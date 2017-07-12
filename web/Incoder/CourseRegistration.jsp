@@ -91,7 +91,7 @@
 
                                     <div class="form-group col-lg-4">
                                         <div class="input-group">
-                                            <span class="input-group-addon">Course Type/span>
+                                            <span class="input-group-addon">Course Type</span>
                                             <input type="text" name="coursetype"  class="form-control" id="firstname" placeholder="Enter Course Type">
                                         </div>
                                     </div>
@@ -229,7 +229,7 @@
                                 //            studentlastname:"required"
 
                     },
-            subject:
+            sucoursetype:
                     {
                         required: true,
                         minlength: 2,
@@ -239,7 +239,10 @@
                                 //            studentlastname:"required"
 
                     },
-            CREDIT        
+            creditH:{
+                required:true,
+                digits:true
+            }        
 
         }
     });
