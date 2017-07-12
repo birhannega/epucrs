@@ -1,0 +1,22 @@
+SMAP
+InstructorProfile_jsp.java
+JSP
+*S JSP
+*F
++ 0 InstructorProfile.jsp
+Incoder/InstructorProfile.jsp
++ 1 imports.jsp
+Incoder/../common/imports.jsp
++ 2 header.jsp
+Incoder/../common/header.jsp
++ 3 sidebar.jsp
+Incoder/../common/sidebar.jsp
+*L
+5,5:51
+1#1,17:56
+9#0,7:73
+1#2,110:80
+15#0,11:190
+1#3,211:201
+25#0,64:412
+*E
