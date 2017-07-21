@@ -6,9 +6,14 @@
 package Controller;
 
 import Entity.StudentManagement;
+import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,7 +69,24 @@ public class StudentController extends HttpServlet {
            STUD_NATIONALITY = request.getParameter("studnationality"), 
            STUD_POLICE_COMMISION_SECTOR = request.getParameter("studpcSector"), 
            STUD_POLICE_COMMISION_NUMBER = request.getParameter("studpcMobile");
-       
+           
+            // getting student iterator
+            Date date=new Date();
+            SimpleDateFormat sdf=new SimpleDateFormat("y");
+            String year=sdf.format(date);
+            
+            String stud_iterator=null;
+            connectionManager dbconn=new connectionManager();
+            Statement idstatement=dbconn.getconnection().createStatement();
+            ResultSet rs_id=idstatement.executeQuery("select REGULAR_STUDENT_COUNTER from TBL_Setup where ACADAMIC_YEAR='"+year+"' ");
+            if(rs_id.next())
+            {
+             stud_iterator=rs_id.getString(1);
+            }else
+            {
+            out.println("");
+            }
+           STUD_ID="R/".concat(stud_iterator)+"/"+year ;
             //out.println(STUD_LAST_NAME);
             //creat object of StudentManagement entity class
             StudentManagement registration = new StudentManagement();

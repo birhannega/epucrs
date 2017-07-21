@@ -447,13 +447,14 @@
                                             <button type="submit" id="page1" class="btn btn-primary pull-right"><span class="fa fa-save"><strong>  Save family info</strong></span></button>
                                         </form>
                                     </div>
+                                        
 
                                 </section>
-                            <h3>Third Step</h3>
+                            <h3>SSEB</h3>
                            <section style="overflow: scroll">
                                     <div clsass="span12">
-                                        <p>  <strong>Secondary schools attended</strong></p></div>
-                                    <form class="form-group">
+                                        <p>  <strong>Secondary schools Educational Background</strong></p></div>
+                               <form class="form-group" action="${pageContext.request.contextPath}/STUD_PSEI">
 
                                         <div class="form-group col-lg-2">
                                             <label>Grade </label>
@@ -532,134 +533,134 @@
                                         <button class="btn btn-success pull-right btn-lg ">Save educational background</button>
                                     </form>
                                 </section>
-                            <h3>Fourth Step</h3>
+                            <h3>Student Result</h3>
                             <section style="overflow-y:scroll ">
-                                    <form>
+                                <form method="post" action="${pageContext.request.contextPath}/STUD_ESLCE">
                                         <strong>   <span class="col-lg-12">
                                                 <p>write five or seven subjects with best grades obtained <small class="text-danger">English and maths should be included </small></p>
                                                 NB. Grade  10 or Grade 12  result</span></strong>
                                         <div class="form-group col-lg-4">
                                             <label>subject</label>
-                                            <input class="form-control" name="subject" id="subject"/>
+                                            <input class="form-control" name="subject1" id="subject"/>
 
                                         </div>
 
                                         <div class="form-group col-lg-4">
                                             <label>Grade obtained</label>
-                                            <input class="form-control" name="grade" id="Grade"/>
+                                            <input class="form-control" name="gradesub1" id="Grade"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label>Year(E.C)</label>
-                                            <input class="form-control" name="year" id="year" type="date"/>
+                                            <input class="form-control" name="year1" id="year1" type="date"/>
 
                                         </div>
 
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="subject" id="subject"/>
-
-                                        </div>
-
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="grade" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year" id="year" type="date"/>
-
-                                        </div>
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject" id="subject"/>
+                                            <input class="form-control" name="subject2" id="subject"/>
 
                                         </div>
 
 
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade" id="Grade"/>
+                                            <input class="form-control" name="grade2" id="Grade"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year" id="year" type="date"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject" id="subject"/>
+                                            <input class="form-control" name="year2" id="year2" type="date"/>
 
                                         </div>
 
-
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year" id="year" type="date"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject" id="subject"/>
+                                            <input class="form-control" name="subject3" id="subject"/>
 
                                         </div>
 
 
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade" id="Grade"/>
+                                            <input class="form-control" name="grade3" id="Grade"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year" id="year" type="date"/>
+                                            <input class="form-control" name="year3" id="year3" type="date"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="subject" id="subject"/>
-
-                                        </div>
-
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="grade" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year" id="year" type="date"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject" id="subject"/>
+                                            <input class="form-control" name="subject4" id="subject"/>
 
                                         </div>
 
 
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade" id="Grade"/>
+                                            <input class="form-control" name="grade4" id="Grade"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year" id="year" type="date"/>
+                                            <input class="form-control" name="year4" id="year4" type="date"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="subject5" id="subject"/>
 
                                         </div>
 
 
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="grade5" id="Grade"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="year5" id="year5" type="date"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="subject6" id="subject"/>
+
+                                        </div>
+
+
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="grade6" id="Grade"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="year6" id="year6" type="date"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="subject7" id="subject"/>
+
+                                        </div>
+
+
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="grade7" id="Grade"/>
+
+                                        </div>
+                                        <div class="form-group col-lg-4">
+
+                                            <input class="form-control" name="year7" id="year7" type="date"/>
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">save </button>
 
 
 
@@ -888,12 +889,34 @@
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    $('input[type=date]').datepicker({
+    $('#year1').datepicker({
         changeMonth: true,
         changeYear: true
     });
-
-
+ $('#year2').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+ $('#year3').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+     $('#year4').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+     $('#year5').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+     $('#year6').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+     $('#year7').datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
     // country chooser
     var countries = [
         "Afghanistan",

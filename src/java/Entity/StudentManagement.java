@@ -117,30 +117,30 @@ public class StudentManagement {
             String MOTHER_PLACE_OF_WORK
     ) throws ClassNotFoundException, SQLException {
         PreparedStatement ps_register_family = dbconnection.getconnection().prepareStatement("Insert into TBL_FAMILY_BACKGROUND("
-        +"FATHER_FNAME"
-       +",FATHER_LAST_NAME"      
-       +",FATHER_MIDDLE_NAME"       
-        +",FATHER_REGIONAL_ADDRESS"  
-       +",FATHER_ZONAL_ADDRESS"     
-        +",FATHER_WOREDA_ADDRESS"    
-        +",FATHER_TOWN_ADDRESS"      
-       +",FATHER_KEBELE_ADDRESS"    
-      +",FATHER_HOUSE_NUM_ADDRESS" 
-      +",FATHER_OCCUPATION"        
-      +",FATHER_PLACE_OF_WORK"     
-      +",MOTHER_FNAME"             
-       +",MOTHER_LAST_NAME"        
-     +",MOTHER_MIDDLE_NAME"       
-     +",MOTHER_REGIONAL_ADDRESS"  
-     +",MOTHER_ZONAL_ADDRESS"     
-     +",MOTHER_WOREDA_ADDRESS"    
-      +",MOTHER_TOWN_ADDRESS"      
-      +",MOTHER_KEBELE_ADDRESS"    
-       +",MOTHER_HOUSE_NUM_ADDRESS"
-      +",MOTHER_OCCUPATION"       
-       +",MOTHER_PLACE_OF_WORK"
-       + ")"
-       + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "FATHER_FNAME"
+                + ",FATHER_LAST_NAME"
+                + ",FATHER_MIDDLE_NAME"
+                + ",FATHER_REGIONAL_ADDRESS"
+                + ",FATHER_ZONAL_ADDRESS"
+                + ",FATHER_WOREDA_ADDRESS"
+                + ",FATHER_TOWN_ADDRESS"
+                + ",FATHER_KEBELE_ADDRESS"
+                + ",FATHER_HOUSE_NUM_ADDRESS"
+                + ",FATHER_OCCUPATION"
+                + ",FATHER_PLACE_OF_WORK"
+                + ",MOTHER_FNAME"
+                + ",MOTHER_LAST_NAME"
+                + ",MOTHER_MIDDLE_NAME"
+                + ",MOTHER_REGIONAL_ADDRESS"
+                + ",MOTHER_ZONAL_ADDRESS"
+                + ",MOTHER_WOREDA_ADDRESS"
+                + ",MOTHER_TOWN_ADDRESS"
+                + ",MOTHER_KEBELE_ADDRESS"
+                + ",MOTHER_HOUSE_NUM_ADDRESS"
+                + ",MOTHER_OCCUPATION"
+                + ",MOTHER_PLACE_OF_WORK"
+                + ")"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         ps_register_family.setString(1, FATHER_FNAME);
         ps_register_family.setString(2, FATHER_LAST_NAME);
@@ -164,11 +164,58 @@ public class StudentManagement {
         ps_register_family.setString(20, MOTHER_HOUSE_NUM_ADDRESS);
         ps_register_family.setString(21, MOTHER_OCCUPATION);
         ps_register_family.setString(22, MOTHER_PLACE_OF_WORK);
-      int registrationcheker = ps_register_family.executeUpdate();
+        int registrationcheker = ps_register_family.executeUpdate();
 
         return registrationcheker;
     }
 
+    public int STUD_PSEI(
+        String DATE_PSEI,
+        String NAME_OF_INSTITUTION,
+        String PROGRAM_ATENDED,
+        String STUD_ID)
+            throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_PSEI("
+                + "  DATE_PSEI"
+                + ", NAME_OF_INSTITUTION"
+                + ", PROGRAM_ATENDED"
+               + ", STUD_ID"
+                + ")"
+                + "VALUES(?,?,?,?)");
+
+        ps_register.setString(1, DATE_PSEI);
+        ps_register.setString(2, NAME_OF_INSTITUTION);
+        ps_register.setString(3, PROGRAM_ATENDED);
+        ps_register.setString(4, STUD_ID);
+      
+        int registrationcheker = ps_register.executeUpdate();
+        //  registrationcheker=res_reg.next();
+        return registrationcheker;
+    
+}
+ public int STUD_ESLCE(String EXAM,String GRADE,String GRADE_OBTAINED,String YEAR_TAKEN,String STUD_ID)
+            throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_ESLCE("
+                + "  EXAM"
+                + ", GRADE"
+                + ", GRADE_OBTAINED"
+                + ", YEAR_TAKEN"
+               + ", STUD_ID"
+                + ")"
+                + "VALUES(?,?,?,?,?)");
+
+        ps_register.setString(1, EXAM);
+        ps_register.setString(2, GRADE);
+        ps_register.setString(3, GRADE_OBTAINED);
+        ps_register.setString(4, YEAR_TAKEN);
+        ps_register.setString(5, STUD_ID);
+        int registrationcheker = ps_register.executeUpdate();
+        //  registrationcheker=res_reg.next();
+        return registrationcheker;
+    
+}
     public int EditStudentInfo(String studentID) {
         return 0;
     }
