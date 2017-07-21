@@ -3,7 +3,7 @@
     Created on : 27-Feb-2017, 13:22:06
     Author     : Efrem
 --%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../css/jQuery.steps.css"
       <%@include file="../common/imports.jsp" %>
       <body>
@@ -31,8 +31,7 @@
                     <div id="example-async" class="pull-right">
 
                         <p class="text-success text-right"><strong>Welcome user:_________________</strong></p>
-                        <p class="text-right"> <a href="View Profile.jsp" ><span style="color: #0055b3">View Profile|</span></a><a href="View Profile.jsp"><span style="color: #0055b3">Logout</span></a></p>
-                        <h3>Instructor Profile</h3>
+                           <h3>Instructor Profile</h3>
                         <section >
                             <form class="form-group " method="post" id="stud_reg" action="">
                                 <div class="form-group col-lg-4">
@@ -45,9 +44,16 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">Title</span>
                                         <select class="form-control" id="gender" name="gender" required="required">
+                                            <option>-select- title</option>
+                                            <option>ኮሚሽነር</option><option>ዕ/መኮንን</option><option>ም/ኮማንደር</option>
+                                            <option>ኮማንደር</option><option>ረ/ኮሚሽነር</option><option>ም/ኮሚሽነር</option>
+                                            <option>ኢንስፔክተር</option><option>ረ/ኢንስፔክተር</option><option>ሳጅን</option>
+                                            <option>ኢንስፔክተር</option><option>ኮንስታብል</option><option>ረ/ሳጅን</option><option>ም/ሳጅን</option><option>ዋ/ሳጅን</option>
+                                            <option>ራ/ቴክ</option><option>ም/ኢንስፔክተር</option><option>Mr ዋ/ኢንስፔክተርn><option> Mr.ኢንጂነርዶክተር</option><option>ም/ኮማንደር</option>
+                                            <option>ወ/ሮ</option><option>ወ/ት</option><option>አቶ<option>ኮሚሽነር ጄኔራል</option><option>ም/ኮሚሽነር ጄኔራል</option>
+                                            <option>ሲስተር</option><option>የጤና መኮንን</option><option>ጸሃፊ</option><option>ነርስ</option><option>ጤና መኮንን</option><option>ዋና ዳይሬክተር</option>
+                                            <option>ሚድዋ<option>ዶክተር</option>
                                             <option>Mr</option><option>Ms</option><option>Phd</option><option>Doctor</option>
-                                            <option>Mr</option><option>Mr</option><option>Mr</option><option>Mr</option>
-                                            <option>Mr</option><option>Mr</option><option>Mr</option><option>Mr</option>
                                         </select>
                                     </div>
                                 </div>
@@ -108,10 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-12" > 
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">New</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Save</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Update</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Delete</button></div>
+                                     <button type="submit" class="btn btn-primary">Register</button>
                                 </div>
                             </form>
                         </section>

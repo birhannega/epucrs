@@ -42,7 +42,7 @@ public class CourseServlet extends HttpServlet {
                String term=request.getParameter("term"),
                 courseName=request.getParameter("coursename"),
                 date_registetred=request.getParameter("date_registered"),
-                subject=request.getParameter("subject"),
+                subject=request.getParameter("coursetype"),
                 credithr=request.getParameter("creditH"),
                 prerequest=request.getParameter("prerequest");
                String course_code=subject.concat("-200");
@@ -55,7 +55,7 @@ if(is_registered>0)
 { 
                     request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Course successfully registred</span></strong>");
 
-     response.sendRedirect("Incoder/CourseRegistration.jsp");
+     response.sendRedirect("Department/CourseRegistration.jsp");
   //out.println("course successfully registred");
 }
 else

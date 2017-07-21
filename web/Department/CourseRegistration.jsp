@@ -29,13 +29,13 @@
             </div>
             <div class="col-lg-10">
                 <div class="col-lg-12">
-                     
+
                     <p class="text-primary page-header text-center">${courseRegistered}</p>
 
 
 
 
- 
+
 
                 </div>
 
@@ -128,7 +128,7 @@
                         </div><!-- /.modal-content -->
                     </div>
                 </div><!-- /.modal -->
-              
+
                 <span class="text-primary">  <strong>List of available courses</strong></span>
 
                 <table  class="table table-striped table-bordered table-hover"  id="tabledate">
@@ -140,8 +140,8 @@
                             <th>Credit Hour</th>
                             <th>Added Date</th>
                             <th>Has Pre Request</th>
-                    <th >Edit</th>
-                    <th >Delete</th>
+                            <th >Edit</th>
+                            <th >Delete</th>
 
 
                         </tr>
@@ -155,7 +155,7 @@
                             String course_sql = "select * from TBL_COURSE_REGISTRATION";
                             ResultSet rs_course = st_list_course.executeQuery(course_sql);
                             while (rs_course.next()) {
-                             String id=   rs_course.getString(1);
+                                String id = rs_course.getString(1);
                         %>
                         <tr>
 <!--                            <td><%=rs_course.getString(1)%></td> -->
@@ -165,20 +165,20 @@
                             <td><%=rs_course.getString(4)%></td> 
                             <td><%=rs_course.getString(5)%></td> 
                             <td><%=rs_course.getString(6)%></td> 
-                                                                                    <td>
-                                                                                        <form action="" method="Get">
-                                                                                            <input type="hidden" name="edit_id" value="<%=id%>"/>
-                                                                                            
-                                                                                             <button class="btn btn-warning">Edit</button>
-                                                                                        </form>
-                                                                                       
-                                                                                        
-                                                                                    </td>
-                                                                                     <td>
-                                                                                          <form>
-                                                                                            <input type="hidden" name="delete_id" value="<%=id%>"/>
-                                                                                         <button class="btn btn-danger">Delete</button>
-                                                                                          </form></td>
+                            <td>
+                                <form action="" method="Get">
+                                    <input type="hidden" name="edit_id" value="<%=id%>"/>
+
+                                    <button class="btn btn-warning">Edit</button>
+                                </form>
+
+
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="hidden" name="delete_id" value="<%=id%>"/>
+                                    <button class="btn btn-danger">Delete</button>
+                                </form></td>
                         </tr>
                         <%
                             }
@@ -193,86 +193,97 @@
         </div>
     </div>
 
-<%
-    request.getSession().setAttribute("courseRegistered", null);
-%>
+    <%
+        request.getSession().setAttribute("courseRegistered", null);
+    %>
 
     <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
     <!--<script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>-->
-<!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
-<!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
-<script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
+    <!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
+    <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
+    <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
 
-<script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
-<link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+    <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
+    <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $().ready(function () {
-//                    var j = jQuery.noConflict();
-        $('#tabledate').dataTable();
-    });
-    //
-</script>
+    <script type="text/javascript">
+        $().ready(function () {
+    //                    var j = jQuery.noConflict();
+            $('#tabledate').dataTable();
+        });
+        //
+    </script>
 
 
-<script type="text/javascript">
-    $("#stud_reg").validate({
-        rules: {
-            Coursename:
-                    {
-                        required: true,
-                        minlength: 2,
-                        digits: false,
-                        maxlength: 30
-                                //            studmiddlename:"required",
-                                //            studentlastname:"required"
+    <script type="text/javascript">
+        $("#stud_reg").validate({
+            rules: {
+                Coursename:
+                        {
+                            required: true,
+                            minlength: 2,
+                            digits: false,
+                            maxlength: 30
+                                    //            studmiddlename:"required",
+                                    //            studentlastname:"required"
 
-                    },
-            sucoursetype:
-                    {
-                        required: true,
-                        minlength: 2,
-                        digits: false,
-                        maxlength: 30
-                                //            studmiddlename:"required",
-                                //            studentlastname:"required"
+                        },
+                sucoursetype:
+                        {
+                            required: true,
+                            minlength: 2,
+                            digits: false,
+                            maxlength: 30
+                                    //            studmiddlename:"required",
+                                    //            studentlastname:"required"
 
-                    },
-            creditH:{
-                required:true,
-                digits:true
-            }        
+                        },
+                creditH: {
+                    required: true,
+                    digits: true
+                },
+                prerequest:
+                        {
+                            required: true
 
-        }
-    });
+                        },
+                date_registered:
+                        {
+                            required: true
+                        },
+                term:{
+                    equired: true
+                }
+            }
+        });
 
-</script>
+    </script>
 
-<script type="text/javascript">
-    $("#date_registered").datepicker({
-        changeMonth: true,
-        changeYear: true
-        //dateFormat: 'yyyy-mm-dd'
-        //format:'yyyy-mm-dd'
+    <script type="text/javascript">
+        $("#date_registered").datepicker({
+            changeMonth: true,
+            changeYear: true
+                    //dateFormat: 'yyyy-mm-dd'
+                    //format:'yyyy-mm-dd'
 
-    });
+        });
 
-    $('input[type=date]').datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true
+        $('input[type=date]').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true
 
-    });
+        });
 
-</script>
-<!--<script>
-            $('#stud_reg').submit(function(e) {
-                $('#messages').removeClass('hide').addClass('alert alert-success alert-dismissible').slideDown().show();
-                $('#messages_content').html('<h4>MESSAGE HERE</h4>');
-                $('#modal').modal('show');
-                e.preventDefault();
-            });
-        </script>	-->
+    </script>
+    <!--<script>
+                $('#stud_reg').submit(function(e) {
+                    $('#messages').removeClass('hide').addClass('alert alert-success alert-dismissible').slideDown().show();
+                    $('#messages_content').html('<h4>MESSAGE HERE</h4>');
+                    $('#modal').modal('show');
+                    e.preventDefault();
+                });
+            </script>	-->
 </body>
 </html>

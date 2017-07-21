@@ -3,7 +3,7 @@
     Created on : 27-Feb-2017, 13:22:06
     Author     : Efrem
 --%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../css/jQuery.steps.css"
       <%@include file="../common/imports.jsp" %>
       <body>
@@ -27,27 +27,34 @@
                 <div class="col-lg-12">
                     <!-- <div class="row">
                          <div class="col-lg-12">-->
-                    <p class="text-primary page-header text-center"><strong>Instructor Registration</strong></p>
+                    <p class="text-primary page-header text-center"><strong>Administrator Staff Registration</strong></p>
                     <div id="example-async" class="pull-right">
 
                         <p class="text-success text-right"><strong>Welcome user:_________________</strong></p>
-                        <p class="text-right"> <a href="View Profile.jsp" ><span style="color: #0055b3">View Profile|</span></a><a href="View Profile.jsp"><span style="color: #0055b3">Logout</span></a></p>
-                        <h3>Instructor Profile</h3>
+                        <h3>Administrator Staff  Profile</h3>
                         <section >
-                            <form class="form-group " method="post" id="stud_reg" action="">
+                            <form class="form-group " method="post" id="staff_reg" action="">
                                 <div class="form-group col-lg-4">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Instructor ID</span>
-                                        <input type="text" name="instructorID"  class="form-control" id="firstname" placeholder="Auto Inst ID">
+                                        <span class="input-group-addon">Admin Staff ID</span>
+                                        <input type="text" name="administratorstaffid"  class="form-control" id="firstname" placeholder="Auto admin staff ID">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Title</span>
-                                        <select class="form-control" id="gender" name="gender" required="required">
+                                        <select class="form-control" id="gender" name="title" required="required">
+                                              <option>-select- title</option>
+                                            <option>ኮሚሽነር</option><option>ዕ/መኮንን</option><option>ም/ኮማንደር</option>
+                                            <option>ኮማንደር</option><option>ረ/ኮሚሽነር</option><option>ም/ኮሚሽነር</option>
+                                            <option>ኢንስፔክተር</option><option>ረ/ኢንስፔክተር</option><option>ሳጅን</option>
+                                            <option>ኢንስፔክተር</option><option>ኮንስታብል</option><option>ረ/ሳጅን</option><option>ም/ሳጅን</option><option>ዋ/ሳጅን</option>
+                                            <option>ራ/ቴክ</option><option>ም/ኢንስፔክተር</option><option>Mr ዋ/ኢንስፔክተርn><option> Mr.ኢንጂነርዶክተር</option><option>ም/ኮማንደር</option>
+                                            <option>ወ/ሮ</option><option>ወ/ት</option><option>አቶ<option>ኮሚሽነር ጄኔራል</option><option>ም/ኮሚሽነር ጄኔራል</option>
+                                            <option>ሲስተር</option><option>የጤና መኮንን</option><option>ጸሃፊ</option><option>ነርስ</option><option>ጤና መኮንን</option><option>ዋና ዳይሬክተር</option>
+                                            <option>ሚድዋ<option>ዶክተር</option>
                                             <option>Mr</option><option>Ms</option><option>Phd</option><option>Doctor</option>
-                                            <option>Mr</option><option>Mr</option><option>Mr</option><option>Mr</option>
-                                            <option>Mr</option><option>Mr</option><option>Mr</option><option>Mr</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -67,7 +74,7 @@
                                 <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Email</span>
-                                        <input type="text" name="Email"  class="form-control" id="firstname" placeholder="Enter Email">
+                                        <input type="text" name="email"  class="form-control" id="firstname" placeholder="Enter Email">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4">
@@ -108,10 +115,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-12" > 
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">New</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Save</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Update</button></div>
-                                    <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Delete</button></div>
+                                    <button type="submit" class="btn navbar-btn btn-info">Register</button>
+
                                 </div>
                             </form>
                         </section>
@@ -135,7 +140,7 @@
                                 <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Phd</span>
-                                        <input type="text" name="phddegree"  class="form-control" id="firstname" placeholder="Enter Phd">
+                                        <input type="text" name="phd"  class="form-control" id="firstname" placeholder="Enter Phd">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4">
@@ -145,21 +150,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-12"> <label> Area of experties </label></div>
-                                <div class="form-group col-lg-4 "> <input class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Lecture</div>
-                                <div class="form-group col-lg-4 ">     <input  class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Government Office</div>
-                                <div class="form-group col-lg-4 ">    <input  class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Private Office</div>
-                                <div class="form-group col-lg-4 ">    <input class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Software</div>
-                                <div class="form-group col-lg-4 ">   <input class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Network</div>
-                                <div class="form-group col-lg-4 ">   <input class="checkbox" type="checkbox" id="studid" value="StudID" name="experiace">Maintenance
+                                <div class="form-group col-lg-4 "> <input class="checkbox" type="checkbox" id="studid" value="StudID" name="expl">Lecture</div>
+                                <div class="form-group col-lg-4 ">     <input  class="checkbox" type="checkbox" id="studid" value="StudID" name="expg">Government Office</div>
+                                <div class="form-group col-lg-4 ">    <input  class="checkbox" type="checkbox" id="studid" value="StudID" name="expp">Private Office</div>
+                                <div class="form-group col-lg-4 ">    <input class="checkbox" type="checkbox" id="studid" value="StudID" name="exps">Software</div>
+                                <div class="form-group col-lg-4 ">   <input class="checkbox" type="checkbox" id="studid" value="StudID" name="expn">Network</div>
+                                <div class="form-group col-lg-4 ">   <input class="checkbox" type="checkbox" id="studid" value="StudID" name="expm">Maintenance
                                 </div>
 
-
-                                <div class="form-group col-lg-12" >                    
-                                    <p class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">New</button></p>
-                                    <p class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Save</button></p>
-                                    <p class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Update</button></p>
+                                <div class="form-group col-lg-12" > 
+                                    <button type="submit" class="btn navbar-btn btn-info">Register</button>
                                     <p class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Delete</button></p>
                                 </div>
+
+                            </form>
                         </section>
                     </div>
 
@@ -171,14 +175,88 @@
             </div>
         </div>
     </div>
+    <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
+    <script>
+        $("#example-async").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slide"
+        });
+
+        $("#staff_reg").validate({
+            rules: {
+                administratorstaffid:
+                        {
+                            required: true,
+                            minlength: 2,
+                            maxlength: 30
+                        },
+                fulltname: {
+                    required: true
+                },
+                tite:
+                        {
+                            required: true
+
+                        },
+                phoneno:
+                        {
+                            required: true
+                        },
+                email: {
+                    required: true
+                },
+                department:
+                        {
+                            required: true
+                        },
+                salary: {
+                    required: true,
+                    digits: false
+                },
+                status:
+                        {
+                            required: true
+                        },
+                membership: {
+                    required: true
+                },
+                description:
+                        {
+                            required: true
+                        },
+                firstdegree: {
+                    required: true
+                },
+                seconddegree:
+                        {
+                            required: true
+                        },
+                phd: {
+                    required: true
+                },
+                Certificates: {
+                    required: true
+                },
+                expl: {
+                    required: true
+                },
+                expp: {
+                    required: true
+                },
+                exps: {
+                    required: true
+                },
+                expn: {
+                    required: true
+                },
+                expm: {
+                    required: true
+                }
+            }
+        });
+
+    </script>
 
 </body>
 </html>
-
-<script>
-    $("#example-async").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slide"
-    });
-</script>

@@ -25,7 +25,7 @@
         
         
         
-        <form name="login-form" class="login-form" action="" method="post">
+        <form name="login-form" class="login-form" action="${pageContext.request.contextPath}//LoginAuthentication" method="post">
 	
 		<div class="header">
 		<h1>EFPUC registrar system</h1>
