@@ -11,11 +11,13 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,23 +39,28 @@ public class STUD_ESLCE extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-     
-        String exam= request.getParameter("exam"),
-                  grade= request.getParameter("grade"),
-                  grade_obtained= request.getParameter("grade_obtained"),
-                  year_taken= request.getParameter("year_taken"),
-                   stud_id = request.getParameter("stud_id");       
-       // creating object of family registration class from model
+
+            String exam = request.getParameter("exam"),
+                    grade = request.getParameter("grade"),
+                    grade_obtained = request.getParameter("grade_obtained"),
+                    year_taken = request.getParameter("year_taken"),
+                    stud_id = request.getParameter("stud_id");
+            // creating object of family registration class from model
             StudentManagement StudPSEI = new StudentManagement();
-            int isSaved = StudPSEI.STUD_ESLCE(exam,grade,grade_obtained,year_taken,stud_id);
-               
+            int isSaved = StudPSEI.STUD_ESLCE(exam, grade, grade_obtained, year_taken, stud_id);
+      HttpSession session = request.getSession();
             if (isSaved >= 1) {
-out.print("saved");
-            }else{
-                out.print("not saved");
+          
+                session.setAttribute("eslce", "<div class='alert alert-success'>Student esclce result successfully saved</div>");
+                response.sendRedirect("Incoder/studentregistration.jsp");
+            } else {
+                  session.setAttribute("eslce", "<div class='alert alert-success'>Student esclce result saving failed</div>");
+                  RequestDispatcher rd=request.getRequestDispatcher("Incoder/studentregistration.jsp");
+                  rd.forward(request, response);
+           //    response.sendRedirect("Incoder/studentregistration.jsp");
             }
         }
-           }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

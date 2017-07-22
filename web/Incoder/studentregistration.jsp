@@ -42,7 +42,7 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                           
+
 
                             <h4 class="page-header text-capitalize text-center text-primary"><i class="fa fa-laptop"></i> federal police university college Data encoders application interface </h4>
 
@@ -55,72 +55,64 @@
                         </div>
                     </div>
                     <div class="row">
- 
-                   <%
-                       //Get current date
-                      Date currentdate=new Date();
-                      
-                      //
-                      SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd");
-                      String formated_date=dateformat.format(currentdate);
-                    //  out.println("system date"+formated_date+" and ");
-                      String[] current_time=formated_date.split("-");
-                     
-                        String currentYear=current_time[0];
-                         String currentMonth=current_time[1];
-                           String currentDate=current_time[2];
-                           
-                           
-                   connectionManager con=new connectionManager();
-                   Connection connection=con.getconnection();
-                   Statement statement=connection.createStatement();
-                   String query="Select Start_Date From Tbl_Schedule where SCHEDULE_ID='SI03' and acadamic_year=2010";
-                   ResultSet res=statement.executeQuery(query);
-                  Date startdate;
-                   if(res.next())
-                    
-                   {
-                      startdate=res.getDate(1);
-                     
-                     out.print("scheduled date"+startdate);
-                       String[] parts = startdate.toString().split("-");
-                       String year =parts[2]; // dd
-                       String month =parts[1]; // mm
-                       String date =parts[0];     
-                    
-////                       
-//                       String schedule_month=Integer.valueOf(month);
-//                        String schedule_year=Integer.valueOf(year);
-//                        String schedule_date=Integer.valueOf(date);
-                        
-//                          if(schedule_month==1)
-//                       {
-//                           schedule_month='0'+schedule_month;
-//                           //month="0".concat(month);
-//                       }
-                        
-                        out.println("current month is  "+currentMonth+"scheduled month is "+month);
-                      if(Integer.valueOf(currentMonth)==Integer.valueOf(month))
-                      {
-//                         currentMonth=currentMonth+12; 
-                          out.println("allowed");
-                         
-                      }
-                      else{
-                       out.print("not");
-                      }
-                           %>
-                                       
-                                         
-                         
-                        <% 
+
+                        <%
+                            //Get current date
+                            Date currentdate = new Date();
+
+                            //
+                            SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+                            String formated_date = dateformat.format(currentdate);
+                            //  out.println("system date"+formated_date+" and ");
+                            String[] current_time = formated_date.split("-");
+
+                            String currentYear = current_time[0];
+                            String currentMonth = current_time[1];
+                            String currentDate = current_time[2];
+
+                            connectionManager con = new connectionManager();
+                            Connection connection = con.getconnection();
+                            Statement statement = connection.createStatement();
+                            String query = "Select Start_Date From Tbl_Schedule where SCHEDULE_ID='SI03' and acadamic_year=2010";
+                            ResultSet res = statement.executeQuery(query);
+                            Date startdate;
+                            if (res.next()) {
+                                startdate = res.getDate(1);
+
+                                out.print("scheduled date" + startdate);
+                                String[] parts = startdate.toString().split("-");
+                                String year = parts[2]; // dd
+                                String month = parts[1]; // mm
+                                String date = parts[0];
+
+     ////                       
+     //                       String schedule_month=Integer.valueOf(month);
+     //                        String schedule_year=Integer.valueOf(year);
+     //                        String schedule_date=Integer.valueOf(date);
+     //                          if(schedule_month==1)
+     //                       {
+     //                           schedule_month='0'+schedule_month;
+     //                           //month="0".concat(month);
+     //                       }
+                                out.println("current month is  " + currentMonth + "scheduled month is " + month);
+                                if (Integer.valueOf(currentMonth) == Integer.valueOf(month)) {
+     //                         currentMonth=currentMonth+12; 
+                                    out.println("allowed");
+
+                                } else {
+                                    out.print("not");
+                                }
+                        %>
+
+
+
+                        <%
 //                         
-                    
-                   }else{
-                       out.println("no data");   
-                   }
-                   
-                   %>
+                            } else {
+                                out.println("no data");
+                            }
+
+                        %>
 
 
                         <div id="example-async" class="pull-right">
@@ -292,383 +284,383 @@
                                 </form>
                             </section>
                             <h3>Family info</h3>
-                           <section style="overflow: scroll">
-                                    <h4 class="text-capitalize text-muted text-info">family background </h4>
-                                    <div class="col-lg-12" >
-                                        <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Father info</p></strong>
+                            <section style="overflow: scroll">
+                                <h4 class="text-capitalize text-muted text-info">family background </h4>
+                                <div class="col-lg-12" >
+                                    <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Father info</p></strong>
 
-                                    </div>
-                                    <div class="container-fluid">
-                                        <form class="form-group " method="post" id="family_background" action="${pageContext.request.contextPath}/registerfamilyinformation">
+                                </div>
+                                <div class="container-fluid">
+                                    <form class="form-group " method="post" id="family_background" action="${pageContext.request.contextPath}/registerfamilyinformation">
 
-                                            <div class="form-group col-lg-4">
+                                        <div class="form-group col-lg-4">
 
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> First Name</span>
-                                                    <input type="text" name="fathersfirstname"  class="form-control" id="firstname" placeholder="Enter fathers first name"></div>
-                                            </div>
-                                            <div class="form-group col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> Middle Name</span>
-                                                    <input type="text" name="fathermiddlename" class="form-control" id="middlename" placeholder="Enter Middle name"></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> Last Name</span>
-                                                    <input type="text" class="form-control" name="fatherlastname" id="flastname" placeholder="Enter Last name"></div>
-                                            </div>
-
-
-
-
-                                            <div class="col-lg-12" >
-                                                <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-address-card-o"></span> Address</p></strong>
-
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">  Region</span>
-                                                    <input type="text" class="form-control" name="fatherBRegion" id="fBRegion" ></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> zone</span>
-                                                    <input type="text" class="form-control" name="fatherBzone" id="fBzone" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> Wereda</span>
-                                                    <input type="text" class="form-control" name="fatherBwereda" id="fBwereda" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> Town</span>
-                                                    <input type="text" class="form-control" name="fatherBtown" id="ftown" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> kebele</span>
-                                                    <input type="text" class="form-control" name="fatherBkebele" id="fBkebele" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> House No.</span>
-                                                    <input type="text" class="form-control" name="fatherHnumber" id="Hnumber" ></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> occupation.</span>
-                                                    <input type="text" class="form-control" name="fatherOccupation" id="foccupation" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> place of work </span>
-                                                    <input type="text" class="form-control" name="fatherworkplace" id="fworkplace" ></div>
-                                            </div>
-
-
-                                            <div class="col-lg-12" >
-                                                <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Mother's info</p></strong>
-
-                                            </div>
-
-
-
-                                            <div class="form-group col-lg-4">
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> First Name</span>
-                                                    <input type="text" name="motherfirstname"  class="form-control" id="mfirstname" placeholder="Enter fathers first name"></div>
-                                            </div>
-                                            <div class="form-group col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> Middle Name</span>
-                                                    <input type="text" name="mothermiddlename" class="form-control" id="mmiddlename" placeholder="Enter Middle name"></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> Last Name</span>
-                                                    <input type="text" class="form-control" name="motherlastname" id="mlastname" placeholder="Enter Last name"></div>
-                                            </div>
-
-
-
-
-                                            <div class="col-lg-12" >
-                                                <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-address-card-o"></span> Address</p></strong>
-
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">  Region</span>
-                                                    <input type="text" class="form-control" name="motherBRegion" id="mBRegion" ></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> zone</span>
-                                                    <input type="text" class="form-control" name="motherBzone" id="mBzone" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> Wereda</span>
-                                                    <input type="text" class="form-control" name="motherBwereda" id="mBwereda" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> Town</span>
-                                                    <input type="text" class="form-control" name="motherBtown" id="mBkTownebele" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> kebele</span>
-                                                    <input type="text" class="form-control" name="motherBkebele" id="mBkebele" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> House No.</span>
-                                                    <input type="text" class="form-control" name="motherHnumber" id="mHnumber" ></div>
-                                            </div>
-
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> occupation.</span>
-                                                    <input type="text" class="form-control" name="motherOccuption" id="mOccupation" ></div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"> <span class=""></span> place of work </span>
-                                                    <input type="text" class="form-control" name="motherPlacework" id="mplacework" ></div>
-                                            </div>
-                                            <button type="submit" id="page1" class="btn btn-primary pull-right"><span class="fa fa-save"><strong>  Save family info</strong></span></button>
-                                        </form>
-                                    </div>
-                                        
-
-                                </section>
-                            <h3>SSEB</h3>
-                           <section style="overflow: scroll">
-                                    <div clsass="span12">
-                                        <p>  <strong>Secondary schools Educational Background</strong></p></div>
-                               <form class="form-group" action="${pageContext.request.contextPath}/STUD_PSEI">
-
-                                        <div class="form-group col-lg-2">
-                                            <label>Grade </label>
-                                            <input class="form-control" name="gr9" value="9" readonly="">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> First Name</span>
+                                                <input type="text" name="fathersfirstname"  class="form-control" id="firstname" placeholder="Enter fathers first name"></div>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> Middle Name</span>
+                                                <input type="text" name="fathermiddlename" class="form-control" id="middlename" placeholder="Enter Middle name"></div>
                                         </div>
 
                                         <div class="form-group col-lg-4">
-                                            <label>school</label>
-                                            <input class="form-control" name="gr9">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> Last Name</span>
+                                                <input type="text" class="form-control" name="fatherlastname" id="flastname" placeholder="Enter Last name"></div>
+                                        </div>
+
+
+
+
+                                        <div class="col-lg-12" >
+                                            <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-address-card-o"></span> Address</p></strong>
+
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">  Region</span>
+                                                <input type="text" class="form-control" name="fatherBRegion" id="fBRegion" ></div>
                                         </div>
 
                                         <div class="form-group col-lg-3">
-                                            <label>from</label>
-                                            <input class="form-control" name="9startyear" id="9startyear" type="date">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> zone</span>
+                                                <input type="text" class="form-control" name="fatherBzone" id="fBzone" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> Wereda</span>
+                                                <input type="text" class="form-control" name="fatherBwereda" id="fBwereda" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> Town</span>
+                                                <input type="text" class="form-control" name="fatherBtown" id="ftown" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> kebele</span>
+                                                <input type="text" class="form-control" name="fatherBkebele" id="fBkebele" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> House No.</span>
+                                                <input type="text" class="form-control" name="fatherHnumber" id="Hnumber" ></div>
                                         </div>
 
                                         <div class="form-group col-lg-3">
-                                            <label>To</label>
-                                            <input class="form-control" name="9endyear" id="9endyear" type="date">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> occupation.</span>
+                                                <input type="text" class="form-control" name="fatherOccupation" id="foccupation" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> place of work </span>
+                                                <input type="text" class="form-control" name="fatherworkplace" id="fworkplace" ></div>
                                         </div>
 
-                                        <div class="form-group col-lg-2">
 
-                                            <input class="form-control" name="gr10" value="10" readonly="">
+                                        <div class="col-lg-12" >
+                                            <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Mother's info</p></strong>
+
                                         </div>
+
+
+
                                         <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="gr10"  type="text">
-                                        </div>
-                                        <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="10startyear" id="10startyear" type="date">
-                                        </div>
-
-                                        <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="10endyear" id="10endyear" type="date">
-                                        </div>
-
-
-
-                                        <div class="form-group col-lg-2">
-
-                                            <input class="form-control" name="gr10" value="11" readonly="">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> First Name</span>
+                                                <input type="text" name="motherfirstname"  class="form-control" id="mfirstname" placeholder="Enter fathers first name"></div>
                                         </div>
                                         <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="gr10" >
-                                        </div>
-                                        <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="11startyear" id="11startyear" type="date">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> Middle Name</span>
+                                                <input type="text" name="mothermiddlename" class="form-control" id="mmiddlename" placeholder="Enter Middle name"></div>
                                         </div>
 
-                                        <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="11endyear" id="11endyear" type="date">
-                                        </div>
-                                        <div class="form-group col-lg-2">
-
-                                            <input class="form-control" name="gr10" value="12" readonly="">
-                                        </div>
                                         <div class="form-group col-lg-4">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> Last Name</span>
+                                                <input type="text" class="form-control" name="motherlastname" id="mlastname" placeholder="Enter Last name"></div>
+                                        </div>
 
-                                            <input class="form-control" name="gr10" >
+
+
+
+                                        <div class="col-lg-12" >
+                                            <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-address-card-o"></span> Address</p></strong>
+
                                         </div>
                                         <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="12startyear" id="12startyear" type="date">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">  Region</span>
+                                                <input type="text" class="form-control" name="motherBRegion" id="mBRegion" ></div>
                                         </div>
 
                                         <div class="form-group col-lg-3">
-
-                                            <input class="form-control" name="12endyear" id="12endyear" type="date" >
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> zone</span>
+                                                <input type="text" class="form-control" name="motherBzone" id="mBzone" ></div>
                                         </div>
-                                        <button class="btn btn-success pull-right btn-lg ">Save educational background</button>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> Wereda</span>
+                                                <input type="text" class="form-control" name="motherBwereda" id="mBwereda" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> Town</span>
+                                                <input type="text" class="form-control" name="motherBtown" id="mBkTownebele" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> kebele</span>
+                                                <input type="text" class="form-control" name="motherBkebele" id="mBkebele" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> House No.</span>
+                                                <input type="text" class="form-control" name="motherHnumber" id="mHnumber" ></div>
+                                        </div>
+
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> occupation.</span>
+                                                <input type="text" class="form-control" name="motherOccuption" id="mOccupation" ></div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"> <span class=""></span> place of work </span>
+                                                <input type="text" class="form-control" name="motherPlacework" id="mplacework" ></div>
+                                        </div>
+                                        <button type="submit" id="page1" class="btn btn-primary pull-right"><span class="fa fa-save"><strong>  Save family info</strong></span></button>
                                     </form>
-                                </section>
+                                </div>
+
+
+                            </section>
+                            <h3>SSEB</h3>
+                            <section style="overflow: scroll">
+                                <div clsass="span12">
+                                    <p>  <strong>Secondary schools Educational Background</strong></p></div>
+                                <form class="form-group" action="${pageContext.request.contextPath}/STUD_PSEI">
+
+
+
+                                    <div class="form-group col-lg-2">
+                                        <label>Grade </label>
+                                        <input class="form-control" name="gr9" value="9" readonly="">
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        <label>school</label>
+                                        <input class="form-control" name="gr9">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>from</label>
+                                        <input class="form-control" name="9startyear" id="9startyear" type="date">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+                                        <label>To</label>
+                                        <input class="form-control" name="9endyear" id="9endyear" type="date">
+                                    </div>
+
+                                    <div class="form-group col-lg-2">
+
+                                        <input class="form-control" name="gr10" value="10" readonly="">
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="gr10"  type="text">
+                                    </div>
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="10startyear" id="10startyear" type="date">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="10endyear" id="10endyear" type="date">
+                                    </div>
+
+
+
+                                    <div class="form-group col-lg-2">
+
+                                        <input class="form-control" name="gr10" value="11" readonly="">
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="gr10" >
+                                    </div>
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="11startyear" id="11startyear" type="date">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="11endyear" id="11endyear" type="date">
+                                    </div>
+                                    <div class="form-group col-lg-2">
+
+                                        <input class="form-control" name="gr10" value="12" readonly="">
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="gr10" >
+                                    </div>
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="12startyear" id="12startyear" type="date">
+                                    </div>
+
+                                    <div class="form-group col-lg-3">
+
+                                        <input class="form-control" name="12endyear" id="12endyear" type="date" >
+                                    </div>
+                                    <button class="btn btn-success pull-right btn-lg ">Save educational background</button>
+                                </form>
+                            </section>
                             <h3>Student Result</h3>
                             <section style="overflow-y:scroll ">
                                 <form method="post" action="${pageContext.request.contextPath}/STUD_ESLCE">
-                                        <strong>   <span class="col-lg-12">
-                                                <p>write five or seven subjects with best grades obtained <small class="text-danger">English and maths should be included </small></p>
-                                                NB. Grade  10 or Grade 12  result</span></strong>
-                                        <div class="form-group col-lg-4">
-                                            <label>subject</label>
-                                            <input class="form-control" name="subject1" id="subject"/>
+                                    <strong>   <span class="col-lg-12">
+                                            ${eslce}
+                                            <p>write five or seven subjects with best grades obtained <small class="text-danger">English and maths should be included </small></p>
+                                            NB. Grade  10 or Grade 12  result</span></strong>
+                                    <div class="form-group col-lg-4">
+                                        <label>subject</label>
+                                        <input class="form-control" name="subject1" id="subject"/>
 
-                                        </div>
+                                    </div>
 
-                                        <div class="form-group col-lg-4">
-                                            <label>Grade obtained</label>
-                                            <input class="form-control" name="gradesub1" id="Grade"/>
+                                    <div class="form-group col-lg-4">
+                                        <label>Grade obtained</label>
+                                        <input class="form-control" name="gradesub1" id="Grade"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
-                                            <label>Year(E.C)</label>
-                                            <input class="form-control" name="year1" id="year1" type="date"/>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label>Year(E.C)</label>
+                                        <input class="form-control" name="year1" id="year1" type="date"/>
 
-                                        </div>
+                                    </div>
 
-                                        <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="subject2" id="subject"/>
+                                        <input class="form-control" name="subject2" id="subject"/>
 
-                                        </div>
-
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="grade2" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year2" id="year2" type="date"/>
-
-                                        </div>
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject3" id="subject"/>
-
-                                        </div>
+                                    </div>
 
 
-                                        <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade3" id="Grade"/>
+                                        <input class="form-control" name="grade2" id="Grade"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
+                                    </div>
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year3" id="year3" type="date"/>
+                                        <input class="form-control" name="year2" id="year2" type="date"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
+                                    </div>
 
-                                            <input class="form-control" name="subject4" id="subject"/>
+                                    <div class="form-group col-lg-4">
 
-                                        </div>
+                                        <input class="form-control" name="subject3" id="subject"/>
 
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="grade4" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year4" id="year4" type="date"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject5" id="subject"/>
-
-                                        </div>
+                                    </div>
 
 
-                                        <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade5" id="Grade"/>
+                                        <input class="form-control" name="grade3" id="Grade"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
+                                    </div>
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year5" id="year5" type="date"/>
+                                        <input class="form-control" name="year3" id="year3" type="date"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
+                                    </div>
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="subject6" id="subject"/>
+                                        <input class="form-control" name="subject4" id="subject"/>
 
-                                        </div>
-
-
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="grade6" id="Grade"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="year6" id="year6" type="date"/>
-
-                                        </div>
-                                        <div class="form-group col-lg-4">
-
-                                            <input class="form-control" name="subject7" id="subject"/>
-
-                                        </div>
+                                    </div>
 
 
-                                        <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="grade7" id="Grade"/>
+                                        <input class="form-control" name="grade4" id="Grade"/>
 
-                                        </div>
-                                        <div class="form-group col-lg-4">
+                                    </div>
+                                    <div class="form-group col-lg-4">
 
-                                            <input class="form-control" name="year7" id="year7" type="date"/>
+                                        <input class="form-control" name="year4" id="year4" type="date"/>
 
-                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-4">
 
-                                        <button type="submit" class="btn btn-primary">save </button>
+                                        <input class="form-control" name="subject5" id="subject"/>
+
+                                    </div>
 
 
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="grade5" id="Grade"/>
+
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="year5" id="year5" type="date"/>
+
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="subject6" id="subject"/>
+
+                                    </div>
 
 
-                                    </form>
+                                    <div class="form-group col-lg-4">
 
-                                </section>
+                                        <input class="form-control" name="grade6" id="Grade"/>
 
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="year6" id="year6" type="date"/>
+
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="subject7" id="subject"/>
+
+                                    </div>
+
+
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="grade7" id="Grade"/>
+
+                                    </div>
+                                    <div class="form-group col-lg-4">
+
+                                        <input class="form-control" name="year7" id="year7" type="date"/>
+
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">save </button>
+                         </form>
+
+                            </section>
+                            <%    request.getSession().setAttribute("eslce", null);
+                            %>
                         </div>
                     </div>
                 </div>
@@ -682,11 +674,11 @@
 
     </div>
 
- <!--      main content ends-->
+    <!--      main content ends-->
 
-<%
-    request.getSession().setAttribute("studentRegistered", null);
-%>
+    <%
+        request.getSession().setAttribute("studentRegistered", null);
+    %>
 
 
 </html>
@@ -712,7 +704,7 @@
                         minlength: 5,
                         digits: !true,
                         maxlength: 30
-          
+
                     },
             studmiddlename: {
                 required: true,
@@ -737,62 +729,62 @@
             },
             studbirthregion: {
                 required: true
-            
-           },
-            studBirthkebele:{
-                required:true
+
             },
-            studBirthzone:{
-                required:true
+            studBirthkebele: {
+                required: true
             },
-            studcpaddress:{
-               required:true
-           },
-             StudBirthwereda:{
-               required:true
-           },           
-            studcpmobile:{
-                required:true
-           },
-           studcpname:{
-               required:true
-           },
-            studcprelation:{
-              required:true
-          },
-           studcptel:{
-            required:true
-          },
-          StudHomeRegion:{
-              required:true
-          },
-          studHomekebele:{
-              required:true
-          },
-          studHomewereda:{
-              required:true
-          },
-          studHomezone:{
-              required:true
-          },
-          studpcSector:{
-              required:true
-          },
-          studpcMobile:{
-              required:true
-          },
-         studcpreligion:{
-              required:true
-          } 
+            studBirthzone: {
+                required: true
+            },
+            studcpaddress: {
+                required: true
+            },
+            StudBirthwereda: {
+                required: true
+            },
+            studcpmobile: {
+                required: true
+            },
+            studcpname: {
+                required: true
+            },
+            studcprelation: {
+                required: true
+            },
+            studcptel: {
+                required: true
+            },
+            StudHomeRegion: {
+                required: true
+            },
+            studHomekebele: {
+                required: true
+            },
+            studHomewereda: {
+                required: true
+            },
+            studHomezone: {
+                required: true
+            },
+            studpcSector: {
+                required: true
+            },
+            studpcMobile: {
+                required: true
+            },
+            studcpreligion: {
+                required: true
+            }
         },
-        messages:{
-            studentfirstname:{
-                required:"student first name cannot be empty"
+        messages: {
+            studentfirstname: {
+                required: "student first name cannot be empty"
             }
         }
     });
     // family validation
-      $("#family_background").validate({
+    $("#family_background").validate({
         rules: {
             fathersfirstname:
                     {
@@ -800,7 +792,7 @@
                         minlength: 2,
                         digits: !true,
                         maxlength: 30
-          
+
                     },
             fathermiddlename: {
                 required: true,
@@ -817,8 +809,8 @@
             fatherBzone: {
                 required: true
             },
-            fatherBtown:{
-                  required: true
+            fatherBtown: {
+                required: true
             },
             fatherBRegion: {
                 required: true
@@ -828,62 +820,62 @@
             },
             fatherBkebele: {
                 required: true
-            
-           },
-            fatherHnumber:{
-                required:true
+
             },
-            fatherOccupation:{
-                required:true
+            fatherHnumber: {
+                required: true
             },
-            fatherworkplace:{
-               required:true,
-               minlength:3
-           },
-           //mother
-             motherfirstname:{
-               required:true
-           },           
-           mothermiddlename:{
-                required:true
-           },
-           motherlastname:{
-               required:true
-           },
-            motherBRegion:{
-              required:true
-          },
-           motherBzone:{
-            required:true
-          },
-          motherBwereda:{
-              required:true
-          },
-           motherBtown:{
-              required:true
-          },
-          
-          motherBkebele:{
-              required:true
-          },
-          motherHnumber:{
-              required:true
-          },
-         motherOccuption:{
-              required:true
-          },
-          motherPlacework:{
-              required:true
-          },
-          studpcMobile:{
-              required:true
-          },
-         studcpreligion:{
-              required:true
-          } 
+            fatherOccupation: {
+                required: true
+            },
+            fatherworkplace: {
+                required: true,
+                minlength: 3
+            },
+            //mother
+            motherfirstname: {
+                required: true
+            },
+            mothermiddlename: {
+                required: true
+            },
+            motherlastname: {
+                required: true
+            },
+            motherBRegion: {
+                required: true
+            },
+            motherBzone: {
+                required: true
+            },
+            motherBwereda: {
+                required: true
+            },
+            motherBtown: {
+                required: true
+            },
+
+            motherBkebele: {
+                required: true
+            },
+            motherHnumber: {
+                required: true
+            },
+            motherOccuption: {
+                required: true
+            },
+            motherPlacework: {
+                required: true
+            },
+            studpcMobile: {
+                required: true
+            },
+            studcpreligion: {
+                required: true
+            }
         }
     });
-    
+
 </script>
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
@@ -893,27 +885,27 @@
         changeMonth: true,
         changeYear: true
     });
- $('#year2').datepicker({
+    $('#year2').datepicker({
         changeMonth: true,
         changeYear: true
     });
- $('#year3').datepicker({
+    $('#year3').datepicker({
         changeMonth: true,
         changeYear: true
     });
-     $('#year4').datepicker({
+    $('#year4').datepicker({
         changeMonth: true,
         changeYear: true
     });
-     $('#year5').datepicker({
+    $('#year5').datepicker({
         changeMonth: true,
         changeYear: true
     });
-     $('#year6').datepicker({
+    $('#year6').datepicker({
         changeMonth: true,
         changeYear: true
     });
-     $('#year7').datepicker({
+    $('#year7').datepicker({
         changeMonth: true,
         changeYear: true
     });
