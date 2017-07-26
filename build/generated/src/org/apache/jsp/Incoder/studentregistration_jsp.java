@@ -513,18 +513,18 @@ public final class studentregistration_jsp extends org.apache.jasper.runtime.Htt
                                 String month = parts[1]; // mm
                                 String date = parts[0];
 
-     ////                       
-     //                       String schedule_month=Integer.valueOf(month);
-     //                        String schedule_year=Integer.valueOf(year);
-     //                        String schedule_date=Integer.valueOf(date);
-     //                          if(schedule_month==1)
-     //                       {
-     //                           schedule_month='0'+schedule_month;
-     //                           //month="0".concat(month);
-     //                       }
+                                ////                       
+                                //                       String schedule_month=Integer.valueOf(month);
+                                //                        String schedule_year=Integer.valueOf(year);
+                                //                        String schedule_date=Integer.valueOf(date);
+                                //                          if(schedule_month==1)
+                                //                       {
+                                //                           schedule_month='0'+schedule_month;
+                                //                           //month="0".concat(month);
+                                //                       }
                                 out.println("current month is  " + currentMonth + "scheduled month is " + month);
                                 if (Integer.valueOf(currentMonth) == Integer.valueOf(month)) {
-     //                         currentMonth=currentMonth+12; 
+                                    //                         currentMonth=currentMonth+12; 
                                     out.println("allowed");
 
                                 } else {
@@ -544,12 +544,28 @@ public final class studentregistration_jsp extends org.apache.jasper.runtime.Htt
 
                         
       out.write("\n");
+      out.write("                        <div class=\"pull-right\">\n");
       out.write("\n");
+      out.write("\n");
+      out.write("                            <form action=\"\" class=\"form-inline\">\n");
+      out.write("                                <select name=\"type\" class=\"form-control\">\n");
+      out.write("                                    <option>select filter type</option>\n");
+      out.write("                                    <option value=\"id\">by id</option>\n");
+      out.write("                                    <option value=\"name\">by name</option>\n");
+      out.write("                                </select>\n");
+      out.write("                                <input type=\"text\" name=\"studid\"/>\n");
+      out.write("                                <input type=\"submit\" class=\"btn btn-info\" value=\"search student\"/>\n");
+      out.write("                            </form>\n");
+      out.write("\n");
+      out.write("                        </div>\n");
       out.write("\n");
       out.write("                        <div id=\"example-async\" class=\"pull-right\">\n");
       out.write("                            <h3>Personal Info</h3>\n");
       out.write("                            ");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${studentRegistered}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\n");
+      out.write("                            ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${studentnotRegistered}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("\n");
       out.write("                            <section >\n");
       out.write("                                <h4 class=\"text-info\">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>\n");
@@ -708,11 +724,22 @@ public final class studentregistration_jsp extends org.apache.jasper.runtime.Htt
       out.write("                                            <span class=\"input-group-addon\"> <span class=\"\"></span> religion</span>\n");
       out.write("                                            <input type=\"text\" class=\"form-control\" name=\"studcpreligion\" id=\"cpreligion\" ></div>\n");
       out.write("                                    </div>\n");
+      out.write("                                    <div class=\"form-group col-lg-3\">\n");
+      out.write("                                        <div class=\"input-group\">\n");
+      out.write("                                            <sapn class=\"input-group-addon\">Student Type</sapn>\n");
+      out.write("                                            <select required name=\"studtype\" id=\"studtype\" class=\"form-control\" required=\"required\">\n");
+      out.write("                                                <option value=\"\">select Type</option>\n");
+      out.write("                                                <option>Regular</option>\n");
+      out.write("                                                <option>Extension</option>\n");
+      out.write("                                                <option>Crime Prevension</option>\n");
+      out.write("                                                <option>Crime Investigation</option>\n");
+      out.write("                                                <option>AD</option>\n");
+      out.write("                                                <option>Special</option>\n");
+      out.write("                                                <option>Health</option>\n");
+      out.write("                                            </select>\n");
+      out.write("                                        </div>\n");
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
+      out.write("                                    </div>\n");
       out.write("\n");
       out.write("\n");
       out.write("                                    <button type=\"submit\" id=\"page1\" class=\"btn btn-primary\"><span class=\"fa fa-save\"><strong>  Save personal info</strong></span></button>\n");
@@ -1099,7 +1126,7 @@ public final class studentregistration_jsp extends org.apache.jasper.runtime.Htt
       out.write("                                    </div>\n");
       out.write("\n");
       out.write("                                    <button type=\"submit\" class=\"btn btn-primary\">save </button>\n");
-      out.write("                         </form>\n");
+      out.write("                                </form>\n");
       out.write("\n");
       out.write("                            </section>\n");
       out.write("                            ");

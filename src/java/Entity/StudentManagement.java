@@ -32,7 +32,7 @@ public class StudentManagement {
             String Stud_Home_Zone,
             String Stud_Nationality,
             String Stud_Police_Commision_Sector,
-            String Stud_Police_Commision_Number) throws ClassNotFoundException, SQLException {
+            String Stud_Police_Commision_Number,String STUD_TYPE) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_STUDENT_PROFILE("
                 + "  Stud_Id"
@@ -59,8 +59,9 @@ public class StudentManagement {
                 + ", Stud_Nationality"
                 + ", Stud_Police_Commision_Sector"
                 + ", Stud_Police_Commision_Number"
+                + ", STUD_TYPE"
                 + ")"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         ps_register.setString(1, Stud_id);
         ps_register.setString(2, Stud_First_Name);
@@ -86,11 +87,17 @@ public class StudentManagement {
         ps_register.setString(22, Stud_Nationality);
         ps_register.setString(23, Stud_Police_Commision_Sector);
         ps_register.setString(24, Stud_Police_Commision_Number);
+        ps_register.setString(25, STUD_TYPE);
 
         int registrationcheker = ps_register.executeUpdate();
         //  registrationcheker=res_reg.next();
         return registrationcheker;
     }
+//    public int Setsessinid(String STUD_ID)
+//    {
+//       
+//        return 0;
+//    }
 
     public int savefamilyinfo(
             String FATHER_FNAME,
@@ -114,7 +121,8 @@ public class StudentManagement {
             String MOTHER_KEBELE_ADDRESS,
             String MOTHER_HOUSE_NUM_ADDRESS,
             String MOTHER_OCCUPATION,
-            String MOTHER_PLACE_OF_WORK
+            String MOTHER_PLACE_OF_WORK,
+            String studid
     ) throws ClassNotFoundException, SQLException {
         PreparedStatement ps_register_family = dbconnection.getconnection().prepareStatement("Insert into TBL_FAMILY_BACKGROUND("
                 + "FATHER_FNAME"
@@ -139,8 +147,9 @@ public class StudentManagement {
                 + ",MOTHER_HOUSE_NUM_ADDRESS"
                 + ",MOTHER_OCCUPATION"
                 + ",MOTHER_PLACE_OF_WORK"
+                       + ",STUD_ID"
                 + ")"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         ps_register_family.setString(1, FATHER_FNAME);
         ps_register_family.setString(2, FATHER_LAST_NAME);
@@ -164,6 +173,7 @@ public class StudentManagement {
         ps_register_family.setString(20, MOTHER_HOUSE_NUM_ADDRESS);
         ps_register_family.setString(21, MOTHER_OCCUPATION);
         ps_register_family.setString(22, MOTHER_PLACE_OF_WORK);
+         ps_register_family.setString(23, studid);
         int registrationcheker = ps_register_family.executeUpdate();
 
         return registrationcheker;

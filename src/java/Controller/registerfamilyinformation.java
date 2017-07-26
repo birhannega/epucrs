@@ -59,7 +59,10 @@ public class registerfamilyinformation extends HttpServlet {
                     motherBkebele = request.getParameter("motherBkebele"),
                     motherHnumber = request.getParameter("motherHnumber"),
                     motherOccuption = request.getParameter("motherOccuption"),
-                    motherPlacework = request.getParameter("motherPlacework");
+                    motherPlacework = request.getParameter("motherPlacework"),
+                    studentid=request.getParameter("studidfamily");
+                  
+            
             // creating object of family registration class from model
             StudentManagement family_registration = new StudentManagement();
             int isSaved = family_registration.savefamilyinfo(fatherHnumber,
@@ -83,9 +86,10 @@ public class registerfamilyinformation extends HttpServlet {
                     motherBkebele,
                     motherHnumber,
                     motherOccuption,
-                    motherPlacework);
+                    motherPlacework,
+                    studentid);
             if (isSaved >= 1) {
-out.print("saved");
+        out.print("saved");
             }else{
                 out.print("not saved");
             }

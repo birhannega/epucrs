@@ -85,18 +85,18 @@
                                 String month = parts[1]; // mm
                                 String date = parts[0];
 
-     ////                       
-     //                       String schedule_month=Integer.valueOf(month);
-     //                        String schedule_year=Integer.valueOf(year);
-     //                        String schedule_date=Integer.valueOf(date);
-     //                          if(schedule_month==1)
-     //                       {
-     //                           schedule_month='0'+schedule_month;
-     //                           //month="0".concat(month);
-     //                       }
+                                ////                       
+                                //                       String schedule_month=Integer.valueOf(month);
+                                //                        String schedule_year=Integer.valueOf(year);
+                                //                        String schedule_date=Integer.valueOf(date);
+                                //                          if(schedule_month==1)
+                                //                       {
+                                //                           schedule_month='0'+schedule_month;
+                                //                           //month="0".concat(month);
+                                //                       }
                                 out.println("current month is  " + currentMonth + "scheduled month is " + month);
                                 if (Integer.valueOf(currentMonth) == Integer.valueOf(month)) {
-     //                         currentMonth=currentMonth+12; 
+                                    //                         currentMonth=currentMonth+12; 
                                     out.println("allowed");
 
                                 } else {
@@ -113,11 +113,25 @@
                             }
 
                         %>
+                        <div class="pull-right">
 
+
+                            <form action="" class="form-inline">
+                                <select name="type" class="form-control">
+                                    <option>select filter type</option>
+                                    <option value="id">by id</option>
+                                    <option value="name">by name</option>
+                                </select>
+                                <input type="text" name="studid"/>
+                                <input type="submit" class="btn btn-info" value="search student"/>
+                            </form>
+
+                        </div>
 
                         <div id="example-async" class="pull-right">
                             <h3>Personal Info</h3>
                             ${studentRegistered}
+                            ${studentnotRegistered}
                             <section >
                                 <h4 class="text-info">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>
 
@@ -273,11 +287,22 @@
                                             <span class="input-group-addon"> <span class=""></span> religion</span>
                                             <input type="text" class="form-control" name="studcpreligion" id="cpreligion" ></div>
                                     </div>
+                                    <div class="form-group col-lg-3">
+                                        <div class="input-group">
+                                            <sapn class="input-group-addon">Student Type</sapn>
+                                            <select required name="studtype" id="studtype" class="form-control" required="required">
+                                                <option value="">select Type</option>
+                                                <option value="R">Regular</option>
+                                                <option value="EX">Extension</option>
+                                                <option value="CP">Crime Prevension</option>
+                                                <option value="CI">Crime Investigation</option>
+                                                <option value="AD">AD</option>
+                                                <option value="SCC">Special</option>
+                                                <option value="H">Health</option>
+                                            </select>
+                                        </div>
 
-
-
-
-
+                                    </div>
 
 
                                     <button type="submit" id="page1" class="btn btn-primary"><span class="fa fa-save"><strong>  Save personal info</strong></span></button>
@@ -285,14 +310,18 @@
                             </section>
                             <h3>Family info</h3>
                             <section style="overflow: scroll">
-                                <h4 class="text-capitalize text-muted text-info">family background </h4>
+                                <h4 class="text-capitalize text-muted text-info">family background of <span class="text-danger">  ${fullname} </span></h4>
+                              
                                 <div class="col-lg-12" >
+                                  
                                     <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Father info</p></strong>
 
                                 </div>
                                 <div class="container-fluid">
-                                    <form class="form-group " method="post" id="family_background" action="${pageContext.request.contextPath}/registerfamilyinformation">
-
+                                     
+                                    <form class="form-group " meth od="post" id="family_background" action="${pageContext.request.contextPath}/registerfamilyinformation">
+                                      
+                                        <input type="hidden" name="studidfamily" value="${studentId}"/>
                                         <div class="form-group col-lg-4">
 
                                             <div class="input-group">
@@ -656,7 +685,7 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">save </button>
-                         </form>
+                                </form>
 
                             </section>
                             <%    request.getSession().setAttribute("eslce", null);

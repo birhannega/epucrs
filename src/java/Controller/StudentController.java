@@ -9,6 +9,7 @@ import Entity.StudentManagement;
 import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,6 +22,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import jdk.nashorn.internal.objects.NativeString;
 
 
 /**
@@ -28,7 +31,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author user
  */
 public class StudentController extends HttpServlet {
+    connectionManager dbconnection=new connectionManager();
+Connection connection;
 
+    public StudentController() throws ClassNotFoundException, SQLException {
+        this.connection = dbconnection.getconnection();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -68,13 +76,15 @@ public class StudentController extends HttpServlet {
            STUD_HOME_ZONE = request.getParameter("studHomezone"), 
            STUD_NATIONALITY = request.getParameter("studnationality"), 
            STUD_POLICE_COMMISION_SECTOR = request.getParameter("studpcSector"), 
-           STUD_POLICE_COMMISION_NUMBER = request.getParameter("studpcMobile");
-           
+           STUD_POLICE_COMMISION_NUMBER = request.getParameter("studpcMobile"),
+           STUD_TYPE = request.getParameter("studtype");
+           HttpSession session=request.getSession();
             // getting student iterator
             Date date=new Date();
-            SimpleDateFormat sdf=new SimpleDateFormat("y");
+            SimpleDateFormat sdf=new SimpleDateFormat("Y");
             String year=sdf.format(date);
-            
+            String yrsub=year.substring(2, 4);
+           // out.println(yrsub);
             String stud_iterator=null;
             connectionManager dbconn=new connectionManager();
             Statement idstatement=dbconn.getconnection().createStatement();
@@ -82,11 +92,26 @@ public class StudentController extends HttpServlet {
             if(rs_id.next())
             {
              stud_iterator=rs_id.getString(1);
+           if(stud_iterator.length()==1)
+           {
+               stud_iterator="00".concat(stud_iterator);
+           } 
+           else  if(stud_iterator.length()==2) {
+                stud_iterator="0".concat(stud_iterator);
+           }
+           else{
+               stud_iterator=stud_iterator;
+           }
             }else
             {
-            out.println("");
+            session.setAttribute("error", "Error occured ");
             }
-           STUD_ID="R/".concat(stud_iterator)+"/"+year ;
+            
+           STUD_ID="R/".concat(stud_iterator)+"/"+yrsub ;
+           
+
+             session.setAttribute("studentId", STUD_ID);
+             session.setAttribute("fullname", STUD_FIRST_NAME+" "+STUD_MIDDLE_NAME+" "+STUD_LAST_NAME);
             //out.println(STUD_LAST_NAME);
             //creat object of StudentManagement entity class
             StudentManagement registration = new StudentManagement();
@@ -113,14 +138,25 @@ public class StudentController extends HttpServlet {
                     STUD_HOME_ZONE,
                     STUD_NATIONALITY, 
                     STUD_POLICE_COMMISION_SECTOR, 
-                    STUD_POLICE_COMMISION_NUMBER);
+                    STUD_POLICE_COMMISION_NUMBER,
+                    STUD_TYPE);
             if(registered>0){
+                Statement update_iterator=connection.createStatement();
+                ResultSet update_rs=update_iterator.executeQuery("update TBL_SETUP set REGULAR_STUDENT_COUNTER=REGULAR_STUDENT_COUNTER+1");
+               if(update_rs.next())
+               {
                 request.getSession().setAttribute("studentRegistered", "<strong><span class='alert alert-success text-center'>Student successfully registred</span></strong>");
                 response.sendRedirect("Incoder/studentregistration.jsp");
-                
+               }
+               else
+               {
+                   request.getSession().setAttribute("idcountnotupdated", "<strong><span class='alert alert- text-center'>Student counter not updated</span></strong>");
+                response.sendRedirect("Incoder/studentregistration.jsp");
+               }
             }
             else{
-                out.println("registration not done");
+                request.getSession().setAttribute("studentnotRegistered", "<strong><span class='alert alert-success text-center'>Student not registred</span></strong>");
+                response.sendRedirect("Incoder/studentregistration.jsp");
             }
            
            
