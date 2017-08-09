@@ -237,4 +237,13 @@ public class StudentManagement {
     public int readmit(String studentID) {
         return 0;
     }
+     public int savestudprogram(String studentID, String program, String department) throws ClassNotFoundException, SQLException {
+         
+         PreparedStatement ps_savedepartment=dbconnection.getconnection().prepareStatement("insert into TBL_STUD_DEP(Stud_id,Dep_id,Program_id) values(?,?,?) ");
+         ps_savedepartment.setString(1, studentID);
+         ps_savedepartment.setString(2, program);
+         ps_savedepartment.setString(3, department);
+        int checkup= ps_savedepartment.executeUpdate();
+        return checkup;
+    }
 }

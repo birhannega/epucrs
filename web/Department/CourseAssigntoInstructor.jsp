@@ -27,7 +27,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/sidebar.jsp" %>
+                <%@include file="../common/department_sidebar.jsp" %>
             </div>
             <div class="col-lg-10">
                 <div class="col-lg-12">
@@ -205,7 +205,7 @@
                                 <td><%=rs_courseinstr.getString(9)%></td> 
                                 <td>
                                     <form action="" method="Get">
-                                        <input type="hidden" name="edit_id" value="<%=id%>"/>
+                                        <input type="hidden" name="edit_id_inst" value="<%=id%>"/>
 
                                         <button class="btn btn-warning">Edit</button>
                                     </form>
@@ -214,7 +214,7 @@
                                 </td>
                                 <td>
                                     <form action="" method="post">
-                                        <input type="hidden" name="delete_id" value="<%=id%>"/>
+                                        <input type="hidden" name="delete_id_inst" value="<%=id%>"/>
                                         <button class="btn btn-danger" id="deleteid">Delete</button>
                                     </form></td>
 

@@ -32,7 +32,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/sidbar2.jsp" %>
+                <%@include file="../common/incoder_sidebar.jsp" %>
             </div>
             <!--      include side bar end-->
 

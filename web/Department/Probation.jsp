@@ -39,7 +39,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/sidebar.jsp" %>
+                <%@include file="../common/department_sidebar.jsp" %>
             </div>
     <body>
         <form class="form-inline container" name="form1"action=""method="post" onsubmit="return checkForm(this);">

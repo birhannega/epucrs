@@ -119,7 +119,19 @@
                                         <span class="input-group-addon">Title</span>
                                         <select class="form-control" id="insttitle" name="insttitle" required="required">
                                             <option value="">-select title-</option>
-                                            <option value="ኮሚሽነር">ኮሚሽነር</option><option value="2">ዕ/መኮንን</option><option value="3">ም/ኮማንደር</option>
+                                            <option value="">-Commissioner-</option>
+                                            <option value="">Ass/Commissioner</option><option value="">Deputy Commissioner</option>
+                                            <option value="">Commander</option><option value="">Ass/Commander</option><option value="">Deputy Commander</option>
+                                            <option value="">Commander</option><option value="">Ass/Commander</option>
+                                            <option value="">Inspector</option><option value=""><option value="">Deputy Inspector</option>
+                                            <option value="">Sergeant</option><option value="">Ass/Sergeant</option><option value="">Deputy Sergeant</option>
+                                            <option value="">Constable</option><option value="">Nominee Officer</option>
+                                            <option value="">Commissioner General</option><option value="">Deputy Commissioner General</option>
+                                            <option value="">Deputy Inspector</option><option value="">Engineer Doctor</option>
+                                            <option value="">Sister</option><option value="">Health Officer</option><option value="">Nurse</option><option value="">Mid Wife</option>
+                                            <option value="">Secretary</option><option value="">Director</option><option value="">Head Director</option>
+                                            <option value="">Ra/Tech</option>
+<!--                                            <option value="ኮሚሽነር">ኮሚሽነር</option><option value="2">ዕ/መኮንን</option><option value="3">ም/ኮማንደር</option>
                                             <option value="ኮማንደር" >ኮማንደር</option><option value="5">ረ/ኮሚሽነር</option><option value="6">ም/ኮሚሽነር</option>
                                             <option value="7">ኢንስፔክተር</option><option value="8">ረ/ኢንስፔክተር</option><option value="9">ሳጅን</option>
                                             <option value="10">ኢንስፔክተር</option><option value="11">ኮንስታብል</option><option value="12">ረ/ሳጅን</option><option value="13">ም/ሳጅን</option><option value="14">ዋ/ሳጅን</option>
@@ -127,7 +139,7 @@
                                             <option value="20">ወ/ሮ</option><option value="21">ወ/ት</option><option value="22">አቶ<option value="23">ኮሚሽነር ጄኔራል</option><option value="24">ም/ኮሚሽነር ጄኔራል</option>
                                             <option value="25">ሲስተር</option><option value="26">የጤና መኮንን</option><option value="27">ጸሃፊ</option><option value="28">ነርስ</option>
                                             <option value="29">ጤና መኮንን</option><option value="30">ዋና ዳይሬክተር</option>
-                                            <option value="31">ሚድዋ<option value="32">ዶክተር</option>
+                                            <option value="31">ሚድዋ<option value="32">ዶክተር</option>-->
                                             <option value="33">Mr</option><option value="34">Ms</option><option value="35">Phd</option><option value="36">Doctor</option>
                                         </select>
                                     </div>

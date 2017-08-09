@@ -133,144 +133,70 @@
                             ${studentnotRegistered}
 
                             <section >
+                                
+                                
+                                
+                                
+                                
                                 <form class="form-inline" method="post">
                                
-                                    <select name="department" id="department"  class="form-control" onChange="getProgram(this.value);>
-                                                <option value='valu_list'> select country</option>
-                                            <%                                           
-                                            Statement getdept = con.getconnection().createStatement();
-                                            String id = null;
-                                            ResultSet rs_dept = getdept.executeQuery("select * from TBL_DEPARTMENT");
+                                    <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
+                                        <option value="">select department</option>
 
-while(rs_dept.next())
-{
-%>
-<option value="<%=rs_dept.getString("DEP_ID")%>" ><%=rs_dept.getString("DEP_NAME")%></option>
-<%
-}
-%>
-</select>
-<script language="javascript" type="text/javascript">
-        var xmlhttp;
-        
-        function showState(str)
-        {
-            if(typeof XMLHttpRequest !== "undifiened")
-            {
-               xmlhttp= new XMLHttpRequest();  
-            }
-            else if(window.ActiveXObject)
-            {
-    xmlhttp=new ActiveXObject("Microsoft.XXLHTTP");              
-            }
-            if(xmlhttp=null)
-            {
-          alert("browser does nort request");
-          return;
-            }
-            var url = "getdepartment.jsp";
-            url +="?departement" + str;
-            xmlhttp.onreadystatechange = stateChange;
-            xmlhttp.open("GMT",url,true);
-            xmlhttp.send(null);
-        }
-        }
-        </script>
+                                            <%
+                                               
+                                                 Statement getdept = con.getconnection().createStatement();
 
-  <script>
-function getProgram(val)
-{
-	$.ajax({
-	type: "POST",
-	url: "getdepartment.jsp",
-	data:'department='+val,
-	success: function(data){} , 
-        
-	}
-        });
-	}
-
-
-
-</script>
-                                    
+                                                String dep_name=null,depid=null;
+                                                ResultSet rs_dept = getdept.executeQuery("select * from TBL_DEPARTMENT");
+                                          
+                                                while (rs_dept.next()) {
+                                                    dep_name=rs_dept.getString("DEP_NAME");
+                                                    depid=rs_dept.getString("DEP_ID");
+                                                 %>
+                                                    <option value="<%=depid%>"><%=dep_name%></option>
+                                                              <%
+                                                             }     
+                                                                %>
+                                             
+                                              </select>                          
                                     
                                     
                                     <select name="program" id="program" class="form-control">
 
-                                        <option value="">teacher1</option>
+                                        <option value="">select program</option> 
+                                  
                                     </select>
   
                                 </form>
-                                <!--                                <form>
-                                                                    <select id="type">
-                                                                        <option value="item1">item1</option>
-                                                                        <option value="item2">item2</option>
-                                                                        <option value="item3">item3</option>
-                                                                    </select>
-                                
-                                                                    <select id="size">
-                                                                        <option value="">-- select one -- </option>
-                                                                    </select>
-                                                                </form>
-                                                                <script type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        $("#department").change(function () {
-                                                                            var val = $(this).val();
-                                                                            if (val === "item1") {
-                                                                                $("#program").html("<option value='test'>item1: test 1</option><option value='test2'>item1: test 2</option>");
-                                                                            } else if (val === "item2") {
-                                                                                $("#program").html("<option value='test'>item2: test 1</option><option value='test2'>item2: test 2</option>");
-                                                                            } else if (val === "item3") {
-                                                                                $("#program").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");
-                                                                            }
-                                                                        });
-                                                                    });
-                                                                </script>   --> 
-                               <%
-                                    try {
-                                    //Class.forName("oracle.jdbc.driver.OracleDriver");
-                                    String sql = "select program_id,program_name from tbl_academic_program where dep_id='" + id + "'";
-                                     //conn = DriverManager.getConnection("jdbc:oracle:thin:@" + iphost + ":1521:" + dbsid, username, password);
-                                    Statement st = connection.createStatement();
-                                    ResultSet rs = st.executeQuery(sql);
-                                    String[] arr = null;
-                                    while (rs.next()) {
-                                    String prm_id = rs.getString("program_id");
-                                    String prm_name = rs.getString("program_name");
-                                    arr = prm_id.split("\n");
-                                    for (int i = 0; i < arr.length; i++){
-                                  out.print(arr[i]);
-                                    }
-                                    }
-                                    } catch (Exception asd) {
-                                    System.out.println(asd);
-                                    }
-                                    %>
-                           
+                                                                
+<script  type="text/javascript">  
+       
+      var xmlHttp;
+      function showState(str){
+      if (typeof XMLHttpRequest != "undefined"){
+      xmlHttp= new XMLHttpRequest();
+      }
+      else if (window.ActiveXObject){
+      xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      if (xmlHttp==null){
+      alert("Browser does not support XMLHTTP Request")
+      return;
+      } 
+      var url="program.jsp";
+      url +="?department=" +str;
+      xmlHttp.onreadystatechange = stateChange;
+      xmlHttp.open("GET", url, true);
+      xmlHttp.send(null);
+      }
 
-                                //<%
-                                    // ArrayList<String> arr = new ArrayList<String>();
-                                   // String query1 = "select program_id,program_name from tbl acadamic_program where dep_id='" + id + "'";
-
-                               // %>
-<!--                                <script type="text/javascript">
-                                    //var dep=document.getElementsByName("department");
-                                    $("#department").change(function () {
-                                    var opt = $("#department").val();
-//                                        $("program").html(opt);
-                                    if (opt === "GDPR") {
-                                    // String query1="select program_id,program_name from tbl acadamic_program where dep_id='"+opt+"'";
-
-                                    $("#program").html("<option value='test2'>GDPR</option>");
-                                    } else if (opt === "ADPR") {
-                                    $("#program").html("<option value='test2'>ADPR</option>");
-                                    } else if (opt === "SDPMR") {
-                                    $("#program").html("<option value='test2'>SDPMR</option>");
-                                    }
-                                    });
-                                </script>-->
-
+      function stateChange(){   
+      if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+      document.getElementById("program").innerHTML=xmlHttp.responseText   
+      }   
+      }
+      </script> 
 
                                 <h4 class="text-info">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>
 
@@ -827,8 +753,7 @@ function getProgram(val)
                                 </form>
 
                             </section>
-                            <%    request.getSession().setAttribute("eslce", null);
-                            %>
+                            
                         </div>
                     </div>
                 </div>
@@ -844,19 +769,17 @@ function getProgram(val)
 
     <!--      main content ends-->
 
-    <%
-        request.getSession().setAttribute("studentRegistered", null);
-    %>
-
+   
+        
 
 </html>
 
 
 <script type="text/javascript">
-    $("#example-async").steps({
-    headerTag: "h3",
-            bodyTag: "section",
-            transitionEffect: "slide"
+$("#example-async").steps({
+                                                headerTag: "h3",
+                                                bodyTag: "section",
+                                                transitionEffect: "slide"
     });</script>
 <!--validation-->
 <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
@@ -864,426 +787,426 @@ function getProgram(val)
 
 <script type="text/javascript">
     $("#stud_reg").validate({
-    rules: {
-    studentfirstname:
-    {
-    required: true,
-            minlength: 5,
-            digits: !true,
-            maxlength: 30
-
-    },
-            studmiddlename: {
-            required: true,
-                    minlength: 2,
-                    digits: false,
-                    maxlength: 30
-            },
-            studlastname: {
-            required: true,
-                    minlength: 2,
-                    digits: false,
-                    maxlength: 30
-            },
-            studnationality: {
-            required: true
-            },
-            studgender: {
-            required: true
-            },
-            studbdate: {
-            required: true
-            },
-            studbirthregion: {
-            required: true
+                                        rules: {
+                                        studentfirstname:
+                                        {
+                                        required: true,
+                                                minlength: 5,
+                                                digits: !true,
+                                                maxlength: 30
 
             },
-            studBirthkebele: {
-            required: true
-            },
-            studBirthzone: {
-            required: true
-            },
-            studcpaddress: {
-            required: true
-            },
-            StudBirthwereda: {
-            required: true
-            },
-            studcpmobile: {
-            required: true
-            },
-            studcpname: {
-            required: true
-            },
-            studcprelation: {
-            required: true
-            },
-            studcptel: {
-            required: true
-            },
-            StudHomeRegion: {
-            required: true
-            },
-            studHomekebele: {
-            required: true
-            },
-            studHomewereda: {
-            required: true
-            },
-            studHomezone: {
-            required: true
-            },
-            studpcSector: {
-            required: true
-            },
-            studpcMobile: {
-            required: true
-            },
-            studcpreligion: {
-            required: true
-            }
-    },
-            messages: {
-            studentfirstname: {
-            required: "student first name cannot be empty"
-            }
-            }
-    });
-    // family validation
-    $("#family_background").validate({
-    rules: {
-    fathersfirstname:
-    {
-    required: true,
-            minlength: 2,
-            digits: !true,
-            maxlength: 30
+        studmiddlename: {
+                                                required: true,
+                                                minlength: 2,
+                                                digits: false,
+                                                maxlength: 30
+        },
+        studlastname: {
+                                                required: true,
+                                                minlength: 2,
+                                                digits: false,
+                                                maxlength: 30
+        },
+        studnationality: {
+                                                required: true
+        },
+        studgender: {
+                                                required: true
+        },
+        studbdate: {
+                                                required: true
+        },
+        studbirthregion: {
+                                                required: true
 
-    },
-            fathermiddlename: {
-            required: true,
-                    minlength: 2,
-                    digits: false,
-                    maxlength: 30
-            },
-            fatherlastname: {
-            required: true,
-                    minlength: 2,
-                    maxlength: 30
-            },
-            fatherBzone: {
-            required: true
-            },
-            fatherBtown: {
-            required: true
-            },
-            fatherBRegion: {
-            required: true
-            },
-            fatherBwereda: {
-            required: true
-            },
-            fatherBkebele: {
-            required: true
+        },
+        studBirthkebele: {
+                                                required: true
+        },
+        studBirthzone: {
+                                                required: true
+        },
+        studcpaddress: {
+                                                required: true
+        },
+        StudBirthwereda: {
+                                                required: true
+        },
+        studcpmobile: {
+                                                required: true
+        },
+        studcpname: {
+                                                required: true
+        },
+        studcprelation: {
+                                                required: true
+        },
+        studcptel: {
+                                                required: true
+        },
+        StudHomeRegion: {
+                                                required: true
+        },
+        studHomekebele: {
+                                                required: true
+        },
+        studHomewereda: {
+                                                required: true
+        },
+        studHomezone: {
+                                                required: true
+        },
+                                studpcSector: {
+                                                required: true
+        },
+        studpcMobile: {
+                                                required: true
+        },
+        studcpreligion: {
+                                                required: true
+                                    }
+                                    },
+                                    messages: {
+                                                studentfirstname: {
+                                                required: "student first name cannot be empty"
+        }
+        }
+        });
+        // family validation
+        $("#family_background").validate({
+                                                        rules: {
+                                                        fathersfirstname:
+                                                        {
+                                                        required: true,
+                                                                minlength: 2,
+                                                                digits: !true,
+                                                                maxlength: 30
 
-            },
-            fatherHnumber: {
-            required: true
-            },
-            fatherOccupation: {
-            required: true
-            },
-            fatherworkplace: {
-            required: true,
-                    minlength: 3
-            },
-            //mother
-            motherfirstname: {
-            required: true
-            },
-            mothermiddlename: {
-            required: true
-            },
-            motherlastname: {
-            required: true
-            },
-            motherBRegion: {
-            required: true
-            },
-            motherBzone: {
-            required: true
-            },
-            motherBwereda: {
-            required: true
-            },
-            motherBtown: {
-            required: true
-            },
-            motherBkebele: {
-            required: true
-            },
-            motherHnumber: {
-            required: true
-            },
-            motherOccuption: {
-            required: true
-            },
-            motherPlacework: {
-            required: true
-            },
-            studpcMobile: {
-            required: true
-            },
-            studcpreligion: {
-            required: true
-            }
-    }
-    });</script>
+        },
+        fathermiddlename: {
+                                                                required: true,
+                                                                minlength: 2,
+                                                                digits: false,
+                                                                maxlength: 30
+        },
+        fatherlastname: {
+                                                                required: true,
+                                                                minlength: 2,
+                                                                maxlength: 30
+        },
+        fatherBzone: {
+                                                                required: true
+        },
+        fatherBtown: {
+                                                                required: true
+},
+        fatherBRegion: {
+                                                                required: true
+        },
+        fatherBwereda: {
+                                                                required: true
+        },
+        fatherBkebele: {
+                                                                required: true
+
+        },
+        fatherHnumber: {
+                                                                required: true
+        },
+fatherOccupation: {
+                                                                required: true
+        },
+        fatherworkplace: {
+                                                                required: true,
+                                                                minlength: 3
+        },
+        //mother
+        motherfirstname: {
+                                                                required: true
+        },
+        mothermiddlename: {
+                                                                required: true
+        },
+        motherlastname: {
+                                                                required: true
+        },
+        motherBRegion: {
+                                                                required: true
+        },
+        motherBzone: {
+                                                                required: true
+        },
+        motherBwereda: {
+                                                                required: true
+        },
+        motherBtown: {
+                                                                required: true
+        },
+        motherBkebele: {
+                                                                required: true
+        },
+        motherHnumber: {
+                                                                required: true
+        },
+        motherOccuption: {
+                                                                required: true
+        },
+        motherPlacework: {
+                                                                required: true
+        },
+                                    studpcMobile: {
+                                                                required: true
+        },
+        studcpreligion: {
+                                                                required: true
+        }
+        }
+        });</script>
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $('#year1').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year2').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year3').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year4').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year5').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year6').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    $('#year7').datepicker({
-    changeMonth: true,
-            changeYear: true
-    });
-    // country chooser
-    var countries = [
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Aruba",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus",
-            "Belgium",
-            "Belize",
-            "Benin",
-            "Bhutan",
-            "Bolivia",
-            "Bosnia and Herzegovina",
-            "Botswana",
-            "Brazil",
-            "Brundi",
-            "Bulgaria",
-            "Burkina Faso",
-            "Burma",
-            "Burundi",
-            "Cambodia",
-            "Cameroon",
-            "Canada",
-            "Cape Verde",
-            "Central African Republic",
-            "Chad",
-            "Chile",
-            "China",
-            "Colombia",
-            "Comoros",
-            "  Congo",
-            "Democratic Republic of the Congo",
-            " Republic of the Costa Rica",
-            " Cote d'Ivoire",
-            "Croatia",
-            "Cuba",
-            "Curacao",
-            "Cyprus",
-            "Czechia",
-            "Denmark",
-            "Djibouti",
-            "Dominica",
-            "Dominican Republic",
-            "East Timor (see Timor-Leste)",
-            "Ecuador",
-            "Egypt",
-            " El Salvador",
-            " Equatorial Guinea",
-            "  Eritrea",
-            "Estonia",
-            " Ethiopia",
-            "Fiji",
-            "Finland",
-            "France",
-            "Gabon",
-            "Gambia",
-            "Georgia",
-            "Germany",
-            "Ghana",
-            "Greece",
-            "Grenada",
-            "Guatemala",
-            "Guinea",
-            "Guinea-Bissau",
-            "Guyana",
-            "Haiti",
-            "Holy See",
-            "Honduras",
-            "Hong Kong",
-            "Hungary",
-            "Iceland",
-            "India",
-            "Indonesia",
-            "Iran",
-            "Iraq",
-            "Ireland",
-            "Israel",
-            "Italy",
-            "Jamaica",
-            "Japan",
-            "Jordan",
-            "Kazakhstan",
-            "Kenya",
-            "Kiribati",
-            "Korea, North",
-            "Korea, South",
-            "Kosovo",
-            "Kuwait",
-            "Kyrgyzstan",
-            "Laos",
-            "Latvia",
-            "Lebanon",
-            "Lesotho",
-            "Liberia",
-            "Libya",
-            "Liechtenstein",
-            "Lithuania",
-            "Luxembourg",
-            "Macau",
-            "Macedonia",
-            "Madagascar",
-            "Malawi",
-            "Malaysia",
-            "Maldives",
-            "Mali",
-            "Malta",
-            "Marshall Islands",
-            "Mauritania",
-            "Mauritius",
-            "Mexico",
-            "Micronesia",
-            "Moldova",
-            "Monaco",
-            "Montenegro",
-            " Morocco",
-            "Mozambique",
-            "Namibia",
-            "Nauru",
-            "Nepal",
-            "Netherlands",
-            " New Zealand",
-            "Nicaragua",
-            "Niger",
-            " Nigeria",
-            "North Korea",
-            "Norway",
-            "Oman",
-            "Pakistan",
-            "Palau",
-            "Palestinian Territories",
-            "Panama",
-            "Papua New Guinea",
-            " Paraguay",
-            "Peru",
-            "Philippines",
-            "Poland",
-            "Portugal",
-            "Qatar",
-            "Romania",
-            "Russia",
-            " Rwanda",
-            "Saint Kitts and Nevis",
-            " Saint Lucia",
-            "Saint Vincent and the Grenadines",
-            " Samoa",
-            "San Marino",
-            "Sao Tome and Principe",
-            "Saudi Arabia",
-            "Senegal",
-            "Serbia",
-            "Seychelles",
-            " Sierra Leone",
-            "Singapore",
-            " Sint Maarten",
-            "Slovakia",
-            "Slovenia",
-            "Solomon Islands",
-            "Somalia",
-            "South Africa",
-            "South Korea",
-            "South Sudan",
-            " Spain",
-            " Sri Lanka",
-            "Sudan",
-            "Suriname",
-            " Swaziland",
-            "Sweden",
-            "Switzerland",
-            "Syria",
-            "Taiwan",
-            "Tajikistan",
-            " Tanzania",
-            " Thailand",
-            "Timor-Leste",
-            " Togo",
-            " Tonga",
-            "Trinidad and Tobago",
-            "Tunisia",
-            "Turkey",
-            "Turkmenistan",
-            " Tuvalu",
-            "Uganda",
-            "Ukraine",
-            "United Arab Emirates",
-            "United Kingdom",
-            "Uruguay",
-            "Uzbekistan",
-            "Vanuatu",
-            "Venezuela",
-            "Vietnam",
-            "Yemen",
-            "Zambia",
-            "Zimbabwe"
-
-    ];
-    $("#country").autocomplete({
-    source: countries
-    });
-
-
-
-
+                                                <script type="text/javascript">
+        $('#year1').datepicker({
+                                                        changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year2').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year3').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year4').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year5').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year6').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year7').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        // country chooser
+        var countries = [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "Andorra",
+        "Angola",
+        "Antigua and Barbuda",
+        "Argentina",
+        "Armenia",
+        "Aruba",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahamas",
+        "Bahrain",
+        "Bangladesh",
+        "Barbados",
+        "Belarus",
+        "Belgium",
+        "Belize",
+        "Benin",
+        "Bhutan",
+        "Bolivia",
+        "Bosnia and Herzegovina",
+        "Botswana",
+        "Brazil",
+        "Brundi",
+        "Bulgaria",
+        "Burkina Faso",
+        "Burma",
+        "Burundi",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Cape Verde",
+        "Central African Republic",
+        "Chad",
+        "Chile",
+        "China",
+        "Colombia",
+        "Comoros",
+        "  Congo",
+        "Democratic Republic of the Congo",
+        " Republic of the Costa Rica",
+        " Cote d'Ivoire",
+        "Croatia",
+        "Cuba",
+        "Curacao",
+        "Cyprus",
+        "Czechia",
+        "Denmark",
+        "Djibouti",
+        "Dominica",
+        "Dominican Republic",
+        "East Timor (see Timor-Leste)",
+        "Ecuador",
+        "Egypt",
+        " El Salvador",
+" Equatorial Guinea",
+        "  Eritrea",
+        "Estonia",
+        " Ethiopia",
+        "Fiji",
+        "Finland",
+        "France",
+        "Gabon",
+        "Gambia",
+        "Georgia",
+        "Germany",
+        "Ghana",
+        "Greece",
+        "Grenada",
+        "Guatemala",
+        "Guinea",
+        "Guinea-Bissau",
+        "Guyana",
+        "Haiti",
+        "Holy See",
+        "Honduras",
+        "Hong Kong",
+        "Hungary",
+        "Iceland",
+        "India",
+        "Indonesia",
+        "Iran",
+        "Iraq",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Jamaica",
+        "Japan",
+        "Jordan",
+        "Kazakhstan",
+        "Kenya",
+        "Kiribati",
+        "Korea, North",
+        "Korea, South",
+        "Kosovo",
+        "Kuwait",
+        "Kyrgyzstan",
+        "Laos",
+        "Latvia",
+        "Lebanon",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Macau",
+        "Macedonia",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Marshall Islands",
+        "Mauritania",
+        "Mauritius",
+        "Mexico",
+        "Micronesia",
+        "Moldova",
+        "Monaco",
+        "Montenegro",
+        " Morocco",
+        "Mozambique",
+        "Namibia",
+        "Nauru",
+        "Nepal",
+        "Netherlands",
+        " New Zealand",
+        "Nicaragua",
+        "Niger",
+        " Nigeria",
+        "North Korea",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palau",
+        "Palestinian Territories",
+        "Panama",
+        "Papua New Guinea",
+        " Paraguay",
+        "Peru",
+        "Philippines",
+        "Poland",
+        "Portugal",
+        "Qatar",
+"Romania",
+        "Russia",
+        " Rwanda",
+        "Saint Kitts and Nevis",
+        " Saint Lucia",
+        "Saint Vincent and the Grenadines",
+        " Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Saudi Arabia",
+        "Senegal",
+        "Serbia",
+        "Seychelles",
+        " Sierra Leone",
+        "Singapore",
+        " Sint Maarten",
+        "Slovakia",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Korea",
+        "South Sudan",
+        " Spain",
+        " Sri Lanka",
+        "Sudan",
+        "Suriname",
+        " Swaziland",
+        "Sweden",
+        "Switzerland",
+        "Syria",
+        "Taiwan",
+        "Tajikistan",
+        " Tanzania",
+        " Thailand",
+        "Timor-Leste",
+        " Togo",
+        " Tonga",
+        "Trinidad and Tobago",
+        "Tunisia",
+        "Turkey",
+        "Turkmenistan",
+        " Tuvalu",
+        "Uganda",
+        "Ukraine",
+        "United Arab Emirates",
+        "United Kingdom",
+        "Uruguay",
+        "Uzbekistan",
+        "Vanuatu",
+        "Venezuela",
+        "Vietnam",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+                                                
+        ];
+        $("#country").autocomplete({
+                                                                source: countries
+                                        });
+                                        
+                                            
+                                                
+                                                
 </script>

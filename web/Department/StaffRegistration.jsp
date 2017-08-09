@@ -21,7 +21,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/sidebar.jsp" %>
+                <%@include file="../common/department_sidebar.jsp" %>
             </div>
             <div class="col-lg-10">
                 <div class="col-lg-12">

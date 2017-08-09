@@ -19,7 +19,7 @@
     <div class="span12"style="margin-top: -20px;">
         <div class="span12">
                         <div class="col-lg-2" id="sidebar">
-                            <%@include file="../common/TeachersSidebar.jsp"%></div></div></div>
+                            <%@include file="../common/department_sidebar.jsp"%></div></div></div>
 <script type="text/javascript"
 	src="../resources/js/jquery.bdt.js"></script>
 	<script type="text/javascript">

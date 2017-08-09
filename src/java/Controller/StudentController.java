@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jdk.nashorn.internal.objects.NativeString;
+
 
 
 /**
@@ -54,6 +54,8 @@ Connection connection;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String STUD_ID = null, 
+                    program=request.getParameter("program"), 
+                    department=request.getParameter("department"), 
             STUD_FIRST_NAME = request.getParameter("studentfirstname"), 
             STUD_LAST_NAME = request.getParameter("studlastname"), 
             STUD_MIDDLE_NAME = request.getParameter("studmiddlename"), 

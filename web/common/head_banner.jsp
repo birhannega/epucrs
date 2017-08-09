@@ -1,0 +1,1 @@
+<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/logoGSM1.jpg" class="img-thumbnail"></div> 
