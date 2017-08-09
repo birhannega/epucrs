@@ -5,7 +5,8 @@
  */
 package Controller;
 
-import Model.StudentManagement;
+import Model.CourseAssignmentModel;
+import Model.CourseManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author user
  */
-@WebServlet(name = "STUD_PSEI", urlPatterns = {"/STUD_PSEI"})
-public class STUD_PSEI extends HttpServlet {
+@WebServlet(name = "CourseAssignment", urlPatterns = {"/CourseAssignment"})
+public class CourseAssignmentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +37,38 @@ public class STUD_PSEI extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-          String date_psei= request.getParameter("date_psei"),
-                  name_of_institution= request.getParameter("name_of_institution"),
-                  program_atended= request.getParameter("program_atended"),
-                  stud_id= request.getParameter("stud_id");
-       // creating object of family registration class from model
-            StudentManagement StudPSEI = new StudentManagement();
-            int isSaved = StudPSEI.STUD_PSEI(date_psei,  name_of_institution,program_atended,stud_id);
-               
-            if (isSaved >= 1) {
-out.print("saved");
-            }else{
-                out.print("not saved");
-            }
-        }
+     
+              PrintWriter out=response.getWriter() ;
+              
+               String selectinstr=request.getParameter("selectinstr"),
+                dateassigned=request.getParameter("dateassigned"),
+                subject=request.getParameter("subject"),
+                course=request.getParameter("course"),
+                creditH=request.getParameter("creditH"),
+                datemodified=request.getParameter("datemodified"),
+               modifiedby=request.getParameter("modifiedby"),
+               period=request.getParameter("period"),
+               previousinstructor=request.getParameter("previousinstructor"),
+               instid=subject.concat("-100");
+//        PrintWriter out=response.getWriter();
+//        out.println("Entered inputs "+term+" "+courseName);
+// creating object of entity class
+CourseAssignmentModel instreg=new CourseAssignmentModel();
+int is_registered= instreg.courseAssignment(instid,selectinstr, dateassigned, subject,course, creditH, datemodified,  modifiedby, period, previousinstructor);
+if(is_registered>0)
+{ 
+                    request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Instructor Assigned successfully</span></strong>");
+
+     response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+  //out.println("course successfully registred");
+}
+else
+{
+
+  out.println("course not registred"); 
+}
+
+   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,9 +86,9 @@ out.print("saved");
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(STUD_PSEI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(STUD_PSEI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -88,9 +106,9 @@ out.print("saved");
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(STUD_PSEI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(STUD_PSEI.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

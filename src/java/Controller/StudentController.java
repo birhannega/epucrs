@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Entity.StudentManagement;
+import Model.StudentManagement;
 import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,6 +89,14 @@ Connection connection;
             connectionManager dbconn=new connectionManager();
             Statement idstatement=dbconn.getconnection().createStatement();
             ResultSet rs_id=idstatement.executeQuery("select REGULAR_STUDENT_COUNTER from TBL_Setup where ACADAMIC_YEAR='"+year+"' ");
+            
+             ResultSet rs_ci_counter=idstatement.executeQuery("select CRIME_INVESTIGATION from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+              ResultSet rs_cp_counter=idstatement.executeQuery("select CRIME_PREVENTION from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+               ResultSet rs_ad_counter=idstatement.executeQuery("select ADVANCED_DIPLOMA from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+                ResultSet rs_spc_counter=idstatement.executeQuery("select SPECIAL from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+               ResultSet rs_ext_counter=idstatement.executeQuery("select EXTENSION from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+                ResultSet hlt_cp_counter=idstatement.executeQuery("select HEALTH from TBL_COUNTER where ACADAMIC_YEAR='"+year+"' ");
+               
             if(rs_id.next())
             {
              stud_iterator=rs_id.getString(1);

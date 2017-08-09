@@ -57,6 +57,7 @@
                     <div class="row">
 
                         <%
+                            
                             //Get current date
                             Date currentdate = new Date();
 

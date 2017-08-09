@@ -10,39 +10,40 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" href="css/login.css"/>
-            <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
+
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> 
-            <link rel="stylesheet" href="bootstrap/css/bootstrap.css"> 
-        
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css"> 
+
     </head>
-   
+
     <body>
         <div class="container"> 
             <h4 class="page-header text-capitalize text-ce ">Federal police university college registrar system </h4>  
-        
-        </div>
-        
-        
-        
-        <form name="login-form" class="login-form" action="${pageContext.request.contextPath}//LoginAuthentication" method="post">
-	
-		<div class="header">
-		<h1>EFPUC registrar system</h1>
-		<span>Please, fill this form</span>
-		</div>
-	
-		<div class="content">
-		<input name="username" type="text" class="input username" placeholder="Username" />
-		<div class="user-icon"></div>
-		<input name="password" type="password" class="input password" placeholder="Password" />
-		<div class="pass-icon"></div>		
-		</div>
 
-		<div class="footer">
-		<button href="#" class="button btn btn-primary">Login</button>
-		</div>
-	
-	</form>
+
+
+
+           
+            <div class="col-lg-offset-2 col-lg-8">
+                 <div class="header">
+                     <h1 class="text-primary">Admin Login Panel</h1>
+                <span class="help-block">Please, fill this form</span>
+            </div>
+            <form name="login-form" class="login-form" action="${pageContext.request.contextPath}//LoginAuthentication" method="post">
+              <div class="form-group col-lg-8">
+                 User name:   <input name="username" type="text" class="form-control" placeholder="Enter Username" />
+                </div>
+                <div class="form-group col-lg-8">
+                  Password:  <input name="password" type="password" class="form-control" placeholder="Enter Password" />
+                </div>
+
+                <div class="form-group col-lg-8">
+                    <button type="submit" class="button btn btn-primary  pull-right">Login</button>
+                </div>
+
+            </form>
+        </div>
+        </div>
     </body>
 </html>

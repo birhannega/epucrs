@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Entity.UserManagement;
+import Model.UserManagement;
 import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;

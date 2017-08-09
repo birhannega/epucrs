@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Entity.CourseManagement;
+import Model.CourseManagement;
 import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,15 +42,15 @@ public class CourseServlet extends HttpServlet {
                String term=request.getParameter("term"),
                 courseName=request.getParameter("coursename"),
                 date_registetred=request.getParameter("date_registered"),
-                subject=request.getParameter("coursetype"),
+                coursetype=request.getParameter("coursetype"),
                 credithr=request.getParameter("creditH"),
                 prerequest=request.getParameter("prerequest");
-               String course_code=subject.concat("-200");
+               String course_code=coursetype.concat("-200");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
 CourseManagement registration=new CourseManagement();
-int is_registered= registration.registerCourse(course_code, term, courseName,credithr, date_registetred, subject,  prerequest);
+int is_registered= registration.registerCourse(course_code, term, courseName,date_registetred,coursetype,credithr,  prerequest);
 if(is_registered>0)
 { 
                     request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Course successfully registred</span></strong>");

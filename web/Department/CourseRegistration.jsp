@@ -32,17 +32,11 @@
 
                     <p class="text-primary page-header text-center">${courseRegistered}</p>
 
-
-
-
-
-
                 </div>
 
 
                 <!-- Button trigger modal -->
-                <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" 
-                        data-target="#myModal">
+                <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
                     Add Course
                 </button>
 
@@ -55,6 +49,10 @@
 
 
                                 <p class="text-primary text-center"><strong>Course Registration</strong></p>
+                                <button type="button" class="close pull-right" 
+                                        data-dismiss="modal" aria-hidden="true" style="color: midnightblue">
+                                    &times;
+                                </button>
                             </div>
                             <form name="applicationForm" role="form" class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">
 
@@ -62,61 +60,68 @@
     <!--                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">-->
 
                                     <div class="form-group col-lg-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Term</span>
-                                            <select class="form-control" id="term" name="term" required="required">
-                                                <option>Term1</option>
-                                                <option>Term2</option>
-                                                <option>Term3</option>
-                                                <option>Term4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Course Name</span>
-                                            <input type="text" name="coursename"  class="form-control" id="cn" placeholder="Enter Course Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Date</span>
-                                            <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group col-lg-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Course Type</span>
-                                            <input type="text" name="coursetype"  class="form-control" id="ct" placeholder="Enter Course Type">
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">Credit Hour</span>
-                                            <input type="text" name="creditH"  class="form-control" id="ch" placeholder="Enter Credit Hour">
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">Pre Request</span>
-                                        <select class="form-control" id="prerequest" name="prerequest" required="required">
-                                            <option>Yes</option>
-                                            <option>No</option>
+                                        <!--<div class="input-group">-->
+                                        <!--<span class="input-group-addon">Term</span>-->
+                                        <span class="pull-center">Term</span>
+                                        <!--Term-->
+                                        <select class="form-control" id="term" name="term" required="required">
+                                            <option value="">-select term-</option>
+                                            <option value="1">Term1</option>
+                                            <option value="2">Term2</option>
+                                            <option value="3">Term3</option>
+                                            <option value="4">Term4</option>
                                         </select>
+                                        <!--</div>-->
                                     </div>
-                                    <button type="button" class="close" 
-                                            data-dismiss="modal" aria-hidden="true">
-                                        &times;
-                                    </button>
+
+                                    <!--<div data-dte-e="input-control" class="DTE_Field_InputControl" style="display: block;">Term<input id="DTE_Field_first_name" type="text"></div>-->
+                                    <div class="form-group col-lg-4">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Course Name</span>
+                                        <input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Date</span>
+                                        <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
+                                        <!--                                            <span class="input-group-addon">
+                                                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                                    </span>-->
+                                        <!--</div>-->
+                                    </div>
+
+
+                                    <div class="form-group col-lg-4">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Course Type</span>
+                                        <input type="text" name="coursetype"  class="form-control" id="ct" placeholder="Enter Course Type">
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Credit Hour</span>
+                                        <input type="text" name="creditH"  class="form-control" id="ch" placeholder="Enter Credit Hour">
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Pre Request</span>
+                                        <!--Term-->
+                                        <select class="form-control" id="prerequest" name="prerequest" required="required">
+                                            <option value="">-select term-</option>
+                                            <option value="1">Yes</option>
+                                            <option value="2">No</option>
+
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
 
                                 </div>
-                            <!--</form>-->
+                                <!--</form>-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" 
+                                    <input type="button" class="btn" id="buttonref" value="Refresh"/>
+                                    <button type="button" class="btn btn-warning" 
                                             data-dismiss="modal">Close
                                     </button>
                                     <button type="submit" class="btn btn-primary" id="btnregister">
@@ -131,22 +136,33 @@
 
                 <span class="text-primary">  <strong>List of available courses</strong></span>
 
+                <script type="text/javascript">
+                    $('#edit_id').click(function ()
+                    {
+                        $("#editing_form").css('visibility', "visible");
+                    });
+                </script>
+                <span class="alert alert-success">  ${del}</span> 
+
                 <table  class="table table-striped table-bordered table-hover"  id="tabledate">
                     <thead>
                         <tr>
+                            <th>Course Code</th>
                             <th>Term</th>
-                            <th>Subject</th>
                             <th>Course Name</th>
-                            <th>Credit Hour</th>
                             <th>Added Date</th>
+                            <th>Course Type</th>
+                            <th>Credit Hours</th>
                             <th>Has Pre Request</th>
-                            <th >Edit</th>
-                            <th >Delete</th>
+                            <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
+                            <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
 
 
                         </tr>
                     </thead>
-
+                    <%
+                        session.setAttribute("del", null);
+                    %>
 
                     <tbody>
                         <%
@@ -165,20 +181,35 @@
                             <td><%=rs_course.getString(4)%></td> 
                             <td><%=rs_course.getString(5)%></td> 
                             <td><%=rs_course.getString(6)%></td> 
+                            <td><%=rs_course.getString(7)%></td> 
                             <td>
-                                <form action="" method="Get">
+
+
+                                <form action="" method="post">
+
                                     <input type="hidden" name="edit_id" value="<%=id%>"/>
 
-                                    <button class="btn btn-warning">Edit</button>
+                                    <button class="btn btn-warning" id="edit_id">Edit</button>
+                                </form>
+
+                            </td>
+
+                            <td>
+                                <form action="deletecourse.jsp" method="Post" >
+                                    <input type="hidden" name="delete_id" value="<%=id%>"/>
+                                    <button class="btn btn-danger" id="deleteid">Delete</button>
                                 </form>
 
 
                             </td>
-                            <td>
-                                <form>
-                                    <input type="hidden" name="delete_id" value="<%=id%>"/>
-                                    <button class="btn btn-danger">Delete</button>
-                                </form></td>
+                            <!--                    <script type="text/javascript">
+                                                    $('#deleteid').on('click', function () {
+                                                        table
+                                                                .row($(this).parents('tr'))
+                                                                .remove()
+                                                                .draw();
+                                                    });
+                                                </script>-->
                         </tr>
                         <%
                             }
@@ -186,7 +217,13 @@
 
                     </tbody>
                 </table>
+                <strong></strong>
+                <form action="" id="editing_form" method="post" style="visibility: hidden">
 
+                    <input type="text" name="edit_id" value="<%%>"/>
+
+                    <button class="btn btn-warning" id="edit_id">Edit</button>
+                </form>
 
 
             </div>
@@ -202,32 +239,72 @@
     <!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
     <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
     <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
+    <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
+<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
-    <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
-    <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-    <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+<!--<script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>-->
+<link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $().ready(function () {
-    //                    var j = jQuery.noConflict();
-            $('#tabledate').dataTable();
+<script type="text/javascript">
+                    $().ready(function () {
+//                    var j = jQuery.noConflict();
+                        $('#tabledate').dataTable();
+                    });
+                    //
+
+</script>
+<script type="text/javascript">
+    $(function () {
+
+        $("#stud_reg").validate({
+            rules: {
+
+                coursename: {
+                    required: true,
+                    minlength: 8
+                },
+                coursetype:
+                        {
+                            required: true
+                        },
+                date_registered:
+                        {
+                            required: true
+                        },
+                creditH: {
+                    required: true,
+                    digits: true
+                },
+                prerequest: {
+                    required: true
+                },
+                term:
+                        {
+                            required: true
+                        }
+            },
+            messages: {
+                coursename: {
+                    required: "Please enter some data",
+                    minlength: "Your data must be at least 8 characters"
+                },
+                coursetype: "Please provide CourseType",
+                date_registered: "Please provide Date",
+                creditH: {
+                    required: "Please enter some data",
+                    digits: "Please provide Number"
+                },
+                prerequest: "Please Select Pre-Request",
+                term: "Please Select Term"
+
+            }
         });
-        //
-    </script>
-<!--     <script type="text/javascript">
-//$("#btnregister").on('click', function (e) {
-//     e.preventDefault;
-//     var validator = $("#stud_reg").validate({
-//coursename: {
-//             "required": true,
-//              "minlength": 13
-//          }
-//      })
-//  }
-//              </script>-->
-
-    <script type="text/javascript">
-        $('#stud_reg').validate({
+    });
+</script>
+<!--    <script type="text/javascript">
+        $("#stud_reg" ).validate({
             rules: {
                 coursename:
                         {
@@ -268,34 +345,27 @@
             }
         });
 
-    </script>
+    </script>-->
 
-    <script type="text/javascript">
-        $("#date_registered").datepicker({
-            changeMonth: true,
-            changeYear: true
-                    //dateFormat: 'yyyy-mm-dd'
-                    //format:'yyyy-mm-dd'
+<script type="text/javascript">
+    $("#date_registered").datepicker({
+        changeMonth: true,
+        changeYear: true
+                //dateFormat: 'yyyy-mm-dd'
+                //format:'yyyy-mm-dd'
 
-        });
+    });
 
-        $('input[type=date]').datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true
+    $('input[type=date]').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true
 
-        });
+    });
 
-    </script>
-    <!--<script>
-                $('#stud_reg').submit(function(e) {
-                    $('#messages').removeClass('hide').addClass('alert alert-success alert-dismissible').slideDown().show();
-                    $('#messages_content').html('<h4>MESSAGE HERE</h4>');
-                    $('#modal').modal('show');
-                    e.preventDefault();
-                });
-            </script>	-->
-    <script type="text/javascript">
+</script>
+
+<!--    <script type="text/javascript">
     $(document).ready(function() {
     $("#btnregister").click(function(e) {
             e.preventdefault();
@@ -318,6 +388,6 @@
         });
     });
 });
-</script>
+</script>-->
 </body>
 </html>
