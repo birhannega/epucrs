@@ -22,7 +22,7 @@
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/header.jsp" %>
+        <%@include file="../common/incoder_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -137,7 +137,64 @@
                                 <h4 class="text-info">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>
 
                                 <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//StudentController">
+                                    <div class="form-group col-lg-4">
+                                    <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
+                                        <option value="">select department</option>
 
+                                            <%
+                                               
+                                                 Statement getdept = con.getconnection().createStatement();
+
+                                                String dep_name=null,depid=null;
+                                                ResultSet rs_dept = getdept.executeQuery("select * from TBL_DEPARTMENT");
+                                          
+                                                while (rs_dept.next()) {
+                                                    dep_name=rs_dept.getString("DEP_NAME");
+                                                    depid=rs_dept.getString("DEP_ID");
+                                                 %>
+                                                    <option value="<%=depid%>"><%=dep_name%></option>
+                                                              <%
+                                                             }     
+                                                                %>
+                                             
+                                              </select>                          
+                                    </div>
+                                                                <div class="form-group col-lg-4">
+                                    
+                                    <select name="program" id="program" class="form-control">
+
+                                        <option value="">select program</option> 
+                                  
+                                    </select>
+                                                                </div>
+                                                                
+<script  type="text/javascript">  
+       
+      var xmlHttp;
+      function showState(str){
+      if (typeof XMLHttpRequest != "undefined"){
+      xmlHttp= new XMLHttpRequest();
+      }
+      else if (window.ActiveXObject){
+      xmlHttp= new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      if (xmlHttp==null){
+      alert("Browser does not support XMLHTTP Request")
+      return;
+      } 
+      var url="program.jsp";
+      url +="?department=" +str;
+      xmlHttp.onreadystatechange = stateChange;
+      xmlHttp.open("GET", url, true);
+      xmlHttp.send(null);
+      }
+
+      function stateChange(){   
+      if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){   
+      document.getElementById("program").innerHTML=xmlHttp.responseText   
+      }   
+      }
+      </script> 
                                     <div class="form-group col-lg-4">
 
                                         <div class="input-group">
@@ -305,8 +362,8 @@
 
                                     </div>
 
-
-                                    <button type="submit" id="page1" class="btn btn-primary"><span class="fa fa-save"><strong>  Save personal info</strong></span></button>
+      <div class="form-group col-lg-4">
+          <button type="submit" id="page1" class="btn btn-primary"><span class="fa fa-save"><strong>  Save personal info</strong></span></button></div>
                                 </form>
                             </section>
                             <h3>Family info</h3>

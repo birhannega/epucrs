@@ -22,35 +22,34 @@
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/header.jsp" %>
+        <%@include file="../common/incoder_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
-    <div class="span12" style="margin-top: -20px"> 
+    <div class="span12"> 
 
 
         <!--      include side bar start-->
         <div class="span12">
 
             <!--      include side bar end-->
-
+<div class="container-fluid"  style="margin-top: 5px">
+    <%@include file="../common/incoder_sidebar.jsp" %>
+    </div>
             <!--      main content starts-->
             <div class="container-fluid">
                 <div class="col-lg-12" >
 
-                    <div class="row">
+                  
                         <div class="col-lg-12">
 
 
                             <h4 class= "text-capitalize text-center text-primary"><i class="fa fa-laptop"></i> federal police university college Data encoders application interface </h4>
 
 
-                            <div class="pull-right">
+                            
 
-
-                            </div>
-
-                        </div>
+                   
                     </div>
                     <div class="row">
 

@@ -17,7 +17,7 @@
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/header.jsp" %>
+        <%@include file="../common/department_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -105,14 +105,62 @@
 
                         <div class="form-group col-lg-4">
                             <div class="input-group">
-                                <span class="input-group-addon">Subject</span>
-                                <input type="text" name="subject"  class="form-control" id="subject" placeholder="Enter Subject">
+                                <span class="input-group-addon">Program</span>
+                                <select class="form-control" id="program" name="program" required="required">
+                                    <option value="-1">-select department-</option>
+                                    <%
+                                        try {
+                                            connectionManager dbconnection = new connectionManager();
+                                            Statement st_list_course = dbconnection.getconnection().createStatement();
+                                            String course_sql = "select DEPARTEMENT from TBL_ACADEMIC_STAFF_REG";
+
+                                            ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
+
+                                    %>
+                                    //                                                                        
+                                    <%    while (rs_courseinstr.next()) {
+                                            String id = rs_courseinstr.getString("DEPARTEMENT");
+                                            //cid;
+                                    %>
+                                    <option><%=id%></option>
+                                    <% } %>
+                                    <!--</select>-->
+                                    <%
+                                        } catch (Exception e) {
+                                            out.println("wrong selection!" + e);
+                                        }
+                                    %>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group col-lg-4">
                             <div class="input-group">
                                 <span class="input-group-addon">Course</span>
-                                <input type="text" name="course"  class="form-control" id="course" placeholder="Enter Course">
+                                 <select class="form-control" id="course" name="course" required="required">
+                                    <option value="-1">-select course-</option>
+                                    <%
+                                        try {
+                                            connectionManager dbconnection = new connectionManager();
+                                            Statement st_list_course = dbconnection.getconnection().createStatement();
+                                            String course_sql = "select COURSE_NAME from TBL_COURSE_REGISTRATION";
+
+                                            ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
+
+                                    %>
+                                    //                                                                        
+                                    <%    while (rs_courseinstr.next()) {
+                                            String id = rs_courseinstr.getString("COURSE_NAME");
+                                            //cid;
+                                    %>
+                                    <option><%=id%></option>
+                                    <% } %>
+                                    <!--</select>-->
+                                    <%
+                                        } catch (Exception e) {
+                                            out.println("wrong selection!" + e);
+                                        }
+                                    %>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group col-lg-4">
@@ -258,7 +306,7 @@
                 dateassigned: {
                     required: true
                 },
-                subject: {
+                program: {
                     required: true
                 },
                 course: {

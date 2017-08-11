@@ -19,16 +19,11 @@
 
     <body>
         <div class="container"> 
-            <h4 class="page-header text-capitalize text-ce ">Federal police university college registrar system </h4>  
-
-
-
-
-           
-            <div class="col-lg-offset-2 col-lg-8">
+            <%@include file="common/head_banner.jsp" %>
+                       <div class="col-lg-offset-2 col-lg-8">
                  <div class="header">
-                     <h1 class="text-primary">Admin Login Panel</h1>
-                <span class="help-block">Please, fill this form</span>
+                     <h1 class="text-primary page-header text-center">Admin Login Panel</h1>
+                <span class="help-block text-center">Please, fill this form</span>
             </div>
             <form name="login-form" class="login-form" action="${pageContext.request.contextPath}//LoginAuthentication" method="post">
               <div class="form-group col-lg-8">

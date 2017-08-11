@@ -18,7 +18,7 @@
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/incoder_nav.jsp" %>
+        <%@include file="../common/instructor_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -28,7 +28,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/incoder_sidebar.jsp" %>
+                <%@include file="../common/instructor_sidebar.jsp" %>
             </div>
             <!--      include side bar end-->
 
@@ -133,7 +133,8 @@
                                 <div class="text-capitalize text-center"><strong>Total Program</strong> </div>						
                             </div><!--/.info-box-->			
                         </div><!--/.col-->
-                   
+                    
+                        
                     </div>
 
 

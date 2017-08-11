@@ -133,45 +133,7 @@
                                 <div class="text-capitalize text-center"><strong>Total Program</strong> </div>						
                             </div><!--/.info-box-->			
                         </div><!--/.col-->
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                            <div class="info-box bg-danger text-center" style="border-radius: 10px;">
-                                <span class="fa fa-graduation-cap fa-4x" ></span>
-                                <div class="count fa fa-2x">
-                                    <%                                       
-                                        String number_of_active_stud = null;
-                                        String query_no_activestud = "select count(program_id) from TBL_academic_program ";
-                                        ResultSet res_no_activestud = statement.executeQuery(query_no_activestud);
-                                        if (res_no_activestud.next()) {
-                                            number_of_active_stud = res_no_activestud.getString(1);
-                                            out.println(number_of_active_stud);
-                                        }
-
-                                    %>
-
-                                </div>
-                                <div class="text-capitalize text-center"><strong>Active Student</strong> </div>						
-                            </div><!--/.info-box-->			
-                        </div><!--/.col-->
-                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                            <div class="info-box bg-danger text-center" style="border-radius: 10px;">
-                                <span class="fa fa-graduation-cap fa-4x" ></span>
-                                <div class="count fa fa-2x">
-                                    <%                                       
-                                        String number_of_inactive_stud = null;
-                                        String query_no_inactivestud = "select count(program_id) from TBL_academic_program ";
-                                        ResultSet res_no_inactivestud = statement.executeQuery(query_no_inactivestud);
-                                        if (res_no_inactivestud.next()) {
-                                            number_of_inactive_stud = res_no_inactivestud.getString(1);
-                                            out.println(number_of_inactive_stud);
-                                        }
-
-                                    %>
-
-                                </div>
-                                <div class="text-capitalize text-center"><strong>Inactive Student</strong> </div>						
-                            </div><!--/.info-box-->			
-                        </div><!--/.col-->
-                        
+                   
                     </div>
 
 

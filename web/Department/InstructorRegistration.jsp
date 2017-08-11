@@ -16,7 +16,7 @@
     }
 
 </style>
-<style>
+<!--<style>
 @font-face {
     font-family: 'abyssinica_silregular';
     src: url('abyssinicasil-r.eot');
@@ -27,14 +27,14 @@
     font-weight: normal;
     font-style: normal;
 }
-</style>
+</style>-->
 <%@include file="../common/imports.jsp" %>
 <body>
 
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/header.jsp" %>
+        <%@include file="../common/department_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -44,7 +44,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/sidebar.jsp" %>
+                <%@include file="../common/department_sidebar.jsp" %>
             </div>
             <div class="col-lg-10"  >
                 <div class="col-lg-12" >

@@ -1,22 +1,20 @@
-
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="dbconnection.connectionManager"%>
-<!Doctype html>
-<link rel="stylesheet" href="../css/jQuery.steps.css"/>   
-<link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<!DOCTYPE html>
 
-<style>
-    section{
-        overflow: scroll;
-        background: #fff;
-    }
-
-</style>
 <%@include file="../common/imports.jsp" %>
+
+
+<%
+    connectionManager dbconnection = new connectionManager();
+    Connection connection = dbconnection.getconnection();
+    Statement statement = connection.createStatement();
+
+%>
 <body>
 
     <!--      include navigation bar start-->
@@ -38,26 +36,24 @@
 
             <!--      main content starts-->
             <div class="col-lg-10">
+              <div class="container-fluid">
                 <div class="col-lg-12" >
 
-                    <div class="row">
+                  
                         <div class="col-lg-12">
 
 
-                            <h4 class="page-header text-capitalize text-center text-primary"><i class="fa fa-laptop"></i> federal police university college Data encoders application interface </h4>
+                            <h4 class= "text-capitalize text-center text-primary"><i class="fa fa-laptop"></i> federal police university college Data encoders application interface </h4>
 
 
-                            <div class="pull-right">
+                            
 
-
-                            </div>
-
-                        </div>
+                   
                     </div>
                     <div class="row">
 
                         <%
-                            
+
                             //Get current date
                             Date currentdate = new Date();
 
@@ -72,8 +68,8 @@
                             String currentDate = current_time[2];
 
                             connectionManager con = new connectionManager();
-                            Connection connection = con.getconnection();
-                            Statement statement = connection.createStatement();
+                             connection = con.getconnection();
+                             statement = connection.createStatement();
                             String query = "Select Start_Date From Tbl_Schedule where SCHEDULE_ID='SI03' and acadamic_year=2010";
                             ResultSet res = statement.executeQuery(query);
                             Date startdate;
@@ -133,11 +129,15 @@
                             <h3>Personal Info</h3>
                             ${studentRegistered}
                             ${studentnotRegistered}
-                            <section >
-                                <h4 class="text-info">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>
 
-                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//StudentController">
-                                    <div class="form-group col-lg-4">
+                            <section >
+                                
+                                
+                                
+                                
+                                
+                                <form class="form-inline" method="post">
+                               
                                     <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
                                         <option value="">select department</option>
 
@@ -158,15 +158,15 @@
                                                                 %>
                                              
                                               </select>                          
-                                    </div>
-                                                                <div class="form-group col-lg-4">
+                                    
                                     
                                     <select name="program" id="program" class="form-control">
 
                                         <option value="">select program</option> 
                                   
                                     </select>
-                                                                </div>
+  
+                                </form>
                                                                 
 <script  type="text/javascript">  
        
@@ -195,6 +195,11 @@
       }   
       }
       </script> 
+
+                                <h4 class="text-info">personal information  <small>This form should be completed with photocopies of necessary documents included.</small> </h4>
+
+                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//StudentController">
+
                                     <div class="form-group col-lg-4">
 
                                         <div class="input-group">
@@ -362,23 +367,23 @@
 
                                     </div>
 
-      <div class="form-group col-lg-4">
-          <button type="submit" id="page1" class="btn btn-primary"><span class="fa fa-save"><strong>  Save personal info</strong></span></button></div>
+
+                                    <button type="submit" id="page1" class="btn btn-primary"><span class="fa fa-save"><strong>  Save personal info</strong></span></button>
                                 </form>
                             </section>
                             <h3>Family info</h3>
                             <section style="overflow: scroll">
                                 <h4 class="text-capitalize text-muted text-info">family background of <span class="text-danger">  ${fullname} </span></h4>
-                              
+
                                 <div class="col-lg-12" >
-                                  
+
                                     <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-user-o " ></span> Father info</p></strong>
 
                                 </div>
                                 <div class="container-fluid">
-                                     
+
                                     <form class="form-group " meth od="post" id="family_background" action="${pageContext.request.contextPath}/registerfamilyinformation">
-                                      
+
                                         <input type="hidden" name="studidfamily" value="${studentId}"/>
                                         <div class="form-group col-lg-4">
 
@@ -746,8 +751,7 @@
                                 </form>
 
                             </section>
-                            <%    request.getSession().setAttribute("eslce", null);
-                            %>
+                            
                         </div>
                     </div>
                 </div>
@@ -763,241 +767,234 @@
 
     <!--      main content ends-->
 
-    <%
-        request.getSession().setAttribute("studentRegistered", null);
-    %>
-
+   
+        
 
 </html>
 
 
 <script type="text/javascript">
-    $("#example-async").steps({
-        headerTag: "h3",
-        bodyTag: "section",
-        transitionEffect: "slide"
-    });
-</script>
+$("#example-async").steps({
+                                                headerTag: "h3",
+                                                bodyTag: "section",
+                                                transitionEffect: "slide"
+    });</script>
 <!--validation-->
 <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
 <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     $("#stud_reg").validate({
-        rules: {
-            studentfirstname:
-                    {
-                        required: true,
-                        minlength: 5,
-                        digits: !true,
-                        maxlength: 30
-
-                    },
-            studmiddlename: {
-                required: true,
-                minlength: 2,
-                digits: false,
-                maxlength: 30
-            },
-            studlastname: {
-                required: true,
-                minlength: 2,
-                digits: false,
-                maxlength: 30
-            },
-            studnationality: {
-                required: true
-            },
-            studgender: {
-                required: true
-            },
-            studbdate: {
-                required: true
-            },
-            studbirthregion: {
-                required: true
+                                        rules: {
+                                        studentfirstname:
+                                        {
+                                        required: true,
+                                                minlength: 5,
+                                                digits: !true,
+                                                maxlength: 30
 
             },
-            studBirthkebele: {
-                required: true
-            },
-            studBirthzone: {
-                required: true
-            },
-            studcpaddress: {
-                required: true
-            },
-            StudBirthwereda: {
-                required: true
-            },
-            studcpmobile: {
-                required: true
-            },
-            studcpname: {
-                required: true
-            },
-            studcprelation: {
-                required: true
-            },
-            studcptel: {
-                required: true
-            },
-            StudHomeRegion: {
-                required: true
-            },
-            studHomekebele: {
-                required: true
-            },
-            studHomewereda: {
-                required: true
-            },
-            studHomezone: {
-                required: true
-            },
-            studpcSector: {
-                required: true
-            },
-            studpcMobile: {
-                required: true
-            },
-            studcpreligion: {
-                required: true
-            }
+        studmiddlename: {
+                                                required: true,
+                                                minlength: 2,
+                                                digits: false,
+                                                maxlength: 30
         },
-        messages: {
-            studentfirstname: {
-                required: "student first name cannot be empty"
-            }
+        studlastname: {
+                                                required: true,
+                                                minlength: 2,
+                                                digits: false,
+                                                maxlength: 30
+        },
+        studnationality: {
+                                                required: true
+        },
+        studgender: {
+                                                required: true
+        },
+        studbdate: {
+                                                required: true
+        },
+        studbirthregion: {
+                                                required: true
+
+        },
+        studBirthkebele: {
+                                                required: true
+        },
+        studBirthzone: {
+                                                required: true
+        },
+        studcpaddress: {
+                                                required: true
+        },
+        StudBirthwereda: {
+                                                required: true
+        },
+        studcpmobile: {
+                                                required: true
+        },
+        studcpname: {
+                                                required: true
+        },
+        studcprelation: {
+                                                required: true
+        },
+        studcptel: {
+                                                required: true
+        },
+        StudHomeRegion: {
+                                                required: true
+        },
+        studHomekebele: {
+                                                required: true
+        },
+        studHomewereda: {
+                                                required: true
+        },
+        studHomezone: {
+                                                required: true
+        },
+                                studpcSector: {
+                                                required: true
+        },
+        studpcMobile: {
+                                                required: true
+        },
+        studcpreligion: {
+                                                required: true
+                                    }
+                                    },
+                                    messages: {
+                                                studentfirstname: {
+                                                required: "student first name cannot be empty"
         }
-    });
-    // family validation
-    $("#family_background").validate({
-        rules: {
-            fathersfirstname:
-                    {
-                        required: true,
-                        minlength: 2,
-                        digits: !true,
-                        maxlength: 30
-
-                    },
-            fathermiddlename: {
-                required: true,
-                minlength: 2,
-                digits: false,
-                maxlength: 30
-            },
-            fatherlastname: {
-                required: true,
-                minlength: 2,
-
-                maxlength: 30
-            },
-            fatherBzone: {
-                required: true
-            },
-            fatherBtown: {
-                required: true
-            },
-            fatherBRegion: {
-                required: true
-            },
-            fatherBwereda: {
-                required: true
-            },
-            fatherBkebele: {
-                required: true
-
-            },
-            fatherHnumber: {
-                required: true
-            },
-            fatherOccupation: {
-                required: true
-            },
-            fatherworkplace: {
-                required: true,
-                minlength: 3
-            },
-            //mother
-            motherfirstname: {
-                required: true
-            },
-            mothermiddlename: {
-                required: true
-            },
-            motherlastname: {
-                required: true
-            },
-            motherBRegion: {
-                required: true
-            },
-            motherBzone: {
-                required: true
-            },
-            motherBwereda: {
-                required: true
-            },
-            motherBtown: {
-                required: true
-            },
-
-            motherBkebele: {
-                required: true
-            },
-            motherHnumber: {
-                required: true
-            },
-            motherOccuption: {
-                required: true
-            },
-            motherPlacework: {
-                required: true
-            },
-            studpcMobile: {
-                required: true
-            },
-            studcpreligion: {
-                required: true
-            }
         }
-    });
+        });
+        // family validation
+        $("#family_background").validate({
+                                                        rules: {
+                                                        fathersfirstname:
+                                                        {
+                                                        required: true,
+                                                                minlength: 2,
+                                                                digits: !true,
+                                                                maxlength: 30
 
-</script>
+        },
+        fathermiddlename: {
+                                                                required: true,
+                                                                minlength: 2,
+                                                                digits: false,
+                                                                maxlength: 30
+        },
+        fatherlastname: {
+                                                                required: true,
+                                                                minlength: 2,
+                                                                maxlength: 30
+        },
+        fatherBzone: {
+                                                                required: true
+        },
+        fatherBtown: {
+                                                                required: true
+},
+        fatherBRegion: {
+                                                                required: true
+        },
+        fatherBwereda: {
+                                                                required: true
+        },
+        fatherBkebele: {
+                                                                required: true
+
+        },
+        fatherHnumber: {
+                                                                required: true
+        },
+fatherOccupation: {
+                                                                required: true
+        },
+        fatherworkplace: {
+                                                                required: true,
+                                                                minlength: 3
+        },
+        //mother
+        motherfirstname: {
+                                                                required: true
+        },
+        mothermiddlename: {
+                                                                required: true
+        },
+        motherlastname: {
+                                                                required: true
+        },
+        motherBRegion: {
+                                                                required: true
+        },
+        motherBzone: {
+                                                                required: true
+        },
+        motherBwereda: {
+                                                                required: true
+        },
+        motherBtown: {
+                                                                required: true
+        },
+        motherBkebele: {
+                                                                required: true
+        },
+        motherHnumber: {
+                                                                required: true
+        },
+        motherOccuption: {
+                                                                required: true
+        },
+        motherPlacework: {
+                                                                required: true
+        },
+                                    studpcMobile: {
+                                                                required: true
+        },
+        studcpreligion: {
+                                                                required: true
+        }
+        }
+        });</script>
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $('#year1').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year2').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year3').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year4').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year5').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year6').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    $('#year7').datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-    // country chooser
-    var countries = [
+                                                <script type="text/javascript">
+        $('#year1').datepicker({
+                                                        changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year2').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year3').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year4').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year5').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year6').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        $('#year7').datepicker({
+                                                                changeMonth: true,
+                                                                changeYear: true
+        });
+        // country chooser
+        var countries = [
         "Afghanistan",
         "Albania",
         "Algeria",
@@ -1055,7 +1052,7 @@
         "Ecuador",
         "Egypt",
         " El Salvador",
-        " Equatorial Guinea",
+" Equatorial Guinea",
         "  Eritrea",
         "Estonia",
         " Ethiopia",
@@ -1146,7 +1143,7 @@
         "Poland",
         "Portugal",
         "Qatar",
-        "Romania",
+"Romania",
         "Russia",
         " Rwanda",
         "Saint Kitts and Nevis",
@@ -1201,13 +1198,21 @@
         "Yemen",
         "Zambia",
         "Zimbabwe"
-
-    ];
-    $("#country").autocomplete({
-        source: countries
-    });
-
-
-
-
+                                                
+        ];
+        $("#country").autocomplete({
+                                                                source: countries
+                                        });
+                                        
+                                            
+                                                
+                                                
 </script>
+  
+
+    </div>  <!--      main content ends-->
+
+
+
+
+</html>

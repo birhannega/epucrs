@@ -1,4 +1,4 @@
-<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/logoGSM1.jpg" class="img-thumbnail"></div> 
+<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/header5.jpg" class="img-thumbnail"></div> 
 <nav class="navbar navbar-default">
     
  
@@ -98,7 +98,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"><span class="fa fa-user-circle"></span> My Account</span></strong> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Logout</a></li>
+                        <li><a href=".../Logout.jsp">Logout</a></li>
                         <li><a href="#">View Profile</a></li>
                         <li><a href="#">Change password</a></li>
                     </ul>

@@ -96,7 +96,7 @@
 
         /*gives sidebar width/height*/
         nav.sidebar{
-            width: 210px;
+            width: 230px;
             height: 100%;
             margin-left: -160px;
             float: left;
@@ -169,43 +169,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.jsp">Department</a>
+            <a class="navbar-brand" href="index.jsp">Student Activity</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student Activity<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="CourseRegistration.jsp">Course Registration</a></li>
-                        <li><a href="#">Edit Course profile</a></li>
-                        <li><a href="#">view Course profile</a></li>
-                        <li><a href="#">view Course profile</a></li>
-                        <li><a href="CourseAssigntoInstructor.jsp">Course Assignment</a></li>
-                    </ul>
+                        <li><a href="">View Result</a></li>
+                        <li><a href="#">View Schedule</a></li>
+                        <li><a href="#">Re-grade  Forms</a></li>
+                        <li><a href="#">Clearance  Forms</a></li> 
+                         <li><a href="#">Withdraw  Forms</a></li> 
+                      </ul>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="InstructorRegistration.jsp">Instructor Registration</a></li>
-                        <li><a href="#">Edit Instructor Profile</a></li>
-                        <li><a href="StaffRegistrationl.jsp">view Instructor Profile</a></li>
-                        <li><a href="#">Admin Staff Registration</a></li>
-                        <li><a href="">view Admin Staff Profile</a></li>
-
-                    </ul>
-                </li>
-            <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student Request Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="InstructorRegistration.jsp">Re-exam Registration</a></li>
-                        <li><a href="Re-grade.jsp">Re-grade Request</a></li>
-                        <li><a href="Probation.jsp">Probation Request</a></li>
-
-                    </ul>
-            </li>
             </ul>
         </div>
     </div>

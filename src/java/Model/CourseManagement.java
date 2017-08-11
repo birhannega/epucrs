@@ -17,18 +17,19 @@ import java.util.logging.Logger;
  */
 public class CourseManagement {
     connectionManager connection=new connectionManager();
-    public int registerCourse(String id,String term,String name,String date,String subject,String creditHr,String prerequest) throws SQLException, ClassNotFoundException
+    public int registerCourse(String id,String department,String program,String term,String name,String date,String creditHr,String prerequest) throws SQLException, ClassNotFoundException
     {
         int action=0;
        
-            PreparedStatement ps_register=connection.getconnection().prepareStatement("INSERT INTO TBL_COURSE_REGISTRATION (COURSE_CODE,TERM, COURSE_NAME, ADDED_DATE,COURSE_TYPE,CREDIT_HOURS, PRE_REQUEST) VALUES(?,?,?,?,?,?,?)");
+            PreparedStatement ps_register=connection.getconnection().prepareStatement("INSERT INTO TBL_COURSE_REGISTRATION (COURSE_CODE,DEPARTMENT,PROGRAM,TERM, COURSE_NAME, ADDED_DATE,CREDIT_HOURS, PRE_REQUEST) VALUES(?,?,?,?,?,?,?,?)");
               ps_register.setString(1, id);
-               ps_register.setString(2, term);
-              ps_register.setString(3, name);
-              ps_register.setString(4, date);
-              ps_register.setString(5, subject);
-              ps_register.setString(6, creditHr);
-               ps_register.setString(7, prerequest);
+               ps_register.setString(2, department);
+              ps_register.setString(3, program);
+               ps_register.setString(4, term);
+              ps_register.setString(5, name);
+              ps_register.setString(6, date);
+              ps_register.setString(7, creditHr);
+               ps_register.setString(8, prerequest);
              action=ps_register.executeUpdate();
           
               return action;

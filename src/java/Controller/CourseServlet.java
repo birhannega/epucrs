@@ -39,18 +39,19 @@ public class CourseServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
           PrintWriter out=response.getWriter() ;
-               String term=request.getParameter("term"),
+               String department=request.getParameter("department"),
+                program=request.getParameter("program"),
+               term=request.getParameter("term"),
                 courseName=request.getParameter("coursename"),
                 date_registetred=request.getParameter("date_registered"),
-                coursetype=request.getParameter("coursetype"),
-                credithr=request.getParameter("creditH"),
+               credithr=request.getParameter("creditH"),
                 prerequest=request.getParameter("prerequest");
-               String course_code=coursetype.concat("-200");
+               String course_code=courseName.concat("-200");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
 CourseManagement registration=new CourseManagement();
-int is_registered= registration.registerCourse(course_code, term, courseName,date_registetred,coursetype,credithr,  prerequest);
+int is_registered= registration.registerCourse(department,program,course_code, term, courseName,date_registetred,credithr,  prerequest);
 if(is_registered>0)
 { 
                     request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Course successfully registred</span></strong>");

@@ -169,40 +169,35 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.jsp">Department</a>
+            <a class="navbar-brand" href="index.jsp">Admin</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
             <ul class="nav navbar-nav">
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Course Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="CourseRegistration.jsp">Course Registration</a></li>
-                        <li><a href="#">Edit Course profile</a></li>
-                        <li><a href="#">view Course profile</a></li>
-                        <li><a href="#">view Course profile</a></li>
-                        <li><a href="CourseAssigntoInstructor.jsp">Course Assignment</a></li>
-                    </ul>
+                        <li><a href="user_registration.jsp">User Registration</a></li>
+                        <li><a href="#">Edit User profile</a></li>
+                        <li><a href="#">view User profile</a></li>
+                      </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Role Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="InstructorRegistration.jsp">Instructor Registration</a></li>
-                        <li><a href="#">Edit Instructor Profile</a></li>
-                        <li><a href="StaffRegistrationl.jsp">view Instructor Profile</a></li>
-                        <li><a href="#">Admin Staff Registration</a></li>
-                        <li><a href="">view Admin Staff Profile</a></li>
-
-                    </ul>
+                        <li><a href="">Assign Role</a></li>
+                        <li><a href="#">Edit Assigned Role Profile</a></li>
+                        <li><a href="">view Assigned Role Profile</a></li>
+                 </ul>
                 </li>
             <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Student Request Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lookup Management <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="InstructorRegistration.jsp">Re-exam Registration</a></li>
-                        <li><a href="Re-grade.jsp">Re-grade Request</a></li>
-                        <li><a href="Probation.jsp">Probation Request</a></li>
+                        <li><a href="">Department Registration</a></li>
+                        <li><a href="">Program Registration</a></li>
+                        <li><a href="">Training Program Registration</a></li>
 
                     </ul>
             </li>

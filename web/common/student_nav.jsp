@@ -1,4 +1,4 @@
-<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/header5.jpg"  class="img-thumbnail"></div> 
+<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/header.jpg"  class="img-thumbnail"></div> 
 <nav class="navbar navbar-default">
     
  
@@ -20,7 +20,19 @@
            
 
             <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"> 
+                                <span class="fa fa-bell "></span> Schedule </strong>
+                        <span class="caret"></span></span> </span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Re-grade Period</a></li>
+                        <li><a href="#">Mid exam Period</a></li>
+                        <li><a href="#">Final Exam Period</a></li>
+                        <li><a href="#">Clearance Period</a></li>
+                        <li><a href="#">With Draw Period</a></li>
 
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"> 
                                 <span class="fa fa-bell "></span> Notifications </strong>

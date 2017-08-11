@@ -39,22 +39,23 @@ public class CourseAssignmentServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
      
               PrintWriter out=response.getWriter() ;
-              
+                /// String instid="-100";
                String selectinstr=request.getParameter("selectinstr"),
                 dateassigned=request.getParameter("dateassigned"),
-                subject=request.getParameter("subject"),
+                program=request.getParameter("program"),
                 course=request.getParameter("course"),
                 creditH=request.getParameter("creditH"),
                 datemodified=request.getParameter("datemodified"),
                modifiedby=request.getParameter("modifiedby"),
                period=request.getParameter("period"),
                previousinstructor=request.getParameter("previousinstructor"),
-               instid=subject.concat("-100");
+               instid=course.concat("-100");
+          //  instid=subject.concat("instid");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
-CourseAssignmentModel instreg=new CourseAssignmentModel();
-int is_registered= instreg.courseAssignment(instid,selectinstr, dateassigned, subject,course, creditH, datemodified,  modifiedby, period, previousinstructor);
+ CourseAssignmentModel instreg = new CourseAssignmentModel();
+int is_registered= instreg.courseAssignment(instid,selectinstr, dateassigned, program,course, creditH, datemodified,  modifiedby, period, previousinstructor);
 if(is_registered>0)
 { 
                     request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Instructor Assigned successfully</span></strong>");

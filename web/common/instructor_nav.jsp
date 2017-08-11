@@ -1,4 +1,4 @@
-<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/header5.jpg"  class="img-thumbnail"></div> 
+<div class="navbar navbar-default " style="margin-bottom: 0"><img src="../images/header.jpg"  class="img-thumbnail"></div> 
 <nav class="navbar navbar-default">
     
  

@@ -15,17 +15,17 @@ import java.sql.SQLException;
  */
 public class CourseAssignmentModel {
     connectionManager connmngr=new connectionManager();
-    public int courseAssignment(String instid,String selectinstr,String dateassigned,String subject,String course,String creditH,String datemodified,String  modifiedby,String period,String previousinstructor) throws ClassNotFoundException, SQLException{
+    public int courseAssignment(String instid,String selectinstr,String dateassigned,String program,String course,String creditH,String datemodified,String  modifiedby,String period,String previousinstructor) throws ClassNotFoundException, SQLException{
         
   
         int action=0;
        
-            PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT(INSTRUCTOR_ID, INSTRUCTOR_NAME , ASSIGNED_DATE,SUBJECT, COURSE_NAME, " +
+            PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT(INSTRUCTOR_ID, INSTRUCTOR_NAME , ASSIGNED_DATE,PROGRAM, COURSE_NAME, " +
 "CREDIT_HOUR,MODIFIED_DATE, MODIFIED_BY,PERIOD, PREV_INSTRUCTOR) VALUES(?,?,?,?,?,?,?,?,?,?)");
              ps_register.setString(1, instid);
             ps_register.setString(2, selectinstr);
                ps_register.setString(3, dateassigned);
-              ps_register.setString(4, subject);
+              ps_register.setString(4, program);
               ps_register.setString(5, course);
               ps_register.setString(6, creditH);
                ps_register.setString(7, datemodified);

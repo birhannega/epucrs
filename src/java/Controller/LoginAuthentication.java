@@ -63,20 +63,20 @@ public class LoginAuthentication extends HttpServlet {
                    role=rs_user.getString(1);
                   if(role.equalsIgnoreCase("R_00"))
                   {
-                      response.sendRedirect("admin/index.jsp");
+                      response.sendRedirect("Admin/index.jsp");
                   }else if (role.equalsIgnoreCase("R_01"))
                           {
                               response.sendRedirect("Incoder/index.jsp");
                           }  
                     else if (role.equalsIgnoreCase("R_02"))
                           {
-                              response.sendRedirect("Teacher/ndex.jsp");
+                              response.sendRedirect("Instructor/ndex.jsp");
                           }  else if (role.equalsIgnoreCase("R_03"))
                           {
-                              response.sendRedirect("department/index.jsp");
+                              response.sendRedirect("Department/index.jsp");
                           }  else if (role.equalsIgnoreCase("R_04"))
                           {
-                              response.sendRedirect("incoder/index.jsp");
+                              response.sendRedirect("Student/index.jsp");
                           }  else
                           {
                           out.print("unknown role");

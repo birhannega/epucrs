@@ -15,7 +15,7 @@
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/header.jsp" %>
+        <%@include file="../common/department_nav.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -58,7 +58,38 @@
 
                                 <div class="modal-body">
     <!--                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">-->
+                                    <div class="form-group col-lg-4">  
+                                        <span>Department</span>
+                                        <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
+                                            <option value="">select department</option>
+                                            <%
+                                                connectionManager connnmgr = new connectionManager();
+                                                Connection con = connnmgr.getconnection();
+                                                Statement getdept = con.createStatement();
 
+                                                String dep_name = null, depid = null;
+                                                ResultSet rs_dept = getdept.executeQuery("select * from TBL_DEPARTMENT");
+
+                                                while (rs_dept.next()) {
+                                                    dep_name = rs_dept.getString("DEP_NAME");
+                                                    depid = rs_dept.getString("DEP_ID");
+                                            %>
+                                            <option value="<%=depid%>"><%=dep_name%></option>
+                                            <%
+                                                }
+                                            %>
+
+                                        </select>                          
+                                    </div>
+                                    <div class="form-group col-lg-4">  
+                                        <span>Program</span>
+
+                                        <select name="program" id="program" class="form-control">
+
+                                            <option value="">select program</option> 
+
+                                        </select>
+                                    </div>
                                     <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <!--<span class="input-group-addon">Term</span>-->
@@ -92,12 +123,28 @@
                                     </div>
 
 
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <span class="pull-center">Course Type</span>
-                                        <input type="text" name="coursetype"  class="form-control" id="ct" placeholder="Enter Course Type">
-                                        <!--</div>-->
-                                    </div>
+
+                                    <!--
+                                                                        <div class="form-group col-lg-4">
+                                                                            <div class="input-group">
+                                                                            <span class="pull-center">Department</span>
+                                                                            <select  name="department"  class="form-control" id="ct" placeholder="Enter Department">
+                                                                                <option>
+                                                                                    
+                                                                                </option>
+                                                                            </div>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group col-lg-4">
+                                                                            <div class="input-group">
+                                                                            <span class="pull-center">Program</span>
+                                                                            <select  name="department"  class="form-control" id="ct" placeholder="Enter Department">
+                                                                                <option>
+                                                                                    
+                                                                                </option>
+                                                                            </div>
+                                                                            </select>
+                                                                        </div>-->
                                     <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Credit Hour</span>
@@ -148,11 +195,12 @@
                     <thead>
                         <tr>
                             <th>Course Code</th>
+                            <th>Department</th>
+                            <th>Program</th>
                             <th>Term</th>
                             <th>Course Name</th>
                             <th>Added Date</th>
-                            <th>Course Type</th>
-                            <th>Credit Hours</th>
+                           <th>Credit Hours</th>
                             <th>Has Pre Request</th>
                             <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
                             <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
@@ -182,6 +230,7 @@
                             <td><%=rs_course.getString(5)%></td> 
                             <td><%=rs_course.getString(6)%></td> 
                             <td><%=rs_course.getString(7)%></td> 
+                            <td><%=rs_course.getString(8)%></td> 
                             <td>
 
 
@@ -235,8 +284,8 @@
     %>
 
     <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
-    <!--<script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>-->
-    <!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
+   <script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
     <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
     <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
     <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
@@ -260,10 +309,15 @@
 
         $("#stud_reg").validate({
             rules: {
-
+                department:{
+                  required: true
+                },
+                program:{
+                  required: true
+                },
                 coursename: {
-                    required: true,
-                    minlength: 8
+                    required: true
+                   
                 },
                 coursetype:
                         {
@@ -303,49 +357,6 @@
         });
     });
 </script>
-<!--    <script type="text/javascript">
-        $("#stud_reg" ).validate({
-            rules: {
-                coursename:
-                        {
-                            required: true,
-                            minlength: 2,
-                            digits: false,
-                            maxlength: 30
-                                    //            studmiddlename:"required",
-                                    //            studentlastname:"required"
-
-                        },
-                coursetype:
-                        {
-                            required: true,
-                            minlength: 2,
-                            digits: false,
-                            maxlength: 30
-                                    //            studmiddlename:"required",
-                                    //            studentlastname:"required"
-
-                        },
-                creditH: {
-                    required: true,
-                    digits: true
-                },
-                prerequest:
-                        {
-                            required: true
-
-                        },
-                date_registered:
-                        {
-                            required: true
-                        },
-                term:{
-                    equired: true
-                }
-            }
-        });
-
-    </script>-->
 
 <script type="text/javascript">
     $("#date_registered").datepicker({
@@ -364,30 +375,31 @@
     });
 
 </script>
+<script  type="text/javascript">
 
-<!--    <script type="text/javascript">
-    $(document).ready(function() {
-    $("#btnregister").click(function(e) {
-            e.preventdefault();
-        $(function() {
-            var form = 
-            $("form[name='applicationForm']").validate({
-                // Specify validation rules
-                rules : {
-                    Coursename : "required",
-                    coursetype : "required"
-                },
-                messages  : {
-                    Coursename : "Please enter your coursename",
-                    coursetype : "Please enter your coursetype"
-                },
-                submitHandler  : function(form) {
-                    form.submit();
-                }
-            });
-        });
-    });
-});
-</script>-->
+    var xmlHttp;
+    function showState(str) {
+        if (typeof XMLHttpRequest != "undefined") {
+            xmlHttp = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        if (xmlHttp == null) {
+            alert("Browser does not support XMLHTTP Request")
+            return;
+        }
+        var url = ".../common/program.jsp";
+        url += "?department=" + str;
+        xmlHttp.onreadystatechange = stateChange;
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    }
+
+    function stateChange() {
+        if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+            document.getElementById("program").innerHTML = xmlHttp.responseText
+        }
+    }
+</script> 
 </body>
 </html>
