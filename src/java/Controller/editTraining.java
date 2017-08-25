@@ -5,8 +5,7 @@
  */
 package Controller;
 
-import Model.CourseAssignmentModel;
-import Model.CourseManagement;
+import Model.TrainingCorseManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author user
+ * @author seid
  */
-@WebServlet(name = "CourseAssignment", urlPatterns = {"/CourseAssignment"})
-public class CourseAssignmentServlet extends HttpServlet {
+@WebServlet(name = "editTraining", urlPatterns = {"/editTraining"})
+public class editTraining extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,39 +32,27 @@ public class CourseAssignmentServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-
-        PrintWriter out = response.getWriter();
-        /// String instid="-100";
-        String selectinstr = request.getParameter("selectinstr"),
-                dateassigned = request.getParameter("dateassigned"),
-                program = request.getParameter("program"),
-                course = request.getParameter("course"),
-                creditH = request.getParameter("creditH"),
-                datemodified = request.getParameter("datemodified"),
-                modifiedby = request.getParameter("modifiedby"),
-                period = request.getParameter("period"),
-                previousinstructor = request.getParameter("previousinstructor"),
-                instid = course.concat("-100");
-        //  instid=subject.concat("instid");
-//        PrintWriter out=response.getWriter();
-//        out.println("Entered inputs "+term+" "+courseName);
-// creating object of entity class
-        CourseAssignmentModel instreg = new CourseAssignmentModel();
-        int is_registered = instreg.courseAssignment(instid, selectinstr, dateassigned, program, course, creditH, datemodified, modifiedby, period, previousinstructor);
-        if (is_registered > 0) {
-            request.getSession().setAttribute("instructorAssigned", "<strong><span class='alert alert-success text-center'>Instructor Assigned successfully</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
-            //out.println("course successfully registred");
-        } else {
-             request.getSession().setAttribute("instructorNotAssigned", "<strong><span class='alert alert-success text-center'>Instructor not assigned</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
-          //  out.println("course not registred");
+        try (PrintWriter out = response.getWriter()) {
+           String credit_hour=request.getParameter("creditehour"),
+         COURSE_NAME=request.getParameter("course_name"),
+          TITLE=request.getParameter("title"),
+          PRE_REQUEST=request.getParameter("PRE_REQUEST"),
+          Course_type=request.getParameter("COURSE_TYPE"),
+          Course_code=request.getParameter("course_code");
+           TrainingCorseManagement editcourse=new TrainingCorseManagement();
+           int edited=editcourse.ediCcourse(credit_hour, Course_type, COURSE_NAME, TITLE, PRE_REQUEST, Course_code);
+           if(edited>0)
+           {
+               request.getSession().setAttribute("inserted", "sucessfuly updated");
+               response.sendRedirect("Department/edit.jsp");
+           }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,9 +70,9 @@ public class CourseAssignmentServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,9 +90,9 @@ public class CourseAssignmentServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CourseAssignmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

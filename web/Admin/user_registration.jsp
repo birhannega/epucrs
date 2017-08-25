@@ -35,7 +35,7 @@
                 <%@include file="../common/admin_sidebar.jsp" %>
             </div>
             <div class="col-lg-10"  >
-                <div class="col-lg-12" >
+                <div class="col-lg-12" > 
                     <!-- <div class="row">
                          <div class="col-lg-12">-->
                     <!--<p class="text-primary page-header text-center"><strong>Instructor Registration</strong></p>-->

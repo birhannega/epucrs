@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="../css/jQuery.steps.css"
-      <%@include file="../common/imports.jsp" %>
+<link rel="stylesheet" href="../css/jQuery.steps.css">
+<%@include file="../common/imports.jsp" %>
 
-      <body>
+<body>
 
     <!--      include navigation bar start-->
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -184,11 +184,11 @@
                                                     <div class="input-group">
                                                         <input class="form-control" id="datepicker2" name="" placeholder="Enter End Date" type="date" required=""/>
                                                         <span class=" input-group-addon fa fa-calendar-minus-o"></span>
-                                                         
+
                                                     </div>
                                                 </td>
                                                 <td class="success"><input class="form-control" id=""></td>     
-                                                  </tr>
+                                            </tr>
                                             <tr class="active">
                                                 <td class="active">2</td>
                                                 <td class="success">Store Department Division</td>
@@ -262,7 +262,7 @@
                                                     </div></td>
                                                 <td class="success"><input class="form-control" id=""></td>
                                                 <!--<button type="submit" class="btn navbar-btn btn-info">Approve</button>-->
-                                          
+
                                             </tr>
 
 
@@ -293,13 +293,7 @@
 
     </div>
 
-
-
-</div>
-</div>
-</div>
-
-</div>  <!--      main content ends-->
+<!--      main content ends-->
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
@@ -322,67 +316,67 @@
 
 <script type="text/javascript">
     $("#datepicker2").datepicker({
-        changeMonth:true,
-        changeYear:true
-        
+        changeMonth: true,
+        changeYear: true
+
     });
     $('input[type=date]').datepicker({
-             dateFormat: 'dd/mm/yy',
-            changeMonth: true,
-            changeYear:true
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
 //            numberOfMonths: 1,
 //            buttonImage: 'contact/calendar/calendar.gif',
 //            buttonImageOnly: true
-      
+
     });
-                  $("#stud_reg").validate({
-                            rules:{
-                    fullname:
-                               {
-                                    required:true,
-                                    minlength:2,
-                                    digits:false,
-                                    maxlength:30
-            //            studmiddlename:"required",
-            //            studentlastname:"required"
+    $("#stud_reg").validate({
+        rules: {
+            fullname:
+                    {
+                        required: true,
+                        minlength: 2,
+                        digits: false,
+                        maxlength: 30
+                                //            studmiddlename:"required",
+                                //            studentlastname:"required"
 
-                            },
-                    departement:
-                            {
-                                    required:true,
-                                    minlength:2,
-                                    digits:false,
-                                    maxlength:30
-            //            studmiddlename:"required",
-            //            studentlastname:"required"
+                    },
+            departement:
+                    {
+                        required: true,
+                        minlength: 2,
+                        digits: false,
+                        maxlength: 30
+                                //            studmiddlename:"required",
+                                //            studentlastname:"required"
 
-                            }
+                    }
 
-                            }
-                            });
-                         
-    
-</script>
-<script>
-        $('#submit').on('click', function() {
-    var valid = true,
-        message = '';
-
-    $('form input').each(function() {
-        var $this = $(this);
-
-        if(!$this.val()) {
-            var inputName = $this.attr('name');
-            valid = false;
-            message += 'Please enter your ' + inputName + '\n';
         }
     });
 
-    if(!valid) {
-        alert(message);
-    }
-});
-        </script>
+
+</script>
+<script>
+    $('#submit').on('click', function () {
+        var valid = true,
+                message = '';
+
+        $('form input').each(function () {
+            var $this = $(this);
+
+            if (!$this.val()) {
+                var inputName = $this.attr('name');
+                valid = false;
+                message += 'Please enter your ' + inputName + '\n';
+            }
+        });
+
+        if (!valid) {
+            alert(message);
+        }
+    });
+</script>
 <style>
     section
     {

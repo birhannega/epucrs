@@ -17,10 +17,28 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-           
-
-            <ul class="nav navbar-nav navbar-right">
-
+           <ul class="nav navbar-nav navbar-left">   
+    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  
+                        <strong><span style="color: white"><span class="fa fa-user-circle"></span>User Management</span></strong> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Add user</a></li>
+                        <li><a href="#">Block user</a></li>
+                        <li><a href="#">Manage user</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  
+                        <strong><span style="color: white"><span class="fa fa-user-circle"></span>Schedule Management</span></strong> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Set calendar</a></li>
+                        <li><a href="#"></a></li>
+                        <li><a href="#">Manage user</a></li>
+                    </ul>
+                </li>
+           </ul>
+            <ul class="nav navbar-nav navbar-right">   
+                 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"> 
                                 <span class="fa fa-bell "></span> Notifications </strong>
@@ -32,7 +50,10 @@
                     </ul>
                 </li>
             <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"><span class="fa fa-user-circle"></span> My Account</span></strong> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" >  <strong><span style="color: white"><span class="fa fa-user-circle"></span>  <strong> Welcome 
+                            <%                             out.print(session.getAttribute("admin").toString());
+                            %>
+                        </strong>  </span></strong> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../Logout.jsp">Logout</a></li>
                         <li><a href="#">View Profile</a></li>

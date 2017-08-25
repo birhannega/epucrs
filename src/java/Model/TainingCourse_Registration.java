@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import Model.UserManagement;
-import dbconnection.connectionManager;
+import Model.TrainingCorseManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,15 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author user
+ * @author seid
  */
-@WebServlet(name = "LoginAuthentication", urlPatterns = {"/LoginAuthentication"})
-public class LoginAuthentication extends HttpServlet {
-    connectionManager manager=new connectionManager();
+@WebServlet(name = "TainingCourse_Registration", urlPatterns = {"/TainingCourse_Registration"})
+public class TainingCourse_Registration extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,52 +38,20 @@ public class LoginAuthentication extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username=request.getParameter("username"),
-                    password=request.getParameter("password");
-                    String status="active",role=null;
-                    
-            UserManagement userlogin=new UserManagement();
-            
-            int user_validity=userlogin.authenticateuser(username, status, password);
-            if(user_validity>=1){
-            
-               Statement user_statement=manager.getconnection().createStatement();
-               ResultSet rs_user=user_statement.executeQuery("select ROLE_ID from Tbl_user where user_id='"+username+"'");
-               if(rs_user.next())
-               {
-
-                    HttpSession session=request.getSession();
-//                    session.setAttribute("loggeduser", username);
-                   role=rs_user.getString(1);
-                  if(role.equalsIgnoreCase("R_00"))
-                  {
-                      session.setAttribute("admin", username);
-                      response.sendRedirect("Admin/index.jsp");
-                  }else if (role.equalsIgnoreCase("R_01"))
-                          {
-                              response.sendRedirect("Incoder/index.jsp");
-                          }  
-                    else if (role.equalsIgnoreCase("R_02"))
-                          {
-                              response.sendRedirect("Instructor/ndex.jsp");
-                          }  else if (role.equalsIgnoreCase("R_03"))
-                          {
-                              response.sendRedirect("Department/index.jsp");
-                          }  else if (role.equalsIgnoreCase("R_04"))
-                          {
-                              response.sendRedirect("Student/index.jsp");
-                          }  else
-                          {
-                          out.print("unknown role");
-                          }
-               }
-                
-            }else{
-                 out.print("login faield");
-            }
-                    
-            //out.println("You entered"+ username +" "+password+"</h1>");
-            
+           String credithour=request.getParameter("credit_hour"),Course_code=request.getParameter("Course_code"),
+                   course_name=request.getParameter("COURSE_NAME"),titel=request.getParameter("TITLE"),
+                   pre_request=request.getParameter("PRE_REQUEST"),Course_type=request.getParameter("Course_type");
+           TrainingCorseManagement training_corseregistration=new TrainingCorseManagement();
+         int course_registerd;
+            course_registerd = training_corseregistration.TrainingCorseRegistration(credithour, Course_code, course_name, titel, pre_request,Course_type);
+        if(course_registerd>0){
+             request.getSession().setAttribute("registerd", "<strong><span class='alert alert-success text-center'>Trainee successfully registred</span></strong>");
+                response.sendRedirect("Department/Training.jsp");
+       }
+        else{request.getSession().setAttribute("oop", "not tarining course sucessfuly registerd");
+        response.sendRedirect("Department/Training.jsp");
+        }
+         
         }
     }
 
@@ -108,7 +70,7 @@ public class LoginAuthentication extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LoginAuthentication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TainingCourse_Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,7 +88,7 @@ public class LoginAuthentication extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LoginAuthentication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TainingCourse_Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -6,6 +6,7 @@
 package Model;
 
 import dbconnection.connectionManager;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -15,7 +16,8 @@ import java.sql.SQLException;
  */
 public class InstructorRegModel {
      connectionManager connection=new connectionManager();
-     public int instructor_registration(String nstid,String ImageFile,String insttitle,String  firsname,String middlename,String lastname,String phoneno, String email,String department,
+     
+     public int instructor_registration(String nstid,InputStream inputStram,String insttitle,String  firsname,String middlename,String lastname,String phoneno, String email,String department,
             String salary,String status,String insttype,String responsibility,String hireddate,String description) throws SQLException, ClassNotFoundException {
          int result=0;
          PreparedStatement prestm=connection.getconnection().prepareStatement("Insert into TBL_ACADEMIC_STAFF_REG( Staff_Id , Image ,  Title , First_Name  ,"+ 
@@ -23,7 +25,7 @@ public class InstructorRegModel {
          " SALARY,Status ,STAFF_TYPE ,RESPONSIBILITY,HIRED_DATE, DESCRIPTION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
          prestm.setString(1, nstid);
-               prestm.setString(2, ImageFile);
+              prestm.setBlob(2, inputStram);
               prestm.setString(3, insttitle);
               prestm.setString(4, firsname);
               prestm.setString(5, middlename);

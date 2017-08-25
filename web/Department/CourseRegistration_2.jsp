@@ -19,25 +19,22 @@
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
-    <div class="span12" style="margin-top: -20px"> 
-
-
         <!--      include side bar start-->
-        <div class="span12">
-            <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/department_sidebar.jsp" %>
+        <div class="col-lg-12">
+            <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12">
+                <%@include file="../common/sidebar_dep.jsp" %>
             </div>
-            <div class="col-lg-10">
-                <div class="col-lg-12">
+            <div class="col-lg-10 col-sm-12 col-xs-12 col-md-9">
 
-                    <p class="text-primary page-header text-center">${courseRegistered}</p>
-                    ${courseNotRegistered}
-                </div>
+
+              ${courseRegistered}
+                ${courseNotRegistered}
+
 
 
                 <!-- Button trigger modal -->
                 <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
-                    <span  class="glyphicon glyphicon-circle-arrow-down">  Add Course</span>
+                    Add Course
                 </button>
 
                 <!-- Modal -->
@@ -46,6 +43,8 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
+
+
                                 <p class="text-primary text-center"><strong>Course Registration</strong></p>
                                 <button type="button" class="close pull-right" 
                                         data-dismiss="modal" aria-hidden="true" style="color: midnightblue">
@@ -56,7 +55,7 @@
 
                                 <div class="modal-body">
     <!--                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">-->
-                                    <div class="form-group col-lg-4 has-success">  
+                                    <div class="form-group col-lg-4">  
                                         <span>Department</span>
                                         <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
                                             <option value="">select department</option>
@@ -79,16 +78,16 @@
 
                                         </select>                          
                                     </div>
-                                    <div class="form-group col-lg-4 has-success">  
-                                        <span class="has-success">Program</span>
+                                    <div class="form-group col-lg-4">  
+                                        <span>Program</span>
 
-                                        <select name="program" id="program" class="form-control has-success">
+                                        <select name="program" id="program" class="form-control">
 
                                             <option value="">select program</option> 
 
                                         </select>
                                     </div>
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <!--<span class="input-group-addon">Term</span>-->
                                         <span class="pull-center">Term</span>
@@ -104,13 +103,13 @@
                                     </div>
 
                                     <!--<div data-dte-e="input-control" class="DTE_Field_InputControl" style="display: block;">Term<input id="DTE_Field_first_name" type="text"></div>-->
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
-                                        <span class="pull-center has-success">Course Name</span>
+                                        <span class="pull-center">Course Name</span>
                                         <input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">
                                         <!--</div>-->
                                     </div>
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Date</span>
                                         <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
@@ -121,13 +120,13 @@
                                     </div>
 
 
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Credit Hour</span>
                                         <input type="text" name="creditH"  class="form-control" id="ch" placeholder="Enter Credit Hour">
                                         <!--</div>-->
                                     </div>
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Pre Request</span>
                                         <!--Term-->
@@ -143,16 +142,12 @@
                                 </div>
                                 <!--</form>-->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-info" 
-                                            data-dismiss="modal">
-                                        <span class="glyphicon glyphicon-record">Refresh</span>
-                                    </button>
+                                    <input type="button" class="btn" id="buttonref" value="Refresh"/>
                                     <button type="button" class="btn btn-warning" 
-                                            data-dismiss="modal">
-                                        <span class="glyphicon glyphicon-remove">Close</span>
+                                            data-dismiss="modal">Close
                                     </button>
                                     <button type="submit" class="btn btn-primary" id="btnregister">
-                                        <span  class="fa fa-save"> Register</span>
+                                        Register
                                     </button>
                                 </div>
                             </form>
@@ -169,9 +164,9 @@
                         $("#editing_form").css('visibility', "visible");
                     });
                 </script>
-                <!--<span class="alert alert-success">  ${del}</span>--> 
-                ${del}
-                <table  class="table table-striped table-bordered table-hover "  id="tabledate">
+                <span class="alert alert-success">  ${del}</span> 
+
+                <table  class="table table-striped table-bordered table-hover"  id="tabledate">
                     <thead>
                         <tr>
                             <th>Course Code</th>
@@ -246,7 +241,7 @@
 
                     </tbody>
                 </table>
-                <strong></strong>
+            3
                 <form action="" id="editing_form" method="post" style="visibility: hidden">
 
                     <input type="text" name="edit_id" value="<%%>"/>

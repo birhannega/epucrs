@@ -31,13 +31,13 @@
                 <div class="col-lg-12">
 
                     <p class="text-primary page-header text-center">${courseRegistered}</p>
-
+                    ${courseNotRegistered}
                 </div>
 
 
                 <!-- Button trigger modal -->
                 <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
-                    Add Course
+                    <span  class="glyphicon glyphicon-circle-arrow-down">  Add Course</span>
                 </button>
 
                 <!-- Modal -->
@@ -46,8 +46,6 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-
-
                                 <p class="text-primary text-center"><strong>Course Registration</strong></p>
                                 <button type="button" class="close pull-right" 
                                         data-dismiss="modal" aria-hidden="true" style="color: midnightblue">
@@ -58,7 +56,7 @@
 
                                 <div class="modal-body">
     <!--                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">-->
-                                    <div class="form-group col-lg-4">  
+                                    <div class="form-group col-lg-4 has-success">  
                                         <span>Department</span>
                                         <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
                                             <option value="">select department</option>
@@ -81,16 +79,16 @@
 
                                         </select>                          
                                     </div>
-                                    <div class="form-group col-lg-4">  
-                                        <span>Program</span>
+                                    <div class="form-group col-lg-4 has-success">  
+                                        <span class="has-success">Program</span>
 
-                                        <select name="program" id="program" class="form-control">
+                                        <select name="program" id="program" class="form-control has-success">
 
                                             <option value="">select program</option> 
 
                                         </select>
                                     </div>
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
                                         <!--<span class="input-group-addon">Term</span>-->
                                         <span class="pull-center">Term</span>
@@ -106,13 +104,13 @@
                                     </div>
 
                                     <!--<div data-dte-e="input-control" class="DTE_Field_InputControl" style="display: block;">Term<input id="DTE_Field_first_name" type="text"></div>-->
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
-                                        <span class="pull-center">Course Name</span>
+                                        <span class="pull-center has-success">Course Name</span>
                                         <input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">
                                         <!--</div>-->
                                     </div>
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Date</span>
                                         <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
@@ -123,35 +121,13 @@
                                     </div>
 
 
-
-                                    <!--
-                                                                        <div class="form-group col-lg-4">
-                                                                            <div class="input-group">
-                                                                            <span class="pull-center">Department</span>
-                                                                            <select  name="department"  class="form-control" id="ct" placeholder="Enter Department">
-                                                                                <option>
-                                                                                    
-                                                                                </option>
-                                                                            </div>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group col-lg-4">
-                                                                            <div class="input-group">
-                                                                            <span class="pull-center">Program</span>
-                                                                            <select  name="department"  class="form-control" id="ct" placeholder="Enter Department">
-                                                                                <option>
-                                                                                    
-                                                                                </option>
-                                                                            </div>
-                                                                            </select>
-                                                                        </div>-->
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Credit Hour</span>
                                         <input type="text" name="creditH"  class="form-control" id="ch" placeholder="Enter Credit Hour">
                                         <!--</div>-->
                                     </div>
-                                    <div class="form-group col-lg-4">
+                                    <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Pre Request</span>
                                         <!--Term-->
@@ -167,12 +143,16 @@
                                 </div>
                                 <!--</form>-->
                                 <div class="modal-footer">
-                                    <input type="button" class="btn" id="buttonref" value="Refresh"/>
+                                    <button type="button" class="btn btn-info" 
+                                            data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-record">Refresh</span>
+                                    </button>
                                     <button type="button" class="btn btn-warning" 
-                                            data-dismiss="modal">Close
+                                            data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove">Close</span>
                                     </button>
                                     <button type="submit" class="btn btn-primary" id="btnregister">
-                                        Register
+                                        <span  class="fa fa-save"> Register</span>
                                     </button>
                                 </div>
                             </form>
@@ -189,9 +169,9 @@
                         $("#editing_form").css('visibility', "visible");
                     });
                 </script>
-                <span class="alert alert-success">  ${del}</span> 
-
-                <table  class="table table-striped table-bordered table-hover"  id="tabledate">
+                <!--<span class="alert alert-success">  ${del}</span>--> 
+                ${del}
+                <table  class="table table-striped table-bordered table-hover "  id="tabledate">
                     <thead>
                         <tr>
                             <th>Course Code</th>
@@ -200,7 +180,7 @@
                             <th>Term</th>
                             <th>Course Name</th>
                             <th>Added Date</th>
-                           <th>Credit Hours</th>
+                            <th>Credit Hours</th>
                             <th>Has Pre Request</th>
                             <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
                             <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
@@ -281,16 +261,17 @@
 
     <%
         request.getSession().setAttribute("courseRegistered", null);
+        request.getSession().setAttribute("courseNotRegistered", null);
     %>
 
     <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
-   <script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>
-    <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
-    <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
-    <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
-    <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
-<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>
+<!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
+<!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
+<script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
+<script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
+<!--<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+<!--<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
 
 <!--<script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>-->
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
@@ -309,15 +290,15 @@
 
         $("#stud_reg").validate({
             rules: {
-                department:{
-                  required: true
+                department: {
+                    required: true
                 },
-                program:{
-                  required: true
+                program: {
+                    required: true
                 },
                 coursename: {
                     required: true
-                   
+
                 },
                 coursetype:
                         {

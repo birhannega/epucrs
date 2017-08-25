@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import Model.UserManagement;
-import dbconnection.connectionManager;
+import Model.Mark_submit;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,15 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author user
+ * @author seid
  */
-@WebServlet(name = "LoginAuthentication", urlPatterns = {"/LoginAuthentication"})
-public class LoginAuthentication extends HttpServlet {
-    connectionManager manager=new connectionManager();
+@WebServlet(name = "markInsertion", urlPatterns = {"/markInsertion"})
+public class markInsertion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,52 +38,30 @@ public class LoginAuthentication extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username=request.getParameter("username"),
-                    password=request.getParameter("password");
-                    String status="active",role=null;
-                    
-            UserManagement userlogin=new UserManagement();
-            
-            int user_validity=userlogin.authenticateuser(username, status, password);
-            if(user_validity>=1){
-            
-               Statement user_statement=manager.getconnection().createStatement();
-               ResultSet rs_user=user_statement.executeQuery("select ROLE_ID from Tbl_user where user_id='"+username+"'");
-               if(rs_user.next())
-               {
+        
+     String section = request.getParameter("test");
+    String teacherid = request.getParameter("teacherid");
+     String studentid = request.getParameter("studid");
+     String subjectid = request.getParameter("subid");
+     String testtype = request.getParameter("testtype");
+      String term="term1";
+      float mark = Float.parseFloat(request.getParameter("obtainedMark"));
+    
 
-                    HttpSession session=request.getSession();
-//                    session.setAttribute("loggeduser", username);
-                   role=rs_user.getString(1);
-                  if(role.equalsIgnoreCase("R_00"))
-                  {
-                      session.setAttribute("admin", username);
-                      response.sendRedirect("Admin/index.jsp");
-                  }else if (role.equalsIgnoreCase("R_01"))
-                          {
-                              response.sendRedirect("Incoder/index.jsp");
-                          }  
-                    else if (role.equalsIgnoreCase("R_02"))
-                          {
-                              response.sendRedirect("Instructor/ndex.jsp");
-                          }  else if (role.equalsIgnoreCase("R_03"))
-                          {
-                              response.sendRedirect("Department/index.jsp");
-                          }  else if (role.equalsIgnoreCase("R_04"))
-                          {
-                              response.sendRedirect("Student/index.jsp");
-                          }  else
-                          {
-                          out.print("unknown role");
-                          }
-               }
-                
-            }else{
-                 out.print("login faield");
+    
+                String grade = "9";
+                      
+                  
+                   
+                Mark_submit submitMark=new Mark_submit();
+            int inserted = submitMark.Mark(studentid, teacherid, subjectid, term,grade,section,term,mark);
+            if(inserted>0){
+                request.getSession().setAttribute("inserted", "mark sucessfully inserted");
+                response.sendRedirect("Instructor/Marksubmission.jsp");
             }
-                    
-            //out.println("You entered"+ username +" "+password+"</h1>");
-            
+            else{ request.getSession().setAttribute("oop", "mark not inserted");
+            response.sendRedirect("instructor/Marksubmission.jsp");
+            }
         }
     }
 
@@ -108,7 +80,7 @@ public class LoginAuthentication extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LoginAuthentication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(markInsertion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,7 +98,7 @@ public class LoginAuthentication extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LoginAuthentication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(markInsertion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

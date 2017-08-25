@@ -206,6 +206,15 @@
 
                     </ul>
             </li>
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Training management<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="TrainerRegistration.jsp">Trainer Registration</a></li>
+                        <li><a href="Trainee.jsp">Trainee</a></li>
+                        <li><a href="Training.jsp">Training</a></li>
+                        <li><a href="TraineeAssignment.jsp">Trainee Assignment</a></li>
+                    </ul>
+            </li>
             </ul>
         </div>
     </div>

@@ -7,22 +7,29 @@ package Controller;
 
 import Model.InstructorRegModel;
 import dbconnection.connectionManager;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author user
  */
 @WebServlet(name = "InstructorReg_Servlet", urlPatterns = {"/InstructorReg_Servlet"})
+//@MultipartConfig(maxFileSize=16177215L)
+@MultipartConfig(maxFileSize = 16177215)  
 public class InstructorReg_Servlet extends HttpServlet {
 
     /**
@@ -36,11 +43,25 @@ public class InstructorReg_Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-
+        response.setContentType("text/html;charset=UTF-8");   
+         InputStream inputStram=null;
+         
+              Part  filepart = request.getPart("ImageFile"); 
+//              File file = new File("image.jpg");
+//           InputStream in = new FileInputStream(file);
+//           preparedStatment.setBinaryStream(1, in, 1000000);
+             if(filepart!=null)
+             {
+                 System.out.println(filepart.getName());
+                 System.out.println(filepart.getSize());
+                 System.out.println(filepart.getContentType());
+                inputStram=filepart.getInputStream();
+             }
+             
         PrintWriter out = response.getWriter();
-        String instid = request.getParameter("instid"), ImageFile = request.getParameter("ImageFile"),
-                insttitle = request.getParameter("insttitle"), firsname = request.getParameter("firsname"),
+        String instid = request.getParameter("instid");
+
+               String insttitle = request.getParameter("insttitle"), firsname = request.getParameter("firsname"),
                 middlename = request.getParameter("middlename"), lastname = request.getParameter("lastname"),
                 phoneno = request.getParameter("phoneno"),
                 email = request.getParameter("email"), department = request.getParameter("department"),
@@ -51,16 +72,16 @@ public class InstructorReg_Servlet extends HttpServlet {
                 description = request.getParameter("description");
 
         InstructorRegModel instreg = new InstructorRegModel();
-        int is_registered = instreg.instructor_registration(instid, ImageFile, insttitle, firsname, middlename, lastname, phoneno,
+        int is_registered = instreg.instructor_registration(instid, inputStram, insttitle, firsname, middlename, lastname, phoneno,
                 email, department, salary, status, insttype, responsibility,hireddate, description);
         if (is_registered > 0) {
             request.getSession().setAttribute("instreg", "<strong><span class='alert alert-success text-center'>Instructor successfully registred</span></strong>");
-
             response.sendRedirect("Department/InstructorRegistration.jsp");
             //out.println("course successfully registred");
         } else {
-
-            out.println("Instructor not registred");
+             request.getSession().setAttribute("instNotreg", "<strong><span class='alert alert-success text-center'>Instructor not registred</span></strong>");
+            response.sendRedirect("Department/InstructorRegistration.jsp");
+           // out.println("Instructor not registred");
         }
 
 //                               courseName=request.getParameter("coursename");
