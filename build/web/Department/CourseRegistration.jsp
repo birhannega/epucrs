@@ -95,10 +95,10 @@
                                         <!--Term-->
                                         <select class="form-control" id="term" name="term" required="required">
                                             <option value="">-select term-</option>
-                                            <option value="1">Term1</option>
-                                            <option value="2">Term2</option>
-                                            <option value="3">Term3</option>
-                                            <option value="4">Term4</option>
+                                            <option value="Term1">Term1</option>
+                                            <option value="Term2">Term2</option>
+                                            <option value="Term3">Term3</option>
+                                            <option value="Term4">Term4</option>
                                         </select>
                                         <!--</div>-->
                                     </div>
@@ -214,7 +214,7 @@
                             <td>
 
 
-                                <form action="" method="post">
+                                <form action="EditCourse.jsp" method="post">
 
                                     <input type="hidden" name="edit_id" value="<%=id%>"/>
 
@@ -268,8 +268,10 @@
     <script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>
 <!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
 <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
+
 <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
 <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
+<link href="../resources/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 <!--<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 <!--<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
 
@@ -342,7 +344,8 @@
 <script type="text/javascript">
     $("#date_registered").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'  
                 //dateFormat: 'yyyy-mm-dd'
                 //format:'yyyy-mm-dd'
 

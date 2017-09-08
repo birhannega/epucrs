@@ -8,7 +8,7 @@
       <%@include file="../common/imports.jsp" %>
       <body>
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/department_nav.jsp" %>
+        <%@include file="../common/header.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -18,22 +18,26 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/department_sidebar.jsp" %>
+                <%@include file="../common/sidebar.jsp" %>
             </div>
       
                 <div class="col-lg-9">
                     <!-- <div class="row">
                          <div class="col-lg-12">-->
                     <p class="text-primary page-header text-center"><strong> Short Term Trainer profile Registration  </strong></p>
-                    <div id="example-async" class="pull-right">
+                    
 
-                        <p class="text-success text-right"><strong>Welcome user:_________________</strong></p>
-                 ${TrainerRegistered}
-                 ${oop}
+                        <p class="text-success text-right"><strong> ${TrainerRegistered}
+                 ${oop}</strong></p>
+                  
+                
+                 
+                        
                  <%
 								request.getSession().setAttribute("TrainerRegistered", null);
 									request.getSession().setAttribute("oops", null);
 							%>
+                                                        <br>                         
                         <section >
                             <form class="form-group " method="post" id="Trainer_reg" action="${pageContext.request.contextPath}//TrainerController">
                                 <div class="form-group col-lg-4">
@@ -51,20 +55,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">Title</span>
                                         <select class="form-control" id="title" name="title" required="required">
-                                            <option value="">-select title-</option>
-                                            <option value="Commissioner">Commissioner</option>
-                                            <option value="assCommissioner">Ass/Commissioner</option><option value="">Deputy Commissioner</option>
-                                            <option value="Commander">Commander</option><option value="">Ass/Commander</option><option value="">Deputy Commander</option>
-                                            <option value="">Ass/Commander</option>
-                                            <option value="">Inspector</option><option value=""><option value="">Deputy Inspector</option>
-                                            <option value="">Sergeant</option><option value="">Ass/Sergeant</option><option value="">Deputy Sergeant</option>
-                                            <option value="">Constable</option><option value="">Nominee Officer</option>
-                                            <option value="">Commissioner General</option><option value="">Deputy Commissioner General</option>
-                                            <option value="">Deputy Inspector</option><option value="">Engineer Doctor</option>
-                                            <option value="">Sister</option><option value="">Health Officer</option><option value="">Nurse</option><option value="">Mid Wife</option>
-                                            <option value="">Secretary</option><option value="">Director</option><option value="">Head Director</option>
-                                            <option value="">Ra/Tech</option>
-<!--                                              <option>-select- title</option>
+                                              <option>-select- title</option>
                                             <option>ኮሚሽነር</option><option>ዕ/መኮንን</option><option>ም/ኮማንደር</option>
                                             <option>ኮማንደር</option><option>ረ/ኮሚሽነር</option><option>ም/ኮሚሽነር</option>
                                             <option>ኢንስፔክተር</option><option>ረ/ኢንስፔክተር</option><option>ሳጅን</option>
@@ -73,7 +64,7 @@
                                             <option>ወ/ሮ</option><option>ወ/ት</option><option>አቶ<option>ኮሚሽነር ጄኔራል</option><option>ም/ኮሚሽነር ጄኔራል</option>
                                             <option>ሲስተር</option><option>የጤና መኮንን</option><option>ጸሃፊ</option><option>ነርስ</option><option>ጤና መኮንን</option><option>ዋና ዳይሬክተር</option>
                                             <option>ሚድዋ<option>ዶክተር</option>
-                                            <option>Mr</option><option>Ms</option><option>Phd</option><option>Doctor</option>-->
+                                            <option>Mr</option><option>Ms</option><option>Phd</option><option>Doctor</option>
 
                                         </select>
                                     </div>
@@ -118,7 +109,7 @@
 
                     <!-- </div>
                  </div>-->
-                </div>
+                
             </div>
         </div>
     </div>
@@ -134,6 +125,7 @@
             },
             tel: {
                 required:true
+                
             },
             hired_date: {
                 required:true
@@ -166,20 +158,40 @@
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script>
-$( "#bdate" ).datepicker({
-	inline: true,
-	showButtonPanel:true,
-	changeYear:true,
-	changeMonth:true,
-        dateFormat:'yy-dd-mm'
-}),
-        $( "#hdate" ).datepicker({
-	inline: true,
-	showButtonPanel:true,
-	changeYear:true,
-	changeMonth:true,
-        dateFormat:'yy-dd-mm'
-});
+//$( "#bdate" ).datepicker({
+//	inline: true,
+//	showButtonPanel:true,
+//	changeYear:true,
+//	changeMonth:true,
+//        dateFormat:'yy-dd-mm'
+//}),
+//        $( "#hdate" ).datepicker({
+//	inline: true,
+//	showButtonPanel:true,
+//	changeYear:true,
+//	changeMonth:true,
+//        dateFormat:'yy-dd-mm'
+//});
 
 
+    $(function () {
+        $("#bdate").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() + 6205);
+                $("#hdate").datepicker("option", "minDate", dt);
+            }
+        });
+        $("#hdate").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 6205);
+                $("#bdate").datepicker("option", "maxDate", dt);
+            }
+        });
+    });
+    
 </script>
+

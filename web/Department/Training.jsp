@@ -3,7 +3,7 @@
       <%@include file="../common/imports.jsp" %>
       <body>
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/department_nav.jsp" %>
+        <%@include file="../common/header.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -13,7 +13,7 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/department_sidebar.jsp" %>
+                <%@include file="../common/sidebar.jsp" %>
             </div>
       
                 <div class="col-lg-9">

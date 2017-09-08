@@ -215,6 +215,14 @@
                         <li><a href="TraineeAssignment.jsp">Trainee Assignment</a></li>
                     </ul>
             </li>
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Class management<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="ClassRegistration.jsp">Class Registration</a></li>
+                        <li><a href="#">View class Profile</a></li>
+                        <li><a href="#">Update Class Profile</a></li>
+                </ul>
+            </li>
             </ul>
         </div>
     </div>

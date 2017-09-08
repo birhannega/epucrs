@@ -48,12 +48,13 @@ public class CourseServlet extends HttpServlet {
                 date_registetred = request.getParameter("date_registered"),
                 credithr = request.getParameter("creditH"),
                 prerequest = request.getParameter("prerequest");
+        
         String course_code = courseName.concat("-200");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
         CourseManagement registration = new CourseManagement();
-        int is_registered = registration.registerCourse(department, program, course_code, term, courseName, date_registetred, credithr, prerequest);
+        int is_registered = registration.registerCourse(course_code,department, program, term, courseName, date_registetred, credithr, prerequest);
         if (is_registered > 0) {
             request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Course successfully registred</span></strong>");
 

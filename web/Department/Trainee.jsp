@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<DOCTYPE html>
 <link rel="stylesheet" href="../css/jQuery.steps.css"
       <%@include file="../common/imports.jsp" %>
+<STYLE type="text/css">
+    .error{
+        color: red;
+    }
+    </style>
       <body>
 
     <!--      include navigation bar start-->
 
     <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/department_nav.jsp" %>
+        <%@include file="../common/header.jsp" %>
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
@@ -16,14 +22,14 @@
         <!--      include side bar start-->
         <div class="span12">
             <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/department_sidebar.jsp" %>
+                <%@include file="../common/sidebar.jsp" %>
             </div>
       
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-8 col-xs-9 col-ms-12">
                     <!-- <div class="row">
                          <div class="col-lg-12">-->
                     <p class="text-primary page-header text-center"><strong> Short Term trainee profile Registration  </strong></p>
-                    <div id="example-async" class="pull-right">
+                    
                            ${TraineeRegistered}
                            ${oop}
                                               <section>
@@ -39,14 +45,14 @@
                                 </div> <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Department</span>
-                                        <input type="text" name="dpt"  class="form-control" placeholder="Department">
+                                        <input type="text" name="dpt"  class="form-control" placeholder="Department" id="dpt">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Title</span>
-                                        <select class="form-control" id="title" name="title" required="required">
-                                              <option>-select- title</option>
+                                        <select class="form-control" name="title" id="title">
+                                            <option value="">-select- title</option>
                                             <option>ኮሚሽነር</option><option>ዕ/መኮንን</option><option>ም/ኮማንደር</option>
                                             <option>ኮማንደር</option><option>ረ/ኮሚሽነር</option><option>ም/ኮሚሽነር</option>
                                             <option>ኢንስፔክተር</option><option>ረ/ኢንስፔክተር</option><option>ሳጅን</option>
@@ -91,12 +97,13 @@
                                  </div>      <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">phone</span>
-                                        <input type="text" name="tel"  class="form-control" id="firstname" placeholder="Enter Phone">
+                                        <input type="text" name="tel"  class="form-control" id="tel" placeholder="Enter Phone">
                                     </div>
                                  </div>      <div class="form-group col-lg-4">
                                     <div class="input-group">
                                         <span class="input-group-addon">Term</span>
-                                        <select class="form-control" name="term"><option>Short Term</option>
+                                        <select class="form-control" name="term" id="term"><option value="">Select Term Type</option>
+                                            <option>Short Term</option>
                                             <option>Long Term</option></select>
                                     </div>
                                  </div><div class="form-group col-lg-4">
@@ -119,21 +126,93 @@
 <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+     jQuery.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please");
+jQuery.validator.addMethod("letterswithspace", function(value, element) {
+    return this.optional(element) || /^[a-z\s]+$/i.test(value);
+}, "letters only");
     $(document).ready(function(){
        $("#Trainee_reg").validate({
            rules: {
                firstname: {
-                   required:true
-               },
+                   required:true,
+                   lettersonly:true,
+                   minlength:2
+                   },
                lastname: {
-                   required:true
+                   required:true,
+                   lettersonly:true,
+                   minlength:2
                },
                bdate: {
                    required:true
                },
                middlename: {
+                   required:true,
+                   lettersonly:true,
+                   minlength:2
+               },
+               end_date: {
                    required:true
+               },
+             
+               dpt:{
+                 required:true,
+                 lettersonly:true,
+                 minlength:true
+               },
+               
+               start_date:{
+                   required:true
+               },
+               tel: {
+                   required:true,
+                   minlength:10,
+                   maxlength:13,
+                   digits:true
+               },
+               title:{
+                   required:true
+                 
+               },
+               term:{
+                   required:true,
+                   letterswithspace:true
                }
+             
+           },
+           messages:{
+             term:{
+                 required:"Select Term"
+             } , 
+             title:{
+                 required:"Select Title"
+             },
+             start_date:{
+                 required:"Enter Start Date"
+             },
+             dpt:{
+                 required:"Enter Department"
+             },
+             end_date:{
+                 required:"Enter End Date"
+             },
+             middlename:{
+                 required:"Enter Middle Name"
+             },
+             bdate:{
+                 required:"Enter Birth Date"
+             },
+             lastname:{
+                 required:"Enter Last Name"
+             },
+             firstname:{
+                 required:"Enter First Name"
+             },
+             tel:{
+                 required:"Enter Phone Number"
+             }
            }
        });  
     });
@@ -147,24 +226,51 @@
 <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script>
-$( "#bdate" ).datepicker({
-	inline: true,
-	showButtonPanel:true,
-	changeYear:true,
-	changeMonth:true
-}),
-        $( "#end_date" ).datepicker({
-	inline: true,
-	showButtonPanel:true,
-	changeYear:true,
-	changeMonth:true
-}),
-        $("#start_date").datepicker({
-            inline: true,
-    showButtonPanel:true,
-    changeYear:true,
-    changeMonth:true
+  
+//$( "#bdate" ).datepicker({
+//	inline: true,
+//	showButtonPanel:true,
+//	changeYear:true,
+//	changeMonth:true
+//}),
+//        $( "#end_date" ).datepicker({
+//	inline: true,
+//	showButtonPanel:true,
+//	changeYear:true,
+//	changeMonth:true
+//}),
+//        $("#start_date").datepicker({
+//            inline: true,
+//    showButtonPanel:true,
+//    changeYear:true,
+//    changeMonth:true
+//        });
+//
+ $(function () {
+        $("#bdate").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() + 6205);
+                $("#start_date").datepicker("option", "minDate", dt);
+                $("#end_date").datepicker("option","minDate",dt);
+            }
         });
-
+         
+        $("#end_date").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 6217);
+            }});
+        $("#start_date").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 6205);
+                $("#bdate").datepicker("option", "maxDate", dt);
+            }
+        });
+    });
 
 </script>

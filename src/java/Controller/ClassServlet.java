@@ -5,24 +5,25 @@
  */
 package Controller;
 
-import Model.ShortTermTrainer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dbconnection.connectionManager;
+import Model.ClassModel;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author seid
+ * @author user
  */
-@WebServlet(name = "TrainerController", urlPatterns = {"/TrainerController"})
-public class TrainerController extends HttpServlet {
+@WebServlet(name = "ClassServlet", urlPatterns = {"/ClassServlet"})
+public class ClassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,32 +35,27 @@ public class TrainerController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String  birthdate=request.getParameter("bdate"),
-                   EXPERIENCE=request.getParameter("Experience"),
-                    firstname=request.getParameter("firstname"),
-                    hireddate=request.getParameter("hired_date")
-                    ,lastname=request.getParameter("lastname"),
-                    middlename=request.getParameter("middlename"),
-                    phone=request.getParameter("tel"),
-                    title=request.getParameter("title");
-            ShortTermTrainer T_reg=new ShortTermTrainer();
-           int Registration= T_reg.Trainer(birthdate,EXPERIENCE,firstname,hireddate,lastname,middlename,phone,title);
-            if(Registration>0)
-            {
-                request.getSession().setAttribute("TrainerRegistered", "<strong><span class='alert alert-success text-center'>Trainer successfully registred</span></strong>");
-                response.sendRedirect("Department/TrainerRegistration.jsp");
-                
-            }
-            else{
-          request.getSession().setAttribute("oops", "Trainer not registered ");
-          response.sendRedirect("Department/TrainerRegistration.jsp");
-      
-            }
+     PrintWriter out = response.getWriter();
+     
+     String classblock=request.getParameter("blockname"),
+             classname=request.getParameter("classname"),
+             regdate=request.getParameter("classdate");
+         String classid=classname.concat("-100");
+     
+     
+     ClassModel clsmdl=new ClassModel();
+     int save_class=clsmdl.class_reg(classid,classblock,classname,regdate);
+       if (save_class > 0) {
+            request.getSession().setAttribute("ClassReg", "<strong><span class='alert alert-success text-center'>Class successfully registred</span></strong>");
 
-            
+            response.sendRedirect("Department/ClassRegistration.jsp");
+            //out.println("course successfully registred");
+        } else {
+             request.getSession().setAttribute("ClassNotReg", "<strong><span class='alert alert-success text-center'>Class not registred</span></strong>");
+            response.sendRedirect("Department/ClassRegistration.jsp");
+//             out.println("course not registred");
         }
     }
 
@@ -77,10 +73,10 @@ public class TrainerController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TrainerController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(TrainerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClassServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClassServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -97,8 +93,10 @@ public class TrainerController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(TrainerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClassServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ClassServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

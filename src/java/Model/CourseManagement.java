@@ -30,6 +30,7 @@ public class CourseManagement {
               ps_register.setString(6, date);
               ps_register.setString(7, creditHr);
                ps_register.setString(8, prerequest);
+               
              action=ps_register.executeUpdate();
           
               return action;

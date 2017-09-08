@@ -13,11 +13,11 @@
         ResultSet rs_delete = st_delete.executeQuery("UPDATE TBL_COURSE_REGISTRATION SET COURSE_CODE = '?', TERM= '?' ,COURSE_NAME='?', ADDED_DATE='?' ,COURSE_TYPE='?' ,CREDIT_HOURS='?',PRE_REQUEST='?' WHERE CustomerID = 1; where COURSE_CODE='" + request.getParameter("edit_id") + "'");
         if (rs_delete.next()) {
 //             response.sendRedirect("Department/CourseRegistration.jsp");
-            out.println("course successfully deleted");
+            out.println("course successfully updated");
             
             
         } else {
-            out.println("deleting failed");
+            out.println("update failed");
         }
 
     }

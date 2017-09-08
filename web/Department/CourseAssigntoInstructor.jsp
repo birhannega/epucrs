@@ -9,6 +9,7 @@
 <!--<link rel="stylesheet" href="../css/jQuery.steps.css"-->
 <%@include file="../common/imports.jsp" %>
 <!--<link  rel="stylesheet" href="../bootstrap/DataTable/css/jquery.dataTables.min.css">-->
+<link href="../resources/css/searchname.css" rel="stylesheet" type="text/css"/>
 <body>
     <%
         int sid, cid;
@@ -77,6 +78,7 @@
                                     </div>
                                 </div>
                                 <!--<form role="search">-->
+                                
                                 <div class="form-group col-lg-8">
                                     <div class="input-group col-lg-4">
                                         <input type="text" class="form-control" placeholder="Search">
@@ -87,34 +89,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-4" id="hidden_field">
+
+                                <div class="form-group col-lg-4">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Full Name</span>
+                                        <span class="input-group-addon">Select Instructor</span>
+                                        <select class="form-control" id="selectinstr" name="selectinstr" required="required">
+                                            <option value="-1">-select instructor-</option>
+                                            <%
+                                                try {
+                                                    connectionManager dbconnection = new connectionManager();
+                                                    Statement st_list_course = dbconnection.getconnection().createStatement();
+                                                    String course_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
-                                        <%
-                                            try {
-                                                connectionManager dbconnection = new connectionManager();
-                                                Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                String course_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                                    ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
 
-                                                ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
-
-                                        %>
-
-                                        <%                                                while (rs_courseinstr.next()) {
-                                                String id = rs_courseinstr.getString("FULL_NAME");
-                                                //cid;
-%>
-                                        <input type="text" name="fullname"  class="form-control" id="hidden_field" value="<%=id%>"></textarea>
-                                        <% } %>
-
-                                        <%
-                                            } catch (Exception e) {
-                                                out.println("wrong selection!" + e);
-                                            }
-                                        %>
-
-
+                                            %>
+                                            //                                                                        
+                                            <%    while (rs_courseinstr.next()) {
+                                                    String id = rs_courseinstr.getString("FULL_NAME");
+                                                    //cid;
+                                            %>
+                                            <option><%=id%></option>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -135,10 +138,10 @@
                         </div>
                     </div>
                     <div class="form-group col-lg-12">
-                        <a class="accordion-toggle"><span class="glyphicon glyphicon-list"><h4 class="accordion-toggle">CourseInfo</h4></span></a>
+                        <a class="accordion-toggle"><span class="glyphicon glyphicon-list">ClassInfo</span></a>
                         <div class="accordion-content">
-                            <form class="form-horizontal">
-                                
+                            <form class="form-group " method="post" id="instrAssign" action="${pageContext.request.contextPath}//CourseAssignment">
+
                                 <div class="form-group">
                                     <label class="control-label col-lg-2" for="email">School</label>
                                     <div class="col-lg-4">
@@ -151,15 +154,9 @@
                                         <input type="password" class="form-control" id="pwd" placeholder="Enter password">
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <div class="col-sm-offset-2 col-lg-4">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox"> Remember me</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-lg-4">
+                                    <div class="col-lg-4">
                                         <button type="submit" class="btn btn-default">Submit</button>
                                     </div>
                                 </div>
@@ -167,7 +164,7 @@
                         </div>
                     </div>
                     <div class="form-group col-lg-12">
-                        <a class="accordion-toggle"><span class="glyphicon glyphicon-list">ClassInfo</span></a>
+                        <a class="accordion-toggle"><span class="glyphicon glyphicon-list">CourseInfo</span></a>
                         <div class="accordion-content">
                             <form class="form-group " method="post" id="instrAssign" action="${pageContext.request.contextPath}//CourseAssignment">
                                 <div class="form-group col-lg-4">
@@ -413,60 +410,87 @@
 
                     </tbody>
                 </table>
+                <div class="form-group col-lg-4">
+                    <input calss="" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
+                    <ul id="myUL">
+                        <%
+                            try {
+                                // connectionManager dbconnection = new connectionManager();
+                                // Statement st_list_course = dbconnection.getconnection().createStatement();
+                                String course_sql1 = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+
+                                ResultSet rs_courseinstr1 = st_list_course.executeQuery(course_sql1);
+
+                        %>
+
+                        <%    while (rs_courseinstr1.next()) {
+                                String id = rs_courseinstr1.getString("FULL_NAME");
+                                //cid;
+                        %>
+                        <li><a href="#" class="header"><%=id%></a></li>
+                            <% } %>
+                        <!--</select>-->
+                        <%
+                            } catch (Exception e) {
+                                out.println("wrong selection!" + e);
+                            }
+                        %>
+                    </ul> 
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
+<link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 <script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>
 <script src="../bootstrap/DataTable/js/jquery.dataTables.min.js"></script>
 <!--<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 <!--<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
 <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
-<link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
-        $(function () {
+                        $(function () {
 
-            $("#instrAssign").validate({
-                rules: {
+                            $("#instrAssign").validate({
+                                rules: {
 
-                    selectinstr: {
-                        required: true
+                                    selectinstr: {
+                                        required: true
 //                    minlength: 8
-                    },
+                                    },
 
-                    dateassigned: {
-                        required: true
-                    },
-                    program: {
-                        required: true
-                    },
-                    course: {
-                        required: true
-                    },
-                    creditH: {
-                        required: true
-                    },
-                    datemodified: {
-                        required: true
-                    },
-                    modifiedby: {
-                        required: true
-                    },
-                    period: {
-                        required: true
-                    },
-                    previousinstructor: {
-                        required: true
-                    }
-                }
-            });
-        });
-        $('#tblcourseass').dataTable();
+                                    dateassig  ned: {
+                                        required: true
+                                    },
+                                    program: {
+                                        required: true
+                                    },
+                                    course: {
+                                        required: true
+                                    },
+                                    creditH: {
+                                        required: true
+                                    },
+                                    datemodified: {
+                                        required: true
+                                    },
+                                    modifiedby: {
+                                        required: true
+                                    },
+                                    period: {
+                                        required: true
+                                    },
+                                    previousinstructor: {
+                                        required: true
+                                    }
+                                }
+                            });
+                        });
+                        $('#tblcourseass').dataTable();
 </script>
 <script type="text/javascript">
 //    $("#datemodified").datepicker({
@@ -526,4 +550,24 @@
             }
         });
     });
+</script>
+<script type="text/javascript">
+    function myFunction() {
+        // Declare variables
+        var input, filter, ul, li, a, i;
+        input = document.getElementById('myInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
 </script>

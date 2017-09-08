@@ -27,8 +27,7 @@ public class TrainingCorseManagement {
     }
 public int ediCcourse(String credit,String course_type,String course_name,
          String title,String pre_request,String course_code) throws ClassNotFoundException, SQLException{
-         PreparedStatement ps_edit=dbcon.getconnection().prepareStatement("update TBL_TRAINING set credit_hour=?,"
-         + "course_type=?,course_name=?,title=?,"
+         PreparedStatement ps_edit=dbcon.getconnection().prepareStatement("update TBL_TRAINING set course_type=?,course_name=?,title=?,"
          + "pre_request=? where course_code=?");
          ps_edit.setString(1, credit);
          ps_edit.setString(2, course_type);

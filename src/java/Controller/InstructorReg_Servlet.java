@@ -44,23 +44,22 @@ public class InstructorReg_Servlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");   
-         InputStream inputStram=null;
-         
-              Part  filepart = request.getPart("ImageFile"); 
-//              File file = new File("image.jpg");
-//           InputStream in = new FileInputStream(file);
-//           preparedStatment.setBinaryStream(1, in, 1000000);
-             if(filepart!=null)
-             {
-                 System.out.println(filepart.getName());
-                 System.out.println(filepart.getSize());
-                 System.out.println(filepart.getContentType());
-                inputStram=filepart.getInputStream();
-             }
-             
+//         InputStream inputStram=null;
+//         
+//              Part  filepart = request.getPart("ImageFile"); 
+////              File file = new File("image.jpg");
+////           InputStream in = new FileInputStream(file);
+////           preparedStatment.setBinaryStream(1, in, 1000000);
+//             if(filepart!=null)
+//             {
+//                 System.out.println(filepart.getName());
+//                 System.out.println(filepart.getSize());
+//                 System.out.println(filepart.getContentType());
+//                inputStram=filepart.getInputStream();
+//             }
+//             
         PrintWriter out = response.getWriter();
         String instid = request.getParameter("instid");
-
                String insttitle = request.getParameter("insttitle"), firsname = request.getParameter("firsname"),
                 middlename = request.getParameter("middlename"), lastname = request.getParameter("lastname"),
                 phoneno = request.getParameter("phoneno"),
@@ -72,14 +71,14 @@ public class InstructorReg_Servlet extends HttpServlet {
                 description = request.getParameter("description");
 
         InstructorRegModel instreg = new InstructorRegModel();
-        int is_registered = instreg.instructor_registration(instid, inputStram, insttitle, firsname, middlename, lastname, phoneno,
+        int is_registered = instreg.instructor_registration(instid, insttitle, firsname, middlename, lastname, phoneno,
                 email, department, salary, status, insttype, responsibility,hireddate, description);
         if (is_registered > 0) {
             request.getSession().setAttribute("instreg", "<strong><span class='alert alert-success text-center'>Instructor successfully registred</span></strong>");
             response.sendRedirect("Department/InstructorRegistration.jsp");
             //out.println("course successfully registred");
         } else {
-             request.getSession().setAttribute("instNotreg", "<strong><span class='alert alert-success text-center'>Instructor not registred</span></strong>");
+             request.getSession().setAttribute("instNotreg", "<strong><span class='alert alert-success text-center' style='color: red'>Instructor not registred</span></strong>");
             response.sendRedirect("Department/InstructorRegistration.jsp");
            // out.println("Instructor not registred");
         }

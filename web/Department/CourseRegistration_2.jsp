@@ -19,44 +19,28 @@
     </div>
     <!--      include navigation bar end-->
     <!--      container wrapper starts-->
+    <div class="span12" style="margin-top: -20px"> 
+
+
         <!--      include side bar start-->
-        <div class="col-lg-12">
-            <div class="col-lg-2 col-sm-12 col-md-3 col-xs-12">
-                <%@include file="../common/sidebar_dep.jsp" %>
+        <div class="span12">
+            <div class="col-lg-2" id="sidebar">
+                <%@include file="../common/department_sidebar.jsp" %>
             </div>
-            <div class="col-lg-10 col-sm-12 col-xs-12 col-md-9">
+            <div class="col-lg-10">
+                <div class="col-lg-12">
 
+                    <p class="text-primary page-header text-center">${courseRegistered}</p>
+                    ${courseNotRegistered}
+                </div>
+                <div class="container-fluid">
 
-              ${courseRegistered}
-                ${courseNotRegistered}
-
-
-
-                <!-- Button trigger modal -->
-                <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
-                    Add Course
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-                     aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-
-
-                                <p class="text-primary text-center"><strong>Course Registration</strong></p>
-                                <button type="button" class="close pull-right" 
-                                        data-dismiss="modal" aria-hidden="true" style="color: midnightblue">
-                                    &times;
-                                </button>
-                            </div>
                             <form name="applicationForm" role="form" class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">
 
-                                <div class="modal-body">
     <!--                                <form class="form-group " method="post" id="stud_reg" action="${pageContext.request.contextPath}//CourseServlet">-->
-                                    <div class="form-group col-lg-4">  
-                                        <span>Department</span>
+                                    <div class="form-group col-lg-4 has-success">  
+                                        <div class="input-group">
+                                        <span class="input-group-addon">Department</span>
                                         <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
                                             <option value="">select department</option>
                                             <%
@@ -76,59 +60,62 @@
                                                 }
                                             %>
 
-                                        </select>                          
+                                        </select>     
+                                        </div>
                                     </div>
-                                    <div class="form-group col-lg-4">  
-                                        <span>Program</span>
+                                    <div class="form-group col-lg-4 has-success"> 
+                                         <div class="input-group">
+                                        <span class="input-group-addon has-success">Program</span>
 
-                                        <select name="program" id="program" class="form-control">
+                                        <select name="program" id="program" class="form-control has-success">
 
                                             <option value="">select program</option> 
 
                                         </select>
+                                         </div>
                                     </div>
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <!--<span class="input-group-addon">Term</span>-->
-                                        <span class="pull-center">Term</span>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                        <span class="input-group-addon">Term</span>
+                                        <!--<span class="pull-center">Term</span>-->
                                         <!--Term-->
                                         <select class="form-control" id="term" name="term" required="required">
                                             <option value="">-select term-</option>
-                                            <option value="1">Term1</option>
-                                            <option value="2">Term2</option>
-                                            <option value="3">Term3</option>
-                                            <option value="4">Term4</option>
+                                            <option value="Term1">Term1</option>
+                                            <option value="Term2">Term2</option>
+                                            <option value="Term3">Term3</option>
+                                            <option value="Term4">Term4</option>
                                         </select>
-                                        <!--</div>-->
+                                        </div>
                                     </div>
 
                                     <!--<div data-dte-e="input-control" class="DTE_Field_InputControl" style="display: block;">Term<input id="DTE_Field_first_name" type="text"></div>-->
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <span class="pull-center">Course Name</span>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                        <span class="input-group-addon pull-center has-success">Course Name</span>
                                         <input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">
-                                        <!--</div>-->
+                                        </div>
                                     </div>
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <span class="pull-center">Date</span>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                        <span class="input-group-addon pull-center">Date</span>
                                         <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
                                         <!--                                            <span class="input-group-addon">
                                                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                                                     </span>-->
-                                        <!--</div>-->
+                                        </div>
                                     </div>
 
 
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <span class="pull-center">Credit Hour</span>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                        <span class="input-group-addon pull-center">Credit Hour</span>
                                         <input type="text" name="creditH"  class="form-control" id="ch" placeholder="Enter Credit Hour">
-                                        <!--</div>-->
+                                        </div>
                                     </div>
-                                    <div class="form-group col-lg-4">
-                                        <!--<div class="input-group">-->
-                                        <span class="pull-center">Pre Request</span>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group ">
+                                        <span class=" input-group-addon pull-center">Pre Request</span>
                                         <!--Term-->
                                         <select class="form-control" id="prerequest" name="prerequest" required="required">
                                             <option value="">-select term-</option>
@@ -136,26 +123,17 @@
                                             <option value="2">No</option>
 
                                         </select>
-                                        <!--</div>-->
+                                        </div>
                                     </div>
 
-                                </div>
-                                <!--</form>-->
-                                <div class="modal-footer">
-                                    <input type="button" class="btn" id="buttonref" value="Refresh"/>
-                                    <button type="button" class="btn btn-warning" 
-                                            data-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary" id="btnregister">
-                                        Register
+                                <div class="form-group col-lg-4">
+                                        <button type="submit" class="btn btn-primary" id="btnregister">
+                                        <span  class="fa fa-arrow-circle-o-up"> Update</span>
                                     </button>
                                 </div>
                             </form>
-
-                        </div><!-- /.modal-content -->
-                    </div>
-                </div><!-- /.modal -->
-
+                </div>
+                    
                 <span class="text-primary">  <strong>List of available courses</strong></span>
 
                 <script type="text/javascript">
@@ -164,9 +142,9 @@
                         $("#editing_form").css('visibility', "visible");
                     });
                 </script>
-                <span class="alert alert-success">  ${del}</span> 
-
-                <table  class="table table-striped table-bordered table-hover"  id="tabledate">
+                <!--<span class="alert alert-success">  ${del}</span>--> 
+                ${del}
+                <table  class="table table-striped table-bordered table-hover "  id="tabledate">
                     <thead>
                         <tr>
                             <th>Course Code</th>
@@ -209,7 +187,7 @@
                             <td>
 
 
-                                <form action="" method="post">
+                                <form action="EditCourse.jsp" method="post">
 
                                     <input type="hidden" name="edit_id" value="<%=id%>"/>
 
@@ -241,7 +219,7 @@
 
                     </tbody>
                 </table>
-            3
+                <strong></strong>
                 <form action="" id="editing_form" method="post" style="visibility: hidden">
 
                     <input type="text" name="edit_id" value="<%%>"/>
@@ -263,8 +241,10 @@
     <script src="../jquery/jquery-1.10.2.min.js" type="text/javascript"/></script>
 <!--<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>-->
 <!--<script src="../bootstrap/DataTable/js/dataTables.bootstrap.min.js"></script>-->
+
 <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
 <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
+<link href="../resources/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 <!--<link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 <!--<script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
 
@@ -337,7 +317,8 @@
 <script type="text/javascript">
     $("#date_registered").datepicker({
         changeMonth: true,
-        changeYear: true
+        changeYear: true,
+        dateFormat: 'yy-mm-dd'  
                 //dateFormat: 'yyyy-mm-dd'
                 //format:'yyyy-mm-dd'
 

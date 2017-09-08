@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package Controller;
-
-import Model.TrainingCorseManagement;
+import Model.ProbationManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -21,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author seid
  */
-@WebServlet(name = "editTraining", urlPatterns = {"/editTraining"})
-public class editTraining extends HttpServlet {
+@WebServlet(name = "ProbationServlet", urlPatterns = {"/ProbationServlet"})
+public class ProbationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,26 +31,35 @@ public class editTraining extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           String credit_hour=request.getParameter("creditehour"),
-         COURSE_NAME=request.getParameter("course_name"),
-          TITLE=request.getParameter("title"),
-          PRE_REQUEST=request.getParameter("PRE_REQUEST"),
-          Course_type=request.getParameter("COURSE_TYPE"),
-          Course_code=request.getParameter("course_code");
-           TrainingCorseManagement editcourse=new TrainingCorseManagement();
-           int edited=editcourse.ediCcourse(credit_hour, Course_type, COURSE_NAME, TITLE, PRE_REQUEST, Course_code);
-           if(edited>0)
-           {
-               request.getSession().setAttribute("inserted", "sucessfuly updated");
-               response.sendRedirect("Department/edit.jsp");
-           }
+            String trainer_name=request.getParameter("trainer_name"),
+                    approval_name=request.getParameter("Manager_name"),
+                    current_result=request.getParameter("pervious_result"),
+                    department=request.getParameter("department"),
+                    exepected_result=request.getParameter("expected_result"),
+                    registrar_office_name=request.getParameter("Registrar_manager_name"),
+                    status=request.getParameter("current_status"),
+                    submissiondate=request.getParameter("date");
+            ProbationManagement probation_reg=new ProbationManagement();
+            int probationRegistration = probation_reg.probationRegistration(trainer_name,
+                    approval_name, current_result,
+                    department, exepected_result,
+                    registrar_office_name, status,submissiondate);
+        if(probationRegistration>0)
+        {
+            request.getSession().setAttribute("registerd","Probation sucessfully ");
+            response.sendRedirect("Department/Probatiion.jsp");
+        }
+        else{
+            request.getSession().setAttribute("not","Probation not regiterd");
+            response.sendRedirect("Department/Probation.jsp");
+        }
         }
     }
 
@@ -69,10 +77,8 @@ public class editTraining extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProbationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,10 +95,8 @@ public class editTraining extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(editTraining.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProbationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

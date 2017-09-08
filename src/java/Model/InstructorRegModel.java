@@ -17,28 +17,41 @@ import java.sql.SQLException;
 public class InstructorRegModel {
      connectionManager connection=new connectionManager();
      
-     public int instructor_registration(String nstid,InputStream inputStram,String insttitle,String  firsname,String middlename,String lastname,String phoneno, String email,String department,
+     public int instructor_registration(String nstid,String insttitle,String  firsname,String middlename,String lastname,String phoneno, String email,String department,
             String salary,String status,String insttype,String responsibility,String hireddate,String description) throws SQLException, ClassNotFoundException {
          int result=0;
-         PreparedStatement prestm=connection.getconnection().prepareStatement("Insert into TBL_ACADEMIC_STAFF_REG( Staff_Id , Image ,  Title , First_Name  ,"+ 
+         PreparedStatement prestm=connection.getconnection().prepareStatement("Insert into TBL_ACADEMIC_STAFF_REG( Staff_Id ,Title , First_Name  ,"+ 
          " Middle_Name ,Last_Name,Phone , E_Mail ,Departement ," +
-         " SALARY,Status ,STAFF_TYPE ,RESPONSIBILITY,HIRED_DATE, DESCRIPTION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+         " SALARY,Status ,STAFF_TYPE ,RESPONSIBILITY,HIRED_DATE, DESCRIPTION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
          prestm.setString(1, nstid);
-              prestm.setBlob(2, inputStram);
-              prestm.setString(3, insttitle);
-              prestm.setString(4, firsname);
-              prestm.setString(5, middlename);
-              prestm.setString(6, lastname);
-               prestm.setString(7, phoneno);
-              prestm.setString(8, email);
-               prestm.setString(9, department);
-              prestm.setString(10, salary);
-              prestm.setString(11, status);
-               prestm.setString(12, insttype);
-              prestm.setString(13, responsibility);
-              prestm.setString(14, hireddate);
-              prestm.setString(15, description);
+              prestm.setString(2, insttitle);
+              prestm.setString(3, firsname);
+              prestm.setString(4, middlename);
+              prestm.setString(5, lastname);
+               prestm.setString(6, phoneno);
+              prestm.setString(7, email);
+               prestm.setString(8, department);
+              prestm.setString(9, salary);
+              prestm.setString(10, status);
+               prestm.setString(11, insttype);
+              prestm.setString(12, responsibility);
+              prestm.setString(13, hireddate);
+              prestm.setString(14, description);
+//              prestm.setBlob(2, inputstram);
+//              prestm.setString(3, insttitle);
+//              prestm.setString(4, firsname);
+//              prestm.setString(5, middlename);
+//              prestm.setString(6, lastname);
+//               prestm.setString(7, phoneno);
+//              prestm.setString(8, email);
+//               prestm.setString(9, department);
+//              prestm.setString(10, salary);
+//              prestm.setString(11, status);
+//               prestm.setString(12, insttype);
+//              prestm.setString(13, responsibility);
+//              prestm.setString(14, hireddate);
+//              prestm.setString(15, description);
               result=prestm.executeUpdate();
           
          return result;
