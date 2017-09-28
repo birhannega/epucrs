@@ -16,7 +16,7 @@
     }
 
 </style>
-<%@include file="../common/imports.jsp" %>
+<%--<%@include file="../common/imports.jsp" %>--%>
 <body>
 
     <!--      include navigation bar start-->

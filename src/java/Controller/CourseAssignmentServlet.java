@@ -61,9 +61,9 @@ public class CourseAssignmentServlet extends HttpServlet {
             response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
             //out.println("course successfully registred");
         } else {
-             request.getSession().setAttribute("instructorNotAssigned", "<strong><span class='alert alert-success text-center'>Instructor not assigned</span></strong>");
+            request.getSession().setAttribute("instructorNotAssigned", "<strong><span class='alert alert-success text-center'>Instructor not assigned</span></strong>");
             response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
-          //  out.println("course not registred");
+            //  out.println("course not registred");
         }
 
     }

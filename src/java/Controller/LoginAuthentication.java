@@ -27,7 +27,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "LoginAuthentication", urlPatterns = {"/LoginAuthentication"})
 public class LoginAuthentication extends HttpServlet {
-    connectionManager manager=new connectionManager();
+
+    connectionManager manager = new connectionManager();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,52 +45,43 @@ public class LoginAuthentication extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String username=request.getParameter("username"),
-                    password=request.getParameter("password");
-                    String status="active",role=null;
-                    
-            UserManagement userlogin=new UserManagement();
-            
-            int user_validity=userlogin.authenticateuser(username, status, password);
-            if(user_validity>=1){
-            
-               Statement user_statement=manager.getconnection().createStatement();
-               ResultSet rs_user=user_statement.executeQuery("select ROLE_ID from Tbl_user where user_id='"+username+"'");
-               if(rs_user.next())
-               {
+            String username = request.getParameter("username"),
+                    password = request.getParameter("password");
+            String status = "active", role = null;
 
-                    HttpSession session=request.getSession();
+            UserManagement userlogin = new UserManagement();
+
+            int user_validity = userlogin.authenticateuser(username, status, password);
+            if (user_validity >= 1) {
+
+                Statement user_statement = manager.getconnection().createStatement();
+                ResultSet rs_user = user_statement.executeQuery("select ROLE_ID from Tbl_user where user_id='" + username + "'");
+                if (rs_user.next()) {
+
+                    HttpSession session = request.getSession();
 //                    session.setAttribute("loggeduser", username);
-                   role=rs_user.getString(1);
-                  if(role.equalsIgnoreCase("R_00"))
-                  {
-                      session.setAttribute("admin", username);
-                      response.sendRedirect("Admin/index.jsp");
-                  }else if (role.equalsIgnoreCase("R_01"))
-                          {
-                              response.sendRedirect("Incoder/index.jsp");
-                          }  
-                    else if (role.equalsIgnoreCase("R_02"))
-                          {
-                              response.sendRedirect("Instructor/ndex.jsp");
-                          }  else if (role.equalsIgnoreCase("R_03"))
-                          {
-                              response.sendRedirect("Department/index.jsp");
-                          }  else if (role.equalsIgnoreCase("R_04"))
-                          {
-                              response.sendRedirect("Student/index.jsp");
-                          }  else
-                          {
-                          out.print("unknown role");
-                          }
-               }
-                
-            }else{
-                 out.print("login faield");
+                    role = rs_user.getString(1);
+                    if (role.equalsIgnoreCase("R_00")) {
+                        session.setAttribute("admin", username);
+                        response.sendRedirect("Admin/index.jsp");
+                    } else if (role.equalsIgnoreCase("R_01")) {
+                        response.sendRedirect("Incoder/index.jsp");
+                    } else if (role.equalsIgnoreCase("R_02")) {
+                        response.sendRedirect("Instructor/ndex.jsp");
+                    } else if (role.equalsIgnoreCase("R_03")) {
+                        response.sendRedirect("Department/index.jsp");
+                    } else if (role.equalsIgnoreCase("R_04")) {
+                        response.sendRedirect("Student/index.jsp");
+                    } else {
+                        out.print("unknown role");
+                    }
+                }
+
+            } else {
+                out.print("login faield");
             }
-                    
+
             //out.println("You entered"+ username +" "+password+"</h1>");
-            
         }
     }
 

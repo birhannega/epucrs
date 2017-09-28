@@ -5,8 +5,12 @@
  */
 package Controller;
 
+import Model.InstructorRegModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,16 +34,33 @@ public class InstructorExpertiseServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-          String expid=request.getParameter("expid"),
-                   expctgry=request.getParameter("expctgry"),  
+          //String expid=request.getParameter("expid");
+              String  expctgry=request.getParameter("expctgry"),  
                  exptype=request.getParameter("exptype"), 
                   orgname=request.getParameter("orgname"), 
                   totalexp=request.getParameter("totalexp"), 
                   datefrom_exp_from=request.getParameter("datefrom_exp_from"),  
                  datefrom_exp_to=request.getParameter("datefrom_exp_to") ;
+           
+          String  expid = expctgry.concat("-100");
+//        PrintWriter out=response.getWriter();
+//        out.println("Entered inputs "+term+" "+courseName);
+// creating object of entity class
+        InstructorRegModel instreg = new InstructorRegModel();
+        int is_registered = instreg.instructor_exp_reg(expid,expctgry, exptype, orgname, totalexp, datefrom_exp_from, datefrom_exp_to);
+        if (is_registered > 0) {
+            request.getSession().setAttribute("instexpRegistered", "<strong><span class='alert alert-success text-center'>Instructor successfully registred</span></strong>");
+
+            response.sendRedirect("Department/InstructorRegistration.jsp");
+            //out.println("course successfully registred");
+        } else {
+             request.getSession().setAttribute("instexpNotRegistered", "<strong><span class='alert alert-success text-center'>Instructor not registred</span></strong>");
+            response.sendRedirect("Department/InstructorRegistration.jsp");
+//             out.println("course not registred");
+        }
      
     }
 
@@ -55,7 +76,13 @@ public class InstructorExpertiseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(InstructorExpertiseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InstructorExpertiseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -69,7 +96,13 @@ public class InstructorExpertiseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(InstructorExpertiseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InstructorExpertiseServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

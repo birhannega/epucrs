@@ -1,1 +1,1 @@
-<div class="navbar navbar-default " style="margin-bottom: 0"><img src="images/header5.jpg" class="img img-responsive"></div> 
+<div class="navbar navbar-default "><img src="../images/header5.jpg" class="img img-responsive"></div> 

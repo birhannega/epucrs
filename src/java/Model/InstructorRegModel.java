@@ -57,5 +57,24 @@ public class InstructorRegModel {
          return result;
         
     }
+     //add expriance
+     public int instructor_exp_reg(String expid,String expctgry,String exptype,String orgname,String  totalexp,String datefrom_exp_from,String datefrom_exp_to) throws SQLException, ClassNotFoundException {
+         int result=0;
+         PreparedStatement prestm=connection.getconnection().prepareStatement("Insert into TBL_INST_EXPERTISE( INSTEXP_ID ,AREA_EXPERTISE ,ORG_TYPE, ORG_NAME  ,"+ 
+         " TOTAL_EXPERTISE ,DATE_FROM,DATE_TO) values(?,?,?,?,?,?,?)");
+
+         prestm.setString(1, expid);
+              prestm.setString(2, expctgry);
+              prestm.setString(3, exptype);
+              prestm.setString(4, orgname);
+              prestm.setString(5, totalexp);
+               prestm.setString(6, datefrom_exp_from);
+              prestm.setString(7, datefrom_exp_to);
+              
+              result=prestm.executeUpdate();
+          
+         return result;
+        
+    }
     
 }
