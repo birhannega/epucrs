@@ -1,3 +1,4 @@
+<%@page import="javafx.scene.control.Alert"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.connectionManager"%>
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body oncontextmenu="return false">
         <%@include file="../common/head_banner.jsp" %>
         <div class="row">
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
@@ -173,12 +174,12 @@
                     <div class="col-lg-12 header">
                         <span class="text-primary">  <strong>List of available courses</strong></span>
                     </div>
-                    <script type="text/javascript">
+<!--                    <script type="text/javascript">
                         $('#edit_id').click(function ()
                         {
                             $("#editing_form").css('visibility', "visible");
                         });
-                    </script>
+                    </script>-->
                     <!--<span class="alert alert-success">  ${del}</span>--> 
                     ${del}
                     ${courseUpdate}
@@ -189,13 +190,14 @@
                             String action = request.getParameter("action");
                             String id = request.getParameter("id");
                             if (action.equalsIgnoreCase("delete")) {
-                                 ResultSet rs_delete = getdept.executeQuery("delete * from TBL_COURSE_REGISTRATION where COURSE_CODE='" + id + "'");
+                                //Alert="";
+                                 ResultSet rs_delete = getdept.executeQuery("delete from TBL_COURSE_REGISTRATION where COURSE_CODE='" + id + "'");
                        // if (rs_delete.next()) {
                   
                          %>    
-<!--                         <div class="alert alert-success">
+                         <div class="alert alert-success" id="">
                              Successfully deleted
-                         </div>        -->
+                         </div>        
 
                     <% } 
                       else if (action.equalsIgnoreCase("edit")) {
@@ -203,6 +205,7 @@
                         if (rs_edit.next()) {
 
                     %>
+                    
                     <div class="form-group">
                         
                         <p class=""> <strong>Editing <%=rs_edit.getString("COURSE_NAME")%></strong> </p>

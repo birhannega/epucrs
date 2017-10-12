@@ -110,7 +110,7 @@
                                             <%    while (rs_class.next()) {
                                                     String cnt_instructor = rs_class.getString("cnt_inst");
                                                     //cid;
-                                            %>
+%>
                                             <label class="control-label" for="tclass" ><%=cnt_instructor%></label>
                                             <% } %>
                                             <!--</select>-->
@@ -138,7 +138,7 @@
                                             <%    while (rs_class.next()) {
                                                     String cnt_instructor = rs_class.getString("cnt_inst");
                                                     //cid;
-                                            %>
+%>
                                             <label class="control-label" for="tclass" ><%=cnt_instructor%> were found</label>
                                             <% } %>
                                             <!--</select>-->
@@ -155,27 +155,25 @@
                                             <tr>
                                                 <th>Title</th>
                                                 <th>Instructor Name</th>
-                                                <th>Department</th>
-                                                <th>Phone No</th>
-                                                <th>Has Police Management </th>
-                                                <th>Status</th>
+                                                <th>STATUS</th>
+                                                <th>Total Hour</th>
+                                                <th>Police Management</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Title</th>
                                                 <th>Instructor Name</th>
-                                                <th>Department</th>
-                                                <th>Phone No</th>
-                                                <th>Has Police Management</th>
-                                                <th>Status</th>
+                                                <th>STATUS</th>
+                                                <th>Total Hour</th>
+                                                <th>Police Management</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <%
                                                 connectionManager dbconnection = new connectionManager();
                                                 Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                String course_sql = "select  ACADEMIC_STAFF_ID,Title, First_Name || ' '|| Middle_Name || ' '|| LAST_NAME as FULL_NAME,departement,Phone,POLICE_MANAGEMENT,STATUS from TBL_ACADEMIC_STAFF_REG ";
+                                                String course_sql = "select  Staff_Id,Title, First_Name || ' '|| Middle_Name || ' '|| LAST_NAME as FULL_NAME,departement,Phone, STATUS ,POLICE_MANAGEMENT from TBL_ACADEMIC_STAFF_REG ";
                                                 ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
                                                 while (rs_courseinstr.next()) {
                                                     String id = rs_courseinstr.getString(1);
@@ -188,7 +186,6 @@
                                                 <td><%=rs_courseinstr.getString(4)%></td> 
                                                 <td><%=rs_courseinstr.getString(5)%></td> 
                                                 <td><%=rs_courseinstr.getString(6)%></td>
-                                                <td><%=rs_courseinstr.getString(7)%></td>
 
                                             </tr>
                                             <%
@@ -202,13 +199,241 @@
                                 </form>
                             </div>
                         </div>
-                   
-                                        
+                        <div class="form-group col-lg-12">
+                            <a class="accordion-toggle"><span class="glyphicon glyphicon-list">ClassInfo</span></a>
+                            <div class="accordion-content">
+
+                                <div class="form-group col-lg-4 has-success">
+                                    <span class="pull-center">Total Class:</span>
+                                    <div class="form-control">
+                                        <%
+                                            try {
+                                                //connectionManager dbconnection = new connectionManager();
+                                                Statement stm_class = dbconnection.getconnection().createStatement();
+                                                String class_sql = "select count(*) as cnt_class from TBL_CLASS";
+
+                                                ResultSet rs_class = stm_class.executeQuery(class_sql);
+
+                                        %>
+
+                                        <%    while (rs_class.next()) {
+                                                String cnt_class = rs_class.getString("cnt_class");
+                                                //cid;
+%>
+                                        <label class="control-label" for="tclass" ><%=cnt_class%></label>
+                                        <% } %>
+                                        <!--</select>-->
+                                        <%
+                                            } catch (Exception e) {
+                                                out.println("wrong selection!" + e);
+                                            }
+                                        %>
+                                        <!--<label class="control-label" for="tclass" >----</label>-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-4 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center">Assigned Class New</span>
+                                    <input type="text" name="assclassnew"  class="form-control" id="assclassnew" placeholder="Enter Assigned class">
+                                    <!--</div>-->
+                                </div>
+                                <div class="form-group col-lg-4 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center">Assigned Class  Indoctrination</span>
+                                    <input type="text" name="unassclassinf"  class="form-control" id="unassclassinf" placeholder="Enter Unassigned class">
+                                    <!--</div>-->
+                                </div>
+                                <div class="form-group col-lg-4 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center">Assigned Class  Old</span>
+                                    <input type="text" name="assnclsold"  class="form-control" id="assnclsold" placeholder="Enter Unassigned class">
+                                    <!--</div>-->
+                                </div> 
+                                <div class="form-group col-lg-4 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center">UnAssigned Class  Old</span>
+                                    <input type="text" name="unassclassold"  class="form-control" id="unassclassold" placeholder="Enter Unassigned class">
+                                    <!--</div>-->
+                                </div>   
+
+                                <!--                                     
+                                                                    </div>
+                                                                    <div class="form-group col-lg-8">
+                                                                        <label class="control-label col-lg-4" for="unassclass">Date :</label>
+                                                                        <div class="col-lg-4">
+                                                                            <input type="text" class="form-control" id="unassclass" placeholder="Enter Unassigned class">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group col-lg-8">
+                                                                        <label class="control-label col-lg-4" for="unassclass">Time difference :</label>
+                                                                        <div class="col-lg-4">
+                                                                            <input type="text" class="form-control" id="unassclass" placeholder="Enter Unassigned class">
+                                                                        </div>
+                                                                    </div>-->
+                                <!--                                    <div class="form-group">
+                                                                        <div class="col-lg-4">
+                                                                            <button type="submit" class="btn btn-default">Submit</button>
+                                                                        </div>
+                                                                    </div>-->
+
+                                <form class="" method="post" id="instrAssign" action="${pageContext.request.contextPath}//CourseAssignment">
+
+                                    <div class="col-lg-12" ><p class="text-primary text-center header "><strong> Class Assignment</strong></p></div>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Instructor Name</span>
+                                        <!--<input type="text" name="instructorname"  class="form-control" id="instructorname" placeholder="Enter Unassigned class">-->
+                                        <select class="form-control" id="instructorname" name="instructorname" required="required">
+                                            <option value="-1">-select instructor-</option>
+                                            <%
+                                                try {
+//                                                        connectionManager dbconnection = new connectionManager();
+                                                    Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                    String lis_inst_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+
+                                                    ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                            %>
+                                            //                                                                        
+                                            <%    while (rs_list_inst.next()) {
+                                                    String id = rs_list_inst.getString("FULL_NAME");
+                                                    //cid;
+                                            %>
+                                            <option><%=id%></option>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
+
+
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Location</span>
+                                        <!--<input type="text" name="Location"  class="form-control" id="Location" placeholder="Enter Unassigned class">-->
+                                        <select class="form-control" id="classlist" name="classlist" required="required">
+                                            <option value="-1">-select class--</option>
+                                            <%
+                                                try {
+//                                                        connectionManager dbconnection = new connectionManager();
+                                                    Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                    String lis_inst_sql = "select  location from TBL_CLASS";
+
+                                                    ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                            %>
+                                            //                                                                        
+                                            <%    while (rs_list_inst.next()) {
+                                                    String id = rs_list_inst.getString("location");
+                                                    //cid;
+                                            %>
+                                            <option><%=id%></option>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                        </select>
+                                        <!--</div>-->
+                                    </div> 
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Block</span>
+                                        <!--<input type="text" name="Block"  class="form-control" id="Block" placeholder="Enter Unassigned class">-->
+                                        <select class="form-control" id="classlist" name="classlist" required="required">
+                                            <option value="-1">-select class--</option>
+                                            <%
+                                                try {
+//                                                        connectionManager dbconnection = new connectionManager();
+                                                    Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                    String lis_inst_sql = "select  block_name from TBL_CLASS";
+
+                                                    ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                            %>
+                                            //                                                                        
+                                            <%    while (rs_list_inst.next()) {
+                                                    String id = rs_list_inst.getString("block_name");
+                                                    //cid;
+                                            %>
+                                            <option><%=id%></option>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                        </select>
+                                        <!--</div>-->
+                                    </div>  
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Class List</span>
+                                        <!--<input type="text" name="classlist"  class="form-control" id="classlist" placeholder="Enter  class List">-->
+                                        <select class="form-control" id="classlist" name="classlist" required="required">
+                                            <option value="-1">-select class--</option>
+                                            <%
+                                                try {
+//                                                        connectionManager dbconnection = new connectionManager();
+                                                    Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                    String lis_inst_sql = "select  class_name from TBL_CLASS";
+
+                                                    ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                            %>
+                                            //                                                                        
+                                            <%    while (rs_list_inst.next()) {
+                                                    String id = rs_list_inst.getString("class_name");
+                                                    //cid;
+                                            %>
+                                            <option><%=id%></option>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Assign Date</span>
+                                        <input class="form-control" id="assigndate" name="date_registered" placeholder="Enter Assign Date" type="date" required=""/>
+                                        <!--                                                                                        <span class="input-group-addon">
+                                                                                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                                                                                </span>-->
+                                        <!--</div>-->
+                                    </div>
+                                         <div class="form-group col-lg-2 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Time From</span>
+                                        <input class="form-control" id="assigndate" name="date_registered" placeholder="Enter time from"  required=""/>
+                                    </div>
+                                         <div class="form-group col-lg-2 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Time TO</span>
+                                        <input class="form-control" id="assigndate" name="date_registered" placeholder="Enter time to"  required=""/>
+                                    </div>
+                                    <div class="form-group col-lg-12" > 
+                                        <button type="submit" id="saveclass" class="btn btn-primary"><span class="fa fa-save"><strong>  Save info</strong></span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <div class="form-group col-lg-12">
                             <a class="accordion-toggle"><span class="glyphicon glyphicon-list">InstructorAssignment</span></a>
                             <div class="accordion-content">
-                                ${instructorAssigned}
-                                ${instructorNotAssigned}
                                 <form class="form-group " role="form" method="post" id="instrAssign"  action="${pageContext.request.contextPath}//CourseAssignment">
                                     <!--                                    <div class="form-group col-lg-4">
                                                                             <div class="input-group">
@@ -244,7 +469,7 @@
                                                     try {
 //                                                        connectionManager dbconnection = new connectionManager();
                                                         Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                                        String lis_inst_sql = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                                        String lis_inst_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
                                                         ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
@@ -253,7 +478,7 @@
                                                 <%    while (rs_list_inst.next()) {
                                                         String id = rs_list_inst.getString("FULL_NAME");
                                                         //cid;
-%>
+                                                %>
                                                 <option><%=id%></option>
                                                 <% } %>
                                                 <!--</select>-->
@@ -283,7 +508,7 @@
                                                 <%    while (rs_cours.next()) {
                                                         String id = rs_cours.getString("COURSE_NAME");
                                                         //cid;
-%>
+                                                %>
                                                 <option><%=id%></option>
                                                 <% } %>
                                                 <!--</select>-->
@@ -324,7 +549,7 @@
                                                 <%    while (rs_program.next()) {
                                                         String id = rs_program.getString("round_name");
                                                         //cid;
-%>
+                                                %>
                                                 <option><%=id%></option>
                                                 <% } %>
                                                 <!--</select>-->
@@ -343,99 +568,99 @@
                                             <input type="text" name="totalH"  class="form-control" id="totalH" placeholder="Enter Total Hour">
                                         </div>
                                     </div>
-                                    <!--                                    <div class="form-group col-lg-4 has-success">
-                                                                            <div class="input-group">
-                                                                                <span class="input-group-addon pull-center">Location</span>
-                                                                                <input type="text" name="Location"  class="form-control" id="Location" placeholder="Enter Unassigned class">
-                                                                                <select class="form-control" id="classlist" name="classlist" required="required">
-                                                                                    <option value="-1">-select class--</option>
-                                    <%
-                                        try {
-                                            //                                                        connectionManager dbconnection = new connectionManager();
-                                            Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                            String lis_inst_sql = "select  location from TBL_CLASS";
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                            <span class="input-group-addon pull-center">Location</span>
+                                            <!--<input type="text" name="Location"  class="form-control" id="Location" placeholder="Enter Unassigned class">-->
+                                            <select class="form-control" id="classlist" name="classlist" required="required">
+                                                <option value="-1">-select class--</option>
+                                                <%
+                                                    try {
+    //                                                        connectionManager dbconnection = new connectionManager();
+                                                        Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                        String lis_inst_sql = "select  location from TBL_CLASS";
 
-                                            ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+                                                        ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
-                                    %>
-                                    //                                                                        
-                                    <%    while (rs_list_inst.next()) {
-                                            String id = rs_list_inst.getString("location");
-                                            //cid;
-%>
-                                                                                    <option><%=id%></option>
-                                    <% } %>
-                                    </select>
-                                    <%
-                                        } catch (Exception e) {
-                                            out.println("wrong selection!" + e);
-                                        }
-                                    %>
-                                </select>
-                            </div>
-                        </div> 
-                        <div class="form-group col-lg-4 has-success">
-                            <div class="input-group">
-                                <span class="input-group-addon pull-center">Block</span>
-                                <input type="text" name="Block"  class="form-control" id="Block" placeholder="Enter Unassigned class">
-                                <select class="form-control" id="classlist" name="classlist" required="required">
-                                    <option value="-1">-select class--</option>
-                                    <%
-                                        try {
-                                            //                                                        connectionManager dbconnection = new connectionManager();
-                                            Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                            String lis_inst_sql = "select  block_name from TBL_CLASS";
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_list_inst.next()) {
+                                                        String id = rs_list_inst.getString("location");
+                                                        //cid;
+                                                %>
+                                                <option><%=id%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                            <span class="input-group-addon pull-center">Block</span>
+                                            <!--<input type="text" name="Block"  class="form-control" id="Block" placeholder="Enter Unassigned class">-->
+                                            <select class="form-control" id="classlist" name="classlist" required="required">
+                                                <option value="-1">-select class--</option>
+                                                <%
+                                                    try {
+    //                                                        connectionManager dbconnection = new connectionManager();
+                                                        Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                        String lis_inst_sql = "select  block_name from TBL_CLASS";
 
-                                            ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+                                                        ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
-                                    %>
-                                    //                                                                        
-                                    <%    while (rs_list_inst.next()) {
-                                            String id = rs_list_inst.getString("block_name");
-                                            //cid;
-%>
-                                                                                    <option><%=id%></option>
-                                    <% } %>
-                                    </select>
-                                    <%
-                                        } catch (Exception e) {
-                                            out.println("wrong selection!" + e);
-                                        }
-                                    %>
-                                </select>
-                            </div>
-                        </div>  
-                        <div class="form-group col-lg-4 has-success">
-                            <div class="input-group">
-                                <span class="input-group-addon pull-center">Class List</span>
-                                <input type="text" name="classlist"  class="form-control" id="classlist" placeholder="Enter  class List">
-                                <select class="form-control" id="classlist" name="classlist" required="required">
-                                    <option value="-1">-select class--</option>
-                                    <%
-                                        try {
-                                            //                                                        connectionManager dbconnection = new connectionManager();
-                                            Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                            String lis_inst_sql = "select  class_name from TBL_CLASS";
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_list_inst.next()) {
+                                                        String id = rs_list_inst.getString("block_name");
+                                                        //cid;
+                                                %>
+                                                <option><%=id%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                    </div>  
+                                    <div class="form-group col-lg-4 has-success">
+                                        <div class="input-group">
+                                            <span class="input-group-addon pull-center">Class List</span>
+                                            <!--<input type="text" name="classlist"  class="form-control" id="classlist" placeholder="Enter  class List">-->
+                                            <select class="form-control" id="classlist" name="classlist" required="required">
+                                                <option value="-1">-select class--</option>
+                                                <%
+                                                    try {
+    //                                                        connectionManager dbconnection = new connectionManager();
+                                                        Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                        String lis_inst_sql = "select  class_name from TBL_CLASS";
 
-                                            ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+                                                        ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
-                                    %>
-                                    //                                                                        
-                                    <%    while (rs_list_inst.next()) {
-                                            String id = rs_list_inst.getString("class_name");
-                                            //cid;
-%>
-                                                                                    <option><%=id%></option>
-                                    <% } %>
-                                    </select>
-                                    <%
-                                        } catch (Exception e) {
-                                            out.println("wrong selection!" + e);
-                                        }
-                                    %>
-                                </select>
-                            </div>
-                        </div>-->
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_list_inst.next()) {
+                                                        String id = rs_list_inst.getString("class_name");
+                                                        //cid;
+                                                %>
+                                                <option><%=id%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group col-lg-4 has-success">
                                         <div class="input-group">
@@ -460,9 +685,6 @@
 
                                     </div>
                                 </form>
-                                <%    request.getSession().setAttribute("instructorAssigned", null);
-                                    request.getSession().setAttribute("instructorNotAssigned", null);
-                                %>
                                 <div class="list-group col-lg-4">
                                     <a href="#" class="list-group-item active">
                                         Subject Info/Total Course
@@ -470,7 +692,8 @@
                                     </a>
                                     <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
                                     <a href="#" class="list-group-item">Morbi leo risus</a>
-                                    
+                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
                                 </div>
                                 <div class="list-group col-lg-4">
                                     <a href="#" class="list-group-item active">
@@ -478,7 +701,8 @@
                                     </a>
                                     <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
                                     <a href="#" class="list-group-item">Morbi leo risus</a>
-                                   
+                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
                                 </div>
                                 <div class="list-group col-lg-4">
                                     <a href="#" class="list-group-item active">
@@ -486,7 +710,9 @@
                                     </a>
                                     <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
                                     <a href="#" class="list-group-item">Morbi leo risus</a>
-                                    </div>
+                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                                </div>
 
                             </div>
 

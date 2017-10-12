@@ -1,5 +1,13 @@
+<%-- 
+    Document   : Instructor Registration
+    Created on : 28-Sep-2017, 02:33:06
+    Author     : Efrem
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="../css/jQuery.steps.css"
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.connectionManager"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,10 +97,10 @@
                             ${instreg}
                             ${instNotreg}
                             <!--<span class="glyphicon glyphicon-list"><h4 class="accordion-toggle">Instructor Profile</h4></span>-->
-                            <a class="accordion-toggle"><span class="glyphicon glyphicon-list">RegisterInstructorProfile</span></a>
+                            <a class="accordion-toggle"><span class="glyphicon glyphicon-list">RegisterStaffProfile</span></a>
                             <div class="accordion-content">
                                 <form class="form-group " method="POST" id="stud_reg" action="${pageContext.request.contextPath}//InstructorReg_Servlet">
-                                    <div class="form-group col-lg-12">Instructor Id:<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled id="instid" name="instid" value="<%=inst_counter%>"></div> 
+                                    <div class="form-group col-lg-12">Staff Id:<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled id="instid" name="instid" value="<%=inst_counter%>"></div> 
                                     <div class="form-group col-lg-4 has-success has-feedback">
                                         <div class="input-group">
                                             <input type="file" name="ImageFile" id="ImageFile" />
