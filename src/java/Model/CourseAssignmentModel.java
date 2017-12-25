@@ -8,33 +8,90 @@ package Model;
 import dbconnection.connectionManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author user
  */
+
 public class CourseAssignmentModel {
     connectionManager connmngr=new connectionManager();
-    public int courseAssignment(String instid,String selectinstr,String dateassigned,String program,String course,String creditH,String datemodified,String  modifiedby,String period,String previousinstructor) throws ClassNotFoundException, SQLException{
-        
+    public int courseAssignment(String instid,String courseid,String dateassigned,String round,String totalH,String durationFrom,String  durationTo) throws ClassNotFoundException, SQLException{
+       
   
         int action=0;
        
-            PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT(INSTRUCTOR_ID, INSTRUCTOR_NAME , ASSIGNED_DATE,PROGRAM, COURSE_NAME, " +
-"CREDIT_HOUR,MODIFIED_DATE, MODIFIED_BY,PERIOD, PREV_INSTRUCTOR) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT(ACADEMIC_STAFF_ID,COURSE_CODE, ASSIGN_DATE,ROUND, " +
+"TOTAL_HOUR,DURATION_FROM, DURATION_TO,COURSEASSIGNMENT_SEQNO) VALUES(?,?,?,?,?,?,?,SEQNO_COURSEASSIGNMENT.nextval)");
+            
              ps_register.setString(1, instid);
-            ps_register.setString(2, selectinstr);
-               ps_register.setString(3, dateassigned);
-              ps_register.setString(4, program);
-              ps_register.setString(5, course);
-              ps_register.setString(6, creditH);
-               ps_register.setString(7, datemodified);
-                ps_register.setString(8, modifiedby);
-              ps_register.setString(9, period);
-               ps_register.setString(10, previousinstructor);
-             action=ps_register.executeUpdate();
+            ps_register.setString(2, courseid); 
+//            ps_register.setString(3, selectinstr);
+//               ps_register.setString(4, course);
+              ps_register.setString(3, dateassigned);
+              ps_register.setString(4, round);
+              ps_register.setString(5, totalH);
+               ps_register.setString(6, durationFrom);
+                ps_register.setString(7, durationTo);
+                action=ps_register.executeUpdate();
           
               return action;
         }
-    
+    //update course assignment
+      public int CourseAssign_Update(String instnameupdate,String crsnameupdate, String dateassignedupdate,
+        String roundupdate,String totalHupdate,String durationFromupdate,String durationToupdate,String crsseqno) throws SQLException, ClassNotFoundException
+{
+    int regclc=0;
+    Statement _stmt=connmngr.getconnection().createStatement();
+//      PreparedStatement pr_stmt=connmngr.getconnection().prepareStatement("UPDATE  TBL_COURSEASSIGNMENT set ( " +
+//"     ACADEMIC_STAFF_ID,COURSE_CODE,INSTRUCTOR_NAME ,COURSE_NAME, ASSIGNED_DATE," +
+//"    ROUND , TOTAL_HOUR ,DURATION_FROM,DURATION_TO) VALUES(?,?,?,?,?,?,?) WHERE COURSEASSIGNMENT_SEQNO ='"+crsseqno+"' ");
+   
+     regclc=_stmt.executeUpdate("UPDATE  TBL_COURSEASSIGNMENT set  ACADEMIC_STAFF_ID='"+instnameupdate+"' ,"
+            + " COURSE_CODE='"+crsnameupdate+"' , ASSIGN_DATE='"+dateassignedupdate+"' ,ROUND='"+roundupdate+"' ,TOTAL_HOUR='"+totalHupdate+"', DURATION_FROM='"+durationToupdate+"', DURATION_TO='"+durationToupdate+"'  WHERE COURSEASSIGNMENT_SEQNO ='"+crsseqno+"' " );
+//
+//    pr_stmt.setString(1, instnameupdate);
+//    pr_stmt.setString(2, crsnameupdate);
+//    pr_stmt.setString(3, dateassignedupdate);
+//    pr_stmt.setString(4, roundupdate);
+//    pr_stmt.setString(5, totalHupdate);
+//    pr_stmt.setString(6, durationFromupdate); 
+//    pr_stmt.setString(7, durationToupdate); 
+//    pr_stmt.setString(8, crsseqno); 
+//    regclc=_stmt.executeUpdate("UPDATE  TBL_CLASS_ASSIGN set ACADEMIC_STAFF_ID='"+acdstaffID+"' ,COURSE_CODE='"+courseID+"', CLASS_ID='"+classID+"' ,"
+//            + " ASSIGN_DATE='"+assigndate+"' , TIME_FROM='"+timeFrom+"' ,TIME_TO='"+timeTo+"'  WHERE CLASSASSIGN_ID ='"+classassignID+"' " );
+    return regclc;
+}
+      
+      public int courseassign(String acdstaffid,String crsname,String dateassigned,String round,String totalH,String durationFrom,String durationTo) throws ClassNotFoundException, SQLException
+//      public int courseassign(String crsname) throws ClassNotFoundException, SQLException
+
+      {
+//          Statement _stmt=connmngr.getconnection().createStatement();
+//           String crsname[]=request.getParameterValues("crsname");
+              
+//          int j=0;
+//   for(int i=0;i<crsname.length;i++){    
+  
+        int action=0;
+       
+            PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT values(?,?,?,?,?,?,?,SEQNO_COURSEASSIGNMENT.nextval)");
+//             PreparedStatement ps_register=connmngr.getconnection().prepareStatement("INSERT INTO TBL_COURSEASSIGNMENT values(?,COURSEASSIGNMENT_SEQNO.nextval)");
+            
+//             ps_register.setString(1, crsname);
+             ps_register.setString(1, acdstaffid);
+            ps_register.setString(2, crsname); 
+            ps_register.setString(3, dateassigned);
+               ps_register.setString(4, round);
+              ps_register.setString(5, totalH);
+              ps_register.setString(6, durationFrom);
+                ps_register.setString(7, durationTo);
+ 
+                action=ps_register.executeUpdate();
+          
+              return action;
+//            }
+//        return 0;
+       }
 }

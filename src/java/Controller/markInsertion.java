@@ -4,10 +4,14 @@
  * and open the template in the editor.
  */
 package Controller;
+
 import Model.Mark_submit;
+import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -38,23 +42,22 @@ public class markInsertion extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        
-     String section = request.getParameter("test");
-    String teacherid = request.getParameter("teacherid");
-     String studentid = request.getParameter("studid");
-     String subjectid = request.getParameter("subid");
-     String testtype = request.getParameter("testtype");
-      String term="term1";
-      float mark = Float.parseFloat(request.getParameter("obtainedMark"));
-    
-
-    
-                String grade = "9";
-                      
-                  
-                   
-                Mark_submit submitMark=new Mark_submit();
-            int inserted = submitMark.Mark(studentid, teacherid, subjectid, term,grade,section,term,mark);
+       String []mark = request.getParameterValues("mark");
+       String[] studentid = request.getParameterValues("studid");
+       String teacherid = request.getParameter("teacherid");
+       String term=request.getParameter("term");
+       String testtype = request.getParameter("test");
+       String grade=request.getParameter("date");
+       String section = request.getParameter("class");
+       String subjectid = request.getParameter("course");
+       String department=request.getParameter("department");
+       String program=request.getParameter("program");
+       int inserted=0;
+       for(int i=0;i<studentid.length;i++){
+            Mark_submit  submitMark=new Mark_submit ();
+      inserted = submitMark.Mark(mark[i], studentid[i], teacherid, subjectid, section, 
+                    term, testtype, grade, department, program);
+               } 
             if(inserted>0){
                 request.getSession().setAttribute("inserted", "mark sucessfully inserted");
                 response.sendRedirect("Instructor/Marksubmission.jsp");

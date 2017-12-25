@@ -41,20 +41,21 @@ public class ClassServlet extends HttpServlet {
      
      String classblock=request.getParameter("blockname"),
              classname=request.getParameter("classname"),
-             regdate=request.getParameter("classdate");
+             regdate=request.getParameter("classdate"),
+     selectlocation=request.getParameter("selectlocation");
          String classid=classname.concat("-100");
      
      
      ClassModel clsmdl=new ClassModel();
-     int save_class=clsmdl.class_reg(classid,classblock,classname,regdate);
+     int save_class=clsmdl.class_reg(classid,classblock,classname,regdate,selectlocation);
        if (save_class > 0) {
             request.getSession().setAttribute("ClassReg", "<strong><span class='alert alert-success text-center'>Class successfully registred</span></strong>");
 
-            response.sendRedirect("Department/ClassRegistration.jsp");
+            response.sendRedirect("Incoder/ClassRegistration.jsp");
             //out.println("course successfully registred");
         } else {
              request.getSession().setAttribute("ClassNotReg", "<strong><span class='alert alert-success text-center'>Class not registred</span></strong>");
-            response.sendRedirect("Department/ClassRegistration.jsp");
+            response.sendRedirect("Incoder/ClassRegistration.jsp");
 //             out.println("course not registred");
         }
     }

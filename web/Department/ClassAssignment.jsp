@@ -101,7 +101,7 @@
                                 <%    while (rs_class.next()) {
                                         String cnt_class = rs_class.getString("cnt_class");
                                         //cid;
-                                %>
+%>
                                                                                                             <label class="control-label" for="tclass" ><%=cnt_class%></label>
                                 <% } %>
                                 </select>
@@ -131,7 +131,7 @@
                                 <%    while (rs_class.next()) {
                                         String cnt_class = rs_class.getString("cnt_class");
                                         //cid;
-                                %>
+%>
                                                                                                             <label class="control-label" for="tclass" ><%=cnt_class%></label>
                                 <% } %>
                                 </select>
@@ -162,7 +162,7 @@
                                 <%    while (rs_class.next()) {
                                         String cnt_class = rs_class.getString("cnt_class");
                                         //cid;
-                                %>
+%>
                                                                                                             <label class="control-label" for="tclass" ><%=cnt_class%></label>
                                 <% } %>
                                 </select>
@@ -193,7 +193,7 @@
                                 <%    while (rs_class.next()) {
                                         String cnt_class = rs_class.getString("cnt_class");
                                         //cid;
-                                %>
+%>
                                                                                                             <label class="control-label" for="tclass" ><%=cnt_class%></label>
                                 <% } %>
                                 </select>
@@ -224,7 +224,7 @@
                                 <%    while (rs_class.next()) {
                                         String cnt_class = rs_class.getString("cnt_class");
                                         //cid;
-                                %>
+%>
                                                                                                             <label class="control-label" for="tclass" ><%=cnt_class%></label>
                                 <% } %>
                                 </select>
@@ -232,7 +232,7 @@
                                     } catch (Exception e) {
                                         out.println("wrong selection!" + e);
                                     }
-                                %>
+                                %>instructorname
                                 <label class="control-label" for="tclass" >----</label>
                             </div>
                         </div>   
@@ -241,11 +241,11 @@
                                 <form class="" method="post" id="classAssign" action="${pageContext.request.contextPath}/ClassAssignServlet">
 
                                     <div class="col-lg-12" ><p class="text-primary text-center header "><strong> Class Assignment</strong></p></div>
-                                    <div class="form-group col-lg-4 has-success">
+                                    <div class="form-group col-lg-4 has-success" id="">
                                         <!--<div class="input-group">-->
                                         <span class="pull-center">Instructor Name</span>
                                         <!--<input type="text" name="instructorname"  class="form-control" id="instructorname" placeholder="Enter Unassigned class">-->
-                                        <select class="form-control" id="instructorname" name="instructorname" required="required">
+                                        <select class="form-control" id="instructorname" name="instructorname" required="required" onchange="showState(this.value)" >
                                             <option value="-1">-select instructor-</option>
                                             <%
                                                 try {
@@ -261,7 +261,7 @@
                                                     String id = rs_list_inst.getString("ACADEMIC_STAFF_ID");
                                                     String name = rs_list_inst.getString("FULL_NAME");
                                                     //cid;
-%>
+                                            %>
                                             <option value="<%=id%>" ><%=name%></option>
                                             <% } %>
                                             <!--</select>-->
@@ -278,14 +278,14 @@
 
                                     <div class="form-group col-lg-4 has-success">
                                         <!--<div class="input-group">-->
-                                        <span class="pull-center">CourseName</span>
+                                        <span class="pull-center">Course Name</span>
                                         <select class="form-control" id="courseName" name="courseName" required="required">
                                             <option value="-1">-select course-</option>
                                             <%
                                                 try {
                                                     //connectionManager dbconnection = new connectionManager();
                                                     Statement st_course = dbconnection.getconnection().createStatement();
-                                                    String crs_sql = "select  COURSE_CODE, COURSE_NAME from TBL_COURSE_REGISTRATION group by COURSE_NAME,course_code";
+                                                    String crs_sql = "select  COURSE_CODE from TBL_COURSEASSIGNMENT group by COURSE_CODE";
 
                                                     ResultSet rs_cours = st_course.executeQuery(crs_sql);
 
@@ -293,10 +293,10 @@
                                             //                                                                        
                                             <%    while (rs_cours.next()) {
                                                     String c_code = rs_cours.getString("COURSE_CODE");
-                                                    String c_name = rs_cours.getString("COURSE_NAME");
+//                                                    String c_name = rs_cours.getString("COURSE_NAME");
                                                     //cid;
-%>
-                                            <option value="<%=c_code%>"><%=c_name%></option>
+                                            %>
+                                            <option value="<%=c_code%>"><%=c_code%></option>
                                             <% } %>
                                             <!--</select>-->
                                             <%
@@ -326,7 +326,7 @@
                                             <%    while (rs_list_inst.next()) {
                                                     String id = rs_list_inst.getString("location");
                                                     //cid;
-%>
+                                            %>
                                             <option><%=id%></option>
                                             <% } %>
                                             <!--</select>-->
@@ -357,7 +357,7 @@
                                             <%    while (rs_list_inst.next()) {
                                                     String id = rs_list_inst.getString("block_name");
                                                     //cid;
-%>
+                                            %>
                                             <option><%=id%></option>
                                             <% } %>
                                             <!--</select>-->
@@ -389,7 +389,7 @@
                                                     String classid = rs_list_inst.getString("class_id");
                                                     String classname = rs_list_inst.getString("class_name");
                                                     //cid;
-%>
+                                            %>
                                             <option value="<%=classid%>"><%=classname%></option>
                                             <% } %>
                                             <!--</select>-->
@@ -429,40 +429,49 @@
                                 </form>
                                 <form action="" method="POST">
 
-                                    <div class="form-group col-lg-12 align-center" > 
-                                        <button type="submit" id="classstatus" class="btn btn-primary"><span class="fa fa-save"><strong>  Show info</strong></span></button>
+                                    <div class="form-group col-lg-4 align-center" id="coursenamepop" onchange="showState()"> 
+                                             Course Name
+                                            <select class="form-control" name="courseID">
+                                               <option value="-1">-select course-</option>
+                                                <%
+                                                    try {
+                                                        //connectionManager dbconnection = new connectionManager();
+                                                        Statement st_course = dbconnection.getconnection().createStatement();
+                                                        String crs_sql = "select  COURSE_CODE, COURSE_NAME from TBL_COURSEASSIGNMENT group by COURSE_NAME,COURSE_CODE";
+
+                                                        ResultSet rs_cours = st_course.executeQuery(crs_sql);
+
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_cours.next()) {
+                                                        String c_code = rs_cours.getString("COURSE_CODE");
+                                                        String c_name = rs_cours.getString("COURSE_NAME");
+                                                        //cid;
+                                                %>
+                                                <option value="<%=c_code%>"><%=c_name%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                      <!--<button type="submit" id="classstatus" class="btn btn-primary"><span class="fa fa-save"><strong>  Show info</strong></span></button>-->
                                     </div>     
-                                    <script type="text/javascript">
-                                        $().ready(function () {
-                                            //                                          var j = instructorname.onselect;
-                                            var j = instructorname;
-                                            //                                          String instname=request.getParameter("instructorname");
-                                            //                                          alert("value='"+instname +"'");
-                                            //                                        $('#tblcourseass').dataTable();
-                                        });
-                                        //
 
-                                    </script>
-
-                                    <% String instructorname = request.getParameter("instructorname");%>
-
-                                    <%
-                                        if (instructorname == null && instructorname == "-select instructor-") {
-                                            response.sendRedirect("Department/ClassAssignment.jsp");
-                                        } else {
-
-
-                                    %>  
-                                    <div class="list-group col-lg-4">
-                                        <a href="#" class="list-group-item active">
+                                    <div class="col-lg-12 align-center" >
+                                               <a href="#" class="list-group-item active">
                                             Course Assigned
                                             <span class="badge">
-                                                <%                                                String instrname = request.getParameter("instructorname");
+                                                <% String instrname = request.getParameter("instructorname");%>
+                                                <%                                              
+//                                                    String instrname = request.getParameter("instructorname");
                                                     try {
                                                         //                                                        connectionManager dbconnection = new connectionManager();
                                                         Statement st_lis_inst = dbconnection.getconnection().createStatement();
                                                         String lis_inst_sql = "select COUNT(ACADEMIC_STAFF_ID) AS academicid  from TBL_CLASS_ASSIGN WHERE "
-                                                                + "ACADEMIC_STAFF_ID='" + instrname + "' GROUP by  ACADEMIC_STAFF_ID";
+                                                                + "ACADEMIC_STAFF_ID='" +instrname+ "' GROUP by  ACADEMIC_STAFF_ID";
 
                                                         ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
@@ -471,7 +480,7 @@
                                                 <%    while (rs_list_inst.next()) {
                                                         String id = rs_list_inst.getString("academicid");
                                                         //cid;
-%>
+                                                %>
                                                 <%=id%>
                                                 <% } %>
                                                 <!--</select>-->
@@ -482,28 +491,33 @@
                                                 %>
                                             </span>
                                         </a>
+                                     </div>
+                                     <div class="form-group col-lg-12" id="classname">
+<!--                                        
                                         <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                        <a href="#" class="list-group-item">Morbi leo risus</a>
+                                        <a href="#" class="list-group-item">Morbi leo risus</a>-->
 
                                     </div>
                                     <div class="list-group col-lg-4">
                                         <a href="#" class="list-group-item active">
                                             Class Assign<span class="badge">
                                                 <%
+                                                    String strname=request.getParameter("instructorname");
                                                     try {
+                                                        
                                                         //                                                        connectionManager dbconnection = new connectionManager();
                                                         Statement st_lis_inst = dbconnection.getconnection().createStatement();
                                                         String lis_inst_sql = "select COUNT(class_id) AS classid  from TBL_CLASS_ASSIGN WHERE "
-                                                                + "class_id='" + instructorname + "' GROUP by  class_id";
+                                                                + "ACADEMIC_STAFF_ID='" + strname + "' GROUP by  ACADEMIC_STAFF_ID";
 
                                                         ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 
                                                 %>
 
                                                 <%    while (rs_list_inst.next()) {
-                                                        String id = rs_list_inst.getString("class_id");
+                                                        String id = rs_list_inst.getString("ACADEMIC_STAFF_ID");
                                                         //cid;
-%>
+                                                %>
                                                 <%=id%>
                                                 <% } %>
                                                 <!--</select>-->
@@ -518,19 +532,11 @@
                                         <a href="#" class="list-group-item">Morbi leo risus</a>
 
                                     </div>
-                                    <div class="list-group col-lg-4">
-                                        <a href="#" class="list-group-item active">
-                                            Period Schedule<span class="badge">8</span>
-                                        </a>
-                                        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                                        <a href="#" class="list-group-item">Morbi leo risus</a>
-
-                                    </div>
-                                    <%}%>
+                                    
                                 </form>
                                 <%
-                                    session.setAttribute("ClassAssignmentReg", null);
-                                    session.setAttribute("ClassAssignmentNotReg", null);
+                                    session.setAttribute("ClassAssign", null);
+                                    session.setAttribute("ClassNotAssign", null);
                                 %>
                             </div>
                         </div>
@@ -539,14 +545,14 @@
                             <a class="accordion-toggle"><span class="glyphicon glyphicon-list">ClassInfoUpdate</span></a>
                             <div class="accordion-content default">
                                 <!--update class assignment-->
-<!--                                 <script type="text/javascript">
-                        $('#edit_id').click(function ()
-                        {
-                            $("#editing_form").css('visibility', "visible");
-                        });
-                    </script>
-                     -->
-                    
+                                <!--                                 <script type="text/javascript">
+                                                        $('#edit_id').click(function ()
+                                                        {
+                                                            $("#editing_form").css('visibility', "visible");
+                                                        });
+                                                    </script>
+                                -->
+
                                 <%
                                     if (request.getParameter("action") != null && request.getParameter("id") != null) {
                                         String action = request.getParameter("action");
@@ -572,28 +578,95 @@
                                     <p class="center-block" > <strong>Editing Class ID:  <%=rs_edit.getString("CLASSASSIGN_ID")%></strong> </p>
 <!--                                    <form class="form-group" action="${ pageContext.request.contextPath }/CourseUpdateServlet" method="Post">
                                         <form class="form-group" action="../CommonOprations/EditCourse.jsp" method="Post">-->
-                                    <form class="form-group" action="" method="Post">
-                                    
+                                    <form class="form-group"  method="Post" action="${ pageContext.request.contextPath }/ClassAssignUpdateServlet">
+
                                         <div class="form-group col-lg-4">
                                             CLASS ASSIGN ID:
-                                            <input class="form-control" type="text" name="coursecode" value="<%=id%>" readonly/>
+                                            <input class="form-control" type="text" name="classassignID" value="<%=id%>" readonly/>
                                             <!--<input class="form-control" type="text" name="coursecode" value="CLASSASSIGN_ID" readonly/>-->
                                         </div>
-                          
+                                        <div class="form-group col-lg-4">
+                                            Academic Staff ID:
+                                            <input class="form-control" type="text" name="acdstaffID" readonly value="<%=rs_edit.getString("ACADEMIC_STAFF_ID")%>" />
+                                            <!--<select class="form-control" name="acdstaffID" readonly><option  value="<%=rs_edit.getString("ACADEMIC_STAFF_ID")%>"><%=rs_edit.getString("ACADEMIC_STAFF_ID")%></option></select>-->
+                                            <!--<input class="form-control" type="text" name="coursecode" value="CLASSASSIGN_ID" readonly/>-->
+                                        </div> 
+                                        <div class="form-group col-lg-4">
+                                            Course Name
+
+                                            <select class="form-control" name="courseID"><option value="<%=rs_edit.getString("COURSE_CODE")%>"><%=rs_edit.getString("COURSE_CODE")%></option>
+                                                <option value="-1">-select course-</option>
+                                                <%
+                                                    try {
+                                                        //connectionManager dbconnection = new connectionManager();
+                                                        Statement st_course = dbconnection.getconnection().createStatement();
+                                                        String crs_sql = "select  COURSE_CODE, COURSE_NAME from TBL_COURSEASSIGNMENT group by COURSE_NAME,COURSE_CODE";
+
+                                                        ResultSet rs_cours = st_course.executeQuery(crs_sql);
+
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_cours.next()) {
+                                                        String c_code = rs_cours.getString("COURSE_CODE");
+                                                        String c_name = rs_cours.getString("COURSE_NAME");
+                                                        //cid;
+                                                %>
+                                                <option value="<%=c_code%>"><%=c_name%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            Class Name
+ <!--                                            <input class="form-control" type="text" name="courseID" value="<%=rs_edit.getString("COURSE_CODE")%>"/>
+                                             <input class="form-control" type="text" name="courseID" value="<%=rs_edit.getString("COURSE_CODE")%>" />-->
+                                            <select class="form-control" name="classID"><option value="<%=rs_edit.getString("CLASS_ID")%>"><%=rs_edit.getString("CLASS_ID")%></option>
+                                                <option value="-1">-select class--</option>
+                                                <%
+                                                    try {
+    //                                                        connectionManager dbconnection = new connectionManager();
+                                                        Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                        String lis_inst_sql = "select class_id, class_name from TBL_CLASS group by class_id,class_name";
+
+                                                        ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                                %>
+                                                //                                                                        
+                                                <%    while (rs_list_inst.next()) {
+                                                        String classid = rs_list_inst.getString("class_id");
+                                                        String classname = rs_list_inst.getString("class_name");
+                                                        //cid;
+                                                %>
+                                                <option value="<%=classid%>"><%=classname%></option>
+                                                <% } %>
+                                                <!--</select>-->
+                                                <%
+                                                    } catch (Exception e) {
+                                                        out.println("wrong selection!" + e);
+                                                    }
+                                                %>
+                                            </select>
+                                               <!--<select class="form-control" name="classID"><option value="<%=rs_edit.getString("CLASS_ID")%>"><%=rs_edit.getString("CLASS_ID")%></option></select>-->
+                                        </div>
                                         <div class="form-group col-lg-4">
                                             ASSIGN DATE
-                                            <input class="form-control" type="text" name="edited_term" value="<%=rs_edit.getString("ASSIGN_DATE")%>"/>
+                                            <input class="form-control" type="date" name="assigndate" value="<%=rs_edit.getString("ASSIGN_DATE")%>"/>
                                         </div>
                                         <div class="form-group col-lg-4">
                                             TIME FROM
-                                            <input class="form-control" type="text" name="edited_coursename" value="<%=rs_edit.getString("TIME_FROM")%>"/>
+                                            <input class="form-control" type="text" name="timeFrom" value="<%=rs_edit.getString("TIME_FROM")%>"/>
 
                                         </div>
                                         <div class="form-group col-lg-4">
                                             TIME TO
-                                            <input class="form-control" type="date" name="edited_added_date" value="<%=rs_edit.getString("TIME_TO")%>"/>
+                                            <input class="form-control" type="text" name="timeTo" value="<%=rs_edit.getString("TIME_TO")%>"/>
                                         </div>
-                                        
+
                                         <div class="form-group col-lg-4"> <br>
 
                                             <input class="btn btn-warning" type="submit" value="Update"/>
@@ -605,7 +678,7 @@
                                         }
                                     }
                                 %>
-                                <table id="tblcourseEdit" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0" >
+                                <table id="tblcourseEdit" class="table table-striped table-bordered table-hover table-responsive" width="100%" cellspacing="0" >
                                     <thead>
                                         <tr>
                                             <th>ClassAssignID</th>
@@ -613,13 +686,13 @@
                                             <th>Assign Date</th>
                                             <th>Time  From</th>
                                             <th>Time  To</th>
-                                            <th><span class="glyphicon glyphicon-edit">Edit</span></th>
-                                            <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
+                                            <th><span class="glyphicon glyphicon-edit " style="color: goldenrod" >Edit</span></th>
+                                            <th ><span class="glyphicon glyphicon-remove" style="color: red">Delete</span></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                             <th>ClassAssignID</th>
+                                            <th>ClassAssignID</th>
                                             <th>Class ID</th>
                                             <th>Assign Date</th>
                                             <th>Time  From</th>
@@ -648,7 +721,7 @@
                                                     <input type="hidden" name="action" value="edit"/>
                                                     <input type="hidden" name="id" id="edit_id" value="<%=rs_instr.getString(1)%>"/>
 
-                                                    <button class="btn btn-warning">Edit</button>
+                                                    <button class="btn btn-warning glyphicon glyphicon-edit">Edit</button>
                                                 </form>
 
 
@@ -657,7 +730,7 @@
                                                 <form action="" method="post">
                                                     <input type="hidden" name="action" value="delete"/>
                                                     <input type="hidden" name="id" id="delete_id" value="<%=rs_instr.getString(1)%>"/>
-                                                    <button class="btn btn-danger" id="deleteid">Delete</button>
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" id="deleteid">Delete</button>
                                                 </form></td>
 
                                         </tr>
@@ -674,12 +747,13 @@
                     </div>   
                     <!--end of accordion-->
                     <!--start table-->
-                    <%    request.getSession().setAttribute("instructorAssigned", null);
-                        request.getSession().setAttribute("instructorNotAssigned", null);
+                    <%    request.getSession().setAttribute("ClassAssign", null);
+                        request.getSession().setAttribute("ClassNotAssign", null);
                     %>
 
 
                     <!--end table-->
+                    
                 </div>
             </div>
         </div>
@@ -776,8 +850,39 @@
             });
 
         </script>
+        <script  type="text/javascript">
+
+            var xmlHttp;
+            function showState(str) {
+                if (typeof XMLHttpRequest != "undefined") {
+                    xmlHttp = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                if (xmlHttp == null) {
+                    alert("Browser does not support XMLHTTP Request")
+                    return;
+                }
+                var url = ".../common/ClassAssignmentDetail.jsp";
+                url += "?instructorname=" + str;
+                
+                 var url_course = ".../common/Courseselection.jsp";
+                url_course += "?coursenamepop=" + str;
+                
+                xmlHttp.onreadystatechange = stateChange;
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+
+            function stateChange() {
+                if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                    document.getElementById("classname").innerHTML = xmlHttp.responseText
+                }
+            }
+        </script>
     </body>
 </html>
+    
 <form name="doublecombo">
     <p align="center">
         <select name="example" size="1" onchange="ChanGeValue()">
@@ -795,6 +900,8 @@
             <option value="5">A5</option>
         </select>
     </p>
+
+    </body>
     <script>
 
         var temp = document.doublecombo.stage2

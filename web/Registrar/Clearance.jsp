@@ -93,7 +93,7 @@
                                         <%    while (rs_list_inst.next()) {
                                                 String depname = rs_list_inst.getString("dep_name");
                                                 //cid;
-                                        %>
+%>
                                         <option><%=depname%></option>
                                         <% } %>
                                         <!--</select>-->
@@ -121,14 +121,14 @@
                                 <lebel id="am" style="font-family: serif">Department</lebel>
                                 <div class="input-group col-lg-10">
                                     <select class="form-control" id="departmentlearn" name="departmentlearn" required="required">
-                                         <option value="-1">-select department-</option>
+                                        <option value="-1">-select department-</option>
                                         <option value="Crime Prevention">Crime Prevention</option>
                                         <option value="Crime Investigation">Crime Investigation</option>
                                         <option value="Police University Collage-1">Police University Collage</option>
                                         <option value="Indoctrination">Indoctrination</option>
                                         <option value="Civil Human Resources">Civil Human Resources</option>
                                         <option value="Hospital">Hospital</option>
-                                        </select>
+                                    </select>
                                     <!--<input class="form-control" name="school" placeholder="This field is required." type="text" required=""/>-->
 
                                 </div>
@@ -166,122 +166,129 @@
                             session.setAttribute("ClearaceNotRegistered", null);
                         %>
                     </div>
+                    <div class="col-lg-12">
+                        <form method="POST" enctype="multipart/form-data" action="Image">
+                            File to upload: <input type="file" name="upfile"><br/>
 
+                            <br/>
+                            <input type="submit" value="Press"> to upload the file!
+                        </form>
+                    </div>
                     <div class="form-group col-lg-11">
                         ${ClearaceAllRegistered}
                         ${ClearaceAllNotRegistered}
                         <form class="form-group"  method="POST" action="${pageContext.request.contextPath}/ClearanceApprovalServlet">
-                        <lebel id="am" style="font-family: serif">Cleared Department</lebel>
-                        <div class="table ">
-                            <table class="table table-condensed table-bordered table-responsive">
-                                <div class="form-group">
-                                    <label ></label>
-                                </div>
-                                <!-- On cells (`td` or `th`) -->
-                                <tr class="active" >
-                                    <td class="active col-lg-1">R.No</td>
-                                    <td class="success col-lg-2">Department</td>
-                                    <td class="warning col-lg-2">Manager Name and Rank</td>
-                                    <td class="danger col-lg-2">Date</td>
-                                    <td class="info col-lg-2">Remark</td>
-                                    <td class="info col-lg-2">Approval Step</td>
-                                </tr>      
+                            <lebel id="am" style="font-family: serif">Cleared Department</lebel>
+                            <div class="table ">
+                                <table class="table table-condensed table-bordered table-responsive">
+                                    <div class="form-group">
+                                        <label ></label>
+                                    </div>
+                                    <!-- On cells (`td` or `th`) -->
+                                    <tr class="active" >
+                                        <td class="active col-lg-1">R.No</td>
+                                        <td class="success col-lg-2">Department</td>
+                                        <td class="warning col-lg-2">Manager Name and Rank</td>
+                                        <td class="danger col-lg-2">Date</td>
+                                        <td class="info col-lg-2">Remark</td>
+                                        <td class="info col-lg-2">Approval Step</td>
+                                    </tr>      
 
-                                <tr class="active">
-                                    <td class="active">1</td>
-                                    <td class="success col-lg-2">Program Manager Confirmation</td>
-                                    <td class="success">
-                                        <input class="form-control" id="pmname" name="pmname" type="text">
-                                    </td>
-                                    <td class="success">
-                                        <div class="input-group">
-                                            <input class="form-control" id="dateprgmgr" name="dateprgmgr" placeholder="Enter End Date" required="" type="text"/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div>
-                                    </td>
-                                    <td class="success"><input class="form-control" id="pmremark" type="text"></td>    
-                                    <td class="success col-lg-2"><button type="submit" class="btn btn-primary" id="">Approve</button>    
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">2</td>
-                                    <td class="success">Store Department Division</td>
-                                    <td class="success"><input class="form-control" id="sddname" name="sddname" type="text">
-                                    </td>
-                                    <td class="success"><div class="input-group">
-                                            <input class="form-control" id="datesdd" name="datesdd" placeholder="Enter End Date"  type="text" required=""/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="sddremark" name="sddremark" type="text"></td>
+                                    <tr class="active">
+                                        <td class="active">1</td>
+                                        <td class="success col-lg-2">Program Manager Confirmation</td>
+                                        <td class="success">
+                                            <input class="form-control" id="pmname" name="pmname" type="text">
+                                        </td>
+                                        <td class="success">
+                                            <div class="input-group">
+                                                <input class="form-control" id="dateprgmgr" name="dateprgmgr" placeholder="Enter End Date" required="" type="text"/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div>
+                                        </td>
+                                        <td class="success"><input class="form-control" id="pmremark" type="text"></td>    
+                                        <td class="success col-lg-2"><button type="submit" class="btn btn-primary" id="">Approve</button>    
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">2</td>
+                                        <td class="success">Store Department Division</td>
+                                        <td class="success"><input class="form-control" id="sddname" name="sddname" type="text">
+                                        </td>
+                                        <td class="success"><div class="input-group">
+                                                <input class="form-control" id="datesdd" name="datesdd" placeholder="Enter End Date"  type="text" required=""/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="sddremark" name="sddremark" type="text"></td>
 
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">3</td>
-                                    <td class="success">Finance Division Manager</td>
-                                    <td class="success"><input class="form-control" id="fdmname" name="fdmname"type="text"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">3</td>
+                                        <td class="success">Finance Division Manager</td>
+                                        <td class="success"><input class="form-control" id="fdmname" name="fdmname"type="text"></td>
+                                        <td class="success"><div class="input-group">
+                                                <input class="form-control" id="datefdm" name="datefdm" placeholder="Enter End Date" type="text" required=""/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="fdmremark" name="fdmremark" type="text"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">4</td>
+                                        <td class="success">Stationary Distribution Manager</td>
+                                        <td class="success"><input class="form-control" id="sdmname" name="sdmname" type="text"></td>
+                                        <td class="success"><div class="input-group">
+                                                <input class="form-control" id="datesdm" name="datesdm" placeholder="Enter End Date"  required="" type="text"/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="sdmremark" name="sdmremark" type="text"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">5</td>
+                                        <td class="success">Library Manager</td>
+                                        <td class="success"><input class="form-control" id="lmname" name="lmname" type="text"></td>
+                                        <td class="success"><div class="input-group">
+                                                <input class="form-control" id="datelm" name="datelm" placeholder="Enter End Date" required="" type="text"/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="lmremark" name="lmremark" type="text"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">6</td>
+                                        <td class="success">General Store Manager</td>
+                                        <td class="success"><input class="form-control" id="gsmname" name="gsmname" type="text"></td>
+                                        <td class="success"><div class="input-group">
+                                                <input class="form-control" id="dategsm" name="dategsm" placeholder="Enter End Date" type="text"  required=""/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="gsmremark" name="gsmremark" type="text"></td>
+                                    </tr>
+                                    <tr class="active"><br>
+                                    <td class="active">7</td>
+                                    <td class="success">Police Tactic and Sport Division</td>
+                                    <td class="success"><input class="form-control" id="ptname" name="ptname"></td>
                                     <td class="success"><div class="input-group">
-                                            <input class="form-control" id="datefdm" name="datefdm" placeholder="Enter End Date" type="text" required=""/>
+                                            <input class="form-control" id="datepolicetct" name="datepolicetct" placeholder="Enter End Date" type="text" required=""/>
                                             <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="fdmremark" name="fdmremark" type="text"></td>
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">4</td>
-                                    <td class="success">Stationary Distribution Manager</td>
-                                    <td class="success"><input class="form-control" id="sdmname" name="sdmname" type="text"></td>
-                                    <td class="success"><div class="input-group">
-                                            <input class="form-control" id="datesdm" name="datesdm" placeholder="Enter End Date"  required="" type="text"/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="sdmremark" name="sdmremark" type="text"></td>
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">5</td>
-                                    <td class="success">Library Manager</td>
-                                    <td class="success"><input class="form-control" id="lmname" name="lmname" type="text"></td>
-                                    <td class="success"><div class="input-group">
-                                            <input class="form-control" id="datelm" name="datelm" placeholder="Enter End Date" required="" type="text"/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="lmremark" name="lmremark" type="text"></td>
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">6</td>
-                                    <td class="success">General Store Manager</td>
-                                    <td class="success"><input class="form-control" id="gsmname" name="gsmname" type="text"></td>
-                                    <td class="success"><div class="input-group">
-                                            <input class="form-control" id="dategsm" name="dategsm" placeholder="Enter End Date" type="text"  required=""/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="gsmremark" name="gsmremark" type="text"></td>
-                                </tr>
-                                <tr class="active"><br>
-                                <td class="active">7</td>
-                                <td class="success">Police Tactic and Sport Division</td>
-                                <td class="success"><input class="form-control" id="ptname" name="ptname"></td>
-                                <td class="success"><div class="input-group">
-                                        <input class="form-control" id="datepolicetct" name="datepolicetct" placeholder="Enter End Date" type="text" required=""/>
-                                        <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                    </div></td>                                          
-                                <td class="success"><input class="form-control" id="ptremark" name="ptremark" type="text"></td>
-                                </tr>
-                                <tr class="active">
-                                    <td class="active">8</td>
-                                    <td class="success">Registrar Mastebaberya</td>
-                                    <td class="success"><input class="form-control" id="rmname" name="rmname" type="text" ></td>
-                                    <td class="success">
-                                        <div class="input-group">
-                                            <input class="form-control" id="daterm" name="daterm" placeholder="Enter End Date" type="text" required=""/>
-                                            <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
-                                        </div></td>
-                                    <td class="success"><input class="form-control" id="rmremark"  name="rmremark" type="text"></td>
-                                    <!--<button type="submit" class="btn navbar-btn btn-info">Approve</button>-->
+                                        </div></td>                                          
+                                    <td class="success"><input class="form-control" id="ptremark" name="ptremark" type="text"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td class="active">8</td>
+                                        <td class="success">Registrar Mastebaberya</td>
+                                        <td class="success"><input class="form-control" id="rmname" name="rmname" type="text" ></td>
+                                        <td class="success">
+                                            <div class="input-group">
+                                                <input class="form-control" id="daterm" name="daterm" placeholder="Enter End Date" type="text" required=""/>
+                                                <span class=" input-group-addon glyphicon glyphicon-calendar"></span>
+                                            </div></td>
+                                        <td class="success"><input class="form-control" id="rmremark"  name="rmremark" type="text"></td>
+                                        <!--<button type="submit" class="btn navbar-btn btn-info">Approve</button>-->
 
-                                </tr>
+                                    </tr>
 
 
-                            </table>
-                        </div>
-                         <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Save</button></div>
+                                </table>
+                            </div>
+                            <div class="container col-lg-3"> <button type="submit" class="btn navbar-btn btn-info">Save</button></div>
 
                         </form>
                         <%
@@ -289,7 +296,7 @@
                             session.setAttribute("ClearaceAllNotRegistered", null);
                         %>
                     </div> 
-                   
+
                     <!--                    </div> -->
                 </div><!--end of body-->
             </div>
@@ -402,7 +409,7 @@
                 changeYear: true
 
             });
-         
+
 //            $('input[type=date]').datepicker({
 //                dateFormat: 'dd/mm/yy',
 //                changeMonth: true,

@@ -359,14 +359,14 @@
                                                     try {
 //                                                        connectionManager dbconnection = new connectionManager();
                                                         Statement st_program = dbconnection.getconnection().createStatement();
-                                                        String program_sql = "select DEPARTEMENT from TBL_ACADEMIC_STAFF_REG";
+                                                        String program_sql = "select DEPARTMENT from TBL_ACADEMIC_STAFF_REG";
 
                                                         ResultSet rs_program = st_program.executeQuery(program_sql);
 
                                                 %>
                                                 //                                                                        
                                                 <%    while (rs_program.next()) {
-                                                        String id = rs_program.getString("DEPARTEMENT");
+                                                        String id = rs_program.getString("DEPARTMENT");
                                                         //cid;
 %>
                                                 <option><%=id%></option>

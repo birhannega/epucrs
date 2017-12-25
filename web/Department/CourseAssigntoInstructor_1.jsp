@@ -79,7 +79,7 @@
                                 </div>
                                 <!--<form role="search">-->
                               
-                                div.col-md-12>div.col-md-2>div#f1
+<!--                              <  div.col-md-12>div.col-md-2>div#f1-->
                                 
                                 <div class="form-group col-lg-8">
                                     <div class="input-group col-lg-4">
@@ -101,7 +101,7 @@
                                                 try {
                                                     connectionManager dbconnection = new connectionManager();
                                                     Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                    String course_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                                    String course_sql = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
                                                     ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
 
@@ -203,7 +203,7 @@
                                                 try {
                                                     connectionManager dbconnection = new connectionManager();
                                                     Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                    String course_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                                    String course_sql = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
                                                     ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
 
@@ -244,14 +244,14 @@
                                                 try {
                                                     connectionManager dbconnection = new connectionManager();
                                                     Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                    String course_sql = "select DEPARTEMENT from TBL_ACADEMIC_STAFF_REG";
+                                                    String course_sql = "select DEPARTMENT from TBL_ACADEMIC_STAFF_REG";
 
                                                     ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
 
                                             %>
                                             //                                                                        
                                             <%    while (rs_courseinstr.next()) {
-                                                    String id = rs_courseinstr.getString("DEPARTEMENT");
+                                                    String id = rs_courseinstr.getString("DEPARTMENT");
                                                     //cid;
                                             %>
                                             <option><%=id%></option>
@@ -437,7 +437,7 @@
                             try {
                                 // connectionManager dbconnection = new connectionManager();
                                 // Statement st_list_course = dbconnection.getconnection().createStatement();
-                                String course_sql1 = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                String course_sql1 = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
                                 ResultSet rs_courseinstr1 = st_list_course.executeQuery(course_sql1);
 
@@ -475,6 +475,7 @@
     $( "#tabs" ).tabs();
   } );
   </script>
+
 <script type="text/javascript">
                         $(function () {
 

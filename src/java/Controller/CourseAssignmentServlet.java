@@ -41,28 +41,28 @@ public class CourseAssignmentServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         /// String instid="-100";
         String selectinstr = request.getParameter("selectinstr"),
-                dateassigned = request.getParameter("dateassigned"),
-                program = request.getParameter("program"),
                 course = request.getParameter("course"),
-                creditH = request.getParameter("creditH"),
-                datemodified = request.getParameter("datemodified"),
-                modifiedby = request.getParameter("modifiedby"),
-                period = request.getParameter("period"),
-                previousinstructor = request.getParameter("previousinstructor"),
-                instid = course.concat("-100");
+                dateassigned = request.getParameter("dateassigned"),
+               round = request.getParameter("round"),
+                totalH = request.getParameter("totalH"),
+                durationFrom = request.getParameter("durationFrom"),
+               durationTo = request.getParameter("durationTo"),
+                 instid = round.concat("-100"),
+                 courseid = round.concat("-01");
+                  
         //  instid=subject.concat("instid");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
         CourseAssignmentModel instreg = new CourseAssignmentModel();
-        int is_registered = instreg.courseAssignment(instid, selectinstr, dateassigned, program, course, creditH, datemodified, modifiedby, period, previousinstructor);
+        int is_registered = instreg.courseAssignment(instid,courseid, dateassigned, round, totalH, durationFrom, durationTo);
         if (is_registered > 0) {
             request.getSession().setAttribute("instructorAssigned", "<strong><span class='alert alert-success text-center'>Instructor Assigned successfully</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+            response.sendRedirect("Department/StaffRegistration.jsp");
             //out.println("course successfully registred");
         } else {
             request.getSession().setAttribute("instructorNotAssigned", "<strong><span class='alert alert-success text-center'>Instructor not assigned</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+            response.sendRedirect("Department/StaffRegistration.jsp");
             //  out.println("course not registred");
         }
 

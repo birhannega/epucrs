@@ -173,7 +173,7 @@
                                             <%
                                                 connectionManager dbconnection = new connectionManager();
                                                 Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                String course_sql = "select  Staff_Id,Title, First_Name || ' '|| Middle_Name || ' '|| LAST_NAME as FULL_NAME,departement,Phone, STATUS ,POLICE_MANAGEMENT from TBL_ACADEMIC_STAFF_REG ";
+                                                String course_sql = "select  ACADEMIC_STAFF_ID,Title, First_Name || ' '|| Middle_Name || ' '|| LAST_NAME as FULL_NAME,department,Phone, STATUS ,POLICE_MANAGEMENT from TBL_ACADEMIC_STAFF_REG ";
                                                 ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
                                                 while (rs_courseinstr.next()) {
                                                     String id = rs_courseinstr.getString(1);
@@ -290,7 +290,7 @@
                                                 try {
 //                                                        connectionManager dbconnection = new connectionManager();
                                                     Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                                    String lis_inst_sql = "select staff_id, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
+                                                    String lis_inst_sql = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
 
                                                     ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
 

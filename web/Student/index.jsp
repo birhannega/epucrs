@@ -1,88 +1,107 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="dbconnection.connectionManager"%>
 <!DOCTYPE html>
-
-<%@include file="../common/imports.jsp" %>
-
-
-<%
-    connectionManager dbconnection = new connectionManager();
-    Connection connection = dbconnection.getconnection();
-    Statement statement = connection.createStatement();
-
-%>
-<body>
-
-    <!--      include navigation bar start-->
-
-    <div class="container-fluid"  style="margin-top: 5px">
-        <%@include file="../common/student_nav.jsp" %>
-    </div>
-    <!--      include navigation bar end-->
-    <!--      container wrapper starts-->
-    <div class="span12" style="margin-top: -20px"> 
-
-
-        <!--      include side bar start-->
-        <div class="span12">
-            <div class="col-lg-2" id="sidebar">
-                <%@include file="../common/student_sidebar.jsp" %>
+<html>
+    <head>
+        <title>students page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/registrar-side-menu.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
+        <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <%@include file="../common/head_banner.jsp" %>
+        <div class="row">
+            <!-- uncomment code for absolute positioning tweek see top comment in css -->
+            <!-- <div class="absolute-wrapper"> </div> -->
+            <!-- Menu -->
+            <div class="side-menu">
+                <%@include file="studentsidemenu.jsp" %>
             </div>
-            <!--      include side bar end-->
 
-            <!--      main content starts-->
-            <div class="col-lg-10">
-                <div class="col-lg-12" >
-
-                    <div class="row">
-                        <div class="col-lg-12">
-
-
-                            <h4 class="page-header text-capitalize text-primary"><i class="fa fa-laptop"></i> federal police university college Data encoders application interface </h4>
-
-
-                            <div class="pull-right">
-
-
-                            </div>
-
-                        </div>
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="side-body">
+             <div class="col-lg-4 pull-right">
+                         <img  class="img img-thumbnail" src="../images/kooper.JPG"alt="profile picture"/>
+                   </div>
+                   <div class="col-lg-8 ">
+                       <table class="table table-hover">
+                           <thead>
+                               <tr>
+                                   <td colspan="3" class="bg-info">Short summary of your profile
+                                   </td></tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <th>Name</th>
+                                   <td>Efrem Mulu </td>
+                               </tr>
+                                <tr>
+                                   <th>Age</th>
+                                   <td>26 </td>
+                               </tr>
+                                <tr>
+                                   <th>Department</th>
+                                   <td>it </td>
+                               </tr>
+                                <tr>
+                                   <th>program:</th>
+                                   <td> </td>
+                               </tr>
+                                <tr>
+                                   <th>Round</th>
+                                   <td></td>
+                               </tr>
+                               <tr>
+                                   <th>Round</th>
+                                   <td></td>
+                               </tr>
+                               <tr>
+                                   <th>Round</th>
+                                   <td></td>
+                               </tr>
+                               <tr>
+                                   <th>Round</th>
+                                   <td></td>
+                               </tr>
+                           </tbody>
+                       </table>
+                         
+                       <table class="table table-condensed">
+                           <thead>
+                               <tr>
+                                   
+                               </tr>
+                           </thead>
+                       </table>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                            <div class="info-box bg-info text-center" style="border-radius: 10px;">
-                                <span class="fa fa-graduation-cap fa-4x" ></span>
-                                <div class="count fa fa-2x">
-                                    <%                                        String number_of_stud = null;
-                                        String query_no_student = "select count(Stud_id) from TBL_STUDENT_PROFILE where STUD_TYPE='Regular'";
-                                        ResultSet res_no_student = statement.executeQuery(query_no_student);
-                                        if (res_no_student.next()) {
-                                            number_of_stud = res_no_student.getString(1);
-                                            out.println(number_of_stud);
-                                        }
-
-                                    %>
-
-
-
-                                </div>
-                                <div class="text-capitalize text-center"><strong> Regular Students  Learning </strong> </div>						
-                            </div><!--/.info-box-->			
-                        </div><!--/.col-->
-                                              
-                    </div>
-
-
 
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(function () {
+                $('.navbar-toggle').click(function () {
+                    $('.navbar-nav').toggleClass('slide-in');
+                    $('.side-body').toggleClass('body-slide-in');
+                    $('#search').removeClass('in').addClass('collapse').slideUp(200);
 
-    </div>  <!--      main content ends-->
+                    /// uncomment code for absolute positioning tweek see top comment in css
+                    //$('.absolute-wrapper').toggleClass('slide-in');
 
+                });
 
+                // Remove menu for searching
+                $('#search-trigger').click(function () {
+                    $('.navbar-nav').removeClass('slide-in');
+                    $('.side-body').removeClass('body-slide-in');
 
+                    /// uncomment code for absolute positioning tweek see top comment in css
+                    //$('.absolute-wrapper').removeClass('slide-in');
 
+                });
+            });
+        </script>
+    </body>
 </html>

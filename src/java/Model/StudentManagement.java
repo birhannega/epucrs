@@ -7,6 +7,8 @@ package Model;
 
 import dbconnection.connectionManager;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,11 +18,19 @@ public class StudentManagement {
 
     connectionManager dbconnection = new connectionManager();
 
-    public int registerStudent(String Stud_id, String Stud_First_Name, String Stud_Last_Name,
-            String Stud_Middle_Name, String Stud_Birthdate,
-            String Stud_Title, String Stud_Birth_Region,
-            String Stud_Birth_Zone, String Stud_Birth_Wereda, String Stud_Birth_Kebele,
-            String Stud_Contact_Person_Adress, String Stud_Contact_Person_Phone,
+    public int registerStudent(
+            String Stud_id,
+            String Stud_First_Name,
+            String Stud_Last_Name,
+            String Stud_Middle_Name,
+            String Stud_Birthdate,
+            String Stud_Title,
+            String Stud_Birth_Region,
+            String Stud_Birth_Zone,
+            String Stud_Birth_Wereda,
+            String Stud_Birth_Kebele,
+            String Stud_Contact_Person_Adress,
+            String Stud_Contact_Person_Phone,
             String Stud_Contact_Person_Name,
             String Stud_Contact_Person_Prelation,
             String Stud_Contact_Person_Religion,
@@ -32,7 +42,8 @@ public class StudentManagement {
             String Stud_Home_Zone,
             String Stud_Nationality,
             String Stud_Police_Commision_Sector,
-            String Stud_Police_Commision_Number,String STUD_TYPE) throws ClassNotFoundException, SQLException {
+            String Stud_Police_Commision_Number,
+            String STUD_TYPE) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_STUDENT_PROFILE("
                 + "  Stud_Id"
@@ -93,11 +104,38 @@ public class StudentManagement {
         //  registrationcheker=res_reg.next();
         return registrationcheker;
     }
-//    public int Setsessinid(String STUD_ID)
-//    {
-//       
-//        return 0;
-//    }
+
+    public int StudentExperience(String STUD_ID,
+            String employeer,
+            String employeeAddress,
+            String telephone,
+            String titleofcurrentpost,
+            String salary,
+            String dateofemployment,
+            String totalyear) throws ClassNotFoundException, SQLException {
+        PreparedStatement ps_experience = dbconnection.getconnection().prepareStatement(""
+                + "insert into TBL_STUD_EXPERIENCE("
+                + "STUD_ID,"
+                + "EMPLOYEER,"
+                + "EMPLOYEER_ADDRESS,"
+                + "TELEPHONE,"
+                + "TITLE_OF_POST,"
+                + "SALARY,"
+                + "DATE_OF_EMPLOYMENT, "
+                + "TOTAL_YEAR_OF_EXPERIENCE)"
+                + "values(?,?,?,?,?,?,?,?)");
+
+        ps_experience.setString(1, STUD_ID);
+        ps_experience.setString(2, employeer);
+        ps_experience.setString(3, employeeAddress);
+        ps_experience.setString(4, telephone);
+        ps_experience.setString(5, titleofcurrentpost);
+        ps_experience.setString(6, salary);
+        ps_experience.setString(7, dateofemployment);
+        ps_experience.setString(8, totalyear);
+        int experience = ps_experience.executeUpdate();
+        return experience;
+    }
 
     public int savefamilyinfo(
             String FATHER_FNAME,
@@ -147,7 +185,7 @@ public class StudentManagement {
                 + ",MOTHER_HOUSE_NUM_ADDRESS"
                 + ",MOTHER_OCCUPATION"
                 + ",MOTHER_PLACE_OF_WORK"
-                       + ",STUD_ID"
+                + ",STUD_ID"
                 + ")"
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -173,61 +211,79 @@ public class StudentManagement {
         ps_register_family.setString(20, MOTHER_HOUSE_NUM_ADDRESS);
         ps_register_family.setString(21, MOTHER_OCCUPATION);
         ps_register_family.setString(22, MOTHER_PLACE_OF_WORK);
-         ps_register_family.setString(23, studid);
+        ps_register_family.setString(23, studid);
         int registrationcheker = ps_register_family.executeUpdate();
 
         return registrationcheker;
     }
 
     public int STUD_PSEI(
-        String DATE_PSEI,
-        String NAME_OF_INSTITUTION,
-        String PROGRAM_ATENDED,
-        String STUD_ID)
+            String NAME_OF_INSTITUTION,
+            String PROGRAM_ATENDED,
+            String STUD_ID,
+            String field,
+            String start_date,
+            String end_date,
+            String cgpa)
             throws ClassNotFoundException, SQLException {
 
-        PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_PSEI("
-                + "  DATE_PSEI"
-                + ", NAME_OF_INSTITUTION"
-                + ", PROGRAM_ATENDED"
-               + ", STUD_ID"
-                + ")"
-                + "VALUES(?,?,?,?)");
+        PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into "
+                + "TBL_PSEI(NAME_OF_INSTITUTION,PROGRAM_ATENDEd,STUD_ID,PSEI_FIELD,START_DATE,END_DATE,cgpa)"
+                + "VALUES(?,?,?,?,?,?,?)");
 
-        ps_register.setString(1, DATE_PSEI);
-        ps_register.setString(2, NAME_OF_INSTITUTION);
-        ps_register.setString(3, PROGRAM_ATENDED);
-        ps_register.setString(4, STUD_ID);
-      
+        ps_register.setString(1, NAME_OF_INSTITUTION);
+        ps_register.setString(2, PROGRAM_ATENDED);
+        ps_register.setString(3, STUD_ID);
+        ps_register.setString(4, field);
+        ps_register.setString(5, start_date);
+        ps_register.setString(6, end_date);
+        ps_register.setString(7, cgpa);
         int registrationcheker = ps_register.executeUpdate();
+
         //  registrationcheker=res_reg.next();
         return registrationcheker;
-    
-}
- public int STUD_ESLCE(String EXAM,String GRADE,String GRADE_OBTAINED,String YEAR_TAKEN,String STUD_ID)
+    }
+
+    public int STUD_ESLCE(String STUD_ID, String GRADE, String subject, String GRADE_OBTAINED, String YEAR_TAKEN)
             throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_ESLCE("
-                + "  EXAM"
-                + ", GRADE"
+                + "  STUD_ID"
+                + ", EXAM"
+                + ", SUBJECT"
                 + ", GRADE_OBTAINED"
                 + ", YEAR_TAKEN"
-               + ", STUD_ID"
                 + ")"
                 + "VALUES(?,?,?,?,?)");
-
-        ps_register.setString(1, EXAM);
+        ps_register.setString(1, STUD_ID);
         ps_register.setString(2, GRADE);
-        ps_register.setString(3, GRADE_OBTAINED);
-        ps_register.setString(4, YEAR_TAKEN);
-        ps_register.setString(5, STUD_ID);
+        ps_register.setString(3, subject);
+        ps_register.setString(4, GRADE_OBTAINED);
+        ps_register.setString(5, YEAR_TAKEN);
+
         int registrationcheker = ps_register.executeUpdate();
         //  registrationcheker=res_reg.next();
         return registrationcheker;
-    
-}
+
+    }
+
     public int EditStudentInfo(String studentID) {
         return 0;
+    }
+
+    public int createAccount(String username, String Password, String studid, String status, Date date_created) throws ClassNotFoundException, SQLException {
+        PreparedStatement create_user;
+        create_user = dbconnection.getconnection().prepareStatement(""
+                + " insert into STUD_ACCOUNT"
+                + "(USERNAME,PASSWORD,STUD_ID,CURRENT_STATUS,DATE_CREATED)"
+                + "values(?,?,?,?,?)");
+        create_user.setString(1, username);
+        create_user.setString(2, Password);
+        create_user.setString(3, studid);
+        create_user.setString(4, status);
+        create_user.setDate(5, date_created);
+        int account_is_created = create_user.executeUpdate();
+        return account_is_created;
     }
 
     public int withdrawStudent(String studentID) {
@@ -237,13 +293,32 @@ public class StudentManagement {
     public int readmit(String studentID) {
         return 0;
     }
-     public int savestudprogram(String studentID, String program, String department) throws ClassNotFoundException, SQLException {
-         
-         PreparedStatement ps_savedepartment=dbconnection.getconnection().prepareStatement("insert into TBL_STUD_DEP(Stud_id,Dep_id,Program_id) values(?,?,?) ");
-         ps_savedepartment.setString(1, studentID);
-         ps_savedepartment.setString(2, program);
-         ps_savedepartment.setString(3, department);
-        int checkup= ps_savedepartment.executeUpdate();
+
+    public int savestudprogram(String studentID, String program, String department) throws ClassNotFoundException, SQLException {
+
+        PreparedStatement ps_savedepartment = dbconnection.getconnection().prepareStatement("insert into TBL_STUD_DEP(Stud_id,Dep_id,Program_id) values(?,?,?) ");
+        ps_savedepartment.setString(1, studentID);
+        ps_savedepartment.setString(2, program);
+        ps_savedepartment.setString(3, department);
+        int checkup = ps_savedepartment.executeUpdate();
         return checkup;
     }
+
+    public int SaveEducationalBackground(String grade, String school, String startdate, String enddate, String Studid) throws ClassNotFoundException {
+        int saved = 0;
+        try {
+            PreparedStatement ps_edubg = dbconnection.getconnection().prepareStatement("insert into TBL_EDUCATIONAL_BACKGROUND(GRADE,SCHOOL,START_DATE, END_DATE,STUD_ID)"
+                    + " values(?,?,?,?,?)");
+            ps_edubg.setString(1, grade);
+            ps_edubg.setString(2, school);
+            ps_edubg.setString(3, startdate);
+            ps_edubg.setString(4, enddate);
+            ps_edubg.setString(5, Studid);
+            saved = ps_edubg.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saved;
+    }
+
 }

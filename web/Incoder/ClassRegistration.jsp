@@ -11,7 +11,7 @@
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body oncontextmenu="return false">
         <%@include file="../common/head_banner.jsp" %>
         <div class="row">
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
@@ -28,7 +28,7 @@
 
                     <!-- Main Menu -->
                     <div class="side-menu-container">
-                        <%@include file="../common/depsidebar.jsp" %>
+                        <%@include file="../common/IncoderSidebar.jsp" %>
                     </div><!-- /.navbar-collapse -->
                 </nav>
 
@@ -43,7 +43,18 @@
                     ${ClassNotReg}
                     <p class="page-header text-primary text-center">Class Registration</p>
 
-                    <form class="form-horizontal" role="form" id="classform" action="${pageContext.request.contextPath}//ClassServlet">
+                    <form class="form-horizontal" role="form" id="classform" action="${pageContext.request.contextPath}/ClassServlet">
+                        <div class="form-group col-lg-10">
+                            <label for="locationname" class="col-lg-4 col-sm-2 control-label">Location</label>
+                            <div class="col-lg-6 col-sm-10">
+                                <select class="form-control" id="selectlocation" name="selectlocation">
+                                    <option>-select location-</option>
+                                    <option>OLD BUILDING</option>
+                                    <option>INDOCTRINATION BUILDING</option>
+                                    <option>NEW BUILDING</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group col-lg-10">
                             <label for="blockname"  class="col-lg-4 col-sm-2 control-label">Block Name</label>
                             <div class="col-lg-6 col-sm-10">
@@ -65,6 +76,7 @@
                                        placeholder="Enter class date">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary"><span class="fa fa-save"> Save Class Info</span></button>
@@ -102,15 +114,15 @@
             });
         </script>
         <script src="../js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+        <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $("#classdate").datepicker({
-        changeMonth: true,
-        changeYear: true,
-       dateFormat: 'yy-mm-dd'
+        <script type="text/javascript">
+                    $("#classdate").datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        dateFormat: 'yy-mm-dd'
 
-    });
-</script>    </body>
+                    });
+        </script>    </body>
 </html>

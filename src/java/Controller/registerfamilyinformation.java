@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +38,7 @@ public class registerfamilyinformation extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+HttpSession session=request.getSession();
             String fathersfirstname = request.getParameter("fathersfirstname"),
                     fathermiddlename = request.getParameter("fathermiddlename"),
                     flastname = request.getParameter("flastname"),
@@ -60,6 +61,7 @@ public class registerfamilyinformation extends HttpServlet {
                     motherHnumber = request.getParameter("motherHnumber"),
                     motherOccuption = request.getParameter("motherOccuption"),
                     motherPlacework = request.getParameter("motherPlacework"),
+                    step = request.getParameter("step"),
                     studentid=request.getParameter("studidfamily");
                   
             
@@ -89,7 +91,10 @@ public class registerfamilyinformation extends HttpServlet {
                     motherPlacework,
                     studentid);
             if (isSaved >= 1) {
-        out.print("saved");
+                 session.setAttribute("stud_id", studentid);
+                 session.setAttribute("step2", step);
+               // response.sendRedirect("Student/STUD_PSEI.jsp");
+        response.sendRedirect("Student/educationalbg.jsp");
             }else{
                 out.print("not saved");
             }

@@ -3,6 +3,14 @@
     Created on : 28-Sep-2017, 02:33:06
     Author     : Efrem
 --%>
+<%
+    if(session.getAttribute("dpt")==null)
+{
+ response.sendRedirect("../index.jsp");
+}
+    else {
+       
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="../css/jQuery.steps.css"
 <%@page import="java.sql.*"%>
@@ -51,7 +59,81 @@
             <!-- Main Content -->
             <div class="container-fluid">
                 <div class="side-body">
+                <%
+                String strname=session.getAttribute("dpt").toString();
+                %>
+                <div class="row">
+                 <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        Java 
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">jmeter</a></li>
+                                        <li><a href="#">EJB</a></li>
+                                        <li><a href="#">Jasper Report</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+<!--                            <form class="navbar-form navbar-left" role="search">
+                                <button type="submit" class="btn btn-default">
+                                    Left align-Submit Button   
+                                </button>
+                            </form> -->
+                            <!--<p class="navbar-text navbar-left">Left align-Text</p>-->
+                            <!--Right Align-->
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                        <b class="glyphicon glyphicon-comment" >
+                                      </b> Welcome:<%out.println(session.getAttribute("dpt")); %> <b class="badge" ><%
+                                          ResultSet rs=statement.executeQuery("select count(*) as cntntf from TBL_NOTIFFICATION where RECIEVER_NAME='"+ strname +"' ");
+                                          while (rs.next()) { 
+                                    String nameval=rs.getString("cntntf");
+                                              %>
+                                            <label class="control-label" for="tclass" ><%=nameval%> msg found</label>  
+                                             <% }%>
+                                         </b><b class="caret"></b>
+                                       <%
+                                                try {
+//                                                    connectionManager dbconnection = new connectionManager();
+                                                    Statement stm_class = dbconnection.getconnection().createStatement();
+                                                    String inst_sql = "select count(*) as cnt_inst from TBL_NOTIFFICATION";
 
+                                                    ResultSet rs_class = stm_class.executeQuery(inst_sql);
+
+                                            %>
+
+                                            <%    while (rs_class.next()) {
+                                                    String cnt_instructor = rs_class.getString("cnt_inst");
+                                                    //cid;
+                                            %>
+                                            <label class="control-label" for="tclass" ><%=cnt_instructor%> notif found</label>
+                                            <% } %>
+                                            <!--</select>-->
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+                                                }
+                                            %>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Course</a></li>
+                                        <li><a href="#">Class</a></li>
+                                        <li><a href="#">Jasper Report</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">One more separated link</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="info-box bg-info text-center" style="border-radius: 10px;">
@@ -176,5 +258,7 @@
                         dateFormat: 'yy-mm-dd'
 
                     });
-        </script>    </body>
+        </script>   
+        <%}%>
+    </body>
 </html>

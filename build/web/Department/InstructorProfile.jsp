@@ -30,7 +30,7 @@
 
 
                     <p class="text-success text-right"><strong>Welcome user:_________________</strong></p>
-                    <p class="text-right"> <a href="InstructorDetail.jsp" ><span style="color: #0055b3">View Profile|</span></a><a href="InstructorDetail.jsp"><span style="color: #0055b3">Logout</span></a></p>
+<!--                    <p class="text-right"> <a href="InstructorDetail.jsp" ><span style="color: #0055b3">View Profile|</span></a><a href="InstructorDetail.jsp"><span style="color: #0055b3">Logout</span></a></p>
                     <div class="col-lg-3 bg-primary"> STAFF NAME</div>
                     <div class="col-lg-2 bg-primary"> ROOM</div>
                     <div class="col-lg-2 bg-primary">  PHONE</div>
@@ -41,7 +41,7 @@
                     <div class="col-lg-2 "><input class=""></div>
                     <div class="col-lg-2 "><input class=""></div>
                     <div class="col-lg-2 "><input class=""></div>
-                    <div class="col-lg-3 "><input class=""></div>
+                    <div class="col-lg-3 "><input class=""></div>-->
 
                    
                     <table class="table table-hover table-bordered table-responsive">

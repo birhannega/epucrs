@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -47,14 +48,19 @@ public class CourseServlet extends HttpServlet {
                 courseName = request.getParameter("coursename"),
                 date_registetred = request.getParameter("date_registered"),
                 credithr = request.getParameter("creditH"),
-                prerequest = request.getParameter("prerequest");
-        
-        String course_code = courseName.concat("-200");
+                prerequest = request.getParameter("prerequest"),
+                coursetype = request.getParameter("coursetype"),
+                courseapproach= request.getParameter("courseapproach"),
+                      course_code = request.getParameter("coursecode");
+        Calendar cal=Calendar.getInstance();
+//         int year=cal.get(Calendar.YEAR);
+        int year=cal.get(Calendar.YEAR);
 //        PrintWriter out=response.getWriter();
-//        out.println("Entered inputs "+term+" "+courseName);
+//        out.println("date "+year);
 // creating object of entity class
         CourseManagement registration = new CourseManagement();
-        int is_registered = registration.registerCourse(course_code,department, program, term, courseName, date_registetred, credithr, prerequest);
+        
+        int is_registered = registration.registerCourse(course_code,department, program, term, courseName, year, credithr, prerequest,coursetype,date_registetred,courseapproach);
         if (is_registered > 0) {
             request.getSession().setAttribute("courseRegistered", "<strong><span class='alert alert-success text-center'>Course successfully registred</span></strong>");
 

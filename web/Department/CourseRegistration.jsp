@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.GregorianCalendar"%>
 <%@page import="javafx.scene.control.Alert"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.connectionManager"%>
@@ -11,10 +13,26 @@
         <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="../resources/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>-->
+        <!--        <script src="../resources/jquery-ui/js/jquery-ui.min.js" type="text/javascript"></script>
+                <script src="../resources/jquery-ui/js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
     </head>
     <body oncontextmenu="return false">
         <%@include file="../common/head_banner.jsp" %>
+        <%
+             connectionManager dbconnection = new connectionManager();
+             Statement stmt = dbconnection.getconnection().createStatement();
+        %>
         <div class="row">
+            <style>
+                table {
+                    max-width: none;
+                }
+            </style>
+            <!--            <style type='text/css'>
+                            /* Style to hide Dates / Months */
+                            .ui-datepicker-calendar,.ui-datepicker-month { display: none; }
+                        </style>-->
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
             <!-- <div class="absolute-wrapper"> </div> -->
             <!-- Menu -->
@@ -34,18 +52,18 @@
                 </nav>
 
             </div>
-
+            <!--            <style>
+                            .ui-datepicker-calendar {
+                                display: none;
+                            }
+                        </style>-->
             <!-- Main Content -->
             <div class="container-fluid">
                 <div class="side-body">
-
-                    <%--<%@include file="adduser_form.jsp" %>--%>
-
                     <!-- Button trigger modal -->
                     <button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
                         <span  class="glyphicon glyphicon-circle-arrow-down">  Add Course</span>
                     </button>
-
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
                          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -96,19 +114,33 @@
                                         </div>
                                         <div class="form-group col-lg-4 has-success">
                                             <!--<div class="input-group">-->
+                                            <span class="pull-center has-success">Course Code</span>
+                                            <input type="text" name="coursecode"  class="form-control" id="coursecode" placeholder="Enter Course Code">
+                                            <!--</div>-->
+                                        </div>
+                                        <div class="form-group col-lg-4 has-success">
+                                            <!--<div class="input-group">-->
                                             <!--<span class="input-group-addon">Term</span>-->
                                             <span class="pull-center">Term</span>
                                             <!--Term-->
                                             <select class="form-control" id="term" name="term" required="required">
                                                 <option value="">-select term-</option>
-                                                <option value="Term1">Term1</option>
-                                                <option value="Term2">Term2</option>
-                                                <option value="Term3">Term3</option>
-                                                <option value="Term4">Term4</option>
-                                                <option value="Term5">Term5</option>
-                                                <option value="Term6">Term6</option>
-                                                <option value="Term7">Term7</option>
-                                                <option value="Term8">Term8</option>
+                                                <%
+                                                    //                                                    connectionManager connnmgr = new connectionManager();
+                                                    //                                                    Connection con = connnmgr.getconnection();
+                                                    Statement getterm = con.createStatement();
+
+                                                    String term_name = null, termid = null;
+                                                    ResultSet rs_term = getterm.executeQuery("select * from LU_TERM");
+
+                                                    while (rs_term.next()) {
+                                                        term_name = rs_term.getString("TERM_NAME");
+                                                        termid = rs_term.getString("TERM_SEQNO");
+                                                %>
+                                                <option value="<%=term_name%>"><%=term_name%></option>
+                                                <%
+                                                    }
+                                                %>
                                             </select>
                                             <!--</div>-->
                                         </div>
@@ -116,18 +148,21 @@
                                         <!--<div data-dte-e="input-control" class="DTE_Field_InputControl" style="display: block;">Term<input id="DTE_Field_first_name" type="text"></div>-->
                                         <div class="form-group col-lg-4 has-success">
                                             <!--<div class="input-group">-->
-                                            <span class="pull-center has-success">Course Name</span>
+                                            <span class="pull-center has-success">Course Title</span>
                                             <input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">
                                             <!--</div>-->
                                         </div>
                                         <div class="form-group col-lg-4 has-success">
                                             <!--<div class="input-group">-->
-                                            <span class="pull-center">Date</span>
+                                            <span class="pull-center">Year Offering</span>
                                             <input class="form-control" id="datepicker2" name="date_registered" placeholder="Enter Date" type="date" required=""/>
-                                            <!--                                            <span class="input-group-addon">
-                                                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                                                        </span>-->
-                                            <!--</div>-->
+                                            <%
+                                                GregorianCalendar cal = new GregorianCalendar();
+                                                //                                                out.print(cal.get(Calendar.YEAR));
+                                            %>
+                                            <!--<input class="form-control" id="datepicker1"   placeholder="Enter Date"  required=""/>-->
+                                            <!--<input  class='datepicker'   placeholder="Enter Date"  required=""/>-->
+                                            <!--<input class='datepicker'/>-->
                                         </div>
 
 
@@ -149,213 +184,780 @@
                                             </select>
                                             <!--</div>-->
                                         </div>
+                                        <div class="form-group col-lg-4 has-success">
+                                            <!--<div class="input-group">-->
+                                            <span class="pull-center">Course Type</span>
+                                            <!--Term-->
+                                            <select class="form-control" id="coursetype" name="coursetype" required="required">
+                                                <!--<option value="">-select type-</option>-->
+                                                <option value="Modular">Modular</option>
+                                                <option value="Linear">Linear</option>
 
+                                            </select>
+                                            <!--</div>-->
+                                        </div>
+                                        <div class="form-group col-lg-4 has-success">
+                                            <!--<div class="input-group">-->
+                                            <span class="pull-center">Course Approach</span>
+                                            <!--Term-->
+                                            <select class="form-control" id="courseapproach" name="courseapproach" required="required">
+                                                <option value="">-select approach-</option>
+                                                <option value="Main">Main</option>
+                                                <option value="Supportive">Supportive</option>
+                                                <option value="Common">Common</option>
+
+                                            </select>
+                                            <!--</div>-->
+                                        </div>
+                                        <div class="modal-footer" >
+                                            <span class="fa sp_empty"><p></p></span>
+                                            <button type="button" class="btn btn-info" 
+                                                    data-dismiss="modal">
+                                                <span class="glyphicon glyphicon-record">Reset</span>
+                                            </button>
+                                            <button type="button" class="btn btn-warning" 
+                                                    data-dismiss="modal">
+                                                <span class="glyphicon glyphicon-remove">Close</span>
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" id="btnregister">
+                                                <span  class="fa fa-save"> Register</span>
+                                            </button>
+                                        </div>
+                                        <!--display prerequest-->
+
+                                        <!--</form>-->
                                     </div>
                                     <!--</form>-->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-info" 
-                                                data-dismiss="modal">
-                                            <span class="glyphicon glyphicon-record">Refresh</span>
-                                        </button>
-                                        <button type="button" class="btn btn-warning" 
-                                                data-dismiss="modal">
-                                            <span class="glyphicon glyphicon-remove">Close</span>
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="btnregister">
-                                            <span  class="fa fa-save"> Register</span>
-                                        </button>
-                                    </div>
+
+
+
+                                    </div>   <!--end footer-->
                                 </form>
 
                             </div><!-- /.modal-content -->
                         </div>
                     </div><!-- /.modal -->
-                    <!--table start-->
-                    <div class="col-lg-12 header">
-                        <span class="text-primary">  <strong>List of available courses</strong></span>
-                    </div>
-<!--                    <script type="text/javascript">
-                        $('#edit_id').click(function ()
-                        {
-                            $("#editing_form").css('visibility', "visible");
-                        });
-                    </script>-->
-                    <!--<span class="alert alert-success">  ${del}</span>--> 
-                    ${del}
-                    ${courseUpdate}
-                        ${courseNotUpdate}
-                    <!--start form edit-->
-                    <%
-                        if (request.getParameter("action") != null && request.getParameter("id") != null) {
-                            String action = request.getParameter("action");
-                            String id = request.getParameter("id");
-                            if (action.equalsIgnoreCase("delete")) {
-                                //Alert="";
-                                 ResultSet rs_delete = getdept.executeQuery("delete from TBL_COURSE_REGISTRATION where COURSE_CODE='" + id + "'");
-                       // if (rs_delete.next()) {
-                  
-                         %>    
-                         <div class="alert alert-success" id="">
-                             Successfully deleted
-                         </div>        
+                    <!--start tab-->
+                    <ul class="nav nav-tabs" id="myTab">
 
-                    <% } 
-                      else if (action.equalsIgnoreCase("edit")) {
-                        ResultSet rs_edit = getdept.executeQuery("select * from TBL_COURSE_REGISTRATION where COURSE_CODE='" + id + "'");
-                        if (rs_edit.next()) {
+                        <li class="active"><a data-toggle="tab" href="#sectionA">Course List</a></li>
 
-                    %>
-                    
-                    <div class="form-group">
-                        
-                        <p class=""> <strong>Editing <%=rs_edit.getString("COURSE_NAME")%></strong> </p>
-                        <form class="form-group" action="${ pageContext.request.contextPath }/CourseUpdateServlet" method="Post">
-                            <!--<form class="form-group" action="../CommonOprations/EditCourse.jsp" method="Post">-->
-                            <div class="form-group col-lg-4">
-                                COURSE CODE:
-                                <input class="form-control" type="text" name="coursecode" value="<%=id%>" readonly/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                DEPARTMENT:
-                                <input class="form-control" type="text" name="edited_department" value="<%=rs_edit.getString("DEPARTMENT")%>"/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                PROGRAM:
-                                <input class="form-control" type="text" name="edited_program" value="<%=rs_edit.getString("PROGRAM")%>"/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                TERM:
-                                <input class="form-control" type="text" name="edited_term" value="<%=rs_edit.getString("TERM")%>"/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                COURSE_NAME:
-                                <input class="form-control" type="text" name="edited_coursename" value="<%=rs_edit.getString("COURSE_NAME")%>"/>
+                        <li><a data-toggle="tab" href="#sectionB">Pre Request</a></li>
 
-                            </div>
-                            <div class="form-group col-lg-4">
-                                ADDED_DATE:
-                                <input class="form-control" type="date" name="edited_added_date" value="<%=rs_edit.getString("ADDED_DATE")%>"/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                CREDIT_HOURS:
-                                <input class="form-control" type="text" name="edited_credit_hour" value="<%=rs_edit.getString("CREDIT_HOURS")%>"/>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                PRE_REQUEST:
-                                <input class="form-control" type="text" name="edited_prerequest" value="<%=rs_edit.getString("PRE_REQUEST")%>"/>
+                        <li><a data-toggle="tab" href="#sectionC">Edit Course Credit Hours</a></li>
 
-                            </div>
-                            <div class="form-group col-lg-4"> <br>
+                    </ul>
 
-                                <input class="btn btn-warning" type="submit" value="Update"/>
-                            </div>
-                        </form>
-                          
-                    </div>
-                    <%}
-                            }
-                        }
-                    %>
+                    <div class="tab-content">
 
-                    <!--end of edit form-->
-                    <table  class="table table-striped table-bordered table-hover "  id="tabledate" >
-                        <thead>
-                            <tr>
-                                <th>Course Code</th>
-                                <th>Department</th>
-                                <th>Program</th>
-                                <th>Term</th>
-                                <th>Course Name</th>
-                                <th>Added Date</th>
-                                <th>Credit Hours</th>
-                                <th>Has Pre Request</th>
-                                <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
-                                <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
+                        <div id="sectionA" class="tab-pane fade in active">
 
+                            ${courseRegistered}
+                            ${courseNotRegistered}
 
-                            </tr>
-                        </thead>
-                         <%
-                            session.setAttribute("$courseUpdate", null);
-                            session.setAttribute("$courseNotUpdate", null);
-                        %>
-                        <%
-                            session.setAttribute("del", null);
-                        %>
-
-                        <tbody>
+                            <!--table start-->
                             <%
-                                connectionManager dbconnection = new connectionManager();
-                                Statement st_list_course = dbconnection.getconnection().createStatement();
-                                String course_sql = "select * from TBL_COURSE_REGISTRATION order by COURSE_CODE";
-                                ResultSet rs_course = st_list_course.executeQuery(course_sql);
-                                while (rs_course.next()) {
-                                    String idcc = rs_course.getString(1);
+                                session.setAttribute("courseRegistered", null);
+                                session.setAttribute("courseNotRegistered", null);
                             %>
-                            <tr>
-    <!--                            <td><%=rs_course.getString(1)%></td> -->
-                                <td><%=idcc%></td> 
-                                <td><%=rs_course.getString(2)%></td> 
-                                <td><%=rs_course.getString(3)%></td> 
-                                <td><%=rs_course.getString(4)%></td> 
-                                <td><%=rs_course.getString(5)%></td> 
-                                <td><%=rs_course.getString(6)%></td> 
-                                <td><%=rs_course.getString(7)%></td> 
-                                <td><%=rs_course.getString(8)%></td> 
-                                <td>
 
 
-                                    <!--<form action="CourseUpdate.jsp" method="post">-->
-                                    <form action="" method="post">
-                                        <input type="hidden" name="action" value="edit"/>
-                                        <input type="hidden" name="id" id="edit_id" value="<%=rs_course.getString(1)%>"/>
-                                        <!--<input type="hidden" name="edit_id" value="<%=idcc%>"/>-->
-
-                                        <button class="btn btn-warning" id="edit_id">Edit</button>
-                                    </form>
-
-                                </td>
-
-                                <td>
-                                    <!--<form action="deletecourse.jsp" method="Post" >-->
-                                    <form action="" class="form-group" method="Post" >
-                                  <!--<input type="hidden" name="delete_id" value="<%=idcc%>"/>-->
-                                        <input type="hidden" name="action" value="delete"/>
-                                        <input type="hidden" name="id" id="delete_id" value="<%=rs_course.getString(1)%>"/>
-
-                                        <button class="btn btn-danger" id="deleteid">Delete</button>
-                                    </form>
 
 
-                                </td>
-                                <!--                    <script type="text/javascript">
-                                                        $('#deleteid').on('click', function () {
-                                                            table
-                                                                    .row($(this).parents('tr'))
-                                                                    .remove()
-                                                                    .draw();
-                                                        });
-                                                    </script>-->
-                            </tr>
+
+                            <div class="col-lg-12 header">
+                                <span class="text-primary">  <strong>List of available courses</strong></span>
+                            </div>
+                            ${del}
+                            ${courseUpdate}
+                            ${courseNotUpdate}
+                            <!--start form edit-->
                             <%
+                                if (request.getParameter("action") != null && request.getParameter("id") != null) {
+                                    String action = request.getParameter("action");
+                                    String id = request.getParameter("id");
+                                    if (action.equalsIgnoreCase("delete")) {
+                                        //Alert="";
+                                        ResultSet rs_delete = getdept.executeQuery("delete from TBL_COURSE_REGISTRATION where COURSE_SEQNO='" + id + "'");
+                                        // if (rs_delete.next()) {
+
+                            %>    
+                            <!--                    <div class="alert alert-success" id="">
+                                                    Successfully deleted
+                                                </div>        -->
+
+                            <% } else if (action.equalsIgnoreCase("edit")) {
+                                ResultSet rs_edit = getdept.executeQuery("select * from TBL_COURSE_REGISTRATION where COURSE_SEQNO='" + id + "'");
+                                if (rs_edit.next()) {
+
+                            %>
+
+                            <div class="form-group">
+
+                                <p class=""> <strong>Editing <%=rs_edit.getString("COURSE_NAME")%></strong> </p>
+                                <form class="form-group" action="${ pageContext.request.contextPath }/CourseUpdateServlet" method="Post">
+                                    <!--<form class="form-group" action="../CommonOprations/EditCourse.jsp" method="Post">-->
+                                    <div class="form-group col-lg-4">
+                                        COURSE CODE:
+                                        <input class="form-control" type="text" name="edit_coursecode" value="<%=rs_edit.getString("COURSE_CODE")%>" />
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        DEPARTMENT:
+                                        <input class="form-control" type="text" name="edited_department" value="<%=rs_edit.getString("DEPARTMENT")%>" />
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        PROGRAM:
+                                        <input class="form-control" type="text" name="edited_program" value="<%=rs_edit.getString("PROGRAM")%>" />
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        TERM:
+                                        <!--<input class="form-control" type="text" name="edited_term" value="<%=rs_edit.getString("TERM")%>"/>-->
+                                        <select class="form-control" name="edited_term">
+                                            <option class="" value="<%=rs_edit.getString("TERM")%>"><%=rs_edit.getString("TERM")%></option>
+                                            <option class="" value="">-select term-</option>
+                                            <%
+                                                try {
+                                                    String trmid = null, termname = null;
+                                                    Statement termstm = con.createStatement();
+                                                    ResultSet termrs = termstm.executeQuery("select * from lu_term");
+                                            %>
+
+                                            <%while (termrs.next()) {
+                                                    trmid = termrs.getString("term_seqno");
+                                                    termname = termrs.getString("term_name");
+                                            %>
+                                            <option value="<%=termid%>"><%=termname%></option>
+                                            <%}%>
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+
+                                                }
+                                            %>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        COURSE_NAME:
+                                        <!--<input class="form-control" type="text" name="edited_coursename" value="<%=rs_edit.getString("COURSE_NAME")%>"/>-->
+                                        <select name="edited_coursename" Class="form-control">
+                                            <option class="form-control" name="edited_coursename" value="<%=rs_edit.getString("COURSE_NAME")%>"><%=rs_edit.getString("COURSE_NAME")%></option>
+                                            <option class="">-select course-</option>
+                                            <%
+                                                try {
+                                                    String trmid = null, termname = null;
+                                                    Statement termstm = con.createStatement();
+                                                    ResultSet termrs = termstm.executeQuery("select * from TBL_COURSE_REGISTRATION");
+                                            %>
+
+                                            <%while (termrs.next()) {
+                                                    trmid = termrs.getString("COURSE_CODE");
+                                                    termname = termrs.getString("COURSE_NAME");
+                                            %>
+                                            <option value="<%=termid%>"><%=termname%></option>
+                                            <%}%>
+                                            <%
+                                                } catch (Exception e) {
+                                                    out.println("wrong selection!" + e);
+
+                                                }
+                                            %>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        Offering Year:
+                                        <input class="form-control" type="date" name="edited_added_date" value="<%=rs_edit.getString("ADDED_DATE")%>"/>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        CREDIT_HOURS:
+                                        <input class="form-control" type="text" name="edited_credit_hour" value="<%=rs_edit.getString("CREDIT_HOURS")%>"/>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <span class="pull-center">PRE_REQUEST:</span>
+                                        <!--Term-->
+                                        <select class="form-control" id="edited_prerequest" name="edited_prerequest" required="required">
+                                            <option value="<%=rs_edit.getString("PRE_REQUEST")%>"><%=rs_edit.getString("PRE_REQUEST")%></option>
+                                            <option value="">-select term-</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+
+                                        </select> 
+                                    </div>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Course Type</span>
+                                        <!--Term-->
+                                        <select class="form-control" id="edit_coursetype" name="edit_coursetype" required="required">
+                                            <option value="<%=rs_edit.getString("COURSE_TYPE")%>"><%=rs_edit.getString("COURSE_TYPE")%></option>
+                                            <option value="">-select type-</option>
+                                            <option value="Main">Main</option>
+                                            <option value="Supportive">Supportive</option>
+                                            <option value="Common">Common</option>
+
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        ACADEMIC_YEAR:
+                                        <input class="form-control" type="date" name="edit_academicyear" id="edit_academicyear" value="<%=rs_edit.getString("ACADEMIC_YEAR")%>"/>
+                                    </div>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="pull-center">Course Approach</span>
+                                        <!--Term-->
+                                        <select class="form-control" id="edit_courseapproach" name="edit_courseapproach" required="required">
+                                            <option value="<%=rs_edit.getString("COURSE_APPROACH")%>"><%=rs_edit.getString("COURSE_APPROACH")%></option>
+                                            <!--<option value="">-select term-</option>-->
+                                            <option value="Modular">Modular</option>
+                                            <option value="Linear">Linear</option>
+
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
+
+                                    <div class="form-group col-lg-4">
+                                        SEQ_NO:
+                                        <input class="form-control" type="TEXT" name="edit_COURSE_SEQNO" id="edit_COURSE_SEQNO" value="<%=rs_edit.getString("COURSE_SEQNO")%>" readonly=""/>
+                                    </div>
+                                    <div class="form-group col-lg-4"> <br>
+
+                                        <input class="btn btn-warning" type="submit" value="Update"/>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <%}
+                                    }
                                 }
                             %>
 
-                        </tbody>
-                    </table>
-<!--                    <strong></strong>
-                    <form action="" id="editing_form" method="post" style="visibility: hidden">
+                            <%
+                                session.setAttribute("courseUpdate", null);
+                                session.setAttribute("courseNotUpdate", null);
+                                session.setAttribute("del", null);
+                            %>
 
-                        <input type="text" name="edit_id" value="<%%>"/>
+                            <!--end of edit form-->
+                            <div class="table table-responsive">
+                                <table  class="table table-striped table-bordered table-hover"  id="tabledate" >
+                                    <thead>
+                                        <tr>
+                                            <th>Course Code</th>
+                                            <th>Department</th>
+                                            <th>Program</th>
+                                            <th>Term</th>
+                                            <th>Course Name</th>
+                                            <th>Offering Year</th>
+                                            <th>Credit Hours</th>
+                                            <th>Has Pre Request</th>
+                                            <th>Course_Type</th>
+                                            <th>Academic_Year</th>
+                                            <th>Course_Approach</th>
+                                            <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
+                                            <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
 
-                        <button class="btn btn-warning" id="edit_id">Edit</button>
-                    </form>-->
 
-                    <!--table end-->
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <%
+//                                            connectionManager dbconnection = new connectionManager();
+                                            Statement st_list_course = dbconnection.getconnection().createStatement();
+                                            String course_sql = "select * from TBL_COURSE_REGISTRATION order by COURSE_CODE";
+                                            ResultSet rs_course = st_list_course.executeQuery(course_sql);
+                                            while (rs_course.next()) {
+                                                String idcc = rs_course.getString(1);
+                                        %>
+                                        <tr>
+                <!--                            <td><%=rs_course.getString(1)%></td> -->
+                                            <td><%=idcc%></td> 
+                                            <td><%=rs_course.getString(2)%></td> 
+                                            <td><%=rs_course.getString(3)%></td> 
+                                            <td><%=rs_course.getString(4)%></td> 
+                                            <td><%=rs_course.getString(5)%></td> 
+                                            <td><%=rs_course.getString(6)%></td> 
+                                            <td><%=rs_course.getString(7)%></td> 
+                                            <td><%=rs_course.getString(8)%></td> 
+                                            <td><%=rs_course.getString(9)%></td> 
+                                            <td><%=rs_course.getString(10)%></td> 
+                                            <td><%=rs_course.getString(11)%></td> 
+                                            <td>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="action" value="edit"/>
+                                                    <input type="hidden" name="id" id="edit_id" value="<%=rs_course.getString(12)%>"/>
+                                                    <!--<input type="hidden" name="edit_id" value="<%=idcc%>"/>-->
+
+                                                    <button class="btn btn-warning glyphicon glyphicon-edit" id="edit_id">Edit</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <!--<form action="deletecourse.jsp" method="Post" >-->
+                                                <form action="" class="form-group" method="Post" >
+                                              <!--<input type="hidden" name="delete_id" value="<%=idcc%>"/>-->
+                                                    <input type="hidden" name="action" value="delete"/>
+                                                    <input type="hidden" name="id" id="delete_id" value="<%=rs_course.getString(12)%>"/>
+
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" id="deleteid">Delete</button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div><!--tab a end-->
+
+
+                        <div id="sectionB" class="tab-pane fade">
+                            ${prerequestsave}
+                            ${prerequestNotsave}
+                            ${PrerequestUpdatesave}
+                            ${PrerequestUpdateNotsave}
+                            <!--display pre-request-->
+                            <form class="form-group" method="POST">
+
+                                <br>
+                                <div class="input-group col-lg-4">
+                                    <!--<label class="form-control">Search By ID:</label>--> 
+                                    <input  type="text" name="crscode" id="crscode" placeholder="Enter Course Code!" class="form-control">
+                                    <div class="input-group-btn">
+                                        <!--<input type="submit" value="search"/>-->
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-search">Search</span>
+                                        </button>
+                                        <!--<span class="glyphicon glyphicon-search"></span>-->
+                                    </div>
+                                </div>
+                                <p class="page-header">Pre Request List</p>
+                                <%
+                                    String crsc = request.getParameter("crscode");
+
+                                    if (crsc == null || crsc == "") {
+                                        //                                        out.println("Enter correct id");
+                                        //                                         out.println("<img width='100' height='50' src=displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                    } else {
+
+                                        connectionManager conn1 = new connectionManager();
+                                        PreparedStatement ps = conn1.getconnection().prepareStatement("select * from TBL_PREREQUEST where COURSE_CODE='" + crsc + "'");
+                                        ResultSet rs = ps.executeQuery();%>
+
+                                <input type="text" value="<%=request.getParameter("crscode")%>" readonly=""><br>
+                                <% while (rs.next()) {
+                                        //                   out.println("<h3>" + rs.getString("ACADEMIC_STAFF_ID") + "</h3>");
+                                        //                    out.println("<img width='100' height='50' src=../displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                %>
+
+                                <!--<div class="col-lg-6">--> 
+
+                                <input type="checkbox" name="fetchprerequest" id="fetchprerequest"><%=rs.getString("PRE_REQUEST_NAME")%><br>
+                                <%  }
+
+                                %>
+
+                                <!--</div>-->
+                            </form>
+                            <form class="form-group" method="POST"action="${ pageContext.request.contextPath }/Pre_requestRegServlet">
+                                <input type="text" value="<%=request.getParameter("crscode")%>" hidden="" name="precrscode" id="crscode">
+                                <p class="page-header pull-center has-success">Additional Pre Request?</p>
+                                <div class="form-group col-lg-4 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center has-success">Has Pre Request?</span>
+                                    <strong>Yes</strong><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck"> 
+                                    <strong>No </strong><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck"><br>
+                                    <!--<input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">-->
+                                    <!--</div>-->
+                                </div>
+
+                                <div id="ifYes" style="visibility:hidden" class="form-group col-lg-4">
+
+                                    <!--<div class="container form-group">-->
+
+                                    <!--<div class="form-group col-lg-2 has-success">-->
+                                    <label>Pre_Request Name</label>
+                                    <input type="text" class="input-small form-control" id="prerequestname"  name="prerequestname"  placeholder="Enter Pre Request Name  " >
+                                    <!--</div>-->
+
+
+                                    <!--</div>-->
+
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6">
+                                    <button type="submit" id="saveinstexp" class="btn btn-warning">
+                                        <span class="fa fa-save"><strong> Save Pre Request</strong></span></button>
+                                </div>
+                                <!--</form>-->
+                                <%  }%>
+                            </form>
+
+                            <%
+                                session.setAttribute("prerequestsave", null);
+                                session.setAttribute("prerequestNotsave", null);
+                            %>
+                            <!--start edit table pre request-->
+                                   <%
+                                if (request.getParameter("action") != null && request.getParameter("id") != null) {
+                                    String action = request.getParameter("action");
+                                    String id = request.getParameter("id");
+                                    if (action.equalsIgnoreCase("delete")) {
+                                        //Alert="";
+                                        ResultSet rs_delete = getdept.executeQuery("delete from TBL_PREREQUEST  where SEQNO_PREREQUEST='" + id + "'");
+                                        // if (rs_delete.next()) {
+
+                            %>    
+                            <!--                    <div class="alert alert-success" id="">
+                                                    Successfully deleted
+                                                </div>        -->
+
+                            <% } else if (action.equalsIgnoreCase("edit")) {
+                                ResultSet rs_edit = getdept.executeQuery("select * from TBL_PREREQUEST  where SEQNO_PREREQUEST='" + id + "'");
+                                if (rs_edit.next()) {
+
+                            %>
+
+                            <div class="form-group">
+
+                                <p class=""> <strong>Editing <%=rs_edit.getString("COURSE_CODE")%></strong> </p>
+                                <form class="form-group" action="${ pageContext.request.contextPath }/PrerequestUpdateServlet" method="Post">
+                                    <!--<form class="form-group" action="../CommonOprations/EditCourse.jsp" method="Post">-->
+                                    <div class="form-group col-lg-4">
+                                        COURSE CODE:
+                                        <input class="form-control" type="text" name="edit_precoursecode" value="<%=rs_edit.getString("COURSE_CODE")%>" readonly=""/>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        PRE REQUEST NAME:
+                                        <input class="form-control" type="text" name="edited_prerequestname" value="<%=rs_edit.getString("PRE_REQUEST_NAME")%>" />
+                                    </div>
+                                                              
+                                     <div class="form-group col-lg-4">
+                                        SEQ_NO:
+                                        <input class="form-control" type="TEXT" name="edit_PRECOURSE_SEQNO" id="edit_PRECOURSE_SEQNO" value="<%=rs_edit.getString("SEQNO_PREREQUEST")%>" readonly=""/>
+                                    </div>
+                                    <div class="form-group col-lg-4"> <br>
+
+                                        <input class="btn btn-warning" type="submit" value="Update"/>
+                                    </div>
+                                </form>
+                                 <%
+                                session.setAttribute("PrerequestUpdatesave", null);
+                                session.setAttribute("PrerequestUpdateNotsave", null);
+                                   %>
+                            </div>
+                            <%}
+                                    }
+                                }
+                            %>
+                            <!--end edit table pre request-->
+                       <!--start pre_request table-->
+                                     <div class="table table-responsive">
+                                <table  class="table table-striped table-bordered table-hover"  id="tabledateprerequest" >
+                                    <thead>
+                                        <tr>
+                                            <th>Course_Code</th>
+                                            <th>Pre_request Name</th>
+                                            <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
+                                            <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
+
+
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <%
+//                                            connectionManager dbconnection = new connectionManager();
+//                                            Statement st_list_course = dbconnection.getconnection().createStatement();
+                                            String _sql = "select * from TBL_PREREQUEST order by COURSE_CODE";
+                                            ResultSet rs_ = stmt.executeQuery(_sql);
+                                            while (rs_.next()) {
+                                                String idcc = rs_.getString(1);
+                                        %>
+                                        <tr>
+                                            <td><%=idcc%></td> 
+                                            <td><%=rs_.getString(2)%></td> 
+                                                                                    
+                                            <td>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="action" value="edit"/>
+                                                    <input type="hidden" name="id" id="edit_id" value="<%=rs_.getString(3)%>"/>
+                                                    <!--<input type="hidden" name="edit_id" value="<%=idcc%>"/>-->
+
+                                                    <button class="btn btn-warning glyphicon glyphicon-edit" id="edit_id">Edit</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <!--<form action="deletecourse.jsp" method="Post" >-->
+                                                <form action="" class="form-group" method="Post" >
+                                              <!--<input type="hidden" name="delete_id" value="<%=idcc%>"/>-->
+                                                    <input type="hidden" name="action" value="delete"/>
+                                                    <input type="hidden" name="id" id="delete_id" value="<%=rs_.getString(3)%>"/>
+
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" id="deleteid">Delete</button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                       <!--end pre_request table-->
+                        </div>
+
+
+                        <div id="sectionC" class="tab-pane fade">
+                            ${creditsave}
+                            ${creditNotsave}
+                            ${creditUpdateNotsave}
+                            ${creditUpdatesave}
+                             <p class="page-header text-primary text-center">Credit Hour Management</p>
+                            <form class="form-group">
+
+                                <br>
+                                <div class="input-group col-lg-4">
+                                    <!--<label class="form-control">Search By ID:</label>--> 
+                                    <input  type="text" name="crscodecredit" id="crscodecredit" placeholder="Enter Course Code!" class="form-control">
+                                    <div class="input-group-btn">
+                                        <!--<input type="submit" value="search"/>-->
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-search">Search</span>
+                                        </button>
+                                        <!--<span class="glyphicon glyphicon-search"></span>-->
+                                    </div>
+                                </div>
+                                <%
+                                    String crscd = request.getParameter("crscodecredit");
+
+                                    if (crscd == null || crscd == "") {
+                                        //                                        out.println("Enter correct id");
+                                        //                                         out.println("<img width='100' height='50' src=displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                    } else {
+
+                                        connectionManager conpre = new connectionManager();
+                                        PreparedStatement ps = conpre.getconnection().prepareStatement("select * from TBL_COURSE_REGISTRATION where COURSE_CODE='" + crscd + "'");
+                                        ResultSet rs = ps.executeQuery();
+                                        //                            out.println("<h3>Students</h3>");
+                                        while (rs.next()) {
+                                            //                   out.println("<h3>" + rs.getString("ACADEMIC_STAFF_ID") + "</h3>");
+                                            //                    out.println("<img width='100' height='50' src=../displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                %>
+                               
+                                <table class="table table-responsive table-hover table-bordered" style="width: 100px">
+                                    
+                                    <thead>  
+                                    <th>
+                                        COURSE_CODE
+                                    </th>
+                                    <th>
+                                        COURSE_NAME
+                                    </th>
+                                    <th>
+                                        TOTAL_CREDIT_HOUR
+                                    </th>
+                                    </thead>
+
+                                    <tr>
+                                        <td>
+                                            <%=rs.getString("COURSE_CODE")%>  
+                                        </td>
+                                        <td>
+                                            <%=rs.getString("COURSE_NAME")%>
+                                        </td>
+                                        <td>
+                                            <%=rs.getString("CREDIT_HOURS")%> 
+                                        </td>
+                                    </tr>
+
+                                </table>
+<!--                                <div class="col-lg-8">
+                                   <p class="page-header"> Edit Total Credit Hour of:  <%=rs.getString("COURSE_CODE")%> <%=rs.getString("CREDIT_HOURS")%></p><br>-->
+
+                                    <%  }
+
+                                    %>
+
+                                <!--</div>-->
+                           
+                           
+                                    <p class="page-header text-primary text-center">You want to edit credit hour:</p>
+                            <form class="form-group" method="POST"  action="${pageContext.request.contextPath}//CreditHourServlet">
+
+                                <input type="hidden" name="creditcrscode" id="creditcrscode" value="<%=request.getParameter("crscodecredit")%>">
+                               <!--<p class="page-header pull-center has-success">Additional credit Request?</p>-->
+                                <div class="form-group col-lg-8 has-success">
+                                    <!--<div class="input-group">-->
+                                    <span class="pull-center has-success">Spit Credit Hour?</span>
+                                    <strong>Yes</strong><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck"> 
+                                    <strong>No </strong><input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck"><br>
+                                    <!--<input type="text" name="coursename"  class="form-control" id="coursename" placeholder="Enter Course Name">-->
+                                    <!--</div>-->
+                                </div>
+                               <div id="ifYes" style="visibility:hidden" class="form-group col-lg-6">
+                                    <div class="form-group col-lg-4 has-success">
+                                    <label>Theory Credit Hour in Number</label>
+                                    <input type="text" class="input-small form-control" id="thrycredithour" name="thrycredithour"  placeholder="Enter theory credit hour  " >
+                                    </div>
+                                 <div class="form-group col-lg-4 has-success">
+                                    <label>Practice Credit Hours in number</label>
+                                    <input type="text" class="input-small form-control" id="prctcredithour" name="prctcredithour"  placeholder="Enter practice credit hour  " >
+                                    </div>
+                                    
+                                    <div class="col-lg-8 col-md-6 col-sm-6">
+                                    <button type="submit" id="saveinstexp" class="btn btn-success">
+                                        <span class="fa fa-save"><strong> Save Credit Hour</strong></span></button>
+                                    </div>
+                                </div>
+                       
+                                </script>
+
+                                <%}%> 
+                            </form>
+                             <%
+                                session.setAttribute("creditsave", null);
+                                session.setAttribute("creditNotsave", null);
+                            %>
+                                 <!--start edit table credit hour-->
+                                   <%
+                                if (request.getParameter("actioncredit") != null && request.getParameter("idcredit") != null) {
+                                    String action = request.getParameter("actioncredit");
+                                    String id = request.getParameter("idcredit");
+                                    if (action.equalsIgnoreCase("delete")) {
+                                        //Alert="";
+                                        ResultSet rs_delete = getdept.executeQuery("delete from TBL_CREDIT  where SEQNO_CREDITHOUR='" + id + "'");
+                                        // if (rs_delete.next()) {
+
+                            %>    
+                            <!--                    <div class="alert alert-success" id="">
+                                                    Successfully deleted
+                                                </div>        -->
+
+                            <% } else if (action.equalsIgnoreCase("edit")) {
+                                ResultSet rs_edit = getdept.executeQuery("select * from TBL_CREDIT  where SEQNO_CREDITHOUR='" + id + "'");
+                                if (rs_edit.next()) {
+
+                            %>
+
+                            <div class="form-group">
+
+                                <p class=""> <strong>Editing <%=rs_edit.getString("COURSE_CODE")%></strong> </p>
+                                <form class="form-group" action="${ pageContext.request.contextPath }/CreditHourUpdateServlet" method="Post">
+                                    <!--<form class="form-group" action="../CommonOprations/EditCourse.jsp" method="Post">-->
+                                    <div class="form-group col-lg-4">
+                                        COURSE CODE:
+                                        <input class="form-control" type="text" name="edit_creditcrscode" value="<%=rs_edit.getString("COURSE_CODE")%>" />
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        THEORY CREDIT HOUR:
+                                        <input class="form-control" type="text" name="edit_credittheory" value="<%=rs_edit.getString("THEORY_CREDIT")%>" />
+                                    </div>
+                                     <div class="form-group col-lg-4">
+                                          PRACTICE CREDIT HOUR:
+                                        <input class="form-control" type="text" name="edit_creditpractice" value="<%=rs_edit.getString("PRACTICE_CREDIT")%>" />
+                                    </div>
+                                                              
+                                     <div class="form-group col-lg-4">
+                                        SEQ_NO:
+                                        <input class="form-control" type="TEXT" name="edit_crdt_SEQNO" id="edit_PRECOURSE_SEQNO" value="<%=rs_edit.getString("SEQNO_CREDITHOUR")%>" readonly=""/>
+                                    </div>
+                                    <div class="form-group col-lg-4"> <br>
+
+                                        <input class="btn btn-warning" type="submit" value="Update"/>
+                                    </div>
+                                </form>
+                            <%
+                                session.setAttribute("creditUpdatesave", null);
+                                session.setAttribute("creditUpdateNotsave", null);
+                            %>
+                            </div>
+                            <% }
+                                    }
+                                }
+                            %>
+                            <!--end edit table credit hour-->
+                             <!--start table credit-->
+                              <div class="table table-responsive">
+                                <table  class="table table-striped table-bordered table-hover"  id="tabledatecredit" >
+                                    <thead>
+                                        <tr>
+                                            <th>COURSE_CODE</th>
+                                            <th>THEORY_CREDIT</th>
+                                             <th>PRACTICE_CREDIT</th>
+                                            <th><span class=" glyphicon glyphicon-edit">Edit</span></th>
+                                            <th ><span class="glyphicon glyphicon-remove">Delete</span></th>
+
+
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <%
+                                           String sql_credit = "select * from TBL_CREDIT order by COURSE_CODE";
+                                            ResultSet rs_credit = stmt.executeQuery(sql_credit);
+                                            while (rs_credit.next()) {
+                                                String idcc = rs_credit.getString(1);
+                                        %>
+                                        <tr>
+                                             <td><%=idcc%></td> 
+                                            <td><%=rs_credit.getString(2)%></td> 
+                                             <td><%=rs_credit.getString(3)%></td>                                        
+                                            <td>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="actioncredit" value="edit"/>
+                                                    <input type="hidden" name="idcredit" id="edit_id" value="<%=rs_credit.getString(4)%>"/>
+                                                    <!--<input type="hidden" name="edit_id" value="<%=idcc%>"/>-->
+
+                                                    <button class="btn btn-warning glyphicon glyphicon-edit" id="edit_id">Edit</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <!--<form action="deletecourse.jsp" method="Post" >-->
+                                                <form action="" class="form-group" method="Post" >
+                                              <!--<input type="hidden" name="delete_id" value="<%=idcc%>"/>-->
+                                                    <input type="hidden" name="actioncredit" value="delete"/>
+                                                    <input type="hidden" name="idcredit" id="delete_id" value="<%=rs_credit.getString(4)%>"/>
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" id="deleteid">Delete</button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                             <!--end credit table-->
+                             
+                        </div>
+                    </div>
                 </div>
+
+                <!--end tab-->
             </div>
         </div>
 
+        <!--pre request script-->
+        <script type="text/javascript">
+            function yesnoCheck() {
+                if (document.getElementById('yesCheck').checked) {
+                    document.getElementById('ifYes').style.visibility = 'visible';
+                } else
+                    document.getElementById('ifYes').style.visibility = 'hidden';
+
+            }
+        </script>
         <script type="text/javascript">
             $(function () {
                 $('.navbar-toggle').click(function () {
@@ -387,7 +989,7 @@
         <link href="../resources/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 
         <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-        <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>              
         <script type="text/javascript">
             $("#date_registered").datepicker({
                 changeMonth: true,
@@ -411,6 +1013,22 @@
             $().ready(function () {
                 //                    var j = jQuery.noConflict();
                 $('#tabledate').dataTable();
+            });
+
+
+        </script>
+        <script type="text/javascript">
+            $().ready(function () {
+                //                    var j = jQuery.noConflict();
+                $('#tabledateprerequest').dataTable();
+            });
+
+
+        </script>
+         <script type="text/javascript">
+            $().ready(function () {
+                //                    var j = jQuery.noConflict();
+                $('#tabledatecredit').dataTable();
             });
 
 
@@ -445,6 +1063,10 @@
                         prerequest: {
                             required: true
                         },
+                        coursetype: {
+                            required: true
+                        },
+
                         term:
                                 {
                                     required: true
@@ -494,5 +1116,27 @@
                 }
             }
         </script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+                    localStorage.setItem('activeTab', $(e.target).attr('href'));
+
+                });
+
+                var activeTab = localStorage.getItem('activeTab');
+
+                if (activeTab) {
+
+                    $('#myTab a[href="' + activeTab + '"]').tab('show');
+
+                }
+
+            });
+
+        </script>
+    
     </body>
 </html>

@@ -178,7 +178,8 @@ and open the template in the editor.
             /* small screen */
             @media (max-width: 768px) {
                 .side-menu {
-                    position: relative;
+                    /*position: relative;*/
+                    position: absolute;
                     width: 100%;
                     height: 0;
                     border-right: 0;
@@ -252,8 +253,8 @@ and open the template in the editor.
                 }
                 .side-menu-container > .navbar-nav {
                     /* Add position:absolute for scrollable menu -> see top comment */
-                    position: fixed;
-                    /*position: absolute;*/
+                    /*position: fixed;*/
+                    position: absolute;
                     left: -300px;
                     width: 300px;
                     top: 43px;
@@ -347,6 +348,7 @@ and open the template in the editor.
                 }
                 /* Hamburger */
                 .navbar-toggle {
+                    position: absolute;
                     border: 0;
                     float: left;
                     padding: 18px;
@@ -363,7 +365,8 @@ and open the template in the editor.
                 }
                 .navbar-header {
                     /* this is probably redundant */
-                    position: fixed;
+                    /*position: fixed;*/
+                     position: absolute;
                     z-index: 3;
                     background-color: #f8f8f8;
                     

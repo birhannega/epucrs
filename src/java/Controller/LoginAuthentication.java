@@ -48,7 +48,7 @@ public class LoginAuthentication extends HttpServlet {
             String username = request.getParameter("username"),
                     password = request.getParameter("password");
             String status = "active", role = null;
-
+  HttpSession session = request.getSession();
             UserManagement userlogin = new UserManagement();
 
             int user_validity = userlogin.authenticateuser(username, status, password);
@@ -58,7 +58,7 @@ public class LoginAuthentication extends HttpServlet {
                 ResultSet rs_user = user_statement.executeQuery("select ROLE_ID from Tbl_user where user_id='" + username + "'");
                 if (rs_user.next()) {
 
-                    HttpSession session = request.getSession();
+                  
 //                    session.setAttribute("loggeduser", username);
                     role = rs_user.getString(1);
                     if (role.equalsIgnoreCase("R_00")) {
@@ -67,8 +67,10 @@ public class LoginAuthentication extends HttpServlet {
                     } else if (role.equalsIgnoreCase("R_01")) {
                         response.sendRedirect("Incoder/index.jsp");
                     } else if (role.equalsIgnoreCase("R_02")) {
-                        response.sendRedirect("Instructor/ndex.jsp");
+                        session.setAttribute("inst", username);
+                        response.sendRedirect("Instructor/index.jsp");
                     } else if (role.equalsIgnoreCase("R_03")) {
+                          session.setAttribute("dpt", username);
                         response.sendRedirect("Department/index.jsp");
                     } else if (role.equalsIgnoreCase("R_04")) {
                         response.sendRedirect("Student/index.jsp");
@@ -78,7 +80,9 @@ public class LoginAuthentication extends HttpServlet {
                 }
 
             } else {
-                out.print("login faield");
+//                out.print("login faield");
+session.setAttribute("error", "username or password is incorrect");
+response.sendRedirect("index.jsp");
             }
 
             //out.println("You entered"+ username +" "+password+"</h1>");

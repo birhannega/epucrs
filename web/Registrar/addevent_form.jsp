@@ -1,4 +1,6 @@
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <link href="../resources/DataTable/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
 
 <%@page import="java.sql.ResultSet"%>
@@ -129,8 +131,10 @@ if(rs_edit.next())
         </thead>
         <tbody>
             <%
-                
-                String sql = "select * from TBL_SCHEDULE order by Schedule_id ";
+                Date date=new Date();
+                SimpleDateFormat sdf=new SimpleDateFormat("Y");
+                String currentyear=sdf.format(date);
+                String sql = "select * from TBL_SCHEDULE where ACADEMICYEAR='"+currentyear+"' order by Schedule_id ";
                 ResultSet resultSet = statement.executeQuery(sql);
                 int counter = 0;
                 while (resultSet.next()) {
