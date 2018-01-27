@@ -6,9 +6,12 @@
 package Model;
 
 import dbconnection.connectionManager;
+import java.io.IOException;
 import java.sql.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -43,7 +46,9 @@ public class StudentManagement {
             String Stud_Nationality,
             String Stud_Police_Commision_Sector,
             String Stud_Police_Commision_Number,
-            String STUD_TYPE) throws ClassNotFoundException, SQLException {
+            String STUD_TYPE,
+           String dep_id,
+           String program_id) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps_register = dbconnection.getconnection().prepareStatement("Insert into TBL_STUDENT_PROFILE("
                 + "  Stud_Id"
@@ -71,8 +76,10 @@ public class StudentManagement {
                 + ", Stud_Police_Commision_Sector"
                 + ", Stud_Police_Commision_Number"
                 + ", STUD_TYPE"
+                + ", DEP_ID"
+                + ", PROGRAM_ID"
                 + ")"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         ps_register.setString(1, Stud_id);
         ps_register.setString(2, Stud_First_Name);
@@ -99,7 +106,8 @@ public class StudentManagement {
         ps_register.setString(23, Stud_Police_Commision_Sector);
         ps_register.setString(24, Stud_Police_Commision_Number);
         ps_register.setString(25, STUD_TYPE);
-
+       ps_register.setString(26, dep_id);
+       ps_register.setString(27, program_id);
         int registrationcheker = ps_register.executeUpdate();
         //  registrationcheker=res_reg.next();
         return registrationcheker;
@@ -293,7 +301,21 @@ public class StudentManagement {
     public int readmit(String studentID) {
         return 0;
     }
+ public int updateherby(String herby,String studentID) {
+     int action = 0;
+        try {
+                  
 
+            PreparedStatement ps_herby=dbconnection.getconnection().prepareStatement("update TBL_STUDENT_PROFILE Set herby=? where stud_id=?");
+               ps_herby.setString(1, herby);
+               ps_herby.setString(2,studentID);
+        action=ps_herby.executeUpdate();
+         
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return action;
+    }
     public int savestudprogram(String studentID, String program, String department) throws ClassNotFoundException, SQLException {
 
         PreparedStatement ps_savedepartment = dbconnection.getconnection().prepareStatement("insert into TBL_STUD_DEP(Stud_id,Dep_id,Program_id) values(?,?,?) ");
@@ -319,6 +341,47 @@ public class StudentManagement {
             Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
         return saved;
+    }
+    /// upload photo start
+    
+     public int uploadPhoto(String studid, Part inputStream) throws ClassNotFoundException, IOException {
+        int saved = 0;
+        try {
+             String sql = "insert INTO TBL_PICTURES (STUD_ID,photo) values (?,?)";
+            PreparedStatement ps_photo = dbconnection.getconnection().prepareStatement(sql);
+                 
+            ps_photo.setString(1, studid);
+            ps_photo.setBinaryStream(2, inputStream.getInputStream(),(int) inputStream.getSize());
+       
+            saved = ps_photo.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return saved;
+    }
+    //upload photo end
+    
+    
+    public String getSudentprofile(String studentid) throws ClassNotFoundException
+    {
+        String profileexists=null;
+        List profile=null;
+        try {
+            Statement st_profile=dbconnection.getconnection().createStatement();
+            ResultSet rs_profile=st_profile.executeQuery("select * from TBL_STUDENT_profile where stud_id='"+studentid+"'");
+            if(rs_profile.next())
+            {
+               profile.add(rs_profile.getString(1));
+               //profileexists=rs_profile.getString(1);
+            }
+            
+           return  profileexists;
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return profileexists;
     }
 
 }

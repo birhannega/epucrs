@@ -7,7 +7,7 @@
         <!--css-->
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="../resources/css/registrar-side-menu.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
      
 

@@ -3,12 +3,7 @@
     Created on : Oct 9, 2017, 11:28:19 AM
     Author     : luv2codeit
 --%>
-<%
-if(session.getAttribute("step2")==null)
-{
-}
-else
-{%>
+
 
 
 <%@page import="java.sql.ResultSet"%>
@@ -181,10 +176,10 @@ else
                         <input type="text" name="school9" class="form-control" placeholder="Enter name of school/ Grade 9">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="startdate9" class="form-control" placeholder="start date/ Grade 9">
+                        <input type="text" data-type="date" name="startdate9" class="form-control" placeholder="start date/ Grade 9">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="enddate9" class="form-control" placeholder="End date/ Grade 9">
+                        <input type="text" data-type="date" name="enddate9" class="form-control" placeholder="End date/ Grade 9">
                     </div>
                 </div>
                 <!--Grade ten-->
@@ -196,10 +191,10 @@ else
                         <input type="text" name="school10" class="form-control" placeholder="Enter name of school/ Grade 10">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="startdate10" class="form-control" placeholder="start date/ Grade 10">
+                        <input type="text" data-type="date" data-type="date" name="startdate10" class="form-control" placeholder="start date/ Grade 10">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="enddate10" class="form-control" placeholder="End date/ Grade 10">
+                        <input type="text" data-type="date" name="enddate10" class="form-control" placeholder="End date/ Grade 10">
                     </div>
                 </div>
                 <!--Grade 11-->
@@ -211,10 +206,10 @@ else
                         <input type="text" name="school11" class="form-control" placeholder="Enter name of school/ Grade 11">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="startdate11" class="form-control" placeholder="start date/ Grade 11">
+                        <input type="text" data-type="date" name="startdate11" class="form-control" placeholder="start date/ Grade 11">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="enddate11" class="form-control" placeholder="End date/ Grade 11">
+                        <input type="text" data-type="date" name="enddate11" class="form-control" placeholder="End date/ Grade 11">
                     </div>
                 </div>
                 <!--Grade 12-->
@@ -226,10 +221,10 @@ else
                         <input type="text" name="school12" class="form-control" placeholder="Enter name of school/ Grade 12">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="startdate12" class="form-control" placeholder="start date/ Grade 9">
+                        <input type="text" data-type="date" name="startdate12" class="form-control" placeholder="start date/ Grade 9">
                     </div>
                     <div class="col-lg-3 form-group">
-                        <input type="text" name="enddate12" class="form-control" placeholder="End date/ Grade 12">
+                        <input type="text" data-type="date" name="enddate12" class="form-control" placeholder="End date/ Grade 12">
                     </div>
                 </div>
 
@@ -240,8 +235,16 @@ else
                 %>
             </form>
         </div>
+            <script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+            <script type="text/javascript">
+               $('input[data-type="date"]').datepicker({
+                                        changeYear: true,
+                                        changeMonth: true,
+                                        inline: true
+                                    });
+                </script>
     </body>
-    <%
-    }
-    %>
+    
 </html>

@@ -42,7 +42,7 @@
                     connectionManager db_con = new connectionManager();
                     Connection con = db_con.getconnection();
                     Statement st_date = con.createStatement();
-                    String sql = "select * from TBl_schedule where event_name like '%student registration%'";
+                    String sql = "select * from TBl_schedule where SCHEDULE_ID=0 ";
                     ResultSet resultSet = st_date.executeQuery(sql);
                     if (resultSet.next()) {
                         java.util.Date dbstartdate = resultSet.getDate("start_date");
@@ -114,7 +114,7 @@
                         <div class="form-group col-sm-4">
 
                             <label> Birth Date</label>
-                            <input type="date" class="form-control" name="studbdate" id="studbdate" placeholder="Enter birthdate">
+                            <input data-type="date" type="text" class="form-control" name="studbdate" id="studbdate" placeholder="Enter birthdate">
                         </div>
                         <div class="form-group col-sm-4">
 
@@ -179,11 +179,15 @@
                         <div class="col-lg-12" >
                             <strong><p class="text-uppercase text-muted text-info"><span class="fa fa-podcast " ></span> police commission </p></strong>
                         </div>
-                        <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-4">
+                            <label>  Police commission</label>
+                            <input type="text" class="form-control" name="studpcomission" id="pcSector" >
+                        </div>
+                        <div class="form-group col-lg-4">
                             <label>  sector</label>
                             <input type="text" class="form-control" name="studpcSector" id="pcSector" >
                         </div>
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-4">
                             <label> Mobile</label>
                             <input type="text" class="form-control" name="studpcMobile" id="pcMobile" >
                         </div>
@@ -218,7 +222,7 @@
                         </div>
 
                         <div class="form-group col-sm-4">
-                            <br><input type="hidden" name="step" value="step1"/>;
+                            <br>
                             <button class=" btn btn-primary"><strong> Save personal info</strong></button>
                         </div>
                     </form>
@@ -227,25 +231,29 @@
                 %>
                                     <div class="container">
                                         <div class="">
-                                            <h1 class="text text-danger"> <span class="fa fa-times-circle"></span> Time is up!</h1>
+                                            <h1 class="text text-danger"> <span class="fa fa-times-circle"></span> Time is up! <a href="${pageContext.request.contextPath}"><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-log-in"> </span> <strong> Back to Login </strong></button></a>
+<br></h1>
+                                            
                                         </div>
                                         <div class="alert alert-warning">
 
-                                            Registration at this time is not allowed</span>
+                                            Registration at this time is not allowed
 
                                         </div> 
                                         <p class="text-info">
-                                            The registration period for this academic year was between <%=dbstartdate%> and <%=dbenddate%>.
+                                            The registration period for this academic year was between <strong> <%=dbstartdate%> and <%=dbenddate%>.</strong>
                                         </p>
                                     </div>
                          <%
                         }else if(Currentutilstartdate.before(dbstartdate)){
  %>
                                     <div class="container">
+                                        
                                         <div class="">
                                             <h4 class="text text-danger"> <span class="fa fa-times-circle"></span> registration not yet started</h4>
                                         </div>
                                         <div class="alert alert-warning">
+
 
                                             Registration at this time is not allowed</span>
 
@@ -270,8 +278,7 @@
 
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
-       
-        <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../resources/js/jquery-ui.js" type="text/javascript"></script>
         <style rel="stylesheet">
             .error{
                 color: red;
@@ -281,7 +288,7 @@
 
                                 $(document).ready(function ()
                                 {
-                                    $('input[type="date"]').datepicker({
+                                    $('input[data-type="date"]').datepicker({
                                         changeYear: true,
                                         changeMonth: true,
                                         inline: true

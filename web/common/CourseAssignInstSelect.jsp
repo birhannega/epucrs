@@ -37,12 +37,12 @@
             }
         %>
         <label type="text" id="crsname" name="crsname"><%=name%></label><br>
-        <div class="table-responsive">
+         <div class="table table-responsive">
             <table class="table table-striped">
                 <!--<caption>Responsive Table Layout</caption>-->
                 <thead>
                     <tr>
-                        <th>Course ID</th>
+                        <th>Course Name</th>
                         <th>Assign Date</th>
                         <th>Round</th>
                         <th>Total Hour</th>
@@ -50,6 +50,7 @@
                         <th>Duration To</th>
                     </tr>
                 </thead>
+                
                 <%
 
                     while (rs.next()) {
@@ -61,12 +62,11 @@
 
 
                 <!--<input class="container-fluid"  type=checkbox id="crsname" name="crsname" value="<%=crs_code%>"><%=crs_code%></br>-->
-                <input class="hidden" type="text" name="staffid" id="staffid" placeholder="Staff ID">
+                
                 <tbody>
                     <tr>
                        <!--<td ><%=name%></td>-->
                         <td><input class="container-fluid"  type=checkbox id="crsname" name="crsname[]" value="<%=crs_code%>"><%=crs_code%></td>
-                        <!--<td><input class="" type="text" name="staffid" id="staffid" placeholder="Staff ID"></td>-->
                         <td><input class="" type="date" name="assigndate" id="assigndate" placeholder="assign date"></td>
                         <td><input class="" type="text" name="round" id="round" placeholder="round"></td>
                         <td><input class="" type="text" name="totalhour" id="totalhour" placeholder="Total Hour"></td>
@@ -85,7 +85,24 @@
     
   </div
 </form>
+<!--<script type="text/javascript">
+function validate() {
+var txt1 = document.getElementById("crsname");
+var txt2 = document.getElementById("assigndate");
+var txt3 = document.getElementById("round");
+var txt4 = document.getElementById("totalhour");
+var txt5 = document.getElementById("durationfrom");
+var txt6 = document.getElementById("durationto");
 
+if(txt1.value== "" || txt1.value== null) {
+alert("Please enter a course name");
+txt.style.border = "2px solid red";
+return false;
+} else {
+txt.style.border = "";
+}
+}
+</script>-->
 
 
 <% } catch (Exception e) {

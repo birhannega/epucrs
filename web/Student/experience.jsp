@@ -3,13 +3,7 @@
     Created on : Oct 19, 2017, 3:17:18 AM
     Author     : luv2codeit
 --%>
-<%
-if(session.getAttribute("pseisaved")==null)
-{
-    response.sendRedirect("psei.jsp");
-}else
-{
-%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -81,7 +75,7 @@ if(session.getAttribute("pseisaved")==null)
                     </div>
                     <div class="form-group col-lg-6" >
                         <label>Telephone</label>
-                        <input type="text" name="employertel" class="form-control">
+                        <input type="tel" name="employertel" class="form-control">
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Title of current post</label>
@@ -93,11 +87,11 @@ if(session.getAttribute("pseisaved")==null)
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Date of employment</label>
-                        <input type="text" name="dateofemployment" class="form-control">
+                        <input type="text" data-type="date" name="dateofemployment" class="form-control">
                     </div>
                     <div class="form-group col-lg-6">
                         <label>Total years of work experience</label>
-                        <input type="text" name="totalexp" class="form-control">
+                        <input type="number" name="totalexp" class="form-control">
                     </div>
                     <div class="form-group col-lg-6">
                         <br>
@@ -107,7 +101,18 @@ if(session.getAttribute("pseisaved")==null)
                 </form>
                         <%}%>
             </div>
+            
         </div>
+            <script src="../resources/jquery/jquery-1.10.2.min.js" type="text/javascript"></script>
+            <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
+            <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                   $("input[data-type='date']").datepicker({
+                       changeYear:true
+                   });
+                   
+                </script>
+            
     </body>
 </html>
-<%}%>

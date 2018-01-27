@@ -8,6 +8,7 @@ package Controller;
 import Model.Events;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,10 +45,10 @@ public class Edit_event extends HttpServlet {
                 PrintWriter out = response.getWriter()) 
         {
             String edited_title=request.getParameter("edited_event_title"),
-                    edited_name=request.getParameter("edited_eventname"), 
-                    edited_start_date=request.getParameter("edited_start_date"),  
-                    edited_end_date=request.getParameter("edited_end_date"),
-                    event_id=request.getParameter("eventid");
+                    edited_name=request.getParameter("edited_eventname"); 
+                 Date edited_start_date=Date.valueOf(request.getParameter("edited_start_date")),  
+                    edited_end_date=Date.valueOf(request.getParameter("edited_end_date"));
+                   String event_id=request.getParameter("eventid");
             int id=Integer.valueOf(event_id);
             String message;
             Events edit_schedule=new Events();

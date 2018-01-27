@@ -552,6 +552,84 @@ Select Languages:<br>
 
 }
         </script>
+        
+        <!--multiselect-->
+        <link href="../resources/css/multiselectcss.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/js/multiselectjavascript.js" type="text/javascript"></script>
+        <script src="../resources/js/multiselectminijavascript.js" type="text/javascript"></script>
+        <div class="row">
+    <div class="col-xs-5">
+        <select name="from[]" id="search" class="form-control" size="8" multiple="multiple">
+            <option value="1">Item 1</option>
+            <option value="2">Item 5</option>
+            <option value="2">Item 2</option>
+            <option value="2">Item 4</option>
+            <option value="3">Item 3</option>
+        </select>
+    </div>
+    
+    <div class="col-xs-2">
+        <button type="button" id="search_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+        <button type="button" id="search_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+        <button type="button" id="search_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+        <button type="button" id="search_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+    </div>
+    
+    <div class="col-xs-5">
+        <select name="to[]" id="search_to" class="form-control" size="8" multiple="multiple"></select>
+    </div>
+</div>
+<!--JavaScript-->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $('#search').multiselect({
+        search: {
+            left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+            right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+        },
+        fireSearch: function(value) {
+            return value.length > 3;
+        }
+    });
+});
+</script>
+<!--onchange event-->
+<style type="text/css">
+    #ic, #passport { display: none; }
+</style> 
+<select id="test">
+     <option value="">--- please select ---</option>
+    <option value="MY">Malaysia</option>
+    <option value="JP">Jipun</option>
+</select>
+
+
+<div id="ic" style="display:none;">
+    <table>
+        <tr>
+            <td>
+                iccc
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="passport" style="display:none;">
+  passport
+</div>
+<script type="text/javascript">
+    $('#test').on('change', function() {
+  //  alert( this.value ); // or $(this).val()
+  if(this.value == "MY") {
+    $('#ic').show();
+    $('#passport').hide();
+  } else {
+    $('#ic').hide();
+    $('#passport').show();
+  }
+});
+    </script>
     </body>
 
     </html>

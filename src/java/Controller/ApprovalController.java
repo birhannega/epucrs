@@ -31,65 +31,124 @@ public class ApprovalController extends HttpServlet {
 
 PrintWriter out = response.getWriter();
  try {
+            approved_mark_model inserted=new approved_mark_model();
+       //connectionManager con=new connectionManager();
+     String action=request.getParameter("action");
+     int i=0;
+         if("submit".equalsIgnoreCase(action))
+     {
+       
+       float sixty=0,fourty=0,hundred=0;
+           String mark_40 []=request.getParameterValues("mark_40");
+     String mark_60 []=request.getParameterValues("mark_60");
+  
+          String approvalname=request.getParameter("approvalname");
+               String teacherid=request.getParameter("teacherid");
+                String date=request.getParameter("date");
      
-       int i=0;
-     String course2=request.getParameter("course");
      String academicyear=request.getParameter("academicyear");
-     String credithour=request.getParameter("credithour");
+     String course2=request.getParameter("course");
+             String mark_100 []=request.getParameterValues("mark_100");
+
      String program=request.getParameter("program");
-     String date=request.getParameter("date");
-     String teacherid=request.getParameter("teacherid");
-     String approvalname=request.getParameter("approvalname");
-     String Registrar_office_name=request.getParameter("Registrar_office_name");
-     String term=request.getParameter("term");
      String []studid=request.getParameterValues("studid");
-     String [] mark_40=request.getParameterValues("mark_40");
-     String []mark_60=request.getParameterValues("mark_60");
-     String [] mark_100=request.getParameterValues("mark_100");
-     String room=request.getParameter("room");
-    int [] status=new int[50];
-    status[1]=1;
-     String []grade=request.getParameterValues("room");
-    float result=0;
+    String grade=null;
     
+   // out.println(mark_40);
      for(int j=0;j<studid.length;j++){
-           result=Float.valueOf(mark_100[j]);
-           if(result>90){
-                    grade[j]="A";
-           }
-          
-           else if(result>80){
-               grade[j]="B";
-           }
-       approved_mark_model inserted=new approved_mark_model();
-       connectionManager con=new connectionManager();
-       Statement st_con=con.getconnection().createStatement();
-       ResultSet rs_con=st_con.executeQuery("select * from tbl_mark where stud_id='"+studid[j]+"'and academicyear='"+academicyear+"' and term='"+term+"'");
-       if(rs_con.next()){
-           String id=rs_con.getString("stud_id");
-           out.println(id);
-           out.println("student data inserted befor this time");
-           
-       }
-       else{
-               i=inserted.approvalmark(mark_40[j],mark_60[j],approvalname,teacherid,date,academicyear,course2,
-        credithour,mark_100[j],program,studid[j],grade[j],term,status[1],Registrar_office_name,room);
+            sixty=Float.valueOf(mark_60[j]);
+            fourty=Float.valueOf(mark_40[j]);
+            hundred=Float.valueOf(mark_100[j]);
+            if(hundred>90)
+    {
+        grade="A";
+        
+    }
+    else if(hundred>80) {
+        grade="B";
+    }
+    else if(hundred>70){
+        grade="C";
+        
+    }
+    else if(hundred>60)
+    {
+        grade="D";
+        
+    }
+    else if(hundred>50){
+        grade="F";
+    }
+    else {
+        grade="FX";
+    }
+              String term=request.getParameter("term");
+              int status=1;
+             String Registrar_office_name=request.getParameter("Registrar_office_name");
+     String room=request.getParameter("room");
+
+//       Statement st_con=con.getconnection().createStatement();
+//       ResultSet rs_con=st_con.executeQuery("select * from tbl_mark where stud_id='"+studid[j]+"'and academicyear='"+academicyear+"' and term='"+term+"'");
+//       if(rs_con.next()){
+//           String id=rs_con.getString("stud_id");
+//           out.println(id);
+//           out.println("student data inserted befor this time");
+//           
+//       }
+//       else{
+              inserted.approvalmark(fourty,sixty,approvalname,teacherid,date,academicyear,course2,hundred,
+        program,studid[j],grade,term,status,Registrar_office_name,room);
                }}
+         
+         else if("ReSubmit".equalsIgnoreCase(action)){
+             float sixty=0,fourty=0,hundred=0;
+     
+                   String mark_40 []=request.getParameterValues("mark_40");
+     String mark_60 []=request.getParameterValues("mark_60");
+    String mark_100 []=request.getParameterValues("mark_100");
+          String []studid=request.getParameterValues("studid");
+          String grade=null;
+          for(int k=0;k<studid.length;k++){
+              sixty=Float.valueOf(mark_60[k]);
+            fourty=Float.valueOf(mark_40[k]);
+            hundred=Float.valueOf(mark_100[k]);
+            if(hundred>90)
+    {
+        grade="A";
+        
+    }
+    else if(hundred>80) {
+        grade="B";
+    }
+    else if(hundred>70){
+        grade="C";
+        
+    }
+    else if(hundred>60)
+    {
+        grade="D";
+        
+    }
+    else if(hundred>50){
+        grade="F";
+    }
+    else {
+        grade="FX";
+    }
+            int status=1;
+            
+            inserted.resubmit(fourty, sixty, hundred, studid[k], grade, status);
+          }
+         }
           if(i>0){
               request.getSession().setAttribute("inserted", " student mark sucessfuly inserted");
-              response.sendRedirect("Incoder/SUbmissionMark.jsp");
+              response.sendRedirect("Instructor/Submit.jsp");
           }
           else{
               request.getSession().setAttribute("not","student mark not inserted");
-              response.sendRedirect("Incoder/SUbmissionMark.jsp");
+              response.sendRedirect("Instructor/Submit.jsp");
           }
-    
-     
-        
-     
-     
-     
-        } finally {
+            } finally {
            
         }
     }

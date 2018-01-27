@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class connectionManager{
     String host="localhost";   //hostname
-    String user="epucrs"; //user
+    String user="C##epucrs"; //user
     String password="epucrs"; //user password
     String url="epucrs@//localhost:1521/epucrs"; // url of db connection
     
@@ -19,10 +19,10 @@ public class connectionManager{
      public Connection getconnection() throws ClassNotFoundException, SQLException {
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:epucrs";
-            String db_uname = "epucrs";
+            String dburl = "jdbc:oracle:thin:@localhost:1521:epucrs";
+            String db_uname = "C##epucrs";
             String db_pwd = "epucrs";
-            Connection conn =DriverManager.getConnection(url, db_uname, db_pwd);
+            Connection conn =DriverManager.getConnection(dburl, db_uname, db_pwd);
             return conn;
 
 

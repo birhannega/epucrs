@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.StudentManagement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,12 +37,18 @@ public class herby extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
+            String id=request.getParameter("studid"),
+                    herby=request.getParameter("herby");
+           // out.print("id:-"+id+" and state="+herby);
             
-            
+            StudentManagement herbysubmission=new StudentManagement();
+            int submited=herbysubmission.updateherby(herby, id);
+            if(submited>=1){
          HttpSession session=request.getSession();
          session.setAttribute("finished", "you have sucessfully finished registration please create user account to login");
             response.sendRedirect("Student/finish.jsp");
           
+        }
         }
     }
 

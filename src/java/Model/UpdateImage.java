@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 import javax.websocket.Encoder.BinaryStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Statement;
 
 /**
  *
@@ -22,6 +23,7 @@ import java.io.InputStream;
  */
 public class UpdateImage {
      connectionManager connection=new connectionManager();
+     
 
     public int UpdateImageProfile(String displayimageid,Part Imageupdate) throws SQLException, ClassNotFoundException, IOException
     {
@@ -29,9 +31,11 @@ public class UpdateImage {
        
           connectionManager cm = new connectionManager();
         Connection con = cm.getconnection();
+        Statement _stmt=con.createStatement();
       
-  PreparedStatement ps_edit =con.prepareStatement("UPDATE TBL_ACADEMIC_STAFF_REG SET IMAGE=?  WHERE  ACADEMIC_STAFF_ID=?");
-// PreparedStatement ps_edit =con.prepareStatement("Insert into TBL_ACADEMIC_STAFF_REG( ACADEMIC_STAFF_ID ,IMAGE)  values(?,?)");
+  PreparedStatement ps_edit =con.prepareStatement("UPDATE TBL_ACADEMIC_STAFF_REG SET ACADEMIC_STAFF_ID=?, IMAGE=?  WHERE  ACADEMIC_STAFF_ID='"+displayimageid+"'");
+// PreparedStatement ps_edit =con.prepareStatement("UPDATE TBL_INST_PHOTO SET ACADEMIC_STAFF_ID=?,IMAGE=?  WHERE  ACADEMIC_STAFF_ID='"+displayimageid+"'");
+ 
                ps_edit.setString(1, displayimageid);
                 ps_edit.setBinaryStream(2, Imageupdate.getInputStream(),(int) Imageupdate.getSize());
 //                ps_edit.setBinaryStream(2, Imageupdate.getInputStream(),(int) Imageupdate.getSize());
@@ -39,6 +43,9 @@ public class UpdateImage {
       
 
              action=ps_edit.executeUpdate();
+//action=_stmt.executeUpdate("UPDATE  TBL_INST_PHOTO set IMAGE='"+Imageupdate.getInputStream()+"' "
+//        + "  WHERE ACADEMIC_STAFF_ID ='"+displayimageid+"' " );
+//    return regclc;
               return action;
      
     }

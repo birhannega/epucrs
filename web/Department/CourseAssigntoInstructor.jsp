@@ -15,7 +15,7 @@
         <title>Registrar Add-user</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/sidebarcss1111.css" rel="stylesheet" type="text/css"/>
         <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
@@ -164,6 +164,9 @@
                             <div class="accordion-content">
                                 ${instructorAssigned}
                                 ${instructorNotAssigned}
+                                ${crslistSave}
+                                ${crslistNotSave}
+                                ${crslistNotValid}
                                 
                                        <div class="container-fluid">            
                                     <div class="list-group col-lg-4">
@@ -271,38 +274,51 @@
                                             </select>
                                         <!--</div>-->
                                     </div>
-                                    <div class="form-group col-lg-6 has-success">
-                                        <!--<div class="input-group">-->
-                                         <span class="" style="cursor: zoom-out">Course Name</span>
-                                            <!--<span class="input-group-addon">CourseName</span>-->
-                                            <select class="form-control" id="course" name="course" required="required">
-                                                <option value="-1">-select course-</option>
+                                             <div class="form-group col-lg-6 has-success">  
+                                            <span>Department</span>
+                                            <select name="department" id="department"  class="form-control" onchange="showState(this.value)" >
+                                                <option value="">select department</option>
                                                 <%
-                                                    try {
-                                                        //connectionManager dbconnection = new connectionManager();
-                                                        Statement st_course = dbconnection.getconnection().createStatement();
-                                                        String crs_sql = "select COURSE_NAME from TBL_COURSE_REGISTRATION";
+//                                                    connectionManager connnmgr = new connectionManager();
+//                                                    Connection con = connnmgr.getconnection();
+                                                    Statement getdept = con.createStatement();
 
-                                                        ResultSet rs_cours = st_course.executeQuery(crs_sql);
+                                                    String dep_name = null, depid = null;
+                                                    ResultSet rs_dept = getdept.executeQuery("select * from TBL_DEPARTMENT");
 
+                                                    while (rs_dept.next()) {
+                                                        dep_name = rs_dept.getString("DEP_NAME");
+                                                        depid = rs_dept.getString("DEP_ID");
                                                 %>
-                                                //                                                                        
-                                                <%    while (rs_cours.next()) {
-                                                        String id = rs_cours.getString("COURSE_NAME");
-                                                        //cid;
-%>
-                                                <option><%=id%></option>
-                                                <% } %>
-                                                <!--</select>-->
+                                                <option value="<%=depid%>"><%=dep_name%></option>
                                                 <%
-                                                    } catch (Exception e) {
-                                                        out.println("wrong selection!" + e);
                                                     }
                                                 %>
+
+                                            </select>                          
+                                        </div>
+                                    
+                                         <div class="form-group col-lg-6 has-success">  
+                                            <span class="has-success">Program</span>
+
+                                            <select name="program" id="program" class="form-control has-success" onchange="showStateCourse(this.value)">
+
+                                                <option value="">select program</option> 
+
                                             </select>
-                                        <!--</div>-->
-                                    </div>
-                                             <p class="page-header text-primary text-center">select common Fields</p> 
+                                        </div>
+                                         <div class="form-group col-lg-6 has-success">  
+                                            <span class="has-success">Course Name</span>
+
+                                            <select name="course" id="course" class="form-control has-success">
+
+                                                <option value="">select course</option> 
+
+                                            </select>
+                                        </div>
+                                 
+                                            
+                                             <p class=" col-lg-12 page-header text-primary text-center">select common Fields</p> 
                                      <div class="form-group col-lg-4 has-success">
                                         <div class="input-group">
                                             <span class="input-group-addon">Assigned Date</span>
@@ -504,7 +520,11 @@
                     <%    request.getSession().setAttribute("instructorAssigned", null);
                         request.getSession().setAttribute("instructorNotAssigned", null);
                     %>
-
+                     <%    request.getSession().setAttribute("crslistSave", null);
+                        request.getSession().setAttribute("crslistNotSave", null);
+                         request.getSession().setAttribute("crslistNotValid", null);
+                    %>
+                
                     <!--update course assignment-->
                     ${CrsAssUpdate}
                     ${CrsAssNotUpdate}
@@ -530,7 +550,13 @@
                     %>
                     <div class="form-group">
                         <form class="form-group " role="form" method="post" id="instrAssign"  action="${pageContext.request.contextPath}//CourseAssignmentUpdateServlet">
-
+                         <div class="form-group col-lg-4 has-success">
+                                <!--<div class="input-group">-->
+                                <span class="" style="font-weight: bolder">Course Code</span>
+                                <input type="text" name="crsnameupdate"  class="form-control" id="crsnameupdate" placeholder="Enter Course Coder" value="<%=rs_edit_update.getString("COURSE_CODE")%>">
+                                <!--</div>-->
+                            </div>
+                           
                             <div class="form-group col-lg-4 has-success">
                                 <div class="input-group">
                                     <span class="" style="font-weight: bolder">Assigned Date</span>
@@ -615,12 +641,13 @@
                     <%    request.getSession().setAttribute("CrsAssUpdate", null);
                         request.getSession().setAttribute("CrsAssNotUpdate", null);
                     %>
+                    <div class="table table-responsive">
                     <table id="tblcourseEdit" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0" >
                         <thead>
                             <tr>
                                 <!--                                <th>Instructor ID</th>
                                                                 <th>Course ID</th>-->
-                                <th>Assigned Date</th>
+                                <th>Course ID</th>
                                 <th>Round</th>
                                 <th>Total Hour</th>
                                 <th>Duration Date From</th>
@@ -633,7 +660,7 @@
                             <tr>
                                 <!--                                <th>Instructor ID</th>
                                                                 <th>Course ID</th>-->
-                                <th>Assigned Date</th>
+                                <th>Course Name</th>
                                 <th>Round</th>
                                 <th>Total Hour</th>
                                 <th>Duration Date From</th>
@@ -652,8 +679,8 @@
                             <tr>
     <!--                            <td><%=rs_instr.getString(1)%></td> -->
                                 <!--<td><%=id%></td>--> 
-                                <!--<td><%=rs_instr.getString(2)%></td>--> 
-                                <td><%=rs_instr.getString(3)%></td> 
+                                <td><%=rs_instr.getString(2)%></td> 
+                                <!--<td><%=rs_instr.getString(3)%></td>--> 
                                 <td><%=rs_instr.getString(4)%></td> 
                                 <td><%=rs_instr.getString(5)%></td> 
                                 <td><%=rs_instr.getString(6)%></td> 
@@ -682,6 +709,7 @@
 
                         </tbody>
                     </table>
+                    </div>
                     <!--end table-->
                 </div>
             </div>
@@ -759,6 +787,12 @@
                         durationFrom: {
                             required: true
                         },
+                        programassign:{
+                                 required: true
+                        },
+                        department:{
+                                 required: true
+                        },
                         durationTo: {
                             required: true
                         }
@@ -775,7 +809,7 @@
                 changeYear: true
             });
         </script>
-
+ 
         <script  type="text/javascript">
 
             var xmlHttp;
@@ -793,11 +827,11 @@
                 var urlass = ".../common/CourseAssignInstSelect.jsp";
                 urlass += "?courseAssname=" + str;
        
-                xmlHttp.onreadystatechange = stateChange;
+                xmlHttp.onreadystatechange = crsassignSelect;
                 xmlHttp.open("GET", urlass, true);
                 xmlHttp.send(null);
             }
-            function stateChange() {
+            function crsassignSelect() {
                 if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 //                    document.getElementById("program").innerHTML = xmlHttp.responseText
                     document.getElementById("crsassignintr").innerHTML = xmlHttp.responseText
@@ -829,6 +863,59 @@
                     document.getElementById("crsassignintr").innerHTML = xmlHttp.responseText
                 }
         </script>
+               <script  type="text/javascript">
+
+            var xmlHttp;
+            function showState(str) {
+                if (typeof XMLHttpRequest != "undefined") {
+                    xmlHttp = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                if (xmlHttp == null) {
+                    alert("Browser does not support XMLHTTP Request")
+                    return;
+                }
+                var url = ".../common/program.jsp";
+                url += "?department=" + str;
+                xmlHttp.onreadystatechange = stateChange;
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+
+            function stateChange() {
+                if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                    document.getElementById("program").innerHTML = xmlHttp.responseText
+                }
+            }
+        </script>
+        <script  type="text/javascript">
+
+            var xmlHttp;
+            function showStateCourse(str) {
+                if (typeof XMLHttpRequest != "undefined") {
+                    xmlHttp = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                if (xmlHttp == null) {
+                    alert("Browser does not support XMLHTTP Request")
+                    return;
+                }
+                var url = ".../common/CoursePopulate.jsp";
+                url += "?program=" + str;
+                xmlHttp.onreadystatechange = listcourse;
+                xmlHttp.open("GET", url, true);
+                xmlHttp.send(null);
+            }
+
+            function listcourse() {
+                if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+                    document.getElementById("course").innerHTML = xmlHttp.responseText
+                }
+            }
+        </script>
+        
         <script type="text/javascript">
             function myFunction() {
                 // Declare variables

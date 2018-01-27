@@ -17,10 +17,11 @@
     <body>
         <div class="row">
             <%@include  file="../common/head_banner.jsp"%>
+            <a href="finish.jsp"></a>
         </div>
         <div class="container">
             <h4 class="alert alert-success ">congrats!You have successfully finished registration</h4>
-            <p>${message}</p>
+            <p>${message}  <a href="../index.jsp"> <strong>Login here</strong></a></p>
                
                <div class="col-lg-6">
                    <strong>create user account to login</strong><hr>
@@ -32,12 +33,12 @@
                    </div>
                    <div class="form-group ">
                        <label>password</label>
-                       <input type="text" class="form-control" name="password" placeholder="Enter password"/>
+                       <input type="password" class="form-control" name="password" placeholder="Enter password"/>
                        
                    </div>
                    <div class="form-group">
                        <label>confirm password</label>
-                       <input type="text" class="form-control" name="cpassword" placeholder="confirm password"/>
+                       <input type="password" class="form-control" name="cpassword" placeholder="confirm password"/>
                        
                    </div>
                        <input type="hidden" class="form-control" name="stud_id" value="<%=session.getAttribute("studentId") %>" />

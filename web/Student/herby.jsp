@@ -25,7 +25,7 @@
                 I hereby certify that all the information given above is complete and correct.I understand that in the event of deliberately giving false information 
                 ,I may be liable to dismissal from the college. I can not claim reimbursement of any fee paid. I undertake to abide by rules and regulations of the Ethiopian Police university college.
             </p>
-            <form class="form-inline" method="Post" action="${pageContext.request.contextPath}//herby">
+            <form class="form-inline" method="Post" action="${pageContext.request.contextPath}/herby">
                 <input type="hidden"  name="studid"  value="<%=session.getAttribute("studentId")%>"/>
                 <input type="hidden"  name="herby" value="1"/>
                 <input type="submit" class="btn btn-warning" value="I Agree "/>

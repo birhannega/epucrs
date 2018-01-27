@@ -35,25 +35,35 @@ public class programmanager_approval extends HttpServlet {
         int saved=0;
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String []name=request.getParameterValues("approvalname");
+
+String action = request.getParameter("action");
+
+if ("Approved".equals(action)) {
+            String []name=request.getParameterValues("departmenthead");
             String []id=request.getParameterValues("studid");
                     int status=2;
                     for(int j=0;j<id.length;j++)
                     {
-                        connectionManager con=new connectionManager();
-                        Statement st_con=con.getconnection().createStatement();
-                        ResultSet rs_con=st_con.executeQuery("select * from tbl_mark where stud_id='"+id[j]+"' and status='status'");
-                        if(rs_con.next()){
-                          out.println("Approved Student mark");
-                        }
-                        else{
+                       
                     program_manager_model state=new program_manager_model();
                    saved= state.Approved(status, name[j], id[j]);
                                 }
-        }
+        
+                    } else if ("Reject".equals(action)) {
+                        String aname=request.getParameter("departmenthead");
+                        String studid[]=request.getParameterValues("studid");
+                        int status=4;
+                        for (int i=0;i<studid.length;i++){
+                           program_manager_model state=new program_manager_model();
+                   saved= state.Approved(status, aname, studid[i]);
+ 
+                        }
+                        
+
+}
                     if(saved>0){
                         request.getSession().setAttribute("updated", "Successfully Mark Approved");
-                        response.sendRedirect("Incoder/ApprovalMark_Submition.jsp");
+                        response.sendRedirect("Department/DepartmentHeadApproval.jsp");
                     }
                     else {
                         request.getSession().setAttribute("notupdated", "Not Approved Mark");

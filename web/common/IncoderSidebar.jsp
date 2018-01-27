@@ -47,7 +47,7 @@
             </div>
         </div>
     </li>
-    
+     <li><a href="TermReport.jsp"><span class="glyphicon glyphicon-log-out"></span> Report</a></li>
     <li><a href="../Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
 
 </ul>

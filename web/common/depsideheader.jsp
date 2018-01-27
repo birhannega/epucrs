@@ -10,7 +10,7 @@
     <!-- Brand -->
     <div class="brand-name-wrapper">
         <a class="navbar-brand" href="index.jsp">
-            EPUCRS/Department page
+            EPUCRS <span class="badge badge-info text-success">Registrar</span>
         </a>
     </div>
 

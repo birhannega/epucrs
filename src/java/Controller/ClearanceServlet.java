@@ -16,11 +16,14 @@ import Model.ClearanceModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 /**
  *
  * @author user
  */
 @WebServlet(name = "ClearanceServlet", urlPatterns = {"/ClearanceServlet"})
+@MultipartConfig(maxFileSize = 16177215)
 public class ClearanceServlet extends HttpServlet {
     
 
@@ -46,18 +49,19 @@ public class ClearanceServlet extends HttpServlet {
              reason=request.getParameter("reason");
         String clrid=reason.concat("-100");
         String studid=fullname.concat("-100");
+        Part filePart = request.getPart("ImageFile");
         ClearanceModel clrmodel=new ClearanceModel();
-     int accept_clrform=clrmodel.clerancemodel(clrid,fullname,directorate,dpstartdate,departmentlearn,enddate,reason,studid);
+     int accept_clrform=clrmodel.clerancemodel(clrid,fullname,directorate,dpstartdate,departmentlearn,enddate,reason,studid,filePart);
      
      if(accept_clrform > 0)
      {
-      request.getSession().setAttribute("ClearaceRegistered", "<strong><span class='alert alert-success text-center'>Clearace successfully registred</span></strong>");
-            response.sendRedirect("Incoder/Clearance.jsp");   
+      request.getSession().setAttribute("ClearaceRegistered", "<strong><span class='alert alert-success text-left'>Clearace successfully registred</span></strong>");
+            response.sendRedirect("Registrar/Clearance.jsp");   
      }
      else
      {
        request.getSession().setAttribute("ClearacepNotRegistered", "<strong><span class='alert alert-success text-center'>Clearace not registred</span></strong>");
-            response.sendRedirect("Incoder/Clearance.jsp");   
+            response.sendRedirect("Registrar/Clearance.jsp");   
      }
     }
 

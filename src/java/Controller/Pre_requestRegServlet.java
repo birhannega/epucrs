@@ -44,11 +44,11 @@ public class Pre_requestRegServlet extends HttpServlet {
  if (prerequestsave > 0) {
             request.getSession().setAttribute("prerequestsave", "<strong><span class='alert alert-success text-center'>PreRequest successfully Saved</span></strong>");
 
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
             //out.println("course successfully registred");
         } else {
              request.getSession().setAttribute("prerequestNotsave", "<strong><span class='alert alert-warning text-center'>PreRequest not Saved</span></strong>");
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
 //             out.println("course not registred");
         }
     }

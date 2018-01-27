@@ -20,12 +20,12 @@
                 }
                 var url = "program.jsp";
                 url += "?department=" + str;
-                xmlHttp.onreadystatechange = stateChange;
+                xmlHttp.onreadystatechange = listprogrma;
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send(null);
             }
 
-            function stateChange() {
+            function listprogrma() {
                 if (xmlHttp.readyState === 4 || xmlHttp.readyState === "complete") {
                     document.getElementById("program").innerHTML = xmlHttp.responseText;
                 }

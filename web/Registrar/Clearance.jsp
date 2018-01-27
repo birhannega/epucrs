@@ -11,35 +11,18 @@
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
     </head>
-
     <body>
-
         <%@include file="../common/head_banner.jsp" %>
         <div class="row">
             <!-- uncomment code for absolute positioning tweek see top comment in css -->
             <!-- <div class="absolute-wrapper"> </div> -->
             <!-- Menu -->
             <div class="side-menu">
-
-                <nav class="navbar navbar-default" role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <%@include file="../common/depsideheader.jsp" %>
-
-                    </div>
-
-                    <!-- Main Menu -->
-                    <div class="side-menu-container">
-                        <%@include file="../common/depsidebar.jsp" %>
-                    </div><!-- /.navbar-collapse -->
-                </nav>
-
+                <%@include file="sidemenu.jsp" %>
             </div>
-
             <!-- Main Content -->
-            <div class="container-fluid">
-                <div class="side-body">
-
+            <div class="side-body">
+                <div class="container-fluid">
                     <%--<%@include file="adduser_form.jsp" %>--%>
                     <p class="text-primary page-header text-center"><strong>Clearance Form</strong></p>
 
@@ -47,25 +30,11 @@
                     <div class="container col-lg-12">
 
                         <!-- <h5><strong>??????  ???  ??????  ???  ??? ??  ?????  ?????  ??????  ?????  ??</strong></h5>-->
-                        <form  class="form-group col-lg-12" method="POST" action="${pageContext.request.contextPath}/ClearanceServlet">
+                        <form  class="form-group col-lg-12" method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/ClearanceServlet">
                             ${ClearaceRegistered}
                             ${ClearaceNotRegistered}
 
-                            <!--                            <div class="form-group col-lg-4">
-                                                            <label id="am" style="font-family: serif">Search Criteria</label>
-                                                            <div>
-                                                                <label id="am" style="font-family: serif">Gender</label>
-                                                                <input type="radio" id="studid" value="StudID" name="Criteria">By Stud ID 
-                                                                <input type="radio" id="studName" value="StudName" name="Criteria">By Stud Name
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group col-lg-4">
-                                                            <lebel id="am" style="font-family: serif">Search</lebel>
-                                                            <div class="input-group col-lg-10">
-                                                                <input class="form-control" placeholder="Enter Search Criteria" required="" type="search"/>
-                                                                <span class="input-group-addon btn-info glyphicon glyphicon-search"></span>
-                                                            </div>
-                                                        </div> -->
+                           
 
                             <!--</form>-->
                             <div class="form-group col-lg-4">
@@ -79,29 +48,14 @@
                                 <lebel id="am" style="font-family: serif">Directorate</lebel>
                                 <div class="input-group col-lg-10">
                                     <select class="form-control" id="directorate" name="directorate" required="required">
-                                        <option value="-1">-select instructor-</option>
-                                        <%
-                                            try {
-                                                connectionManager dbconnection = new connectionManager();
-                                                Statement st_lis_inst = dbconnection.getconnection().createStatement();
-                                                String lis_inst_sql = "select dep_name from lu_dep";
+                                        <option value="">-select directorate-</option>
+                                        <option value="Crime Prevention">Crime Prevention</option>
+                                        <option value="Crime Investigation">Crime Investigation</option>
+                                        <option value="Police University Collage-1">Police University Collage</option>
+                                        <option value="Indoctrination">Indoctrination</option>
+                                        <option value="Civil Human Resources">Civil Human Resources</option>
+                                        <option value="Hospital">Hospital</option>
 
-                                                ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
-
-                                        %>
-                                        //                                                                        
-                                        <%    while (rs_list_inst.next()) {
-                                                String depname = rs_list_inst.getString("dep_name");
-                                                //cid;
-%>
-                                        <option><%=depname%></option>
-                                        <% } %>
-                                        <!--</select>-->
-                                        <%
-                                            } catch (Exception e) {
-                                                out.println("wrong selection!" + e);
-                                            }
-                                        %>
                                     </select>
                                     <!--<input class="form-control" name="departement" placeholder="Enter Department" type="text" required=""/>-->
 
@@ -122,12 +76,28 @@
                                 <div class="input-group col-lg-10">
                                     <select class="form-control" id="departmentlearn" name="departmentlearn" required="required">
                                         <option value="-1">-select department-</option>
-                                        <option value="Crime Prevention">Crime Prevention</option>
-                                        <option value="Crime Investigation">Crime Investigation</option>
-                                        <option value="Police University Collage-1">Police University Collage</option>
-                                        <option value="Indoctrination">Indoctrination</option>
-                                        <option value="Civil Human Resources">Civil Human Resources</option>
-                                        <option value="Hospital">Hospital</option>
+                                        <%
+                                            try {
+                                                connectionManager dbconnection = new connectionManager();
+                                                Statement st_lis_inst = dbconnection.getconnection().createStatement();
+                                                String lis_inst_sql = "select dep_name from lu_dep";
+
+                                                ResultSet rs_list_inst = st_lis_inst.executeQuery(lis_inst_sql);
+
+                                        %>
+                                                                                                              
+                                        <%    while (rs_list_inst.next()) {
+                                                String depname = rs_list_inst.getString("dep_name");
+                                                //cid;
+                                        %>
+                                        <option><%=depname%></option>
+                                        <% } %>
+                                        <!--</select>-->
+                                        <%
+                                            } catch (Exception e) {
+                                                out.println("wrong selection!" + e);
+                                            }
+                                        %>
                                     </select>
                                     <!--<input class="form-control" name="school" placeholder="This field is required." type="text" required=""/>-->
 
@@ -156,6 +126,12 @@
 
                                 </div>
                             </div>
+                            <div class="form-group col-lg-4 has-success has-feedback">
+                                <div class="input-group">
+                                    <lebel id="am" style="font-family: serif">Attach Clearance Doc</lebel> 
+                                    <input  type="file" name="ImageFile" id="ImageFile" />ImageFile
+                                </div>
+                            </div>
                             <div class="form-group col-lg-12" > 
                                 <button type="submit" id="tnsaveinst" class="btn btn-primary"><span class="fa fa-save"><strong>  Save</strong></span></button>
 
@@ -166,14 +142,8 @@
                             session.setAttribute("ClearaceNotRegistered", null);
                         %>
                     </div>
-                    <div class="col-lg-12">
-                        <form method="POST" enctype="multipart/form-data" action="Image">
-                            File to upload: <input type="file" name="upfile"><br/>
 
-                            <br/>
-                            <input type="submit" value="Press"> to upload the file!
-                        </form>
-                    </div>
+
                     <div class="form-group col-lg-11">
                         ${ClearaceAllRegistered}
                         ${ClearaceAllNotRegistered}

@@ -437,15 +437,15 @@
                                                     try {
                                                         //connectionManager dbconnection = new connectionManager();
                                                         Statement st_course = dbconnection.getconnection().createStatement();
-                                                        String crs_sql = "select  COURSE_CODE, COURSE_NAME from TBL_COURSEASSIGNMENT group by COURSE_NAME,COURSE_CODE";
+                                                        String crs_sql = "select  ACADEMIC_STAFF_ID, COURSE_CODE from TBL_COURSEASSIGNMENT group by ACADEMIC_STAFF_ID,COURSE_CODE";
 
                                                         ResultSet rs_cours = st_course.executeQuery(crs_sql);
 
                                                 %>
                                                 //                                                                        
                                                 <%    while (rs_cours.next()) {
-                                                        String c_code = rs_cours.getString("COURSE_CODE");
-                                                        String c_name = rs_cours.getString("COURSE_NAME");
+                                                        String c_code = rs_cours.getString("ACADEMIC_STAFF_ID");
+                                                        String c_name = rs_cours.getString("COURSE_CODE");
                                                         //cid;
                                                 %>
                                                 <option value="<%=c_code%>"><%=c_name%></option>
@@ -600,18 +600,18 @@
                                                     try {
                                                         //connectionManager dbconnection = new connectionManager();
                                                         Statement st_course = dbconnection.getconnection().createStatement();
-                                                        String crs_sql = "select  COURSE_CODE, COURSE_NAME from TBL_COURSEASSIGNMENT group by COURSE_NAME,COURSE_CODE";
+                                                        String crs_sql = "select  ACADEMIC_STAFF_ID, COURSE_CODE from TBL_COURSEASSIGNMENT group by ACADEMIC_STAFF_ID,COURSE_CODE";
 
                                                         ResultSet rs_cours = st_course.executeQuery(crs_sql);
 
                                                 %>
                                                 //                                                                        
                                                 <%    while (rs_cours.next()) {
-                                                        String c_code = rs_cours.getString("COURSE_CODE");
-                                                        String c_name = rs_cours.getString("COURSE_NAME");
+                                                        String c_code = rs_cours.getString("ACADEMIC_STAFF_ID");
+                                                        String c_name = rs_cours.getString("COURSE_CODE");
                                                         //cid;
                                                 %>
-                                                <option value="<%=c_code%>"><%=c_name%></option>
+                                                <option value="<%=c_code%>"><%=c_code%></option>
                                                 <% } %>
                                                 <!--</select>-->
                                                 <%

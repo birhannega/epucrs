@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-        <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/sidebarcss1111.css" rel="stylesheet" type="text/css"/>
         <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <title>Instructor Notification</title>

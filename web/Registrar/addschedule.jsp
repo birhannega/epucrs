@@ -8,7 +8,7 @@
         
           <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
           <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
-          <link href="../resources/css/registrar-side-menu.css" rel="stylesheet" type="text/css"/>
+          <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
       
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>

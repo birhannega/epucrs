@@ -43,7 +43,7 @@
 
                     <!-- Main Menu -->
                     <div class="side-menu-container">
-                        <%@include file="../common/IncoderSidebar.jsp" %>
+                        <%@include file="../common/depsidebar.jsp" %>
                     </div><!-- /.navbar-collapse -->
                 </nav>
 
@@ -74,13 +74,19 @@
                             ${instreg}
                             ${instNotreg}
                             <!--<span class="glyphicon glyphicon-list"><h4 class="accordion-toggle">Instructor Profile</h4></span>-->
- 
+
                             <form class="form-group " method="POST" enctype="multipart/form-data" id="stud_reg" action="${pageContext.request.contextPath}//InstructorReg_Servlet">
 
                                 <!--<div class="form-group col-lg-12">Instructor Id:<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled id="instid" name="instid" value=""></div>--> 
                                 <div class="form-group col-lg-4 has-success has-feedback">
                                     <div class="input-group">
                                         <input  type="file" name="ImageFile" id="ImageFile" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4 has-success has-feedback">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Instructor ID</span>
+                                        <input type="text" name="instid"  class="form-control" id="instid" value="inst_100" placeholder="Enter Instructor ID!">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4 has-success has-feedback">
@@ -226,9 +232,9 @@
                                 </div>
                                 <div class="form-group col-lg-4 has-success has-feedback">
                                     <div class="input-group">
-                                        <span class="input-group-addon">Police Management</span>
+                                        <span class="input-group-addon">Police Science</span>
                                         <select class="form-control" id="policemngmt" name="policemngmt" required="requiered">
-                                            <option value="">-select PM type-</option>
+                                            <option value="">-select PS type-</option>
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
                                         </select>
@@ -245,7 +251,8 @@
                                         <span class="fa fa-save"><strong>  Save staff info</strong></span></button>
                                 </div>
                             </form>
-
+                         
+                                                          
 
                             <%
                                 session.setAttribute("instreg", null);
@@ -464,40 +471,40 @@
                                 </tbody>
                             </table>
                             <strong></strong>
-                         
+
                         </div>
                         <div id="sectionC" class="tab-pane fade">
-                           
+
                             <form class="form-group">
-                               
+
                                 <br>
                                 <div class="input-group col-lg-4">
                                     <!--<label class="form-control">Search By ID:</label>--> 
                                     <input  type="text" name="staffidimage" id="staffidimage" placeholder="Enter Stud ID!" class="form-control">
                                     <div class="input-group-btn">
-                                    <!--<input type="submit" value="search"/>-->
-                                    <button type="submit" class="btn btn-default">
+                                        <!--<input type="submit" value="search"/>-->
+                                        <button type="submit" class="btn btn-default">
                                             <span class="glyphicon glyphicon-search">Search</span>
                                         </button>
-                                    <!--<span class="glyphicon glyphicon-search"></span>-->
+                                        <!--<span class="glyphicon glyphicon-search"></span>-->
                                     </div>
                                 </div>
-                                    <%
-                                        String sid = request.getParameter("staffidimage");
-                                        
-                                        if (sid == null || sid == "") {
-                                            //                                        out.println("Enter correct id");
-                                            //                                         out.println("<img width='100' height='50' src=displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
-                                        } else {
+                                <%
+                                    String sid = request.getParameter("staffidimage");
 
-                                            connectionManager con = new connectionManager();
-                                            PreparedStatement ps = con.getconnection().prepareStatement("select * from TBL_ACADEMIC_STAFF_REG where ACADEMIC_STAFF_ID='" + sid + "'");
-                                            ResultSet rs = ps.executeQuery();
-                                            //                            out.println("<h3>Students</h3>");
-                                            while (rs.next()) {
-                                                //                   out.println("<h3>" + rs.getString("ACADEMIC_STAFF_ID") + "</h3>");
-                                                //                    out.println("<img width='100' height='50' src=../displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
-                                    %>
+                                    if (sid == null || sid == "") {
+                                        //                                        out.println("Enter correct id");
+                                        //                                         out.println("<img width='100' height='50' src=displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                    } else {
+
+                                        connectionManager con = new connectionManager();
+                                        PreparedStatement ps = con.getconnection().prepareStatement("select * from TBL_ACADEMIC_STAFF_REG where ACADEMIC_STAFF_ID='" + sid + "'");
+                                        ResultSet rs = ps.executeQuery();
+                                        //                            out.println("<h3>Students</h3>");
+                                        while (rs.next()) {
+                                            //                   out.println("<h3>" + rs.getString("ACADEMIC_STAFF_ID") + "</h3>");
+                                            //                    out.println("<img width='100' height='50' src=../displayphoto?name=" +  rs.getString("ACADEMIC_STAFF_ID")+"></img>");
+                                %>
 
                                 <div class="col-lg-6"> <p class="page-header"><%=rs.getString("FIRST_NAME")%></p>
                                     <% out.println("<img width=100' height='100' src=../displayphoto?name=" + rs.getString("ACADEMIC_STAFF_ID") + "></img>");%> 
@@ -519,7 +526,7 @@
                                 <div class="col-lg-8">
                                     <input type="submit" value="update" class="btn btn-warning"/>
                                 </div>
-                                                            
+
                                 <%}%> 
                             </form>
 
@@ -534,11 +541,12 @@
                             <!--<h3>Section C</h3>-->
                             ${academicexpRegistered}
                             ${academicexpNotRegistered}
-                            <form class="form-group " method="post" id="instrAssign" action="${pageContext.request.contextPath}/AcademicExperianceServlet">
-
+                            <form class="form-group " method="post" id="staffexpform" action="${pageContext.request.contextPath}/AcademicExperianceServlet">
+                               <div <div class="table table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Qualification</th>
                                             <th>Area of Expertise</th>
                                             <th>Organization Type</th>
                                             <th>Organization Name</th>
@@ -549,10 +557,24 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td> 
+                                                <select class="form-control" id="qualification" name="qualification" required="required">
+                                                    <option value="">-select Qualification-</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="BSC Dgree">BSC Dgree</option>
+                                                    <option value="MSC">MSC</option>
+                                                    <option value="PHD">PHD</option>
+                                                    <option value="CERTIFICATE">CERTIFICATE</option>
+                                                    <option value="LEVEL1">LEVEL1</option>
+                                                    <option value="LEVEL2">LEVEL2</option>
+                                                    <option value="LEVEL3">LEVEL3</option>
+                                                    <option value="LEVEL4">LEVEL4</option>
+                                                </select>
+                                            </td>
                                             <th scope="row"><select class="form-control" id="expctgry" name="expctgry" required="required">
-                                                    <option value="-1">-select category-</option>
+                                                    <option value="">-select category-</option>
                                                     <option value="Lecture">Lecture</option>
-                                                     <option value="Lecture">Assistant Lecture</option>
+                                                    <option value="Lecture">Assistant Lecture</option>
                                                     <option value="IT">IT</option>
                                                     <option value="Software">Software</option>
                                                     <option value="Maintenance">Maintenance</option>
@@ -564,7 +586,7 @@
 
                                             <td> 
                                                 <select class="form-control" id="officetype" name="officetype" required="required">
-                                                    <option value="-1">-select Office-</option>
+                                                    <option value="">-select Office-</option>
                                                     <option value="Government Office">Government Office</option>
                                                     <option value="Private Office">Private Office</option>
                                                 </select>
@@ -593,6 +615,7 @@
 
                                     </tbody>
                                 </table>
+                                   </div>
                                 <div class="col-lg-12 col-md-6 col-sm-6">
                                     <button type="submit" id="saveinstexp" class="btn btn-primary">
                                         <span class="fa fa-save"><strong>  Save Instructor Expertise</strong></span></button>
@@ -631,7 +654,7 @@
                                 <form class="form-group " role="form" method="post" id="instrAssign"  action="${pageContext.request.contextPath}//StaffExperianceUpdateServlet">
                                     <div class="form-group col-lg-4 has-success">
                                         <span class="" style="font-weight: bolder">Instructor ID</span>
-                                        <input class="form-control" name="acdstaffid" id="acdstaffid" value="<%=rs_update.getString("ACADEMIC_STAFF_ID")%>"  readonly>
+                                        <input class="form-control" name="acdstaffid" id="acdstaffid" value="<%=rs_update.getString("ACADEMIC_STAFF_ID")%>"  >
                                     </div>
 
 
@@ -643,6 +666,26 @@
 
                                         <!--</div>-->
                                     </div>
+                                    <div class="form-group col-lg-4 has-success">
+                                        <!--<div class="input-group">-->
+                                        <span class="" style="font-weight: bolder">QUALIFICATION</span>
+                                        <!--<input class="form-control" value="<%=rs_update.getString("QUALIFICATION")%>" name="orgtype">-->
+                                        <select class="form-control" id="editqualification" name="editqualification" required="required">
+                                            <option value="<%=rs_update.getString("ORG_TYPE")%>"><%=rs_update.getString("ORG_TYPE")%></option>
+                                            <option value="">-select qualification-</option>
+                                            <option value="Diploma">Diploma</option>
+                                            <option value="BSC Dgree">BSC Dgree</option>
+                                            <option value="MSC">MSC</option>
+                                            <option value="PHD">PHD</option>
+                                            <option value="CERTIFICATE">CERTIFICATE</option>
+                                            <option value="LEVEL1">LEVEL1</option>
+                                            <option value="LEVEL2">LEVEL2</option>
+                                            <option value="LEVEL3">LEVEL3</option>
+                                            <option value="LEVEL4">LEVEL4</option>
+                                        </select>
+                                        <!--</div>-->
+                                    </div>
+
                                     <div class="form-group col-lg-4 has-success">
                                         <span class="" style="font-weight: bolder">AREA_EXPERTISE</span>
                                         <!--<input class="form-control" name="areaexp" id="areaexp" value="<%=rs_update.getString("AREA_EXPERTISE")%>" >-->
@@ -702,25 +745,27 @@
                                         <input class="form-control" value="<%=rs_update.getString("SEQNO_ACADEMIC_EXPERTIES")%>" name="seqno" >
                                         <!--</div>-->
                                     </div> 
-                                        <div class="col-lg-12 col-md-6 col-sm-6">
-                                    <button type="submit" id="saveinstexp" class="btn btn-warning">
-                                        <span class="fa fa-save"><strong> Update Staff Exp</strong></span></button>
-                                </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-6">
+                                        <button type="submit" id="saveinstexp" class="btn btn-warning">
+                                            <span class="fa fa-save"><strong> Update Staff Exp</strong></span></button>
+                                    </div>
                                 </form>
                                 <%}
                                         }
                                     }
                                 %>
-                                <div class="container-fluid"> 
+                                <div class="table table-responsive">
                                     <table  class="table table-striped table-bordered table-hover "  id="tabledata1">
                                         <thead>
                                             <tr>
+                                                <th>Staff ID</th>
                                                 <th>Area of Expertise</th>
                                                 <th>Organization Type</th>
                                                 <th>Organization Name</th>
                                                 <th>Total Experience</th>
                                                 <th>From</th>
                                                 <th>To</th>
+                                                 <th>Qualification</th>
                                                 <th><span class=" glyphicon glyphicon-edit" style="color: #ffcc00">Edit</span></th>
                                                 <th ><span class="glyphicon glyphicon-remove" style="color: tomato">Delete</span></th>
 
@@ -740,18 +785,20 @@
                                                     String id = _acdstaff.getString(1);
                                             %>
                                             <tr>
-                    <!--                            <td><%=_acdstaff.getString(1)%></td> -->
+                                                <td><%=_acdstaff.getString(1)%></td> 
                                                 <!--<td><%=id%></td>--> 
-                                                <td><%=_acdstaff.getString(2)%></td> 
+                                                <!--<td><%=_acdstaff.getString(2)%></td>--> 
                                                 <td><%=_acdstaff.getString(3)%></td> 
                                                 <td><%=_acdstaff.getString(4)%></td> 
                                                 <td><%=_acdstaff.getString(5)%></td> 
                                                 <td><%=_acdstaff.getString(6)%></td> 
                                                 <td><%=_acdstaff.getString(7)%></td>
+                                                <td><%=_acdstaff.getString(8)%></td>
+                                                <td><%=_acdstaff.getString(9)%></td>
                                                 <td>
                                                     <form action="" method="post">
                                                         <input type="hidden" name="action" value="edit"/>
-                                                        <input type="hidden" name="id" id="edit_id" value="<%=_acdstaff.getString(9)%>"/>
+                                                        <input type="hidden" name="id" id="edit_id" value="<%=_acdstaff.getString(10)%>"/>
 
                                                         <button class="btn btn-warning glyphicon glyphicon-edit" id="editid">Edit</button>
                                                     </form>
@@ -759,7 +806,7 @@
                                                 <td>
                                                     <form action="" class="form-group" method="Post" >
                                                         <input type="hidden" name="action" value="delete"/>
-                                                        <input type="hidden" name="id" id="delete_id" value="<%=_acdstaff.getString(9)%>"/>
+                                                        <input type="hidden" name="id" id="delete_id" value="<%=_acdstaff.getString(10)%>"/>
 
                                                         <button class="btn btn-danger glyphicon glyphicon-trash" id="deleteid" onclick="return getData()">Delete</button>
                                                     </form>
@@ -852,7 +899,7 @@
                                     },
                             email: {
                                 required: true,
-                                digits: true
+                               email: true
                             },
                             department: {
                                 required: true
@@ -871,7 +918,12 @@
                             description:
                                     {
                                         required: true
-                                    }
+                                    },
+                              file:
+                                    {      
+                                        required: true
+//                                        accept: "*/pdf"
+                                       },
 
                         },
                         messages: {
@@ -892,7 +944,37 @@
                     });
                 });
             </script>
+                  <script type="text/javascript">
+                $(function () {
 
+                    $("#staffexpform").validate({
+                        rules: {
+                            qualification: {
+                                required: true
+                            },
+                           expctgry:{
+                               required: true
+                           },
+                           officetype:{
+                               
+                           },
+                           orgname:{
+                                required: true
+                           },
+                           totalexp:{
+                               required: true 
+                           },
+                           datefrom_exp_from:{
+                                required: true
+                           },
+                           datefrom_exp_to:{
+                                required: true
+                           }
+                       }
+                   });
+               });
+                   
+                     </script>
             <script type="text/javascript">
                 $("#date_registered").datepicker({
                     changeMonth: true,

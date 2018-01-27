@@ -3,189 +3,141 @@
     Created on : Feb 6, 2017, 10:37:41 PM
     Author     : seid
 --%>
+
+
+<%@page import="java.util.Date"%>
+
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="dbconnection.connectionManager"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.GregorianCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-          <link rel="stylesheet"type="text/css"href="../bootstrap/css/bootstrap.css">
-                <link rel="stylesheet"type="text/css"href="../bootstrap/css/bootstrap.min.css">
-                <link rel="stylesheet" type="text/css" href="../bootstrap/font-awesome/css/font-awesome.css">
-              <script type="text/javascript" src="../resources/js/jquery.js"></script>
-                       <%@include file="../common/imports.jsp"%>
-         <div class="container-fluid"style="margin-top: 5px;">
-             <%@include file="../common/TeacherHeader.jsp" %></div>
-    <div class="span12"style="margin-top: -20px;">
-        <div class="span12">
-                        <div class="col-lg-2" id="sidebar">
-                            <%@include file="../common/TeachersSidebar.jsp"%></div></div></div>
-<script type="text/javascript"
-	src="../resources/js/jquery.bdt.js"></script>
-	<script type="text/javascript">
-$(document).ready(function(){
-	$('#regrade').bdt(
-			{
-			ordering:true,
-			scrollY:300,
-			paging:false
-			});
+        
+                        <link rel="stylesheet" href="../css/jQuery.steps.css"/>   
+<link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
+        <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+       <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../bootstrap/DataTable/js/jquery.dataTables.js"></script>
+        <script src="../resources/jquery/jquery.validate.min.js" type="text/javascript"></script>
+        <link href="../resources/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
-})
-</script>
-<style type="text/css">
-    #Text1{
-       height: 6px;
- height:3px;
- padding-top: -12px;
- margin-top: 2px;
+<body>
+            <%@include file="../common/head_banner.jsp" %>
+        <div class="row">
+            <!-- uncomment code for absolute positioning tweek see top comment in css -->
+            <!-- <div class="absolute-wrapper"> </div> -->
+            <!-- Menu -->
+            <div class="side-menu">
 
-    }
-</style>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Re_grade</title>
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <%@include file="../common/depsideheader.jsp" %>
+
+                    </div>
+
+                    <!-- Main Menu -->
+                    <div class="side-menu-container">
+                        <%@include file="../common/InstructorSidebar.jsp" %>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+
+            </div>
+
+            <!-- Main Content -->
+            <div class="container-fluid">
+                <div class="side-body">
+        
     </head>
     <body>
-        <form action=""name=""method="post">
+        <form action="${pageContext.request.contextPath}/re-grade"name=""method="post">
          <% 
       GregorianCalendar cal = new GregorianCalendar();
      
     ;%>
-        <h3 class=" text-center page-header col-lg-9"><strong>Ethiopian Police University College<br>
+        <h3 class=" text-center page-header container"><strong>Ethiopian Police University College<br>
                 Grade/Mark/ Change Report Form</strong></h3>
-        <div class="container form-inline">
-            <label for="disable">Academic Year<input type="text" value="<% out.print(cal.get(Calendar.YEAR)); %>"name="year"class="form-control"size="12px;" disabled>
-   </label>
-   <label>Program/Dpt<select class="form-control"  name="program"><option value="null ">--select program---</option>
-                                    <option value="se">Software</option>
-                                    <option value="cs">Computer Science</option>
-                                    <option value="economics">Economics</option>
-                                    <option value="accounting">Accounting</option>
-                                    <option value="health">health</option>
-                                    <option value="sport">Sport</option>
-                                    <option value="civic">Civil</option></select>
-                            </label>
+        <div class="container col-lg-12 form-group ">
+            <div class="form-group col-lg-4">
+           Academic Year<input type="text" value="<% out.print(cal.get(Calendar.YEAR)); %>"name="year"class="form-control"size="12px;" readonly="readonly">
+            </div>
+            <div class="form-group col-lg-4">
+   Program<select class="form-control"  name="program">
+   <%String program=null;
+       connectionManager con=new connectionManager();
+   Statement st_regrade=con.getconnection().createStatement();
+   ResultSet rs_regrade=st_regrade.executeQuery("select distinct program_id  from TBL_COURSE_REGISTRATION");
+   while(rs_regrade.next()){
+       %>
+       <option>
+       <%
+       program=rs_regrade.getString("program_id");
+       out.println(program);
+   }
 
+   %>
+       </option>
+                          </select>
+            </div>
 
-   <label>Term<select input type="text"name="term" class="form-control">
-           <option value="null">---select term--</option>
-            <option value="t1">Term1</option>
-             <option value="t2">Term2</option>
-       </select></label>
-  <button class="btn btn-primary">
-		 <span class="fa fa-arrow-right"></span>Go</button>
-                 <div class="alert-success pull-right"><label>Well Come Instructor Seid Nur</label></div>
+       <div class="form-group col-lg-4">
+   select Term<select input type="text"name="term" class="form-control">
+       <%String term=null;
+           Statement st_term=con.getconnection().createStatement();
+       ResultSet rs_term=st_term.executeQuery("select distinct term from TBL_COURSE_REGISTRATION");
+       while(rs_term.next()){
+           term=rs_term.getString("term");
+%>
+<option>
+    <%=term%> 
+       <%}%>
+        </option> 
+       </select>
+       </div>
+      
+        <div class="form-group col-lg-4">
+            Student ID<input type="text" name="studid" class="form-control">
+            
         </div>
+         
+        <div class="form-group col-lg-4">
+            Module Code<input type="text" name="modulename" class="form-control">
+            
+        </div>
+        <div class="form-group col-lg-4">
+            Change From<input type="text" name="changeform" class="form-control">
+        </div>
+        <div class="form-group col-lg-4">
+            Change To<input type="text" name="changeto" class="form-control">
+            
+        </div>
+        <div class="form-group col-lg-4">
+            Reason For Change<textarea type="text" name="reason" class="form-control"></textarea>
+        </div>
+          <%!DateFormat year = new SimpleDateFormat("yyyy-MM-E");
+                            DateFormat currentyear=new SimpleDateFormat("yyyy");
+                            //String activeyear= currentyear.format(new Date());
+                             String now = year.format(new Date());
+                             
+                            %>
+        <div class="form-group col-lg-4">
+            Report Date<input type="text" name="date" class="form-control" value="<%=now%>" readonly="">
+        </div>
+                <input type="submit" value="submit" class="btn btn-primary pull-right">
+          </div>
+
         </form>
-   <br>
-        <%if( request.getParameter("program")==null && request.getParameter("term")==null){
-        
-        %>
-        
-        <div class="alert alert-warning text-center col-lg-offset-4"style="margin-top: -320px;margin-right: 15%;margin-right: 25%"><h5 class="text-danger" id="Text1" >You Must Choose program and Term from the above option</h5></div>
-        <% }else { 
-                String program=request.getParameter("program"),term=request.getParameter("term");
-                if(program.equals("se")||program.equals("cs")||program.equals("economics")||program.equals("health")||program.equals("sport")||program.equals("civic")&&term.equals("t1")||term.equals("t2")){%>
-                 <div class="container">
-                     <form class="form-inline"name="re-grade" action=""method="post" onsubmit="return CheckForm(this)">
-                         <div class="col-lg-offset-2"style="margin-top: -320px;margin-right: 10%">
-                    <table class="table  table-striped  table-bordered" id="regrade">
-                        
-                        <th>Student id</th>
-                         <th>Student Name</th>
-                          <th>Module Code</th>
-                           <th>Module Title</th>
-                            <th>Change From</th>
-                             <th>To</th>
-                           <th>Reason For Change</th>
-                              <th>Action</th>
-                       <tbody><tr><td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                 <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                 <td><input type="submit"value="submit"></td>
-                        </tr>
-                           <tr><td>R/2549</td>
-                               
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                 <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr><tr><td>R/2550</td>
-                               <td>Mohammed nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                     <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                          <td><input type="submit"value="submit"></td>
-                           </tr><tr><td>R/2551</td>
-                               <td>Birhan nega</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                 <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr>
-                           <tr><td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                 <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr>
-                           <tr><td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                      <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td></tr>
-                                      <tr>
-                                      <td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                      <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr>
-                           <tr><td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                          <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr>
-                           <tr><td>R/2549</td>
-                               <td>seid nur</td>
-                               <td>se1010</td>
-                               <td>introduction to software</td>
-                               <td><input type="text" name="change"class="form-control"size="20"></td>
-                               <td><input type="text"name="to"class="form-control"size="20"></td>
-                                         <td><input type="text"name="reason"class="form-control"size="20"></td>
-                                      <td><input type="submit"value="submit"></td>
-                           </tr>
-                       </tbody>
-                    </table>
-                         </div>
-                     </form>
-            <%    }
-                }   %>
-               
-                </div>
     </body>
 </html>

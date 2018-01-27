@@ -40,30 +40,31 @@ public class CourseUpdateServlet extends HttpServlet {
        PrintWriter out = response.getWriter();    
        String edited_department = request.getParameter("edited_department"),
                 edited_program = request.getParameter("edited_program"),
-                edited_term = request.getParameter("edited_term"),
+//                edited_term = request.getParameter("edited_term"),
                 edited_coursename = request.getParameter("edited_coursename"),
-                edited_added_date = request.getParameter("edited_added_date"),
+//                edited_crsofferingyear = request.getParameter("edited_crsofferingyear"),
                 edited_credit_hour = request.getParameter("edited_credit_hour"),
                 edited_prerequest = request.getParameter("edited_prerequest"),
                edit_coursetype = request.getParameter("edit_coursetype"),
                edit_academicyear=request.getParameter("edit_academicyear"), 
               edit_courseapproach=request.getParameter("edit_courseapproach"),
                  coursecode = request.getParameter("edit_coursecode"),
+               
         edit_COURSE_SEQNO = request.getParameter("edit_COURSE_SEQNO");
         //String course_code = courseName.concat("-200");
 //        PrintWriter out=response.getWriter();
 //        out.println("Entered inputs "+term+" "+courseName);
 // creating object of entity class
         CourseUpdateModel  courseupdate = new CourseUpdateModel();
-        int is_registered = courseupdate.updateCourse(coursecode,edited_department, edited_program, edited_term, edited_coursename, edited_added_date, edited_credit_hour, edited_prerequest,edit_coursetype,edit_academicyear,edit_courseapproach,edit_COURSE_SEQNO);
+        int is_registered = courseupdate.updateCourse(coursecode,edited_department, edited_program, edited_coursename,  edited_credit_hour, edited_prerequest,edit_coursetype,edit_academicyear,edit_courseapproach,edit_COURSE_SEQNO);
         if (is_registered > 0) {
             request.getSession().setAttribute("courseUpdate", "<strong><span class='alert alert-success text-center'>Course successfully Updated</span></strong>");
 
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
             //out.println("course successfully registred");
         } else {
              request.getSession().setAttribute("courseNotUpdate", "<strong><span class='alert alert-warning text-center'>Course not Updated</span></strong>");
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
 //             out.println("course not registred");
         }
     }

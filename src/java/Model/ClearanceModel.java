@@ -11,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import dbconnection.connectionManager;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.*;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -23,8 +25,8 @@ public class ClearanceModel implements Serializable {
     connectionManager conmngr = new connectionManager();
 
     //Connection conn=conmngr.getconnection();
-    public int clerancemodel(String clrid, String fullname, String directorate, String dpstartdate, String departmentlearn, String enddate, String reason, String studid) throws SQLException, ClassNotFoundException {
-        PreparedStatement ps_clear = conmngr.getconnection().prepareStatement("insert into tbl_clearance(CLEARANCE_ID,FULL_NAME , DIRECTORATE ,STARTED_DATE ,DEPARTMENT ,END_DATE ,REASON ,STUD_ID) values(?,?,?,?,?,?,?,?)");
+    public int clerancemodel(String clrid, String fullname, String directorate, String dpstartdate, String departmentlearn, String enddate, String reason, String studid,Part ImageFile) throws SQLException, ClassNotFoundException, IOException {
+        PreparedStatement ps_clear = conmngr.getconnection().prepareStatement("insert into tbl_clearance(CLEARANCE_ID,FULL_NAME , DIRECTORATE ,STARTED_DATE ,DEPARTMENT ,END_DATE ,REASON ,STUD_ID,PHOTO) values(?,?,?,?,?,?,?,?,?)");
 
         int clrmodel = 0;
         ps_clear.setString(1, clrid);
@@ -35,6 +37,7 @@ public class ClearanceModel implements Serializable {
         ps_clear.setString(6, enddate);
         ps_clear.setString(7, reason);
         ps_clear.setString(8, studid);
+       ps_clear.setBinaryStream(9, ImageFile.getInputStream(), (int) ImageFile.getSize());
         clrmodel = ps_clear.executeUpdate();
         return clrmodel;
     }

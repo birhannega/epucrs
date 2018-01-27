@@ -16,6 +16,7 @@ import Model.CourseAssignmentModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author user
@@ -34,40 +35,53 @@ public class CourseInstServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        CourseAssignmentModel crsass=new CourseAssignmentModel();
-        
-        String crsname[]=request.getParameterValues("crsname[]");
-   String acdstaffid=request.getParameter("staffid");
+        CourseAssignmentModel crsass = new CourseAssignmentModel();
+
+        String crsname[] = request.getParameterValues("crsname[]");
+        String acdstaffid = request.getParameter("staffid");
 //   String crsname=request.getParameter("crsname");
-   String dateassigned=request.getParameter("assigndate");  
-String round=request.getParameter("round");  
-String totalH=request.getParameter("totalhour");  
-String durationFrom=request.getParameter("durationfrom");  
-String durationTo=request.getParameter("durationto");  
-out.print(durationTo);
-out.print(crsname);
-int is_registered=0;
+        String dateassigned = request.getParameter("assigndate");
+        String round = request.getParameter("round");
+        String totalH = request.getParameter("totalhour");
+        String durationFrom = request.getParameter("durationfrom");
+        String durationTo = request.getParameter("durationto");
+//out.print(durationTo);
+//out.print(crsname);
 
-          int j=0;
-   for(int i=0;i<crsname.length;i++){  
-         is_registered = crsass.courseassign(acdstaffid, crsname[i],dateassigned, round, totalH, durationFrom, durationTo);
+        if (crsname.length==1 ){
+        if(acdstaffid.length()==1  && dateassigned.length()==1   && round.length()==1  && totalH.length()==1  && durationFrom.length()==1  && durationTo.length()==1 )
+
+        {
+    
+int is_registered = 0;
+
+            int j = 0;
+            for (int i = 0; i < crsname.length; i++) {
+                
+                is_registered = crsass.courseassign(acdstaffid, crsname[i], dateassigned, round, totalH, durationFrom, durationTo);
 //          is_registered = crsass.courseassign(crsname[i]);
-   }   
+            }
 
-         if (is_registered> 0) {
-            request.getSession().setAttribute("instreg", "<strong><span class='alert alert-success text-center'>Course List successfully registred</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
-            //out.println("course successfully registred");
-        } else {
-            request.getSession().setAttribute("instNotreg", "<strong><span class='alert alert-success text-center' style='color: red'>Course List  not registred</span></strong>");
-            response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
-            // out.println("Instructor not registred");
-           
+            if (is_registered > 0) {
+                request.getSession().setAttribute("crslistSave", "<strong><span class='alert alert-success text-center'>Course List successfully registred</span></strong>");
+                response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+                //out.println("course successfully registred");
+            } else {
+                request.getSession().setAttribute("crslistNotSave", "<strong><span class='alert alert-success text-center' style='color: red'>Course List  not registred</span></strong>");
+                response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+                // out.println("Instructor not registred");
+
+            }
         }
-     
+         request.getSession().setAttribute("crslistNotValid", "<strong><span class='alert alert-success text-center' style='color: red'>No selected Data</span></strong>");
+        response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+        }
+        request.getSession().setAttribute("crslistNotValid", "<strong><span class='alert alert-success text-center' style='color: red'>Course Must be Checked</span></strong>");
+        response.sendRedirect("Department/CourseAssigntoInstructor.jsp");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

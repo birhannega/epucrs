@@ -91,14 +91,13 @@ public class StudentController extends HttpServlet {
             SimpleDateFormat sdf = new SimpleDateFormat("Y");
             String year = sdf.format(date);
             String yrsub = year.substring(0, 4);
-            out.println(year);
-            out.println(program);
+            //out.println(yrsub);
             String stud_iterator = null;
             connectionManager dbconn = new connectionManager();
             Statement idstatement = dbconn.getconnection().createStatement();
             
 
-            ResultSet rs_ci_counter = idstatement.executeQuery("select NUMBER_OF_STUDENTS from TBL_COUNTER where ACADAMIC_YEAR='" + year + "' and PROGRAM_ID='" + program + "'");
+            ResultSet rs_ci_counter = idstatement.executeQuery("select NUMBER_OF_STUDENTS from TBL_COUNTER where ACADAMIC_YEAR='" + year + "' and DEP_ID='" + department + "'");
   if (rs_ci_counter.next()) {
                 stud_iterator = rs_ci_counter.getString(1);
                 switch (stud_iterator.length()) {
@@ -116,7 +115,7 @@ public class StudentController extends HttpServlet {
                 session.setAttribute("error", "Error occured ");
             }
 
-            STUD_ID = program+"/".concat(stud_iterator) + "/" + yrsub;
+            STUD_ID = department+"/".concat(stud_iterator) + "/" + yrsub;
 
             session.setAttribute("studentId", STUD_ID);
              session.setAttribute("step1", Step);
@@ -148,10 +147,12 @@ public class StudentController extends HttpServlet {
                                                             STUD_NATIONALITY,
                                                             STUD_POLICE_COMMISION_SECTOR,
                                                             STUD_POLICE_COMMISION_NUMBER,
-                                                            STUD_TYPE);
-            if (registered > 0) {
+                                                            STUD_TYPE,
+                                                            department,
+                                                            program);
+            if (registered >0) {
                 Statement update_iterator = connection.createStatement();
-                ResultSet update_rs = update_iterator.executeQuery("update TBL_COUNTER set NUMBER_OF_STUDENTS=NUMBER_OF_STUDENTS+1 where PROGRAM_ID='" + program + "'");
+                ResultSet update_rs = update_iterator.executeQuery("update TBL_COUNTER set NUMBER_OF_STUDENTS=NUMBER_OF_STUDENTS+1 where DEP_ID='" + department + "'");
                 if (update_rs.next()) {
                     request.getSession().setAttribute("studentRegistered", "<strong><span class='alert alert-success text-center'>Student successfully registred</span></strong>");
                    response.sendRedirect("Student/familyinfo.jsp");

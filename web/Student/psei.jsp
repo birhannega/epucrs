@@ -72,7 +72,7 @@ response.sendRedirect("../index.jsp");
                 </div>
                 <div class="form-group col-lg-4">
                     <label>CGPA</label>
-                    <input type="date" class="form-control" name="cgpa" />
+                    <input type="number" step="0.01" class="form-control" name="cgpa" />
                 </div>
                 <div class="form-group ">
                     <input type="hidden" name="studentId"  value="<%=session.getAttribute("studentId")%>"  />
@@ -82,6 +82,9 @@ response.sendRedirect("../index.jsp");
             <%
                 session.setAttribute("recorded",null);
                     } else if (choice.equalsIgnoreCase("no")) {
+                      %>
+                      <a href="experience.jsp"><button class="btn btn-link">Next</button> </a>
+                      <%
                     }
                 }
 

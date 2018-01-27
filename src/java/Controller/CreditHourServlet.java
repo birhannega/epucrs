@@ -37,17 +37,18 @@ public class CreditHourServlet extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-          String creditcrscode=request.getParameter("creditcrscode") ,thrycredithour=request.getParameter("thrycredithour"),prctcredithour=request.getParameter("prctcredithour");
+        
+          String creditcrscode=request.getParameter("crscodecredit") ,thrycredithour=request.getParameter("thrycredithour"),prctcredithour=request.getParameter("prctcredithour");
         CourseManagement crsmngm=new CourseManagement();
         int crscredit=crsmngm.AddCreditHour(creditcrscode,thrycredithour,prctcredithour);
         if (crscredit > 0) {
             request.getSession().setAttribute("creditsave", "<strong><span class='alert alert-success text-center'>Credit Hour successfully Saved</span></strong>");
 
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
             //out.println("course successfully registred");
         } else {
              request.getSession().setAttribute("creditNotsave", "<strong><span class='alert alert-warning text-center'>Credit Hour not Saved</span></strong>");
-            response.sendRedirect("Department/CourseRegistration.jsp");
+            response.sendRedirect("Registrar/CourseRegistration.jsp");
 //             out.println("course not registred");
         }
     }

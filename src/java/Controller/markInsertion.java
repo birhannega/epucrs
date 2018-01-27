@@ -4,14 +4,10 @@
  * and open the template in the editor.
  */
 package Controller;
-
 import Model.Mark_submit;
-import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -54,7 +50,7 @@ public class markInsertion extends HttpServlet {
        String program=request.getParameter("program");
        int inserted=0;
        for(int i=0;i<studentid.length;i++){
-            Mark_submit  submitMark=new Mark_submit ();
+            Mark_submit submitMark=new Mark_submit();
       inserted = submitMark.Mark(mark[i], studentid[i], teacherid, subjectid, section, 
                     term, testtype, grade, department, program);
                } 

@@ -40,27 +40,35 @@ public class RegistrarApproval_controller extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int saved=0;
+                  int saved=0;
+String action = request.getParameter("action");
+
+if ("Approved".equals(action)) {
+      
             /* TODO output your page here. You may use following sample code. */
-           String []name=request.getParameterValues("approvalname");
+           String []name=request.getParameterValues("Registrar_office_name");
             String []id=request.getParameterValues("studid");
                     int status=3;
                     for(int j=0;j<id.length;j++)
                     {
                         connectionManager con=new connectionManager();
-                        Statement st_con=con.getconnection().createStatement();
-                        ResultSet rs_con=st_con.executeQuery("select * from tbl_mark where stud_id='"+id[j]+"' and status='status'");
-                        if(rs_con.next()){
-                          out.println("Approved Student mark");
-                        }
-                        else{
+                       
                     RegistrarApproval_model state=new RegistrarApproval_model();
                              saved = state.Approval(status, name[j], id[j]);
-                                }
-        }
+                                
+        }}
+else if("Reject".equals(action)){
+    String []name1=request.getParameterValues("Registrar_office_name");
+            String []id1=request.getParameterValues("studid");
+                    int status1=5;
+                    for(int i=0;i<id1.length;i++){
+                    RegistrarApproval_model r_model=new RegistrarApproval_model();
+                    saved=r_model.Approval(status1, name1[i], id1[i]);
+}
+}      
                     if(saved>0){
                         request.getSession().setAttribute("updated", "Successfully Mark Approved");
-                        response.sendRedirect("Department/RegistrarApproval.jsp");
+                        response.sendRedirect("Registrar/ApprovedByRegistrar.jsp");
                     }
                     else {
                         request.getSession().setAttribute("notupdated", "Not Approved Mark");

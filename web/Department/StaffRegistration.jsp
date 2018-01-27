@@ -43,7 +43,7 @@
 
                     <!-- Main Menu -->
                     <div class="side-menu-container">
-                        <%@include file="../common/IncoderSidebar.jsp" %>
+                        <%@include file="../common/depsidebar.jsp" %>
                     </div><!-- /.navbar-collapse -->
                 </nav>
 
@@ -86,7 +86,7 @@
                                 <div class="form-group col-lg-4 has-success has-feedback">
                                     <div class="input-group">
                                         <span class="input-group-addon">Instructor ID</span>
-                                        <input type="text" name="instid"  class="form-control" id="instid" placeholder="Enter Instructor ID!">
+                                        <input type="text" name="instid"  class="form-control" id="instid" value="inst_100" placeholder="Enter Instructor ID!">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-4 has-success has-feedback">
@@ -251,115 +251,8 @@
                                         <span class="fa fa-save"><strong>  Save staff info</strong></span></button>
                                 </div>
                             </form>
-                            <!--add qualification-->
-                            <div class="container-fluid">
-                                <form class="form" action="${pageContext.request.contextPath}//CourseListServlet" method="post">
-
-                                    <div class=" col-lg-12 row">
-                                        <!--<h3 >Add Course To Teach</h3>-->
-                                        <!--<p class="page-header"><span class="header">Add Qualification</span></p>-->
-                                        <p class="text-primary text-center "><strong>Add Qualification</strong></p>
-                                        <br>
-                                    </div>
-
-                                    <div class="row" id="dynamic_form">
-                                        <div class="form-group form-horizontal">
-                                            <!--<label>Primitives</label>-->
-                                            <div class="container">
-                                                <!--<div class="form-inline" id="primitive_fields">-->
-                                                <div class="form-group" id="primitive_fields">
-                                                    <table>
-                                                        <div class="form-group col-lg-3 has-success">
-                                                            <label>Instructor Name</label>
-                                                            <select class="input-small form-control" id="primitive-selector"  name="InstName[]" >
-                                                                <!--<option value=" " disabled selected>Instructor Name</option>-->
-                                                                <!--<select class="form-control" id="selectinstr" name="selectinstr" required="required">-->
-                                                                <option value=" ">-select instructor-</option>
-                                                                <%
-                                                                    try {
-                                                                        //                                                    connectionManager dbconnection = new connectionManager();
-                                                                        Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                                        String course_sql = "select ACADEMIC_STAFF_ID, FIRST_NAME ||  ' ' ||  MIDDLE_NAME  || ' ' || LAST_NAME as FULL_NAME from TBL_ACADEMIC_STAFF_REG";
-
-                                                                        ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
-
-                                                                %>
-                                                                //                                                                        
-                                                                <%    while (rs_courseinstr.next()) {
-                                                                        String id = rs_courseinstr.getString("FULL_NAME");
-                                                                        //cid;
-                                                                %>
-                                                                <option><%=id%></option>
-                                                                <% } %>
-                                                                <!--</select>-->
-                                                                <%
-                                                                    } catch (Exception e) {
-                                                                        out.println("wrong selection!" + e);
-                                                                    }
-                                                                %>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="form-group col-lg-3 has-success">
-                                                            <label>Course Name</label>
-                                                            <select class="input-small form-control" id="circle-color-selector" name="CourseName[]" >
-                                                                <!--<select class="form-control" id="course" name="course" required="required">-->
-                                                                <option value=" ">-select course-</option>
-                                                                <%
-                                                                    try {
-                                                                        //                                                    connectionManager dbconnection = new connectionManager();
-                                                                        Statement st_list_course = dbconnection.getconnection().createStatement();
-                                                                        String course_sql = "select COURSE_NAME from TBL_COURSE_REGISTRATION";
-
-                                                                        ResultSet rs_courseinstr = st_list_course.executeQuery(course_sql);
-
-                                                                %>
-                                                                //                                                                        
-                                                                <%    while (rs_courseinstr.next()) {
-                                                                        String id = rs_courseinstr.getString("COURSE_NAME");
-                                                                        //cid;
-                                                                %>
-                                                                <option><%=id%></option>
-                                                                <% } %>
-                                                                <!--</select>-->
-                                                                <%
-                                                                    } catch (Exception e) {
-                                                                        out.println("wrong selection!" + e);
-                                                                    }
-                                                                %>
-                                                            </select> 
-                                                        </div>
-                                                        <div class="form-group col-lg-2 has-success">
-                                                            <label>Credit Hour</label>
-                                                            <input type="number" class="input-small form-control" id="diameter"  name="CreditHour[]" step="any" placeholder="enter credit  hour" >
-                                                        </div>
-                                                        <div class="form-group col-lg-2 has-success">
-                                                            <label>total Hour</label>
-                                                            <input type="text" class="input-small form-control"  id="sphere-position" name="TotalHour[]"  placeholder="enter total hour">
-                                                        </div>
-
-                                                        <div class="form-group col-lg-2 has-success"><br> &nbsp;&nbsp;
-                                                            <!--<div class="form-control">-->
-                                                            <!--<label>btn</label>-->
-                                                            <button type="button" class="btn btn-success btn-add " id="add_more">
-                                                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                                            </button>
-                                                            <!--</div>-->
-                                                        </div>
-                                                    </table>
-                                                    <div class="form-group col-lg-12">
-                                                        <button type="submit" id="tnsaveinst" class="btn btn-primary">
-                                                            <span class="fa fa-save"><strong>  Save info</strong></span></button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-
-                            </div>
+                        
+                 
 
                             <%
                                 session.setAttribute("instreg", null);
@@ -648,8 +541,8 @@
                             <!--<h3>Section C</h3>-->
                             ${academicexpRegistered}
                             ${academicexpNotRegistered}
-                            <form class="form-group " method="post" id="instrAssign" action="${pageContext.request.contextPath}/AcademicExperianceServlet">
-
+                            <form class="form-group " method="post" id="staffexpform" action="${pageContext.request.contextPath}/AcademicExperianceServlet">
+                               <div <div class="table table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -666,7 +559,7 @@
                                         <tr>
                                             <td> 
                                                 <select class="form-control" id="qualification" name="qualification" required="required">
-                                                    <option value="-1">-select Qualification-</option>
+                                                    <option value="">-select Qualification-</option>
                                                     <option value="Diploma">Diploma</option>
                                                     <option value="BSC Dgree">BSC Dgree</option>
                                                     <option value="MSC">MSC</option>
@@ -679,7 +572,7 @@
                                                 </select>
                                             </td>
                                             <th scope="row"><select class="form-control" id="expctgry" name="expctgry" required="required">
-                                                    <option value="-1">-select category-</option>
+                                                    <option value="">-select category-</option>
                                                     <option value="Lecture">Lecture</option>
                                                     <option value="Lecture">Assistant Lecture</option>
                                                     <option value="IT">IT</option>
@@ -693,7 +586,7 @@
 
                                             <td> 
                                                 <select class="form-control" id="officetype" name="officetype" required="required">
-                                                    <option value="-1">-select Office-</option>
+                                                    <option value="">-select Office-</option>
                                                     <option value="Government Office">Government Office</option>
                                                     <option value="Private Office">Private Office</option>
                                                 </select>
@@ -722,6 +615,7 @@
 
                                     </tbody>
                                 </table>
+                                   </div>
                                 <div class="col-lg-12 col-md-6 col-sm-6">
                                     <button type="submit" id="saveinstexp" class="btn btn-primary">
                                         <span class="fa fa-save"><strong>  Save Instructor Expertise</strong></span></button>
@@ -760,7 +654,7 @@
                                 <form class="form-group " role="form" method="post" id="instrAssign"  action="${pageContext.request.contextPath}//StaffExperianceUpdateServlet">
                                     <div class="form-group col-lg-4 has-success">
                                         <span class="" style="font-weight: bolder">Instructor ID</span>
-                                        <input class="form-control" name="acdstaffid" id="acdstaffid" value="<%=rs_update.getString("ACADEMIC_STAFF_ID")%>"  readonly>
+                                        <input class="form-control" name="acdstaffid" id="acdstaffid" value="<%=rs_update.getString("ACADEMIC_STAFF_ID")%>"  >
                                     </div>
 
 
@@ -860,7 +754,7 @@
                                         }
                                     }
                                 %>
-                                <div class="container-fluid"> 
+                                <div class="table table-responsive">
                                     <table  class="table table-striped table-bordered table-hover "  id="tabledata1">
                                         <thead>
                                             <tr>
@@ -1005,7 +899,7 @@
                                     },
                             email: {
                                 required: true,
-                                digits: true
+                               email: true
                             },
                             department: {
                                 required: true
@@ -1024,7 +918,12 @@
                             description:
                                     {
                                         required: true
-                                    }
+                                    },
+                              file:
+                                    {      
+                                        required: true
+//                                        accept: "*/pdf"
+                                       },
 
                         },
                         messages: {
@@ -1045,7 +944,37 @@
                     });
                 });
             </script>
+                  <script type="text/javascript">
+                $(function () {
 
+                    $("#staffexpform").validate({
+                        rules: {
+                            qualification: {
+                                required: true
+                            },
+                           expctgry:{
+                               required: true
+                           },
+                           officetype:{
+                               
+                           },
+                           orgname:{
+                                required: true
+                           },
+                           totalexp:{
+                               required: true 
+                           },
+                           datefrom_exp_from:{
+                                required: true
+                           },
+                           datefrom_exp_to:{
+                                required: true
+                           }
+                       }
+                   });
+               });
+                   
+                     </script>
             <script type="text/javascript">
                 $("#date_registered").datepicker({
                     changeMonth: true,

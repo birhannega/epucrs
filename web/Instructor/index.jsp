@@ -4,22 +4,20 @@
     Author     : Efrem
 --%>
 <%
-    if(session.getAttribute("inst")==null)
-{
- response.sendRedirect("../index.jsp");
-}
-    else {
-       
+    if (session.getAttribute("inst") == null) {
+        response.sendRedirect("../index.jsp");
+    } else {
+
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="../css/jQuery.steps.css"
+
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.connectionManager"%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Program Manager Index</title>
+        <title>Index-PM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
@@ -29,7 +27,7 @@
     </head>
     <body>
         <%@include file="../common/head_banner.jsp" %>
-        <%
+        <%  
             connectionManager dbconnection = new connectionManager();
             Connection connection = dbconnection.getconnection();
             Statement statement = connection.createStatement();
@@ -40,100 +38,63 @@
             <!-- <div class="absolute-wrapper"> </div> -->
             <!-- Menu -->
             <div class="side-menu">
-
-                <nav class="navbar navbar-default" role="navigation">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <%@include file="../common/depsideheader.jsp" %>
-
-                    </div>
-
-                    <!-- Main Menu -->
-                    <div class="side-menu-container">
-                        <%@include file="../common/InstructorSidebar.jsp" %>
-                    </div><!-- /.navbar-collapse -->
-                </nav>
-
-            </div>
-
+             <%@include file="sidemenu.jsp" %>
+           </div>
             <!-- Main Content -->
-            <div class="container-fluid">
-                <div class="side-body">
-                <%
-                String strname=session.getAttribute("inst").toString();
-                %>
-                <div class="row">
-                 <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        Java 
-                                        <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">jmeter</a></li>
-                                        <li><a href="#">EJB</a></li>
-                                        <li><a href="#">Jasper Report</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">One more separated link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-<!--                            <form class="navbar-form navbar-left" role="search">
-                                <button type="submit" class="btn btn-default">
-                                    Left align-Submit Button   
-                                </button>
-                            </form> -->
-                            <!--<p class="navbar-text navbar-left">Left align-Text</p>-->
-                            <!--Right Align-->
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-                                        <b class="glyphicon glyphicon-comment" >
-                                      </b> Welcome:<%out.println(session.getAttribute("inst")); %> <b class="badge" ><%
-                                          ResultSet rs=statement.executeQuery("select count(*) as cntntf from TBL_NOTIFFICATION where RECIEVER_NAME='"+ strname +"' ");
-                                          while (rs.next()) { 
-                                    String nameval=rs.getString("cntntf");
-                                              %>
-                                            <label class="control-label" for="tclass" ><%=nameval%> msg found</label>  
-                                             <% }%>
-                                         </b><b class="caret"></b>
-                                       <%
-                                                try {
+              <div class="side-body">
+                     <div class="container-fluid">
+                    <%                    
+                        String strname = session.getAttribute("inst").toString();
+                    %>
+                    <div class="row">
+                      
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+                                    <b class="glyphicon glyphicon-comment" >
+                                    </b> Welcome:<%out.println(session.getAttribute("inst")); %> <b class="badge" ><%
+                                        ResultSet rs = statement.executeQuery("select count(*) as cntntf from TBL_NOTIFFICATION where RECIEVER_NAME='" + strname + "' ");
+                                        while (rs.next()) {
+                                            String nameval = rs.getString("cntntf");
+                                        %>
+                                        <label class="control-label" for="tclass" ><%=nameval%> msg found</label>  
+                                        <% }%>
+                                    </b><b class="caret"></b>
+                                    <%
+                                        try {
 //                                                    connectionManager dbconnection = new connectionManager();
-                                                    Statement stm_class = dbconnection.getconnection().createStatement();
-                                                    String inst_sql = "select count(*) as cnt_inst from TBL_NOTIFFICATION";
+                                            Statement stm_class = dbconnection.getconnection().createStatement();
+                                            String inst_sql = "select count(*) as cnt_inst from TBL_NOTIFFICATION";
 
-                                                    ResultSet rs_class = stm_class.executeQuery(inst_sql);
+                                            ResultSet rs_class = stm_class.executeQuery(inst_sql);
 
-                                            %>
+                                    %>
 
-                                            <%    while (rs_class.next()) {
-                                                    String cnt_instructor = rs_class.getString("cnt_inst");
-                                                    //cid;
-                                            %>
-                                            <label class="control-label" for="tclass" ><%=cnt_instructor%> notif found</label>
-                                            <% } %>
-                                            <!--</select>-->
-                                            <%
-                                                } catch (Exception e) {
-                                                    out.println("wrong selection!" + e);
-                                                }
-                                            %>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Course</a></li>
-                                        <li><a href="#">Class</a></li>
-                                        <li><a href="#">Jasper Report</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">One more separated link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                </div>
+                                    <%    while (rs_class.next()) {
+                                            String cnt_instructor = rs_class.getString("cnt_inst");
+                                            //cid;
+%>
+                                    <label class="control-label" for="tclass" ><%=cnt_instructor%> notif found</label>
+                                    <% } %>
+                                    <!--</select>-->
+                                    <%
+                                        } catch (Exception e) {
+                                            out.println("wrong selection!" + e);
+                                        }
+                                    %>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Course</a></li>
+                                    <li><a href="#">Class</a></li>
+                                    <li><a href="#">Jasper Report</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                             <div class="info-box bg-info text-center" style="border-radius: 10px;">
@@ -252,12 +213,12 @@
         <script src="../assets/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
 
         <script type="text/javascript">
-                    $("#classdate").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        dateFormat: 'yy-mm-dd'
+            $("#classdate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
 
-                    });
+            });
         </script>   
         <%}%>
     </body>

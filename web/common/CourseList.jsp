@@ -14,7 +14,7 @@ String varcrsassignment=request.getParameter("programname");
  connectionManager con= new connectionManager();
  Connection connection= con.getconnection();
  Statement stmt = connection.createStatement();  
- ResultSet rs = stmt.executeQuery("select PROGRAM, COURSE_NAME,CREDIT_HOURS  from TBL_COURSE_REGISTRATION where PROGRAM='"+varcrsassignment+"' "); 
+ ResultSet rs = stmt.executeQuery("select distinct COURSE_NAME from TBL_COURSE_REGISTRATION where PROGRAM_ID='"+varcrsassignment+"' "); 
 %>
  
 <%String adminname=session.getAttribute("inst").toString();%>
@@ -43,9 +43,9 @@ String varcrsassignment=request.getParameter("programname");
                                             %>
       <div><label>Course_Name</label></div>
  <%   while(rs.next()){
-       String prgrm=rs.getString("PROGRAM");
+//       String prgrm=rs.getString("PROGRAM_ID");
         String crsname=rs.getString("COURSE_NAME");
-          String crdthr=rs.getString("CREDIT_HOURS");
+//          String crdthr=rs.getString("CREDIT_HOURS");
        %>
 
        <input type=checkbox id="crsname" name="crsname" value="<%=crsname%>"><%=crsname %></br> 

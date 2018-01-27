@@ -4,7 +4,7 @@
         <title>students page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-      <link href="../resources/css/registrar-side-menu.css" rel="stylesheet" type="text/css"/>
+      <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
         <script src="../resources/jquery/jquery-1.11.1.js" type="text/javascript"></script>
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
     </head>

@@ -61,11 +61,11 @@ public class StaffRegUpdateServlet extends HttpServlet {
         if (is_registered > 0) {
             request.getSession().setAttribute("staffinfoUpdate", "<strong><span class='alert alert-success text-center'>Staff Info successfully Updated</span></strong>");
 
-            response.sendRedirect("Department/StaffRegistration.jsp");
+            response.sendRedirect("Registrar/StaffRegistration.jsp");
             //out.println("course successfully registred");
         } else {
              request.getSession().setAttribute("staffinfoNotUpdate", "<strong><span class='alert alert-warning text-center'>Staff Info  not Updated</span></strong>");
-            response.sendRedirect("Department/StaffRegistration.jsp");
+            response.sendRedirect("Registrar/StaffRegistration.jsp");
 //             out.println("course not registred");
         }
     

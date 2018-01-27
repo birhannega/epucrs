@@ -39,7 +39,8 @@ public class CourseAssignmentUpdateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
  
-        String instnameupdate=request.getParameter("instnameupdate"),
+        String   
+               instnameupdate=request.getParameter("instnameupdate"),
              crsnameupdate=request.getParameter("crsnameupdate"),
              dateassignedupdate=request.getParameter("dateassignedupdate"),
              roundupdate=request.getParameter("roundupdate"),

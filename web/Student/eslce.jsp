@@ -20,8 +20,7 @@
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-        <script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-        <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
+       
         
         <title>ESLCE</title>
     </head>
@@ -81,11 +80,11 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="Eng_year" class="form-control"/>
+                        <input type="text" data-type="date" name="Eng_year" class="form-control"/>
                     </div>
                         <div class="form-group col-lg-4">
                         <label>Mandatory Subject </label>
-                        <input name="mainsub2" id="subject1" value="Amharic" readonly="" class="form-control" />
+                        <input name="mainsub2" id="subject1" value="Mathematics" readonly="" class="form-control" />
                          
                     </div>
                     <div class="form-group col-lg-4">
@@ -95,7 +94,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="Am_year" class="form-control"/>
+                        <input type="text" data-type="date" name="Am_year" class="form-control"/>
                     </div>
                         <div class="form-group col-lg-4">
                         <label>choose Subject </label>
@@ -109,7 +108,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="sub1_year" class="form-control"/>
+                        <input type="text" data-type="date" name="sub1_year" class="form-control"/>
                     </div>
                              <div class="form-group col-lg-4">
                         <label>choose Subject </label>
@@ -123,7 +122,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="sub2_year" class="form-control"/>
+                        <input type="text" data-type="date" name="sub2_year" class="form-control"/>
                     </div>     <div class="form-group col-lg-4">
                         <label>choose Subject </label>
                         <input type="text" name="subject3" id="subject3" class="form-control" />
@@ -136,7 +135,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="sub3_year" class="form-control"/>
+                        <input  type="text" data-type="date" name="sub3_year" class="form-control"/>
                     </div>
                              <div class="form-group col-lg-4">
                         <label>choose Subject </label>
@@ -150,7 +149,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="sub4_year" class="form-control"/>
+                        <input type="text"  data-type="date"  name="sub4_year" class="form-control"/>
                     </div>
                              <div class="form-group col-lg-4">
                         <label>choose Subject </label>
@@ -164,7 +163,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label>Year taken </label>
-                        <input type="date" name="sub5_year" class="form-control"/>
+                        <input type="text"  data-type="date" name="sub5_year" class="form-control"/>
                     </div>
                      
                              
@@ -195,11 +194,12 @@
             }
            
         %>
-
+ <script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+        <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
         <script type="text/javascript">
 
 $(document).ready(function (){
-    $('input[type=date]').datepicker({
+    $('input[data-type=date]').datepicker({
         changeYear:true,
         inline:true,
         changeMonth:true
@@ -208,17 +208,16 @@ $(document).ready(function (){
 var subjects = [
 	"Mathematics",
 	"English",
-	"Sport",
-	"Drawing",
 	"physics",
 	"chemistry",
 	"Biology",
 	"History",
 	"Geography",
-	"ICT",
+        "civics",
         "Guragigna",
 	"Economics",
 	"Accounting",
+        "Amharic",
 	"AfanOromo",
 	"Tigrigna",
 	"Afarigna"];

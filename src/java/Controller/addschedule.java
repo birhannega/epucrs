@@ -51,8 +51,10 @@ public class addschedule extends HttpServlet {
         
         
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+        
         java.util.Date startingdate = sdf1.parse(startdate);
         java.util.Date endingdate = sdf1.parse(enddate);
+        // casing to java.sql.date
           java.sql.Date sqlStartDate = new java.sql.Date(startingdate.getTime());  
             java.sql.Date sqlendDate = new java.sql.Date(endingdate.getTime()); 
             

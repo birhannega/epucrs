@@ -5,7 +5,7 @@
 --%>
 
 <%
-if(session.getAttribute("step1")==null)
+if(session.getAttribute("studentId")==null)
 {
     response.sendRedirect("../index.jsp");
 }
