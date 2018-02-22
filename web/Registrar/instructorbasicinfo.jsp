@@ -1,4 +1,5 @@
-  <form class="form-group " method="POST" enctype="multipart/form-data" id="stud_reg" action="${pageContext.request.contextPath}//InstructorReg_Servlet">
+  <%@page import="java.sql.ResultSet"%>
+<form class="form-group " method="POST" enctype="multipart/form-data" id="stud_reg" action="${pageContext.request.contextPath}//InstructorReg_Servlet">
 
                                     <!--<div class="form-group col-lg-12">Instructor Id:<input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled id="instid" name="instid" value=""></div>--> 
                                     <div class="form-group col-lg-4 has-success has-feedack">
@@ -80,10 +81,11 @@
                                                 %>
                                                 //                                                                        
                                                 <%    while (rs_program.next()) {
-                                                        String id = rs_program.getString("dep_name");
+                                                        String depname = rs_program.getString("DEP_NAME");
                                                         //cid;
+                                                        String depid = rs_program.getString("DEP_ID");
 %>
-                                                <option><%=id%></option>
+                                                <option value="<%=depid%>"><%=depname%></option>
                                                 <% } %>
                                                 <!--</select>-->
                                                 <%

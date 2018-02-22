@@ -5,13 +5,13 @@
  */
 package Controller;
 
-import Model.termManagement;
+import Model.CourseManagement;
+import dbconnection.connectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,15 +19,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author luv2codeit
  */
-@WebServlet(name = "admission", urlPatterns = {"/admission"})
-public class admission extends HttpServlet {
-
-
+@WebServlet(name = "BreakDownCourses", urlPatterns = {"/breakDownCourses"})
+public class BreakDownCourses extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,35 +38,46 @@ public class admission extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.lang.ClassNotFoundException
      * @throws java.sql.SQLException
-     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, ParseException {
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-           String acadamic_year=request.getParameter("year"),
-                   term=request.getParameter("term"),
-                   studid=request.getParameter("studid");
-          
-           Date admission_date = new Date();
-            SimpleDateFormat df=new SimpleDateFormat("yyyy-dd-MM");
-            String today=df.format(admission_date);
+            String department = request.getParameter("department"),
+                    program = request.getParameter("program"),
+                    course = request.getParameter("course"),
+                    term = request.getParameter("term");
+            CourseManagement course_breakdown = new CourseManagement();
+            String message=null;
+            HttpSession session=request.getSession();
             
-            java.util.Date admissiondate=df.parse(today);
-            java.sql.Date currentdate=new  java.sql.Date(admissiondate.getTime());
+            connectionManager connectmgr=new connectionManager();
+          Statement st_check=connectmgr.getconnection().createStatement();
+          ResultSet rs_check=st_check.executeQuery("select * from TBL_COURSE_BREAKDOWN where COURSE_ID='"+course+"'");
+          if(rs_check.next())
+          {
+              message="<div class='alert alert-warning'>breakdown already done</div>";
+                session.setAttribute("message", message);
+              response.sendRedirect("Registrar/courseBreakdown.jsp");
+          }
+          else
+          {
             
-           termManagement termapplication=new termManagement();
-           
-           //out.print("Year:"+acadamic_year+"\n Term: "+term+"\n STudid: "+studid+"\n Date "+currentdate);
-           boolean applied=termapplication.applyterm(studid,  currentdate, term, acadamic_year);
-           if(applied)
-           {
-               out.println("successfully applied");
-           }else
-           {
-               out.println("not applied");
-           }
+            int breakdown=course_breakdown.coursebreakdown(department, program, course, term);
+            if(breakdown>=1)
+            {
+                 message="<div class='alert alert-success'>course breakdown  successfully saved</div>";
+                   session.setAttribute("message", message);
+              response.sendRedirect("Registrar/courseBreakdown.jsp");
+            }else
+            {
+                message="<div class='alert alert-warning'>course breakdown not successfull</div>";
+                session.setAttribute("message", message);
+                  response.sendRedirect("Registrar/courseBreakdown.jsp");
+
+            }
+            
+          }
         }
     }
 
@@ -85,8 +95,8 @@ public class admission extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException | ParseException ex) {
-            Logger.getLogger(admission.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BreakDownCourses.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,8 +113,8 @@ public class admission extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException | ParseException ex) {
-            Logger.getLogger(admission.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(BreakDownCourses.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -115,7 +125,7 @@ public class admission extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "course offering servlet";
     }// </editor-fold>
 
 }

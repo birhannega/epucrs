@@ -21,6 +21,7 @@
     <div class="side-menu-container">
         <ul class="nav navbar-nav">
             <li class="active"><a href="Academic_schedule.jsp"><span class="fa fa-calendar"></span> View Academic schedule </a></li>
+            <li class="active"><a href="Academic_Legislation.jsp"><span class="fa fa-info-circle"></span> View Academic legislation </a></li>
             <!-- Dropdown-->
             <li class="panel panel-primary" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl1">
@@ -31,9 +32,9 @@
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
 
-                            <li><a href="probation.jsp"><span class="glyphicon glyphicon-print"></span> Apply probation</a></li>
+                            <li><a href="probation.jsp"><span class="glyphicon glyphicon-send"></span> Apply probation</a></li>
                            
-                            <li><a href="myfullprofile.jsp"><span class=" glyphicon glyphicon-transfer"></span>view full profile</a></li>
+                            <li><a href="myfullprofile.jsp"><span class="glyphicon glyphicon-exclamation-sign"></span>view full profile</a></li>
                         </ul>
                     </div>
                  
@@ -41,30 +42,30 @@
             </li>
             <li class="panel panel-primary" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl2">
-                    <span class="glyphicon glyphicon-user"></span> Mark and Grade   <span class="caret"></span>
+                    <span class="glyphicon glyphicon-folder-open"></span> Mark and Grade   <span class="caret"></span>
                 </a>
                 <!-- Dropdown level 1 -->
                 <div id="dropdown-lvl2" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="coursehistory.jsp"><span class="glyphicon glyphicon-book"></span>view Taken courses</a></li>
-                            <li><a href="ViewMark.jsp"><span class="glyphicon glyphicon-print"></span> View Marks</a></li>
-                            <li><a href="complain.jsp"><span class="glyphicon glyphicon-retweet"></span>submit complain </a></li>
-                            <li><a href="AddDrop.jsp"><span class="fa fa-drupal"> </span> Add/drop </a></li>
+                            <li><a href="coursehistory.jsp"><span class="glyphicon glyphicon-list"></span>view Taken courses</a></li>
+                            <li><a href="ViewMark.jsp"><span class="glyphicon glyphicon-eye-open"></span> View Marks</a></li>
+                            <li><a href="complain.jsp"><span class="glyphicon glyphicon-send"></span>submit complain </a></li>
+                            <li><a href="AddDrop.jsp"><span class="glyphicon glyphicon-transfer"></span>  Add/drop </a></li>
                         </ul>
                     </div>
                 </div>
             </li>
             <li class="panel panel-primary" id="dropdown">
                 <a data-toggle="collapse" href="#dropdown-lvl3">
-                    <span class="glyphicon glyphicon-book"></span> Admissions and records  <span class="caret"></span>
+                    <span class="fa fa-database"></span> Admissions and records  <span class="caret"></span>
                 </a>
                 <!-- Dropdown level 1 -->
                 <div id="dropdown-lvl3" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                            <li><a href="admission.jsp"><span class="glyphicon glyphicon-edit"></span> View Admissions</a></li>
-                            <li><a href="gradebook.jsp"><span class="glyphicon glyphicon-scale"></span>Grade book </a></li>
+                            <li><a href="admission.jsp"><span class="glyphicon glyphicon-eye-open"> </span>   View Admissions</a></li>
+                            <li><a href="gradebook.jsp"><span class="glyphicon glyphicon-dashboard"></span>  Grade book </a></li>
                         </ul>
                     </div>
                 </div>

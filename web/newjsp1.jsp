@@ -5,7 +5,7 @@
   window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer",
     {
-      theme: "light2",    // "light1", "dark1", "dark2"
+      theme: "light1",    // "light1", "dark1", "dark2"
       title:{
        text: "Changing Theme"
       },

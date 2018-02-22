@@ -41,11 +41,11 @@ connectionManager schcon = new connectionManager();
                         </div>
                         <div class="form-group ">
                             Start Date
-                            <input type="date" class="form-control" name="startdate" />
+                            <input data-type="date" type="text" class="form-control" name="startdate" />
                         </div>
                         <div class="form-group ">
                             End Date
-                            <input type="date" class="form-control" name="enddate" />
+                            <input data-type="date" type="text" class="form-control" name="enddate" />
                         </div>
                         <button type="submit" class="btn btn-primary"> Add event</button>
                     </form>
@@ -174,7 +174,7 @@ if(rs_edit.next())
        
 <script src="../resources/DataTable/js/jquery.dataTables.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $("input[type=date]").datepicker({
+    $("input[data-type=date]").datepicker({
         changeMonth: true,
         changeYear: true
     });

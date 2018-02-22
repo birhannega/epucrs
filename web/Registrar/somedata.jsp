@@ -265,9 +265,9 @@
 
             %>
             <tr>
-                <td class="text-info"><strong><%=counter%> </strong> </td>
-                <td class="text-info"> <strong> <%=department_name%> </strong> </td>
-                <td ><%=number_of_students%></td>
+                <td> <%=counter%>  </td>
+                <td class="text-capitalize text-primary">  <%=department_name%>  </td>
+                <td> <%=number_of_students%> </td>
 
             </tr>
             <%

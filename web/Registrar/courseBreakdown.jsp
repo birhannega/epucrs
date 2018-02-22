@@ -1,4 +1,6 @@
 
+<%@page import="Model.CourseManagement"%>
+<%@page import="Model.CourseAssignmentModel"%>
 <%@page import="Model.Events"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -80,7 +82,7 @@
                             <div class="form-group col-sm-6">
                                 <label>Select term</label>
                                 <select class="form-control" name="term" required="">
-                                    <option>Select term</option>
+                                    <option value="">Select term</option>
                                     <%
                                         Statement St_term = connection.createStatement();
                                         ResultSet rs_term = St_term.executeQuery("select distinct term_NAME,term_id from Lu_term order by term_name");
@@ -97,12 +99,7 @@
                                     <option></option>
                                 </select>
                             </div>
-                            <!--                        <div class="form-group col-sm-6">
-                                                        <label>Round</label>
-                                                        <select class="form-control" name="course">
-                                                            <option></option>
-                                                        </select>
-                                                    </div>-->
+                          
                             <div class="form-group  col-sm-6 pull-right">
 
                                 <input type="reset" class="btn btn-danger " value="Reset form">
@@ -117,7 +114,8 @@
                                 String year = getyear.getActiveyear();
 
                                 out.print(year);
-                            %> </p></div>
+                            %> </p>
+                    </div>
                             <%
                                 ResultSet rs_deps = St_department.executeQuery("select * from TBL_DEPARTMENT");
                                 while (rs_deps.next()) {
@@ -125,7 +123,8 @@
                                     dep_id = rs_deps.getString("DEP_ID");
 
                             %>
-                    <div class="page-header"><strong><%=department_name%></strong></div>
+                            <div class="col-lg-12">
+                                <pre><%=department_name%></pre></div>
 
                     <%
                         Statement st_list_program = connection.createStatement();
@@ -140,12 +139,13 @@
                         </strong>
                     </p>
                     <div class="col-lg-6">
-                        <p> <strong> First term</strong></p>
-                        <table class=" table table-condensed">
+                        <p class="text-primary "> <strong> First term</strong></p>
+                        <table class=" table table-condensed table-striped table-bordered">
                             <thead>
                             <th>course ID</th>
+                            <th>course Name</th>
                             <th>credit hours </th>
-                            <th>total hours </th>
+                            
                             </thead>
                             <%
                                 String progid = rs_program_list.getString("program_id");
@@ -159,7 +159,24 @@
                             <tr>
                                 <td>
                                     <%
+                                        String coourseID=rs_list_course.getString("course_id");
                                         out.print(rs_list_course.getString("course_id"));
+                                        CourseManagement coursenfo=new CourseManagement();
+                                    %>
+                                </td>
+                               
+                                <td>
+                                    <%
+                                        
+                                        String coursename=coursenfo.getcoursname(coourseID);
+                                        out.print(coursename);
+                                    %>
+                                </td>
+                                 <td>
+                                    <%
+                                        
+                                        String credit=coursenfo.getcourcredit(coourseID);
+                                        out.print(credit);
                                     %>
                                 </td>
                             </tr>
@@ -170,19 +187,41 @@
                     </div>
 
                     <div class="col-lg-6">
-                        <p><strong> Second term</strong></p>
+                        <p class="text-primary"><strong> Second term</strong></p>
+                        <table class=" table table-condensed">
+                            <thead>
+                            <th>course ID</th>
+                            <th>credit hours </th>
+                            <th>total hours </th>
+                            </thead>
+                        </table>
+                        
                         <%
                             out.println("<p class='text-info'>No course breakdown done so far</p>");
                         %>
                     </div>
                     <div class="col-lg-6">
-                        <p> <strong> Third term</strong></p>
+                        <p class="text-info "> <strong> Third term</strong></p>
+                        <table class=" table table-condensed">
+                            <thead>
+                            <th>course ID</th>
+                            <th>credit hours </th>
+                            <th>total hours </th>
+                            </thead>
+                        </table>
                         <%
                             out.println("<p class='text-info'>No course breakdown done so far</p>");
                         %>
                     </div>
                     <div class="col-lg-6">
-                        <p><strong> Fourth term</strong></p>
+                        <p class="text-info "><strong> Fourth term</strong></p>
+                        <table class=" table table-condensed">
+                            <thead>
+                            <th>course ID</th>
+                            <th>credit hours </th>
+                            <th>total hours </th>
+                            </thead>
+                        </table>
                         <%
                             out.println("<p class='text-info'>No course breakdown done so far</p>");
                         %>
@@ -209,7 +248,7 @@
                                         $('.navbar-toggle').click(function () {
                                             $('.navbar-nav').toggleClass('slide-in');
                                             $('.side-body').toggleClass('body-slide-in');
-                                            $('#search').removeClass('in').addClass('collapse').slideUp(200);
+                                           
                                         });
 
                                     });

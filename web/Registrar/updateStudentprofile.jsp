@@ -9,8 +9,6 @@
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/css/sidebarcss.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-     
-
     </head>
     <body>
         <%@include file="../common/head_banner.jsp" %>

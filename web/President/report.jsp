@@ -19,7 +19,7 @@
     <!-- Bootstrap core CSS -->
   <link href="bootstrap.css" rel="stylesheet">
  
-  <link href="../resources/DataTable/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+  <link href="../resources/DataTables-1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
       <!--<link href="bootstrap.min.css" rel="stylesheet">-->
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <!-- Custom styles for this template -->
@@ -198,7 +198,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
    
     <script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="../resources/DataTable/js/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="../resources/DataTables/js/jquery.dataTables.js" type="text/javascript"></script>
     <script type="text/javascript">
      
         $("#studreport").dataTable();

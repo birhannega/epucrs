@@ -52,8 +52,8 @@ public class LoginAuthentication extends HttpServlet {
                     //session.setAttribute("loggeduser", username);
                     role = rs_user.getString(1);
                     if (role.equalsIgnoreCase("R_00")) {
-                          session.setAttribute("admin", username);
-                          Cookie cookie = new Cookie("admin","3000");
+                          session.setAttribute("registrar", username);
+                          Cookie cookie = new Cookie("registrar","3000");
                         response.sendRedirect("Registrar/index.jsp");
                     } else if (role.equalsIgnoreCase("R_01")) {
                         response.sendRedirect("Incoder/index.jsp");

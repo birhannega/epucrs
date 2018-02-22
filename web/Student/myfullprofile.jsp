@@ -1,8 +1,7 @@
+<%@page import="sun.misc.BASE64Encoder"%>
 <%@page import="Model.DepartmentManagement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="sun.misc.BASE64Encoder"%>
-<%@page import="org.apache.xml.security.utils.Base64"%>
 <%@page import="java.io.OutputStream"%>
 <%
     if (session.getAttribute("student") == null) {
@@ -43,22 +42,23 @@
             <div class="side-body">
                 <!--                <pre><strong>Full description of Your profile</strong></pre>-->
 
-                <h4 class="text-info page-header" >Full description of Your profile</h4>
+                <pre>Full description of Your profile</pre>
 
-                <div id="tabs">
+                <div id="tabs" style="margin-top: -8px">
                     <ul>
                         <li><a href="#tabs-1">personal info</a></li>
                         <li><a href="#tabs-2">Family information</a></li>
                         <li><a href="#tabs-3">Experience</a></li>
                         <li><a href="#tabs-4">Post Graduate Education</a></li>
                         <li><a href="#tabs-5">Educational background</a></li>
-                        <li><a href="#tabs-6">photo</a></li>
+                        <li><a href="#tabs-6">Student photo</a></li>
                     </ul>
                     <div id="tabs-1">
                         <%
                             UserManagement fetchid = new UserManagement();
 
                             String user = fetchid.getstudentUserID(session.getAttribute("student").toString());
+                            // Get Id number of Logged student using username 
                             String studentID = user;
                             // out.println(user);
                             //  StudentManagement profile=new StudentManagement();
@@ -106,30 +106,184 @@
                                 SimpleDateFormat yrformat = new SimpleDateFormat("yyyy");
                                 String year = bdate.substring(0, 4);
                                 int year_from_db = Integer.valueOf(year);
-                              
+
                                 // get current year
                                 java.util.Date thisyear = new java.util.Date();
                                 //
                                 String thisyearf = yrformat.format(thisyear);
                                 int age = Integer.valueOf(thisyearf) - year_from_db;
                                 //
-                                
 
                                 // out.println(age);
                                 out.println("<p><strong>Full name: <span class='text-capitalize text-info'>" + fullname + "</span></strong></p>");
                                 out.println("<p><strong>Age: </strong><span class='text-capitalize'>" + age + "( " + year_from_db + "-current)" + "</span></p>");
                                 out.println("<p><strong>Department: </strong><span class='text-capitalize'>" + departmentname + "</span></p>");
                                 out.println("<p><strong>Program: </strong><span class='text-capitalize'>" + programname + "</span></p>");
-                                  out.println("<p><strong>Round: </strong><span class='text-capitalize'>" + round + "</span></p>");
+                                out.println("<p><strong>Round: </strong><span class='text-capitalize'>" + round + "</span></p>");
                             }
 
                         %>   
                     </div>
-                    <div id="tabs-2">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div>
-                    <div id="tabs-3">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellen</div>
-                    <div id="tabs-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                    <div id="tabs-5">Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.</div>
-                    <div id="tabs-6">Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.</div>
+                    <div id="tabs-2">
+                        <table class="table table-striped">
+                            <thead>
+                            <th>Family info</th>
+                            </thead>
+                            <tbody>
+
+                                <% 
+                                    //Creating object of student info
+                                    StudentInfo familyInfo = new StudentInfo();
+                                    //Get mother full name
+                                    String motherfullname = familyInfo.getmotherFullNeme(studentID);
+                                    //Get father fullname
+                                    String fatherfullname = familyInfo.getfatherFullName(studentID);
+                                    //get father job
+                                    String fatherjob = familyInfo.getfatherJOb(studentID);
+                                    //Get father address
+                                    String fatherAddress = familyInfo.getfatherAddress(studentID);
+                                    // Get mother job
+                                    String motherjob = familyInfo.getMotherJOb(studentID);
+                                    //Get mother's address
+                                    String motherAddress = familyInfo.getMotherAddress(studentID);
+
+                                    out.println("<tr><td>Father full name: </td><td>" + fatherfullname + "<td></tr>");
+                                    out.println("<tr><td>Father Address: </td><td>" + fatherAddress + "<td></tr>");
+                                    out.println("<tr><td>Father Job: </td><td>" + fatherjob + "<td></tr>");
+                                    out.println("<tr><td>Mother full name: </td><td>" + motherfullname + "<td></tr>");
+                                    out.println("<tr><td>Mother Address : </td><td>" + motherAddress + "<td></tr>");
+                                    out.println("<tr><td>Mother Job: </td><td>" + fatherjob + "<td></tr>");
+                                %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="tabs-3">
+                        <div class="page-header"> Student Experience</div>
+                        <%
+                            String studexperience = familyInfo.GetStudentExperience(studentID);
+                            out.println("<div class='text-capitalize'>" + studexperience + "</div>");
+
+                        %>
+                    </div>
+                    <div id="tabs-4">
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-info pull-right " data-toggle="modal" data-target="#myModal">
+                            Add new 
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table">
+                            <table class="table table-striped">
+                                <thead>
+                                <th>#</th>
+                                <th>Name of Institution</th>
+                                <th>Program attended</th>
+                                <th>Field of study</th>
+                                <th>Start year</th>
+                                <th>End year</th>
+                                <th>cumulative GPA</th>
+
+
+                                </thead>
+                                <tbody>
+                                    <% 
+                                        String psei = familyInfo.GetPSeiInfo(studentID);
+                                        out.println(psei);
+                                    %>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <div id="tabs-5">
+                        <table class="table table-striped">
+                            <thead>
+                            <th>#</th>
+                            <th>Grade</th>
+                            <th>SCHOOL</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+
+
+                            </thead>
+                            <tbody>
+
+                                <%
+                                    ResultSet rsbg = familyInfo.getinfo(studentID);
+                                    int counter = 1;
+                                    while (rsbg.next()) {
+                                %>
+                                <tr>
+                                    <td>
+                                        <%
+                                       out.println(counter);
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            out.println(rsbg.getString("Grade"));
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            out.println(rsbg.getString("SCHOOL"));
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            out.println(rsbg.getString("START_DATE"));
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            out.println(rsbg.getString("END_DATE"));
+                                        %>
+                                    </td>
+                                </tr>
+                                <%
+                                        counter++;
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="tabs-6"> 
+                        <%
+                            //out.println("photo ");
+                            byte[] imgData = null;
+                            Blob blob = familyInfo.getProfilePic(studentID);
+                            imgData = blob.getBytes(1, (int) blob.length());
+
+                            BASE64Encoder Base64 = new BASE64Encoder();
+
+                            String photo = "data:image/png;base64," + Base64.encode(imgData);
+
+                            //OutputStream o = response.getOutputStream();
+                            out.println("<center><img style='width:240px;height:320px' class='img img-thumbnabil img-rounded img-responsive'src='" + photo + "'/img>"+"<h3 class='text-info'>"+user+"</h3></center>");
+                            //out.print("<p class='text-info'>ID no.:" + user + "</p>");
+                        %>
+                        
+                    </div>
                 </div>
 
             </div>

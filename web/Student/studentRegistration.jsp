@@ -16,7 +16,7 @@
         <link href="../resources/jquery-ui/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-        <script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+        
     </head>
 
     <body>
@@ -273,12 +273,12 @@
 
 
             </div> </div>
-
+<script src="../resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
         <script src="../resources/js/getprogram.js" type="text/javascript"></script>
 
         <script src="../resources/bootstrap/js/bootstrap.js" type="text/javascript"></script>
         <script src="../resources/jquery/jquery.validate.js" type="text/javascript"></script>
-        <script src="../resources/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="../resources/jquery-ui/js/jquery-ui.js" type="text/javascript"></script>
         <style rel="stylesheet">
             .error{
                 color: red;
@@ -288,7 +288,7 @@
 
                                 $(document).ready(function ()
                                 {
-                                    $('input[data-type="date"]').datepicker({
+                                    $('#studbdate').datepicker({
                                         changeYear: true,
                                         changeMonth: true,
                                         inline: true

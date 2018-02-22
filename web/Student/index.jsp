@@ -98,7 +98,7 @@
                                 String photo = "data:image/png;base64," + Base64.encode(imgData);
 
                                 //OutputStream o = response.getOutputStream();
-                                out.println("<img style='width:240px;height:320px' class='img img-thumbnabil img-responsive'src='" + photo + "'/img>");
+                                out.println("<img style='width:240px;height:320px' class='img img-thumbnabil img-circle img-responsive'src='" + photo + "'/img>");
                                 out.print("<p class='text-info'>ID no.:"+user+"</p>");
                             }
                         %>
@@ -168,7 +168,7 @@
                             <tr>
                                 <td>full name:   <%
                                     StudentInfo fatherinfo = new StudentInfo();
-                                    String father_fullname = fatherinfo.getfatherinfo(user);
+                                    String father_fullname = fatherinfo.getfatherFullName(user);
                                     //
                                     out.print(father_fullname);
 
@@ -177,7 +177,7 @@
                                 <td>full name: 
                                     <% 
                                         StudentInfo motherinfo = new StudentInfo();
-                                        String mother_fullname = motherinfo.getmotherinfo(user);
+                                        String mother_fullname = motherinfo.getmotherFullNeme(user);
                                         out.print(mother_fullname);
                                     %>
                                 </td>

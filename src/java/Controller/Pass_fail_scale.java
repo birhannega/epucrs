@@ -5,13 +5,13 @@
  */
 package Controller;
 
-import Model.termManagement;
+import Model.Criteria_management;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,10 +24,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author luv2codeit
  */
-@WebServlet(name = "admission", urlPatterns = {"/admission"})
-public class admission extends HttpServlet {
+@WebServlet(name = "Pass_fail_scale", urlPatterns = {"/AddScale"})
+public class Pass_fail_scale extends HttpServlet {
+    Criteria_management criteria_management;
 
-
+    public Pass_fail_scale() {
+        try {
+            this.criteria_management = new Criteria_management();
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(Pass_fail_scale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,37 +44,40 @@ public class admission extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException, ParseException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-           String acadamic_year=request.getParameter("year"),
-                   term=request.getParameter("term"),
-                   studid=request.getParameter("studid");
-          
-           Date admission_date = new Date();
+            
+             String program=request.getParameter("program"),
+                    insertedby=request.getParameter("insertedby"),
+                    mingpa=request.getParameter("mingpa");
+            
+            //
+            Date insertion_date = new Date();
             SimpleDateFormat df=new SimpleDateFormat("yyyy-dd-MM");
-            String today=df.format(admission_date);
+            String today=df.format(insertion_date);
+            ///  
+            java.util.Date date_inserted=df.parse(today);
+            java.sql.Date currentdate=new  java.sql.Date(date_inserted.getTime());
+            Double required_gpa=Double.valueOf(mingpa);           
+          out.print(currentdate+"  "+required_gpa+" "+program+"  "+insertedby );
+            try {
+                int data_inserted=criteria_management.Add_pass_fail_scale(program,required_gpa,currentdate,insertedby);
+                if(data_inserted>=1)
+                {
+                    out.println("success");
+                }else
+                {
+                     out.println("error");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Pass_fail_scale.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            java.util.Date admissiondate=df.parse(today);
-            java.sql.Date currentdate=new  java.sql.Date(admissiondate.getTime());
             
-           termManagement termapplication=new termManagement();
-           
-           //out.print("Year:"+acadamic_year+"\n Term: "+term+"\n STudid: "+studid+"\n Date "+currentdate);
-           boolean applied=termapplication.applyterm(studid,  currentdate, term, acadamic_year);
-           if(applied)
-           {
-               out.println("successfully applied");
-           }else
-           {
-               out.println("not applied");
-           }
         }
     }
 
@@ -85,8 +95,8 @@ public class admission extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException | ParseException ex) {
-            Logger.getLogger(admission.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Pass_fail_scale.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,8 +113,8 @@ public class admission extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException | ParseException ex) {
-            Logger.getLogger(admission.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Pass_fail_scale.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

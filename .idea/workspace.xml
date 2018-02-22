@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="cf47e636-b68d-4ebf-a193-f6cdcbdd5e18" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/web/directorate/Academic_schedule.jsp" />
+      <change beforePath="$PROJECT_DIR$/build/web/Incoder/studentregistration.jsp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/006.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/abuki.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/dawa.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/dawed.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/dawud.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/hd.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/build/web/resources/images/seya.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/nbproject/genfiles.properties" afterPath="$PROJECT_DIR$/nbproject/genfiles.properties" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.properties" afterPath="$PROJECT_DIR$/nbproject/private/private.properties" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.properties" afterPath="$PROJECT_DIR$/nbproject/project.properties" />
+      <change beforePath="$PROJECT_DIR$/nbproject/project.xml" afterPath="$PROJECT_DIR$/nbproject/project.xml" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/admission.java" afterPath="$PROJECT_DIR$/src/java/Controller/admission.java" />
+      <change beforePath="$PROJECT_DIR$/src/java/Controller/breakDownCourses.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/java/Model/InstructorRegModel.java" afterPath="$PROJECT_DIR$/src/java/Model/InstructorRegModel.java" />
+      <change beforePath="$PROJECT_DIR$/src/java/Model/StudentInfo.java" afterPath="$PROJECT_DIR$/src/java/Model/StudentInfo.java" />
+      <change beforePath="$PROJECT_DIR$/web/CommonOprations/deleteExprience.jsp" afterPath="$PROJECT_DIR$/web/CommonOprations/deleteExprience.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/President/report.jsp" afterPath="$PROJECT_DIR$/web/President/report.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Registrar/addevent_form.jsp" afterPath="$PROJECT_DIR$/web/Registrar/addevent_form.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Registrar/addschedule_form.jsp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/Registrar/courseBreakdown.jsp" afterPath="$PROJECT_DIR$/web/Registrar/courseBreakdown.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Registrar/instructorbasicinfo.jsp" afterPath="$PROJECT_DIR$/web/Registrar/instructorbasicinfo.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Registrar/updateStudentprofile.jsp" afterPath="$PROJECT_DIR$/web/Registrar/updateStudentprofile.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Student/admission.jsp" afterPath="$PROJECT_DIR$/web/Student/admission.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Student/index.jsp" afterPath="$PROJECT_DIR$/web/Student/index.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Student/myfullprofile.jsp" afterPath="$PROJECT_DIR$/web/Student/myfullprofile.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Student/myfullprofile_1.jsp" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/Student/studentRegistration.jsp" afterPath="$PROJECT_DIR$/web/Student/studentRegistration.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/Student/studentsidemenu.jsp" afterPath="$PROJECT_DIR$/web/Student/studentsidemenu.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/directorate/directorsidemenu.jsp" afterPath="$PROJECT_DIR$/web/directorate/sidemenu.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/directorate/index.jsp" afterPath="$PROJECT_DIR$/web/directorate/index.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/newjsp1.jsp" afterPath="$PROJECT_DIR$/web/newjsp1.jsp" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.bootstrap.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.bootstrap.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.bootstrap4.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.bootstrap4.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.foundation.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.foundation.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.jqueryui.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.jqueryui.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.material.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.material.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.semanticui.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.semanticui.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.uikit.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/dataTables.uikit.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/jquery.dataTables.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/jquery.dataTables.min.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/css/jquery.dataTables_themeroller.css" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/Sorting icons.psd" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/favicon.ico" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/sort_asc.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/sort_asc_disabled.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/sort_both.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/sort_desc.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/images/sort_desc_disabled.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.bootstrap.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.bootstrap.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.bootstrap4.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.bootstrap4.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.foundation.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.foundation.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.jqueryui.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.jqueryui.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.material.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.material.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.semanticui.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.semanticui.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.uikit.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/dataTables.uikit.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/jquery.dataTables.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/jquery.dataTables.min.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/DataTables-1.10.15/js/jquery.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/006.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/abuki.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/dawa.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/dawed.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/dawud.JPG" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/hd.jpg" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/resources/images/seya.JPG" afterPath="" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="activeinstuctors.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/Registrar/activeinstuctors.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="45" column="15" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BreakDownCourses.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/java/Controller/BreakDownCourses.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="434">
+              <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/java/Controller/BreakDownCourses.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="153" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EPUCRS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPUCRS" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="EPUCRS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPUCRS" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="EPUCRS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPUCRS" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="java" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="EPUCRS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EPUCRS" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="java" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf47e636-b68d-4ebf-a193-f6cdcbdd5e18" name="Default" comment="" />
+      <created>1518069899988</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1518069899988</updated>
+      <workItem from="1518069910574" duration="118000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="118000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/web/Registrar/addevent.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/Registrar/activeinstuctors.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="45" column="15" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/Controller/BreakDownCourses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -28,5 +28,7 @@
           }
            request.getSession().setAttribute("academicexpNotRegistered", "<strong><span class='alert alert-success text-center'>Expriance not deleted</span></strong>");
             response.sendRedirect("Department/AcademicStaffRegistration.jsp");
+        }
+    }
 
 %>

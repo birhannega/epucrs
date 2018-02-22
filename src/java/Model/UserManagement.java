@@ -60,6 +60,20 @@ public class UserManagement {
         }
         return usernid;
     }
+      public String get_looged_Satff_ID(String loogeduser) throws SQLException {
+        String usernid = null;
+        PreparedStatement ps_id = connection.prepareStatement("select ACADEMIC_STAFF_ID from TBL_USERS where USER_ID=?");
+        try {
+            ps_id.setString(1, loogeduser);
+            ResultSet rs_stud_id = ps_id.executeQuery();
+            if (rs_stud_id.next()) {
+                usernid = rs_stud_id.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usernid;
+    }
 
     public int countAccountsByID(String userid) throws SQLException {
         int count = 0;

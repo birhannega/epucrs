@@ -4,7 +4,7 @@
 <%@page import="java.sql.*"%>
 <%
 String department=request.getParameter("department");  
- String buffer="<select name='state' ><option value='-1'>Select</option>";  
+ String buffer="<select name='program' ><option value='-1'>Select</option>";  
  try{
  connectionManager con= new connectionManager();
  Connection connection= con.getconnection();

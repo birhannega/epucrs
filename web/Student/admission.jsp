@@ -1,7 +1,4 @@
-<%@page import="Model.CourseManagement"%>
-<%@page import="java.util.Date"%>
-<%@page import="javax.mail.internet.MailDateFormat"%>
-<%@page import="Model.termManagement"%>
+
 
 
 <%
@@ -9,6 +6,10 @@
         response.sendRedirect("../index.jsp");
     } else {
 %>
+<%@page import="Model.CourseManagement"%>
+<%@page import="java.util.Date"%>
+<%@page import="javax.mail.internet.MailDateFormat"%>
+<%@page import="Model.termManagement"%>
 <%@page import="Model.StudentInfo"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Blob"%>
@@ -106,6 +107,7 @@
                     <div class="alert alert-warning">  You have no admissions so far</div>
                     <form class="form-group" method="post" action="${pageContext.request.contextPath}/admission">
                         <input type="hidden" name="studid" value="<%=studentID%>"/>
+                          <input type="hidden" name="term" value="<%=current_term%>"/>
                         <input type="hidden" name="year" value="<%=currentYear%>"/>
 
                         <button type="submit" class="btn btn-primary">Claim your first admission</button>

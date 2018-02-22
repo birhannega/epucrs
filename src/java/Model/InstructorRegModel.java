@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author user
+ * @author Efrem
  */
 public class InstructorRegModel {
 
@@ -25,7 +25,7 @@ public class InstructorRegModel {
             String status, String insttype, String responsibility, String hireddate, String policemngmt, String description) throws SQLException, ClassNotFoundException, IOException {
         int result = 0;
         PreparedStatement prestm = connection.getconnection().prepareStatement("Insert into TBL_ACADEMIC_STAFF_REG( ACADEMIC_STAFF_ID ,IMAGE,Title , First_Name  ,"
-                + " Middle_Name ,Last_Name,Phone , E_Mail ,Department ,"
+                + " Middle_Name ,Last_Name,Phone , E_Mail ,DEP_ID ,"
                 + " Status ,STAFF_TYPE ,RESPONSIBILITY,HIRED_DATE,POLICE_MANAGEMENT, DESCRIPTION) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         prestm.setString(1, nstid);
@@ -50,7 +50,7 @@ public class InstructorRegModel {
     }
     //add expriance
 
-    public int instructor_exp_reg(String staffid, String expid, String expctgry, String exptype, String orgname, String totalexp, String datefrom_exp_from, String datefrom_exp_to,String qualification) throws SQLException, ClassNotFoundException {
+    public int instructor_exp_reg(String staffid, String expid, String expctgry, String exptype, String orgname, String totalexp, String datefrom_exp_from, String datefrom_exp_to, String qualification) throws SQLException, ClassNotFoundException {
         int result = 0;
         PreparedStatement prestm = connection.getconnection().prepareStatement("Insert into TBL_ACADEMIC_EXPERTISE( ACADEMIC_STAFF_ID,INSTEXP_ID ,AREA_EXPERTISE ,ORG_TYPE, ORG_NAME  ,"
                 + " TOTAL_EXPERTISE ,DATE_FROM,DATE_TO,QUALIFICATION,SEQNO_ACADEMIC_EXPERTIES) values(?,?,?,?,?,?,?,?,?,SEQNO_ACADEMIC_EXPERTIES.nextval)");
@@ -112,10 +112,9 @@ public class InstructorRegModel {
     }
 //update expriance
 
-    public int UpdateStaffExp(String staffid, String expid, String expctgry, String exptype, String orgname, String totalexp, String datefrom_exp_from, String datefrom_exp_to,String qualification,String seqno) throws SQLException, ClassNotFoundException {
+    public int UpdateStaffExp(String staffid, String expid, String expctgry, String exptype, String orgname, String totalexp, String datefrom_exp_from, String datefrom_exp_to, String qualification, String seqno) throws SQLException, ClassNotFoundException {
         int action = 0;
 
-      
         PreparedStatement prestm = connection.getconnection().prepareStatement("UPDATE TBL_ACADEMIC_EXPERTISE set ACADEMIC_STAFF_ID=?,INSTEXP_ID=? ,AREA_EXPERTISE=? ,ORG_TYPE=?, ORG_NAME=?  ,"
                 + " TOTAL_EXPERTISE=? ,DATE_FROM=?,DATE_TO=?,QUALIFICATION=?  WHERE  SEQNO_ACADEMIC_EXPERTIES='" + seqno + "'");
         prestm.setString(1, staffid);
@@ -131,13 +130,13 @@ public class InstructorRegModel {
         return action;
 
     }
-    public boolean checkIfIDExists(String instid) throws ClassNotFoundException, SQLException
-    {
-        boolean result=false;
-        PreparedStatement ps_check=connection.getconnection().prepareStatement("select ACADEMIC_STAFF_ID from TBL_ACADEMIC_STAFF_REG where ACADEMIC_STAFF_ID=?");
+
+    public boolean checkIfIDExists(String instid) throws ClassNotFoundException, SQLException {
+        boolean result = false;
+        PreparedStatement ps_check = connection.getconnection().prepareStatement("select ACADEMIC_STAFF_ID from TBL_ACADEMIC_STAFF_REG where ACADEMIC_STAFF_ID=?");
         ps_check.setString(1, instid);
-        ResultSet rs_id=ps_check.executeQuery();
-        result=rs_id.next();
+        ResultSet rs_id = ps_check.executeQuery();
+        result = rs_id.next();
         return result;
     }
 }
